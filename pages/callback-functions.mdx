@@ -1,0 +1,257 @@
+import { Tabs, Tab } from "~/components/global";
+import { Webflow, Liquid, NextJs, Hydrogen } from "~/components/icons";
+
+# Callback Functions
+
+Callback Functions is Sledge's additional props (for Hydrogen/Next.js) and attributes (for Liquid/Webflow) you can use to execute your own function after Sledge function running.
+
+Let's say you want to show a 'thank you' notification after customer adding a review you can feed your own function to props `onAfterAddReview` / using event listener like `after-add-review`.
+
+## Code Sample
+
+<Tabs storageKey="selected-tech-stack" items={[
+    <div className="flex items-center gap-2">
+        <Hydrogen width={24} height={24} />
+        <span>Hydrogen</span>
+    </div>,
+    <div className="flex items-center gap-2">
+        <NextJs width={24} height={24} />
+        <span>Next.js</span>
+    </div>,
+    <div className="flex items-center gap-2">
+        <Liquid width={24} height={24} />
+        <span>Liquid</span>
+    </div>,
+    <div className="flex items-center gap-2">
+        <Webflow width={24} height={24} />
+        <span>Webflow</span>
+    </div>
+]}>
+    <Tab>
+        ```tsx {7-27} showLineNumbers copy
+        import { SearchIconWidget } from "@sledge-app/react-instant-search";
+
+        export default function InstantSearchIconWidget() {
+            return (
+                <SearchIconWidget
+                    size='sm'
+                    onAfterAddWishlist={(state) => {
+                        if (state) {
+                            // if condition is state === true, run your custom code
+                        } else {
+                            // if condition is state === true, run your custom code
+                        }
+                    }}
+                    onAfterRemoveWishlist={(state) => {
+                        if (state) {
+                            // if condition is state === true, run your custom code
+                        } else {
+                            // if condition is state === true, run your custom code
+                        }
+                    }}
+                    onAfterRenderProduct={(state) => {
+                        if (state) {
+                            // if condition is state === true, run your custom code
+                        } else {
+                            // if condition is state === true, run your custom code
+                        }
+                    }}
+                />
+            );
+        }
+        ```
+
+        <div className="text-xl font-bold mt-6">List of Callback Functions</div>
+        - `onAfterAddWishlist`, see the [API reference](/sledge-app-react-instant-search#onafteraddwishliststate-boolean).
+        - `onAfterRemoveWishlist`, see the [API reference](/sledge-app-react-instant-search#onafterremovewishliststate-boolean).
+        - `onAfterAddReview`, see the [API reference](/sledge-app-react-product-review#onafteraddreviewstate-boolean).
+        - `onAfterAddToCart`, see the [API reference](/sledge-app-react-instant-search#onafteraddtocartstate-boolean).
+        - `onAfterRenderProduct`, see the [API reference](/sledge-app-react-instant-search#onafterrenderproductstate-boolean).
+        - `onAfterRenderCollection` see the [API reference](/sledge-app-react-instant-search#onafterrendercollectionstate-boolean)
+        - `onAfterRenderPage` see the [API reference](/sledge-app-react-instant-search#onafterrenderpagestate-boolean)
+        - `onAfterRenderBlog` see the [API reference](/sledge-app-react-instant-search#onafterrenderblogstate-boolean)
+        - `onAfterRenderArticle` see the [API reference](/sledge-app-react-instant-search#onafterrenderarticlestate-boolean)
+    </Tab>
+    <Tab>
+        ```tsx {9-29} showLineNumbers copy
+        'use client';
+
+        import { SearchIconWidget } from "@sledge-app/react-instant-search";
+
+        export default function InstantSearchIconWidget() {
+            return (
+                <SearchIconWidget
+                    size='sm'
+                    onAfterAddWishlist={(state) => {
+                        if (state) {
+                            // if condition is state === true, run your custom code
+                        } else {
+                            // if condition is state === true, run your custom code
+                        }
+                    }}
+                    onAfterRemoveWishlist={(state) => {
+                        if (state) {
+                            // if condition is state === true, run your custom code
+                        } else {
+                            // if condition is state === true, run your custom code
+                        }
+                    }}
+                    onAfterRenderProduct={(state) => {
+                        if (state) {
+                            // if condition is state === true, run your custom code
+                        } else {
+                            // if condition is state === true, run your custom code
+                        }
+                    }}
+                />
+            );
+        }
+        ```
+
+        <div className="text-xl font-bold mt-6">List of Callback Functions</div>
+        - `onAfterAddWishlist`, see the [API reference](/sledge-app-react-instant-search#onafteraddwishliststate-boolean).
+        - `onAfterRemoveWishlist`, see the [API reference](/sledge-app-react-instant-search#onafterremovewishliststate-boolean).
+        - `onAfterAddReview`, see the [API reference](/sledge-app-react-product-review#onafteraddreviewstate-boolean).
+        - `onAfterAddToCart`, see the [API reference](/sledge-app-react-instant-search#onafteraddtocartstate-boolean).
+        - `onAfterRenderProduct`, see the [API reference](/sledge-app-react-instant-search#onafterrenderproductstate-boolean).
+        - `onAfterRenderCollection` see the [API reference](/sledge-app-react-instant-search#onafterrendercollectionstate-boolean)
+        - `onAfterRenderPage` see the [API reference](/sledge-app-react-instant-search#onafterrenderpagestate-boolean)
+        - `onAfterRenderBlog` see the [API reference](/sledge-app-react-instant-search#onafterrenderblogstate-boolean)
+        - `onAfterRenderArticle` see the [API reference](/sledge-app-react-instant-search#onafterrenderarticlestate-boolean)
+    </Tab>
+    <Tab>
+        ```html {8-51} showLineNumbers copy
+        <div
+            data-component="instant-search-icon-widget"
+            data-icon-size="sm"
+        >
+        </div>
+
+        <script>
+            document.addEventListener('after-add-wishlist', ({ detail }) => {
+                const { state, product } = detail;
+
+                // for declare the event is 'success' or 'failed'
+                console.log('state', state);
+
+                // product data
+                console.log('product', product);
+
+                if (state === 'success') {
+                    // Code here
+                } else {
+                    // Code here
+                }
+            });
+
+            document.addEventListener('after-remove-wishlist', ({ detail }) => {
+                const { state, product } = detail;
+
+                // for declare the event is 'success' or 'failed'
+                console.log('state', state);
+
+                // product data
+                console.log('product', product);
+
+                if (state === 'success') {
+                    // Code here
+                } else {
+                    // Code here
+                }
+            });
+
+            document.addEventListener('after-render-product', ({ detail }) => {
+                const { state } = detail;
+
+                // for declare the event is 'success' or 'failed'
+                console.log('state', state);
+
+                if (state === 'success') {
+                    // Code here
+                } else {
+                    // Code here
+                }
+            });
+        </script>
+        ```
+
+        <div className="text-xl font-bold mt-6">List of Callback Functions</div>
+        - `after-add-wishlist`, see the [API reference](/javascript-events#after-add-wishlist).
+        - `after-remove-wishlist`, see the [API reference](/javascript-events#after-remove-wishlist).
+        - `after-add-review`, see the [API reference](/javascript-events#after-add-review).
+        - `after-render-product`, see the [API reference](/javascript-events#after-render-product).
+        - `after-render-collection`, see the [API reference](/javascript-events#after-render-collection).
+        - `after-render-page`, see the [API reference](/javascript-events#after-render-page).
+        - `after-render-blog`, see the [API reference](/javascript-events#after-render-blog).
+        - `after-render-article`, see the [API reference](/javascript-events#after-render-article).
+    </Tab>
+    <Tab>
+        You can place this code in custom code webflow, see the <a href="https://university.webflow.com/lesson/custom-code-embed" target="_blank" className="nx-text-primary-600 nx-underline nx-decoration-from-font [text-underline-position:from-font]">documentation</a> about custom code embed at webflow
+
+        ```html {8-51} showLineNumbers copy
+        <div
+            data-component="instant-search-icon-widget"
+            data-icon-size="sm"
+        >
+        </div>
+
+        <script>
+            document.addEventListener('after-add-wishlist', ({ detail }) => {
+                const { state, product } = detail;
+
+                // for declare the event is 'success' or 'failed'
+                console.log('state', state);
+
+                // product data
+                console.log('product', product);
+
+                if (state === 'success') {
+                    // Code here
+                } else {
+                    // Code here
+                }
+            });
+
+            document.addEventListener('after-remove-wishlist', ({ detail }) => {
+                const { state, product } = detail;
+
+                // for declare the event is 'success' or 'failed'
+                console.log('state', state);
+
+                // product data
+                console.log('product', product);
+
+                if (state === 'success') {
+                    // Code here
+                } else {
+                    // Code here
+                }
+            });
+
+            document.addEventListener('after-render-product', ({ detail }) => {
+                const { state } = detail;
+
+                // for declare the event is 'success' or 'failed'
+                console.log('state', state);
+
+                if (state === 'success') {
+                    // Code here
+                } else {
+                    // Code here
+                }
+            });
+        </script>
+        ```
+
+        <div className="text-xl font-bold mt-6">List of Callback Functions</div>
+        - `after-add-wishlist`, see the [API reference](/javascript-events#after-add-wishlist).
+        - `after-remove-wishlist`, see the [API reference](/javascript-events#after-remove-wishlist).
+        - `after-add-review`, see the [API reference](/javascript-events#after-add-review).
+        - `after-render-product`, see the [API reference](/javascript-events#after-render-product).
+        - `after-render-collection`, see the [API reference](/javascript-events#after-render-collection).
+        - `after-render-page`, see the [API reference](/javascript-events#after-render-page).
+        - `after-render-blog`, see the [API reference](/javascript-events#after-render-blog).
+        - `after-render-article`, see the [API reference](/javascript-events#after-render-article).
+    </Tab>
+
+</Tabs>

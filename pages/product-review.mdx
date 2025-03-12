@@ -1,0 +1,943 @@
+import { Tabs, Tab, Dropdown } from "~/components/global";
+import { Callout } from "nextra-theme-docs";
+import Image from "next/image";
+import {
+  Webflow,
+  Liquid,
+  NextJs,
+  Hydrogen,
+  AppBlock,
+  Code,
+} from "~/components/icons";
+import {
+  IMAGE_APPS_REVIEW_RATING,
+  IMAGE_APPS_REVIEW_LIST,
+  IMAGE_LIQUID_SHOPIFY_APP_EMBED_REVIEW_RATING_1,
+  IMAGE_LIQUID_SHOPIFY_APP_EMBED_REVIEW_RATING_1_1,
+  IMAGE_LIQUID_SHOPIFY_APP_EMBED_REVIEW_RATING_2,
+  IMAGE_LIQUID_SHOPIFY_APP_EMBED_REVIEW_RATING_3,
+  IMAGE_LIQUID_SHOPIFY_APP_EMBED_REVIEW_WIDGET_1,
+  IMAGE_LIQUID_SHOPIFY_APP_EMBED_REVIEW_WIDGET_2,
+  IMAGE_LIQUID_SHOPIFY_APP_EMBED_REVIEW_WIDGET_3,
+  IMAGE_LIQUID_SHOPIFY_APP_EMBED_GUIDE_1,
+  IMAGE_LIQUID_SHOPIFY_APP_EMBED_TRUST_BADGE_1,
+  IMAGE_LIQUID_SHOPIFY_APP_EMBED_TRUST_BADGE_2,
+  IMAGE_LIQUID_SHOPIFY_APP_EMBED_TRUST_BADGE_3,
+  IMAGE_APPS_REVIEW_HAPPY_CUSTOMER_PAGE,
+  IMAGE_APPS_REVIEW_TRUST_BADGE,
+  IMAGE_APPS_REVIEW_STICKY_REVIEW_BADGE,
+  IMAGE_APPS_REVIEW_SNIPPET_WIDGET,
+  IMAGE_LIQUID_SHOPIFY_APP_EMBED_REVIEW_STICKY_SIDEBAR_1,
+  IMAGE_LIQUID_SHOPIFY_APP_EMBED_REVIEW_STICKY_SIDEBAR_2,
+  IMAGE_LIQUID_SHOPIFY_APP_EMBED_HAPPY_CUSTOMER_PAGE_1,
+  IMAGE_LIQUID_SHOPIFY_APP_EMBED_HAPPY_CUSTOMER_PAGE_2,
+  IMAGE_LIQUID_SHOPIFY_APP_EMBED_HAPPY_CUSTOMER_PAGE_3,
+  IMAGE_LIQUID_SHOPIFY_APP_EMBED_SNIPPET_CAROUSEL_WIDGET_1,
+  IMAGE_LIQUID_SHOPIFY_APP_EMBED_SNIPPET_CAROUSEL_WIDGET_2
+} from "~/lib/const";
+
+# Product Review
+
+Show the best review of your products with the easy and customizable product review widgets to gain customer trust and boost your store sales.
+
+Sledge provides several widgets you can use to integrate it with your store.
+
+Available widgets :
+
+- [Rating](#rating)
+- [Widget](#widget)
+- [Happy Customers Page](#happy-customers-page)
+- [Trust Badge](#trust-badge)
+- [Sticky Sidebar Widget](#sticky-sidebar-widget)
+- [Snippet Carousel Widget](#snippet-carousel-widget)
+
+<Callout type="info">
+  If you're using `Hydrogen` or `Next.js`, <br /> make sure to install the
+  `@sledge-app/react-product-review` package first.
+</Callout>
+
+```sh copy
+npm i @sledge-app/react-product-review
+```
+
+## Rating
+
+Rating is a Product Review's widget you can use to display your review's score and total rating of your product.<br/><br/>
+
+<Image src={IMAGE_APPS_REVIEW_RATING} alt="Rating" width="244" height="59" /> <br />
+
+<Tabs
+  storageKey="selected-method"
+  items={[
+    <div className="flex items-center gap-2">
+      <AppBlock />
+      <span>Theme Customizer</span>
+    </div>,
+    <div className="flex items-center gap-2">
+      <Code />
+      <span>Code</span>
+    </div>,
+  ]}
+>
+  <Tab>
+    Here is a step-by-step guide to adding this widget with block.
+
+    - In the Theme Installation, click `Integrate to my theme` on `Product Review` option.
+
+    <Image
+      className="mt-3 rounded-[24px] w-auto border border-[rgba(67,198,172,1)]"
+      src={IMAGE_LIQUID_SHOPIFY_APP_EMBED_REVIEW_RATING_1}
+      alt="sledge-image-docs"
+    />
+
+    - Then click `Add widget to my theme` on `Add product rating` option.
+
+    <Image
+      className="mt-3 rounded-[24px] w-auto border border-[rgba(67,198,172,1)]"
+      src={IMAGE_LIQUID_SHOPIFY_APP_EMBED_REVIEW_RATING_1_1}
+      alt="sledge-image-docs"
+    />
+
+    - You will be directed to the Editor, and the Review Rating will have been added automatically.
+
+    <Image
+      className="mt-3 rounded-[24px] w-auto border border-[rgba(67,198,172,1)]"
+      src={IMAGE_LIQUID_SHOPIFY_APP_EMBED_REVIEW_RATING_2}
+      alt="sledge-image-docs"
+    />
+
+    - You can rearrange Review Rating by Click and drag the `⋮⋮` icon
+    - You can customize the Review Rating by click the `Review Rating` Block.
+
+    <Image
+      className="mt-3 rounded-[24px] w-auto border border-[rgba(67,198,172,1)]"
+      src={IMAGE_LIQUID_SHOPIFY_APP_EMBED_REVIEW_RATING_3}
+      alt="sledge-image-docs"
+    />
+
+    - When ready, `Save` your changes.
+
+  </Tab>
+  <Tab>
+    Here is a step-by-step guide to adding this widget with code.
+    <Tabs tabVariant="gradient" storageKey="selected-tech-stack" uniqueClass="tech-stack-tabs"  items={[
+        <div className="flex items-center gap-2">
+            <Hydrogen color="#677487" width={24} height={24} />
+            <span>Hydrogen</span>
+        </div>,
+        <div className="flex items-center gap-2">
+            <NextJs color="#677487" width={24} height={24} />
+            <span>Next.js</span>
+        </div>,
+        <div className="flex items-center gap-2">
+            <Liquid color="#677487" width={24} height={24} />
+            <span>Liquid</span>
+        </div>,
+        <div className="flex bg-re items-center gap-2">
+            <Webflow color="#677487" width={24} height={24} />
+            <span>Webflow</span>
+        </div>
+    ]}>
+    <Tab>
+        See the [API reference](/sledge-app-react-product-review#api-reference) for code below.
+
+        ```tsx filename="app/SledgeProductReviewRating.tsx" showLineNumbers copy
+        import { Rating } from "@sledge-app/react-product-review";
+
+        export default function SledgeProductReviewRating() {
+            return (
+                <Rating
+                    params={{
+                        productId: "",
+                    }}
+                    size="md"
+                />
+            );
+        }
+        ```
+
+    </Tab>
+    <Tab>
+        See the [API reference](/sledge-app-react-product-review#api-reference) for code below.
+
+        ```tsx filename="app/SledgeProductReviewRating.tsx" showLineNumbers copy
+        'use client';
+
+        import { Rating } from "@sledge-app/react-product-review";
+
+        export default function SledgeProductReviewRating() {
+            return (
+                <Rating
+                    params={{
+                        productId: "",
+                    }}
+                    size="md"
+                />
+            );
+        }
+        ```
+
+    </Tab>
+    <Tab>
+        See the [API reference](/html-data-attribute#api-reference-1) for code below.
+
+        ```html showLineNumbers copy
+        <div
+            data-component="product-review-rating"
+            data-product-id="{{ product.id }}"
+            data-rating-size="md"
+        ></div>
+        ```
+
+    </Tab>
+    <Tab>
+        You can place these code in custom code webflow, see the <a href="https://university.webflow.com/lesson/custom-code-embed" target="_blank" className="nx-text-primary-600 nx-underline nx-decoration-from-font [text-underline-position:from-font]">documentation</a> about custom code embed at webflow
+
+        See the [API reference](/html-data-attribute#api-reference-1) for code below.
+
+        ```html showLineNumbers copy
+        <div
+            data-component="product-review-rating"
+            data-product-id=""
+            data-rating-size="md"
+        ></div>
+        ```
+
+    </Tab>
+    </Tabs>
+
+  </Tab>
+</Tabs>
+
+## Widget
+
+Widget is a Product Review's widget you can use to display list data of your product reviews. Typically used on product detail page.<br/><br/>
+
+<Image src={IMAGE_APPS_REVIEW_LIST} alt="Widget" width="668" height="164" /> <br />
+
+<Tabs
+  storageKey="selected-method"
+  items={[
+    <div className="flex items-center gap-2">
+      <AppBlock />
+      <span>Theme Customizer</span>
+    </div>,
+    <div className="flex items-center gap-2">
+      <Code />
+      <span>Code</span>
+    </div>,
+  ]}
+>
+  <Tab>
+    Here is a step-by-step guide to adding this widget with block.
+
+    - In the Product Review Theme Installation, click `Add widget to my theme` on `Add review widget` option.
+
+    <Image
+        src={IMAGE_LIQUID_SHOPIFY_APP_EMBED_REVIEW_WIDGET_1} alt="List" width="1339" height="749"
+        className="mt-3 rounded-[24px] w-auto border border-[rgba(67,198,172,1)]"
+    />
+
+    - You will be directed to the Editor, and the Review Widget will have been added automatically.
+
+    <Image
+      className="mt-3 rounded-[24px] w-auto border border-[rgba(67,198,172,1)]"
+      src={IMAGE_LIQUID_SHOPIFY_APP_EMBED_REVIEW_WIDGET_2}
+      alt="sledge-image-docs"
+    />
+
+    - You can rearrange Review Widget by Click and drag the `⋮⋮` icon
+    - You can customize the Review Widget by click the `Review Widget` Block.
+
+    <Image
+      className="mt-3 rounded-[24px] w-auto border border-[rgba(67,198,172,1)]"
+      src={IMAGE_LIQUID_SHOPIFY_APP_EMBED_REVIEW_WIDGET_3}
+      alt="sledge-image-docs"
+    />
+
+    - When ready, `Save` your changes.
+
+    <Dropdown text={`If the position is not suitable, you can add it manually by selecting the`}
+    trigger={`block`}>
+
+    <Image
+      className="mt-3 rounded-[24px] w-auto max-h-[540px] border border-[rgba(67,198,172,1)]"
+      src={IMAGE_LIQUID_SHOPIFY_APP_EMBED_GUIDE_1}
+      alt="sledge-image-docs"
+    />
+    - Click `+ Add Block` > Search `Sledge` > select the `Sldege's Widget` you want to apply.
+    - You can rearrange widget by Click and drag the ⋮⋮ icon
+    - When ready, `Save` your changes.
+    </Dropdown>
+
+  </Tab>
+  <Tab>   
+    Here is a step-by-step guide to adding this widget with code. 
+    <Tabs tabVariant="gradient" storageKey="selected-tech-stack" uniqueClass="tech-stack-tabs"  items={[
+        <div className="flex items-center gap-2">
+            <Hydrogen color="#677487" width={24} height={24} />
+            <span>Hydrogen</span>
+        </div>,
+        <div className="flex items-center gap-2">
+            <NextJs color="#677487" width={24} height={24} />
+            <span>Next.js</span>
+        </div>,
+        <div className="flex items-center gap-2">
+            <Liquid color="#677487" width={24} height={24} />
+            <span>Liquid</span>
+        </div>,
+        <div className="flex bg-re items-center gap-2">
+            <Webflow color="#677487" width={24} height={24} />
+            <span>Webflow</span>
+        </div>
+    ]}>
+    <Tab>
+        See the [API reference](/sledge-app-react-product-review#api-reference-1) for code below.
+
+        ```tsx filename="app/SledgeProductReviewWidget.tsx" showLineNumbers copy
+        import { Widget, WidgetHeader } from "@sledge-app/react-product-review";
+
+        export default function SledgeProductReviewWidget() {
+            return (
+                <Widget.Root
+                    params={{
+                        productId: "",
+                        productVariantId: "",
+                    }}
+                    width=""
+                >
+                    <WidgetHeader>
+                        <WidgetHeader.Summary />
+                        <WidgetHeader.AddTrigger text="Add review" />
+                        <WidgetHeader.Sort />
+                    </WidgetHeader>
+                    <Widget.List />
+                </Widget.Root>
+            );
+        }
+        ```
+
+    </Tab>
+    <Tab>
+        See the [API reference](/sledge-app-react-product-review#api-reference-1) for code below.
+
+        ```tsx filename="app/SledgeProductReviewWidget.tsx" showLineNumbers copy
+        'use client';
+
+        import { Widget, WidgetHeader } from "@sledge-app/react-product-review";
+
+        export default function SledgeProductReviewWidget() {
+            return (
+                <Widget.Root
+                    params={{
+                        productId: "",
+                        productVariantId: "",
+                    }}
+                    width=""
+                >
+                    <WidgetHeader>
+                        <WidgetHeader.Summary />
+                        <WidgetHeader.AddTrigger text="Add review" />
+                        <WidgetHeader.Sort />
+                    </WidgetHeader>
+                    <Widget.List />
+                </Widget.Root>
+            );
+        }
+        ```
+
+    </Tab>
+    <Tab>
+        See the [API reference](/html-data-attribute#api-reference-1) for code below.
+
+        ```html showLineNumbers copy
+        <div
+            data-component="product-review-widget"
+            data-product-id="{{ product.id }}"
+            data-product-variant-id="{{ product.selected_or_first_available_variant.id }}"
+            data-on-after-add-review=""
+            data-width-element=""
+        ></div>
+        ```
+
+    </Tab>
+    <Tab>
+        You can place these code in custom code webflow, see the <a href="https://university.webflow.com/lesson/custom-code-embed" target="_blank" className="nx-text-primary-600 nx-underline nx-decoration-from-font [text-underline-position:from-font]">documentation</a> about custom code embed at webflow
+
+        See the [API reference](/html-data-attribute#api-reference-1) for code below.
+
+        ```html showLineNumbers copy
+        <div
+            data-component="product-review-widget"
+            data-product-id=""
+            data-product-variant-id=""
+            data-on-after-add-review=""
+            data-width-element=""
+        ></div>
+        ```
+
+    </Tab>
+    </Tabs>
+
+  </Tab>
+</Tabs>
+
+## Happy Customers Page
+
+Happy Customers Page is a Product Review widget that you can use to display all reviews of your store, aimed at building credibility, trust, and confidence in potential customers by showcasing the real-life experiences of others who have interacted positively with your store.<br/><br/>
+
+<Image
+  src={IMAGE_APPS_REVIEW_HAPPY_CUSTOMER_PAGE}
+  alt="Happy Customers Page"
+  className="rounded-3xl"
+  width="500"
+  height="250"
+/>{" "}
+
+<br />
+
+<Tabs
+  storageKey="selected-method"
+  items={[
+    <div className="flex items-center gap-2">
+      <AppBlock />
+      <span>Theme Customizer</span>
+    </div>,
+    <div className="flex items-center gap-2">
+      <Code />
+      <span>Code</span>
+    </div>,
+  ]}
+>
+  <Tab>
+    - From your Shopify admin, navigate to `Online Store` > `Themes` > click the `Customize` button.
+
+    - Navigate to the drop-down menu at the top, select the page you want to install the `Happy Customers Page` on.
+
+      <Image
+        className="mt-3 rounded-[24px] w-auto border border-[rgba(67,198,172,1)]"
+        src={IMAGE_LIQUID_SHOPIFY_APP_EMBED_HAPPY_CUSTOMER_PAGE_1}
+        alt="sledge-image-docs" />
+        <br/>
+
+    - Click `+ Add Section` > Search `Happy Customers Page` > Slides to `Apps` > select the `Happy Customers Page`.
+
+      <Image
+        className="mt-3 rounded-[24px] w-auto border border-[rgba(67,198,172,1)]"
+        src={IMAGE_LIQUID_SHOPIFY_APP_EMBED_HAPPY_CUSTOMER_PAGE_2}
+        alt="sledge-image-docs" />
+        <br/>
+
+    - You can customize the Happy Customers Page by click the `Happy Customers Page` Block.
+
+      <Image
+        className="mt-3 rounded-[24px] w-auto border border-[rgba(67,198,172,1)]"
+        src={IMAGE_LIQUID_SHOPIFY_APP_EMBED_HAPPY_CUSTOMER_PAGE_3}
+        alt="sledge-image-docs" />
+        <br/>
+          
+    - When ready, `Save` your changes.
+      
+  </Tab>
+  <Tab>
+    Here is a step-by-step guide to adding this widget with code.
+    <Tabs tabVariant="gradient" storageKey="selected-tech-stack" uniqueClass="tech-stack-tabs"  items={[
+        <div className="flex items-center gap-2">
+            <Hydrogen color="#677487" width={24} height={24} />
+            <span>Hydrogen</span>
+        </div>,
+        <div className="flex items-center gap-2">
+            <NextJs color="#677487" width={24} height={24} />
+            <span>Next.js</span>
+        </div>,
+        <div className="flex items-center gap-2">
+            <Liquid color="#677487" width={24} height={24} />
+            <span>Liquid</span>
+        </div>,
+        <div className="flex bg-re items-center gap-2">
+            <Webflow color="#677487" width={24} height={24} />
+            <span>Webflow</span>
+        </div>
+    ]}>
+    <Tab>
+
+        See the [API reference](/sledge-app-react-product-review#happy-customers-page) for code below.
+
+        [Custom Review Product Info](/custom-components/product-review#review-product-info) can be added to this widget.
+
+        ```tsx filename="app/compoennts/SledgeHappyCustomersPage.tsx" showLineNumbers copy
+        import { HappyCustomersPage } from '@sledge-app/react-product-review';
+
+        export default function SledgeHappyCustomersPage() {
+          return (
+            <HappyCustomersPage.Root width=''>
+              <HappyCustomersPage.Header />
+              <HappyCustomersPage.List />
+            </HappyCustomersPage.Root>
+          );
+        }
+        ```
+
+    </Tab>
+    <Tab>
+
+        See the [API reference](/sledge-app-react-product-review#happy-customers-page) for code below.
+
+        [Custom Review Product Info](/custom-components/product-review#review-product-info) can be added to this widget.
+
+        ```tsx filename="components/SledgeHappyCustomersPage.tsx" showLineNumbers copy
+        'use client';
+
+        import { HappyCustomersPage } from '@sledge-app/react-product-review';
+
+        export default function SledgeHappyCustomersPage() {
+          return (
+            <HappyCustomersPage.Root width=''>
+              <HappyCustomersPage.Header />
+              <HappyCustomersPage.List />
+            </HappyCustomersPage.Root>
+          );
+        }
+        ```
+
+    </Tab>
+    <Tab>
+
+        See the [API reference](/html-data-attribute#api-reference-1) for code below.
+
+        [Custom Review Product Info](/custom-components/product-review#review-product-info) can be added to this widget.
+
+        ```html showLineNumbers copy
+        <div
+          data-component="product-review-happy-customers-page"
+          data-width-element=""
+          data-on-after-add-review=""
+        >
+        </div>
+        ```
+
+    </Tab>
+    <Tab>
+
+        You can place these code in custom code webflow, see the <a href="https://university.webflow.com/lesson/custom-code-embed" target="_blank" className="nx-text-primary-600 nx-underline nx-decoration-from-font [text-underline-position:from-font]">documentation</a> about custom code embed at webflow
+
+        See the [API reference](/html-data-attribute#api-reference-1) for code below.
+
+        [Custom Review Product Info](/custom-components/product-review#review-product-info) can be added to this widget.
+
+        ```html showLineNumbers copy
+        <div
+          data-component="product-review-happy-customers-page"
+          data-width-element=""
+          data-on-after-add-review=""
+        >
+        </div>
+        ```
+
+    </Tab>
+    </Tabs>
+
+  </Tab>
+</Tabs>
+
+<br />
+
+## Trust Badge
+
+The trust badge is a Product Review widget that you can use to display review scores from all of your products.<br/><br/>
+
+<Image
+  className="rounded-[24px] w-auto border"
+  src={IMAGE_APPS_REVIEW_TRUST_BADGE}
+  alt="Trust Badge"
+  width="668"
+  height="164"
+/> <br />
+
+<Tabs
+  storageKey="selected-method"
+  items={[
+    <div className="flex items-center gap-2">
+      <AppBlock />
+      <span>Theme Customizer</span>
+    </div>,
+    <div className="flex items-center gap-2">
+      <Code />
+      <span>Code</span>
+    </div>
+  ]}
+>
+  <Tab>
+    Here is a step-by-step guide to adding this widget with block.
+
+    - From your Shopify admin, navigate to `Online Store` > `Themes` > click the `Customize` button.
+
+    - In the Customize Theme, click `+ Add Block` > Search `Trust Badge` > select the `Trust Badge`.
+    
+    <Image
+      className="mt-3 rounded-[24px] w-auto border border-[rgba(67,198,172,1)]"
+      src={IMAGE_LIQUID_SHOPIFY_APP_EMBED_TRUST_BADGE_1}
+      alt="sledge-image-docs" />
+
+    - You can rearrange Trust Badge by Click and drag the `⋮⋮` icon
+
+    - You can customize the Trust Badge by click the `Trust Badge` Block.
+
+     <Image
+      className="mt-3 rounded-[24px] w-auto border border-[rgba(67,198,172,1)]"
+      src={IMAGE_LIQUID_SHOPIFY_APP_EMBED_TRUST_BADGE_3}
+      alt="sledge-image-docs"
+    />
+
+    - When ready, `Save` your changes.
+  </Tab>
+  <Tab>
+    Here is a step-by-step guide to adding this widget with code.
+    <Tabs tabVariant="gradient" storageKey="selected-tech-stack" uniqueClass="tech-stack-tabs"  items={[
+        <div className="flex items-center gap-2">
+            <Hydrogen color="#677487" width={24} height={24} />
+            <span>Hydrogen</span>
+        </div>,
+        <div className="flex items-center gap-2">
+            <NextJs color="#677487" width={24} height={24} />
+            <span>Next.js</span>
+        </div>,
+        <div className="flex items-center gap-2">
+            <Liquid color="#677487" width={24} height={24} />
+            <span>Liquid</span>
+        </div>,
+        <div className="flex bg-re items-center gap-2">
+            <Webflow color="#677487" width={24} height={24} />
+            <span>Webflow</span>
+        </div>
+    ]}>
+    <Tab>
+        See the [API reference](/sledge-app-react-product-review#trust-badge) for code below.
+
+        ```tsx filename="app/SledgeTrustBadge.tsx" showLineNumbers copy
+        import { TrustBadge } from "@sledge-app/react-product-review";
+
+        export default function SledgeTrustBadge() {
+            return (
+                <TrustBadge />
+            );
+        }
+        ```
+
+    </Tab>
+    <Tab>
+        See the [API reference](/sledge-app-react-product-review#trust-badge) for code below.
+
+        ```tsx filename="app/SledgeTrustBadge.tsx" showLineNumbers copy
+        'use client';
+
+        import { TrustBadge } from "@sledge-app/react-product-review";
+
+        export default function SledgeTrustBadge() {
+            return (
+                <TrustBadge />
+            );
+        }
+        ```
+
+    </Tab>
+    <Tab>
+        See the [API reference](/html-data-attribute#api-reference-2) for code below.
+
+        ```html showLineNumbers copy
+        <div data-component="product-review-trust-badge"></div>
+        ```
+
+    </Tab>
+    <Tab>
+        You can place these code in custom code webflow, see the <a href="https://university.webflow.com/lesson/custom-code-embed" target="_blank" className="nx-text-primary-600 nx-underline nx-decoration-from-font [text-underline-position:from-font]">documentation</a> about custom code embed at webflow
+
+        See the [API reference](/html-data-attribute#api-reference-2) for code below.
+
+        ```html showLineNumbers copy
+        <div data-component="product-review-trust-badge"></div>
+        ```
+
+    </Tab>
+    </Tabs>
+
+  </Tab>
+</Tabs>
+
+## Sticky Sidebar Widget
+
+Sticky Sidebar Widget is a Product Review widget that you can use to display all reviews associated with store and products. This badge remains 'sticky' on your store, drawing attention to all reviews or ratings for potential customers.<br/><br/>
+
+<Image
+  src={IMAGE_APPS_REVIEW_STICKY_REVIEW_BADGE}
+  alt="Sticky Sidebar Widget"
+  className="rounded-3xl"
+  width="105"
+  height="290"
+/>
+
+<br />
+
+<Tabs
+  storageKey="selected-method"
+  items={[
+    <div className="flex items-center gap-2">
+      <AppBlock />
+      <span>Theme Customizer</span>
+    </div>,
+    <div className="flex items-center gap-2">
+      <Code />
+      <span>Code</span>
+    </div>,
+  ]}
+>
+
+  <Tab>
+    - From your Shopify admin, navigate to `Online Store` > `Themes` > click the `Customize` button.
+
+    - In the Customize Theme, see sidebar on the left and choose `App Embeds` and then turn on the `Review Sticky Sidebar`.
+
+        <Image
+          className="mt-3 rounded-[24px] w-auto border border-[rgba(67,198,172,1)]"
+          src={IMAGE_LIQUID_SHOPIFY_APP_EMBED_REVIEW_STICKY_SIDEBAR_1}
+          alt="sledge-image-docs" />
+
+    - You can customize the Review Sticky Sidebar by click the `Review Sticky Sidebar` embed.
+
+      <Image
+        className="mt-3 rounded-[24px] w-auto border border-[rgba(67,198,172,1)]"
+        src={IMAGE_LIQUID_SHOPIFY_APP_EMBED_REVIEW_STICKY_SIDEBAR_2}
+        alt="sledge-image-docs" />
+
+    - When ready, `Save` your changes.
+      
+  </Tab>
+  <Tab>
+    Here is a step-by-step guide to adding this widget with code.
+    <Tabs tabVariant="gradient" storageKey="selected-tech-stack" uniqueClass="tech-stack-tabs"  items={[
+        <div className="flex items-center gap-2">
+            <Hydrogen color="#677487" width={24} height={24} />
+            <span>Hydrogen</span>
+        </div>,
+        <div className="flex items-center gap-2">
+            <NextJs color="#677487" width={24} height={24} />
+            <span>Next.js</span>
+        </div>,
+        <div className="flex items-center gap-2">
+            <Liquid color="#677487" width={24} height={24} />
+            <span>Liquid</span>
+        </div>,
+        <div className="flex bg-re items-center gap-2">
+            <Webflow color="#677487" width={24} height={24} />
+            <span>Webflow</span>
+        </div>
+    ]}>
+    <Tab>
+
+        See the [API reference](/sledge-app-react-product-review#sticky-sidebar-widget) for code below.
+
+        ```tsx filename="app/compoennts/SledgeStickySidebar.tsx" showLineNumbers copy
+        import { StickySidebarWidget } from '@sledge-app/react-product-review';
+
+        export default function SledgeStickySidebar() {
+          return (
+            <StickySidebarWidget position="" showRatingAverage="" />
+          );
+        }
+        ```
+
+    </Tab>
+    <Tab>
+
+        See the [API reference](/sledge-app-react-product-review#sticky-sidebar-widget) for code below.
+
+        ```tsx filename="components/SledgeStickySidebar.tsx" showLineNumbers copy
+        'use client';
+
+        import { StickySidebarWidget } from '@sledge-app/react-product-review';
+
+        export default function SledgeStickySidebar() {
+          return (
+            <StickySidebarWidget position="" showRatingAverage="" />
+          );
+        }
+        ```
+
+    </Tab>
+    <Tab>
+
+        See the [API reference](/html-data-attribute#api-reference-1) for code below.
+
+        ```html showLineNumbers copy
+          <div
+            data-component="product-review-sticky-sidebar-widget"
+            data-position-widget=""
+            data-show-rating-average=""
+          ></div>
+        ```
+
+    </Tab>
+    <Tab>
+
+        You can place these code in custom code webflow, see the <a href="https://university.webflow.com/lesson/custom-code-embed" target="_blank" className="nx-text-primary-600 nx-underline nx-decoration-from-font [text-underline-position:from-font]">documentation</a> about custom code embed at webflow
+
+        See the [API reference](/html-data-attribute#api-reference-1) for code below.
+
+        ```html showLineNumbers copy
+        <div
+            data-component="product-review-sticky-sidebar-widget"
+            data-position-widget=""
+            data-show-rating-average=""
+          ></div>
+        ```
+
+    </Tab>
+    </Tabs>
+
+  </Tab>
+</Tabs>
+
+## Snippet Carousel Widget
+
+Snippet Carousel Widget is a Product Review widget that you can use to display product reviews and ratings in a carousel format<br/><br/>
+
+<Image
+  src={IMAGE_APPS_REVIEW_SNIPPET_WIDGET}
+  alt="Snippet Carousel Widget"
+  className="rounded-3xl"
+  width="464"
+  height="130"
+/>
+
+<br />
+
+<Tabs
+  storageKey="selected-method"
+  items={[
+    <div className="flex items-center gap-2">
+      <AppBlock />
+      <span>Theme Customizer</span>
+    </div>,
+    <div className="flex items-center gap-2">
+      <Code />
+      <span>Code</span>
+    </div>,
+  ]}
+>
+  <Tab>
+    - From your Shopify admin, navigate to `Online Store` > `Themes` > click the `Customize` button.
+    
+    - Navigate to the drop-down menu at the top, select `Products` > select a default product.
+
+      <Image
+        className="mt-5 rounded-[24px] w-auto max-h-[459px] border border-[rgba(67,198,172,1)]"
+        src={IMAGE_LIQUID_SHOPIFY_APP_EMBED_SNIPPET_CAROUSEL_WIDGET_1}
+        alt="sledge-image-docs"
+      /><br/>
+
+    - Click `+ Add Block` > Search `review snippet` > select the `Review Snippet` section.
+
+      <Image
+          className="mt-5 rounded-[24px] w-auto max-h-[459px] border border-[rgba(67,198,172,1)]"
+          src={IMAGE_LIQUID_SHOPIFY_APP_EMBED_SNIPPET_CAROUSEL_WIDGET_2}
+          alt="sledge-image-docs"
+        /><br/>
+
+    - You can rearrange Review Snippet by Click and drag the `⋮⋮` icon
+
+    - When ready, `Save` your changes.
+
+  </Tab>
+  <Tab>
+    Here is a step-by-step guide to adding this widget with code.
+    <Tabs tabVariant="gradient" storageKey="selected-tech-stack" uniqueClass="tech-stack-tabs"  items={[
+        <div className="flex items-center gap-2">
+            <Hydrogen color="#677487" width={24} height={24} />
+            <span>Hydrogen</span>
+        </div>,
+        <div className="flex items-center gap-2">
+            <NextJs color="#677487" width={24} height={24} />
+            <span>Next.js</span>
+        </div>,
+        <div className="flex items-center gap-2">
+            <Liquid color="#677487" width={24} height={24} />
+            <span>Liquid</span>
+        </div>,
+        <div className="flex bg-re items-center gap-2">
+            <Webflow color="#677487" width={24} height={24} />
+            <span>Webflow</span>
+        </div>
+    ]}>
+    <Tab>
+
+        See the [API reference](/sledge-app-react-product-review#snippet-carousel-widget) for code below.
+
+        ```tsx filename="app/compoennts/SledgeSnippetCarouselWidget.tsx" showLineNumbers copy
+        import { Snippet } from '@sledge-app/react-product-review';
+
+        export default function SledgeSnippetCarouselWidget() {
+          return (
+            <Snippet productId="" maxWidth="" />
+          );
+        }
+        ```
+
+    </Tab>
+    <Tab>
+
+        See the [API reference](/sledge-app-react-product-review#snippet-carousel-widget) for code below.
+
+        ```tsx filename="components/SledgeSnippetCarouselWidget.tsx" showLineNumbers copy
+        'use client';
+
+        import { Snippet } from '@sledge-app/react-product-review';
+
+        export default function SledgeSnippetCarouselWidget() {
+          return (
+            <Snippet productId="" maxWidth="" />
+          );
+        }
+        ```
+
+    </Tab>
+    <Tab>
+
+        See the [API reference](/html-data-attribute#api-reference-1) for code below.
+
+        ```html showLineNumbers copy
+          <div
+            data-component="product-review-snippet"
+            data-product-id=""
+            data-width-element=""
+          ></div>
+        ```
+
+    </Tab>
+    <Tab>
+
+        You can place these code in custom code webflow, see the <a href="https://university.webflow.com/lesson/custom-code-embed" target="_blank" className="nx-text-primary-600 nx-underline nx-decoration-from-font [text-underline-position:from-font]">documentation</a> about custom code embed at webflow
+
+        See the [API reference](/html-data-attribute#api-reference-1) for code below.
+
+        ```html showLineNumbers copy
+        <div
+          data-component="product-review-snippet"
+          data-product-id=""
+          data-width-element=""
+        ></div>
+        ```
+
+    </Tab>
+    </Tabs>
+
+  </Tab>
+</Tabs>
+
+## Learn more
+
+Congratulations! Now that you've learned usage of Product Review widgets, you can start implementing Product Review into your store.
+
+If your store requires custom callback for the widget, you can learn more on how to modify them based on your needs :
+
+- [How to add Callback Functions](/callback-functions)
+- [How to add Custom Style](/custom-styles)

@@ -1,0 +1,235 @@
+import { Steps, Code, Pre, Callout } from "nextra/components";
+import Image from "next/image";
+import { Table } from "~/components/global";
+import {
+  IMAGE_APPS_IS_PF_RESULT,
+  IMAGE_CUSTOM_STYLES_IS_FILTER_HORIZONTAL,
+  IMAGE_CUSTOM_STYLES_IS_FILTER_VERTICAL,
+} from "~/lib/const";
+
+# Product Filters
+
+All of Sledge's themes use of several kinds of classes. To assist you in customizing CSS to your needs, the most frequently used element selectors and classes are listed below.
+
+- [Product Filters](#product-filters)
+
+## Product Filters
+
+<Image
+  src={IMAGE_APPS_IS_PF_RESULT}
+  alt="Product Filter Result"
+  className="mt-3"
+  width="1391"
+  height="646"
+/>
+
+<Callout type="info">
+  For `Search Input Field`, you can check out
+  [here](/custom-styles/global#search-input-field).
+</Callout>
+
+<Callout type="info">
+  For `Product Card`, you can check out
+  [here](/custom-styles/global#product-card).
+</Callout>
+
+<Callout type="info">
+  For `Pagination` component, you can check out
+  [here](/custom-styles/global#pagination).
+</Callout>
+
+## Filter Horizontal
+
+<Image
+  src={IMAGE_CUSTOM_STYLES_IS_FILTER_HORIZONTAL}
+  alt="Filter Horizontal"
+  className="mt-3 w-auto rounded-[14px]"
+/>
+
+<Table
+  overflow={true}
+  data={{
+    thead: [{ title: "Class" }, { title: "Description" }],
+    tbody: [
+      [
+        "`sledge-instant-search__result-filter-horizontal-wrapper`",
+        "Filter wrapper",
+      ],
+      [
+        "`sledge-instant-search__result-filter-horizontal-refine-item-clear-all`",
+        "Clear all button",
+      ],
+      [
+        "`sledge-instant-search__result-filter-item-refine-selected`",
+        "Selected filters wrapper",
+      ],
+      [
+        "`sledge-instant-search__result-filter-item-title-refine-list`",
+        "Selected filters text",
+      ],
+      [
+        "`sledge-instant-search__result-filter-item-refine-title-clear`",
+        "Selected filters clear icon",
+      ],
+      [
+        "`sledge-instant-search__filter-horizontal-facet-content`",
+        "Popover wrapper",
+      ],
+      [
+        "`sledge-instant-search__result-filter-item-list`",
+        "Popover items wrapper",
+      ],
+    ],
+  }}
+/>
+
+### Using Selector
+
+<Table
+  overflow={true}
+  data={{
+    thead: [{ title: "Selector" }, { title: "Description" }],
+    tbody: [
+      [
+        "`.sledge-instant-search__result-filter-horizontal-wrapper .sledge__button`",
+        "Filter button",
+      ],
+      [
+        "`.sledge-instant-search__result-filter-horizontal-wrapper .sledge__button .sledge-icon__arrow-down`",
+        "Arrow down icon",
+      ],
+      [
+        "`.sledge-instant-search__result-filter-horizontal-facet .sledge__checkbox-wrapper`",
+        "Popover items checkbox wrapper",
+      ],
+      [
+        "`.sledge-instant-search__result-filter-horizontal-facet .sledge__checkbox-root`",
+        "checkbox input",
+      ],
+      [
+        "`.sledge-instant-search__result-filter-horizontal-facet .sledge__checkbox-label`",
+        "checkbox label",
+      ],
+    ],
+  }}
+/>
+
+## Filter Vertical
+
+<Image
+  src={IMAGE_CUSTOM_STYLES_IS_FILTER_VERTICAL}
+  alt="Filter vertical"
+  className="mt-3 w-auto rounded-[14px]"
+/>
+
+<Table
+  overflow={true}
+  data={{
+    thead: [{ title: "Class" }, { title: "Description" }],
+    tbody: [
+      ["`sledge-instant-search__result-filter`", "Filter wrapper"],
+      [
+        "`sledge-instant-search__result-filter-item-title-refine`",
+        "Filter title",
+      ],
+      [
+        "`sledge-instant-search__result-filter-horizontal-refine-item-clear-all`",
+        "Clear all button",
+      ],
+      [
+        "`sledge-instant-search__result-filter-item-refine-selected`",
+        "Selected filters wrapper",
+      ],
+      [
+        "`sledge-instant-search__result-filter-item-title-refine-list`",
+        "Selected filters text",
+      ],
+      [
+        "`sledge-instant-search__result-filter-item-refine-title-clear`",
+        "Selected filters clear icon",
+      ],
+
+      ["`sledge-instant-search__result-filter-item`", "Filter items wrapper"],
+      [
+        "`sledge-instant-search__result-filter-item-title`",
+        "Filter items title",
+      ],
+      ["`sledge-instant-search__result-filter-item-list`", "Filter items list"],
+      ["`sledge-instant-search__result-filter-item`", "Filter items wrapper"],
+      [
+        "`sledge-instant-search__result-filter-item-title`",
+        "Filter items title",
+      ],
+      ["`sledge-instant-search__result-filter-item-list`", "Filter items list"],
+      [
+        "`sledge-instant-search__result-filter-item-list-slider`",
+        "Filter slider wrapper",
+      ],
+      [
+        "`sledge-instant-search__result-filter-item-color-swatches`",
+        "Filter color swatches container",
+      ],
+    ],
+
+}}
+/>
+
+<Callout type="info">
+  You can edit `Title of Filters` text with `Using Backend` in `Title of
+  Filters` section, check out
+  [here](/backend-instant-search-and-product-filters#title-of-filters).
+</Callout>
+
+<Callout type="info">
+  You can edit `Options of Filter` text with `Using Backend` in `Options of
+  Filter` section, check out
+  [here](/backend-instant-search-and-product-filters#options-of-filter).
+</Callout>
+
+<Callout type="info">
+  You can edit `Filter Button` with `Using Backend` in `Filter Button` section,
+  check out [here](/backend-instant-search-and-product-filters#filter-button).
+</Callout>
+
+### Using Selector
+
+<Table
+  overflow={true}
+  data={{
+    thead: [{ title: "Selector" }, { title: "Description" }],
+    tbody: [
+      [
+        "`.sledge-instant-search__result-filter-item .sledge-icon__arrow-down`",
+        "Arrow down icon",
+      ],
+      [
+        "`.sledge-instant-search__result-filter-item-list .sledge__checkbox-wrapper`",
+        "checkbox and label wrapper",
+      ],
+      [
+        "`.sledge-instant-search__result-filter-item-list .sledge__checkbox-root`",
+        "checkbox input",
+      ],
+      [
+        "`.sledge-instant-search__result-filter-item-list .sledge__checkbox-label`",
+        "checkbox label",
+      ],
+      [
+        "`.sledge-instant-search__result-filter-item-list .sledge__checkbox-label`",
+        "checkbox label",
+      ],
+      [
+        "`.sledge-instant-search__result-filter-item-list-slider .sledge__SliderRoot`",
+        "Filter slider",
+      ],
+      [
+        "`.sledge-instant-search__result-filter-item-list-slider .sledge-instant-search__result-filter-minmax-field`",
+        "Filter slider min max text",
+      ],
+      [
+        "`.sledge-instant-search__result-filter-item-color-swatches .sledge__color-swatch-root`",
+        "Filter color swatches button",
+      ],
+    ],
+  }}
+/>

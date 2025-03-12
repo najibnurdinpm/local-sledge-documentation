@@ -1,0 +1,227 @@
+import { Tabs, Tab, Dropdown } from "~/components/global";
+import { Callout } from "nextra-theme-docs";
+import Image from "next/image";
+import {
+  Webflow,
+  Liquid,
+  NextJs,
+  Hydrogen,
+  AppBlock,
+  Code,
+} from "~/components/icons";
+import {
+  IMAGE_APPS_IS_PF_RESULT,
+  IMAGE_LIQUID_SHOPIFY_APP_EMBED_PF_1,
+  IMAGE_LIQUID_SHOPIFY_APP_EMBED_PF_1_1,
+  IMAGE_LIQUID_SHOPIFY_APP_EMBED_PF_2,
+  IMAGE_LIQUID_SHOPIFY_APP_EMBED_PF_3,
+} from "~/lib/const";
+
+# Product Filters
+
+Instantly integrate a smart product filters on any pages including collections and search result pages. Let your customer navigate your store collections in instant.
+
+Sledge provides several widgets you can use to integrate it with your store.
+
+Available widgets :
+
+- [Product Filter](#product-filter)
+
+<Callout type="info">
+  If you're using `Hydrogen` or `Next.js`, <br/> make sure to install the `@sledge-app/react-instant-search` package first.
+</Callout>
+
+```sh copy
+npm i @sledge-app/react-instant-search
+```
+
+## Product Filter
+
+Product Filter is an Instant Search's widget you can use to search your products on a single page. This widget is also known as a "Product Listing Page." <br/><br/>
+
+<Image
+  src={IMAGE_APPS_IS_PF_RESULT}
+  alt="Product Filter"
+  width="1391"
+  height="646"
+/> <br />
+
+<Tabs
+  storageKey="selected-method"
+  items={[
+    <div className="flex items-center gap-2">
+      <AppBlock />
+      <span>Theme Customizer</span>
+    </div>,
+    <div className="flex items-center gap-2">
+      <Code />
+      <span>Code</span>
+    </div>,
+  ]}
+>
+  <Tab>
+    Here is a step-by-step guide to adding this widget with block.
+
+    - In the Theme Installation, click `Integrate to my theme` on `Product Filter` option.
+
+     <Image
+      className="mt-3 rounded-[24px] w-auto border border-[rgba(67,198,172,1)]"
+      src={IMAGE_LIQUID_SHOPIFY_APP_EMBED_PF_1}
+      alt="sledge-image-docs"
+    />
+
+    - Then click `Add widget to my theme` on `Add product filter` option.
+
+    <Image
+      className="mt-3 rounded-[24px] w-auto border border-[rgba(67,198,172,1)]"
+      src={IMAGE_LIQUID_SHOPIFY_APP_EMBED_PF_1_1}
+      alt="sledge-image-docs"
+    />
+
+    - You will be directed to the Editor, and the Product Filter will have been added automatically.
+
+    <Image
+      className="mt-5 rounded-[24px] w-auto max-h-[459px] border border-[rgba(67,198,172,1)]"
+      src={IMAGE_LIQUID_SHOPIFY_APP_EMBED_PF_2}
+      alt="sledge-image-docs"
+    />
+
+    - You can rearrange Product Filter by Click and drag the `⋮⋮` icon
+    - You can customize the Product Filter by click the `Product Filter` Section.
+
+    <Image
+      className="mt-5 rounded-[24px] w-auto max-h-[459px] border border-[rgba(67,198,172,1)]"
+      src={IMAGE_LIQUID_SHOPIFY_APP_EMBED_PF_3}
+      alt="sledge-image-docs"
+    />
+
+    - When ready, `Save` your changes.
+
+  </Tab>
+  <Tab>
+    Here is a step-by-step guide to adding this widget with code.
+    <Tabs tabVariant="gradient" storageKey="selected-tech-stack" uniqueClass="tech-stack-tabs"  items={[
+        <div className="flex items-center gap-2">
+            <Hydrogen color="#677487" width={24} height={24} />
+            <span>Hydrogen</span>
+        </div>,
+        <div className="flex items-center gap-2">
+            <NextJs color="#677487" width={24} height={24} />
+            <span>Next.js</span>
+        </div>,
+        <div className="flex items-center gap-2">
+            <Liquid color="#677487" width={24} height={24} />
+            <span>Liquid</span>
+        </div>,
+        <div className="flex bg-re items-center gap-2">
+            <Webflow color="#677487" width={24} height={24} />
+            <span>Webflow</span>
+        </div>
+    ]}>
+    <Tab>
+        See the [API reference](/sledge-app-react-instant-search#api-reference-3) for code below.
+
+        ```tsx filename="app/SledgeInstantSearchProductFilterWidget.tsx" showLineNumbers copy
+        import { ProductFilterWidget } from "@sledge-app/react-instant-search";
+
+        export default function InstantSearchProductFilterWidget() {
+            return (
+                <ProductFilterWidget
+                    query={{
+                        keyword: 'q',
+                        sortBy: 'sort_by',
+                        page: 'page',
+                        limit: 'limit',
+                    }}
+                    params={{
+                        collectionId: '',
+                        collectionName: ''
+                    }}
+                />
+            );
+        }
+        ```
+
+    </Tab>
+    <Tab>
+        See the [API reference](/sledge-app-react-instant-search#api-reference-3) for code below.
+
+        ```tsx filename="app/SledgeInstantSearchProductFilterWidget.tsx" showLineNumbers copy
+        'use client';
+
+        import { ProductFilterWidget } from "@sledge-app/react-instant-search";
+
+        export default function InstantSearchProductFilterWidget() {
+            return (
+                <ProductFilterWidget
+                    query={{
+                        keyword: 'q',
+                        sortBy: 'sort_by',
+                        page: 'page',
+                        limit: 'limit',
+                    }}
+                    params={{
+                        collectionId: '',
+                        collectionName: ''
+                    }}
+                />
+            );
+        }
+        ```
+
+    </Tab>
+    <Tab>
+        See the [API reference](/html-data-attribute#api-reference-1) for code below.
+
+        ```html showLineNumbers copy
+        <div
+            data-component="instant-search-product-filter-widget"
+            data-query-keyword="q"
+            data-query-sort-by="sort_by"
+            data-query-page="page"
+            data-query-limit="limit"
+            data-collection-id="{{ collection.id }}"
+            data-collection-name="{{ collection.title }}"
+            data-current-tags="{{ current_tags | join: ', ' }}"
+            data-on-after-add-wishlist=""
+            data-on-after-remove-wishlist=""
+            data-on-after-render-product=""
+        ></div>
+        ```
+
+    </Tab>
+    <Tab>
+        You can place these code in custom code webflow, see the <a href="https://university.webflow.com/lesson/custom-code-embed" target="_blank" className="nx-text-primary-600 nx-underline nx-decoration-from-font [text-underline-position:from-font]">documentation</a> about custom code embed at webflow
+
+        See the [API reference](/html-data-attribute#api-reference-1) for code below.
+
+        ```html showLineNumbers copy
+        <div
+            data-component="instant-search-product-filter-widget"
+            data-query-keyword="q"
+            data-query-sort-by="sort_by"
+            data-query-page="page"
+            data-query-limit="limit"
+            data-collection-id=""
+            data-collection-name=""
+            data-on-after-add-wishlist=""
+            data-on-after-remove-wishlist=""
+            data-on-after-render-product=""
+        ></div>
+        ```
+
+    </Tab>
+    </Tabs>
+
+  </Tab>
+</Tabs>
+
+## Learn more
+
+Congratulations! Now that you've learned usage of Product Filters widgets, you can start implementing Product Filters into your store.
+
+If your store requires custom layout or custom callback for the widget, you can learn more on how to modify them based on your needs :
+
+- [How to add Callback Functions](/callback-functions)
+- [How to add Custom Components](/custom-components)
+- [How to add Custom Style](/custom-styles)

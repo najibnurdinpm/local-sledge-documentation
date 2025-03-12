@@ -1,0 +1,255 @@
+import { Tabs, Tab, Dropdown } from "~/components/global";
+import { Callout } from "nextra-theme-docs";
+import Image from "next/image";
+import {
+  Webflow,
+  Liquid,
+  NextJs,
+  Hydrogen,
+  AppBlock,
+  Code,
+} from "~/components/icons";
+
+import { 
+  IMAGE_APPS_PR_RECENTLY_VIEWED, 
+  IMAGE_LIQUID_SHOPIFY_APP_EMBED_PR_RECENTLY_VIEWED_1, 
+  IMAGE_LIQUID_SHOPIFY_APP_EMBED_PR_RECENTLY_VIEWED_1_1, 
+  IMAGE_LIQUID_SHOPIFY_APP_EMBED_PR_RECENTLY_VIEWED_2,
+  IMAGE_LIQUID_SHOPIFY_APP_EMBED_PR_RECENTLY_VIEWED_3,
+  IMAGE_LIQUID_SHOPIFY_APP_EMBED_GUIDE_1
+} from "~/lib/const";
+
+# Recently Viewed
+
+Designed to increase user engagement and optimize the shopping experience by providing quick access to previously viewed products.
+
+Sledge provides several widgets you can use to integrate it with your store.
+
+Available widgets :
+
+- [Recently Viewed](#recently-viewed)
+
+<Callout type="info">
+  If you're using `Hydrogen` or `Next.js`, <br/> make sure to install the `@sledge-app/react-product-recommendation` package first.
+</Callout>
+
+```sh copy
+npm i @sledge-app/react-product-recommendation
+```
+
+## Recently Viewed
+
+Recently Viewed is an Product Recommendation's widget you can use to see a list of products that you have previously opened, this widget can be placed on all your store pages. <br/><br/>
+
+<Image
+  src={IMAGE_APPS_PR_RECENTLY_VIEWED}
+  alt="Recently Viewed"
+  width="1391"
+  height="646"
+  className="rounded-2xl"
+/> <br />
+
+{/* TODO: Theme Customizer on backend */}
+
+<Tabs
+  storageKey="selected-method"
+  items={[
+    <div className="flex items-center gap-2">
+      <AppBlock />
+      <span>Theme Customizer</span>
+    </div>,
+    <div className="flex items-center gap-2">
+      <Code />
+      <span>Code</span>
+    </div>,
+  ]}
+>
+  <Tab>
+    Here is a step-by-step guide to adding this widget with block.
+
+    - In the Theme Installation, click `Integrate to my theme` on `Product Recommendation` option.
+
+    <Image
+      className="mt-3 rounded-[24px] w-auto border border-[rgba(67,198,172,1)]"
+      src={IMAGE_LIQUID_SHOPIFY_APP_EMBED_PR_RECENTLY_VIEWED_1}
+      alt="sledge-image-docs"
+    />
+
+    - Then click `Add widget to my theme` on `Add recently viewed widget` option.
+
+    <Image
+      className="mt-3 rounded-[24px] w-auto border border-[rgba(67,198,172,1)]"
+      src={IMAGE_LIQUID_SHOPIFY_APP_EMBED_PR_RECENTLY_VIEWED_1_1}
+      alt="sledge-image-docs"
+    />
+
+    - You will be directed to the Editor, and the Recently Viewed will have been added automatically.
+
+    <Image
+      className="mt-3 rounded-[24px] w-auto border border-[rgba(67,198,172,1)]"
+      src={IMAGE_LIQUID_SHOPIFY_APP_EMBED_PR_RECENTLY_VIEWED_2}
+      alt="sledge-image-docs"
+    />
+
+    - You can rearrange Recently Viewed by Click and drag the `⋮⋮` icon
+    - You can customize the Recently Viewed by click the `Recently Viewed` Block.
+
+    <Image
+      className="mt-3 rounded-[24px] w-auto border border-[rgba(67,198,172,1)]"
+      src={IMAGE_LIQUID_SHOPIFY_APP_EMBED_PR_RECENTLY_VIEWED_3}
+      alt="sledge-image-docs"
+    />
+
+    - When ready, `Save` your changes.
+
+    <Dropdown text={`If the position is not suitable, you can add it manually by selecting the`}
+    trigger={`block`}>
+      <Image
+        className="mt-3 rounded-[24px] w-auto max-h-[540px] border border-[rgba(67,198,172,1)]"
+        src={IMAGE_LIQUID_SHOPIFY_APP_EMBED_GUIDE_1}
+        alt="sledge-image-docs"
+      />
+      - Click `+ Add Block` > Search `Sledge` > select the `Sldege's Widget` you want to apply.
+      - You can rearrange widget by Click and drag the ⋮⋮ icon
+      - When ready, `Save` your changes.
+    </Dropdown>
+
+  </Tab>
+  <Tab>
+    Here is a step-by-step guide to adding this widget with code.
+    <Tabs tabVariant="gradient" storageKey="selected-tech-stack" uniqueClass="tech-stack-tabs"  items={[
+        <div className="flex items-center gap-2">
+            <Hydrogen color="#677487" width={24} height={24} />
+            <span>Hydrogen</span>
+        </div>,
+        <div className="flex items-center gap-2">
+            <NextJs color="#677487" width={24} height={24} />
+            <span>Next.js</span>
+        </div>,
+        <div className="flex items-center gap-2">
+            <Liquid color="#677487" width={24} height={24} />
+            <span>Liquid</span>
+        </div>,
+        <div className="flex bg-re items-center gap-2">
+            <Webflow color="#677487" width={24} height={24} />
+            <span>Webflow</span>
+        </div>
+    ]}>
+    <Tab>
+
+        See the [API reference](/sledge-app-react-product-recommendation#api-reference) for code below.
+
+        [Custom Product Card](/custom-components/global#product-card) can be added to this widget.
+
+        ```tsx filename="app/compoennts/SledgeRecentlyViewed.tsx" showLineNumbers copy
+        import { RecentlyViewed } from "@sledge-app/react-product-recommendation";
+ 
+        export default function SledgeRecentlyViewed() {
+          return (
+            <RecentlyViewed
+              params={{
+                productId: "",
+              }}
+              hiddenProductIds=""
+              displayLimit=""
+              useSlider=""
+            >
+              <RecentlyViewedHeaderTitle text="" />
+              <RecentlyViewedHeaderDescription text="" />
+              <RecentlyViewedList />
+            </RecentlyViewed>
+          );
+        }
+        ```
+
+    </Tab>
+    <Tab>
+
+        See the [API reference](/sledge-app-react-product-recommendation#api-reference) for code below.
+
+        [Custom Product Card](/custom-components/global#product-card) can be added to this widget.
+
+        ```tsx filename="components/SledgeRecentlyViewed.tsx" showLineNumbers copy
+        'use client';
+
+        import { RecentlyViewed } from "@sledge-app/react-product-recommendation";
+ 
+        export default function SledgeRecentlyViewed() {
+          return (
+            <RecentlyViewed
+              params={{
+                productId: "",
+              }}
+              hiddenProductIds=""
+              displayLimit=""
+              useSlider=""
+            >
+              <RecentlyViewedHeaderTitle text="" />
+              <RecentlyViewedHeaderDescription text="" />
+              <RecentlyViewedList />
+            </RecentlyViewed>
+          );
+        }
+        ```
+
+    </Tab>
+    <Tab>
+
+        See the [API reference](/html-data-attribute#api-reference-1) for code below.
+
+        [Custom Product Card](/custom-components/global#product-card) can be added to this widget.
+
+        ```html showLineNumbers copy
+        <div
+            data-component="product-recommendation-recently-viewed"
+            data-product-id="{{ product.id }}"
+            data-hidden-product-ids=""
+            data-display-limit=""
+            data-use-slider=""
+            data-section-title=""
+            data-section-description=""
+            data-on-after-add-wishlist=""
+            data-on-after-remove-wishlist=""
+            data-on-after-render-product=""
+        ></div>
+        ```
+
+    </Tab>
+    <Tab>
+
+        You can place these code in custom code webflow, see the <a href="https://university.webflow.com/lesson/custom-code-embed" target="_blank" className="nx-text-primary-600 nx-underline nx-decoration-from-font [text-underline-position:from-font]">documentation</a> about custom code embed at webflow
+
+        See the [API reference](/html-data-attribute#api-reference-1) for code below.
+
+        [Custom Product Card](/custom-components/global#product-card) can be added to this widget.
+
+        ```html showLineNumbers copy
+        <div
+            data-component="product-recommendation-recently-viewed"
+            data-product-id=""
+            data-hidden-product-ids=""
+            data-display-limit=""
+            data-use-slider=""
+            data-section-title=""
+            data-section-description=""
+            data-on-after-add-wishlist=""
+            data-on-after-remove-wishlist=""
+            data-on-after-render-product=""
+        ></div>
+        ```
+
+    </Tab>
+    </Tabs>
+
+  </Tab>
+</Tabs>
+
+## Learn more
+
+Congratulations! Now that you've learned usage of Recently Viewed widget, you can start implementing Recently Viewed into your store.
+
+If your store requires custom layout or custom callback for the widget, you can learn more on how to modify them based on your needs :
+
+- [How to add Callback Functions](/callback-functions)
+- [How to add Custom Components](/custom-components)
+- [How to add Custom Style](/custom-styles)

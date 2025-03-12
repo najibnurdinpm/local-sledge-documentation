@@ -1,0 +1,65 @@
+import Image from "next/image";
+import {
+  IMAGE_BACKEND_GENERAL_CUSTOMIZE,
+  IMAGE_BACKEND_GENERAL_HELP,
+  IMAGE_BACKEND_GENERAL_CUSTOMIZE_POINT_1,
+  IMAGE_BACKEND_GENERAL_CUSTOMIZE_POINT_2,
+} from "~/lib/const";
+
+# Using Backend
+
+General menu contains things that can be used for several Sledge apps, such as:
+
+- [Help](#help)
+- [Customize](#customize)
+
+## Help
+
+Sledge continues to strive to make it easier for users to use the Sledge app, through this page it is hoped that you will find a solution to the confusion you are facing.
+
+<Image
+  className="mt-3 rounded-[24px] w-auto max-h-[359px] border border-[rgba(67,198,172,1)]"
+  src={IMAGE_BACKEND_GENERAL_HELP}
+  alt="sledge-image-docs"
+/>
+
+## Customize
+
+Sledge provides customizations for things that are general or can apply to more than one app. There are various settings available, such as:
+
+<ul className="mt-2">
+  <li className="list-disc list-inside my-2">
+    <span>[Cart URL](#cart-url)</span>
+  </li>
+  <li className="list-disc list-inside my-2">
+    <span>[Skeleton](#skeleton)</span>
+  </li>
+</ul>
+
+<Image
+  className="mt-3 rounded-[24px] w-auto max-h-[359px] border border-[rgba(67,198,172,1)]"
+  src={IMAGE_BACKEND_GENERAL_CUSTOMIZE}
+  alt="sledge-image-docs"
+/>
+
+### Cart URL
+
+If the cart page in your shop is not `/cart` then you can tell Sledge by changing it in the cart url settings. The cart URL is used for redirection after the customer clicks add to cart on the wishlist page or instant search results
+
+Using the [Custom Component - Product Card](/custom-components/global#product-card) will be disabled this setting.<br/>
+
+<Image
+  className="mt-3 rounded-[24px] w-auto max-h-[200px] border border-[rgba(67,198,172,1)]"
+  src={IMAGE_BACKEND_GENERAL_CUSTOMIZE_POINT_1}
+  alt="sledge-image-docs"
+/>
+
+### Skeleton
+
+In each sledge component when loading data it will display a skeleton. You can change the color and deactivate it from this menu.<br/>
+
+<Image
+  className="mt-3 rounded-[24px] w-auto max-h-[300px] border border-[rgba(67,198,172,1)]"
+  src={IMAGE_BACKEND_GENERAL_CUSTOMIZE_POINT_2}
+  alt="sledge-image-docs"
+/>

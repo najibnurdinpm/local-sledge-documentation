@@ -1,0 +1,367 @@
+import { Steps } from "nextra/components";
+import Image from "next/image";
+import { IMAGE_APPS_IS_PF_RESULT, IMAGE_FETCH_SUCCESS } from "~/lib/const";
+import { Table } from "~/components/global";
+import Link from "next/link";
+import { Code, Pre, FileTree } from "nextra/components";
+
+# Start using Sledge and Hydrogen
+
+Prior using all Sledge's widgets, follow the steps below to start integrating Sledge into your Hydrogen storefront.
+
+## Quickstart
+
+<Steps>
+### Install Sledge Core
+
+First, you need to install the core of sledge package, run the following command:
+
+```bash copy
+npm i @sledge-app/core
+```
+
+### Setup the `SledgeProvider`
+
+Once you've installed the core, you can start using it in your Hydrogen project.
+
+```tsx filename="app/root.tsx" showLineNumbers copy
+import { type LinksFunction } from "@shopify/remix-oxygen";
+import { SledgeProvider } from "@sledge-app/core";
+import sledgeCss from '@sledge-app/core/style.css';
+
+export const links: LinksFunction = () => {
+  return [
+    ...
+    { rel: "stylesheet", href: sledgeCss },
+    ...
+  ];
+};
+
+export default function App() {
+  return (
+    <html lang="en">
+      <head>
+        <Meta />
+        <Links />
+      </head>
+      <body>
+        <SledgeProvider
+          config={{
+            userId: "",
+            userEmail: "",
+            userFullname: "",
+            domain: ""
+          }}
+        >
+          {/* Routes, Pages, etc */}
+        </SledgeProvider>
+      </body>
+    </html>
+  );
+}
+```
+
+#### `SledgeProvider` Parameters
+
+Let's look on list of all available parameters:
+
+<br />
+
+<Table
+  data={{
+    thead: [
+      { title: "Parameter" },
+      { title: "Type" },
+      { title: "Description" },
+    ],
+    tbody: [
+      [
+        "`userId`",
+        "string",
+        <>
+          <p>
+            Fill with your own user logined data,
+            <br />
+            You can check out the example{" "}
+            <Link
+              target="_blank"
+              href="https://github.com/offstack/sledge-demo-store/blob/main/hydrogen/app/root.tsx#L171"
+            >
+              code
+            </Link>
+          </p>
+        </>,
+      ],
+      [
+        "`userEmail`",
+        "string",
+        <>
+          <p>
+            Fill with your own user logined data,
+            <br />
+            You can check out the example{" "}
+            <Link
+              target="_blank"
+              href="https://github.com/offstack/sledge-demo-store/blob/main/hydrogen/app/root.tsx#L172"
+            >
+              code
+            </Link>
+          </p>
+        </>,
+      ],
+      [
+        "`userFullname`",
+        "string",
+        <>
+          <p>
+            Fill with your own user logined data,
+            <br />
+            You can check out the example{" "}
+            <Link
+              target="_blank"
+              href="https://github.com/offstack/sledge-demo-store/blob/main/hydrogen/app/root.tsx#L173"
+            >
+              code
+            </Link>
+          </p>
+        </>,
+      ],
+      [
+        "`domain`",
+        "string (required)",
+        <>
+          <p>
+            Fill with your shop's <code>.myshopify.com</code> domain name
+          </p>
+        </>,
+      ],
+    ],
+  }}
+/>
+
+### Install one of the Sledge's widget
+
+We're going to try implement product filters widget so install `@sledge-app/react-instant-search` package first :
+
+```bash copy
+npm i @sledge-app/react-instant-search
+```
+
+### Implement Widget
+
+Create a new directory for your components (if it doesn't already exist).
+
+For example, you can create a directory named `components` and create a file named `SledgeProductFilterWidget.tsx`.
+
+<FileTree>
+  <FileTree.Folder name="app" defaultOpen>
+    <FileTree.Folder name="components" defaultOpen>
+      <FileTree.File name="SledgeProductFilterWidget.tsx" />
+    </FileTree.Folder>
+  </FileTree.Folder>
+</FileTree>
+
+```tsx filename="app/components/SledgeProductFilterWidget.tsx" showLineNumbers copy
+import { ProductFilterWidget } from "@sledge-app/react-instant-search";
+import { parseGid } from "@shopify/hydrogen";
+
+export const SledgeProductFilterWidget = ({
+  collection,
+}: {
+  collection: { id: string; name: string; };
+}) => (
+  <div key={collection?.id}>
+    <ProductFilterWidget
+      query={{
+        keyword: "q",
+      }}
+      params={{
+        collectionId: Number(parseGid(collection?.id).id),
+        collectionName: collection?.name,
+      }}
+    />
+  </div>
+);
+```
+
+#### `ProductFilterWidget` Parameters
+
+Let's look on list of all available parameters:
+
+<br />
+
+<Table
+  data={{
+    thead: [
+      { title: "Parameter" },
+      { title: "Type" },
+      { title: "Description" },
+    ],
+    tbody: [
+        [
+          "`keyword`",
+          "string",
+          <>
+            <p>
+             Fill up your unique <Code>queryParam</Code> name for keyword.<br/>
+             e.g: <Code>https://your-online-store.com/collection/all?q=hoodie</Code>
+             <br/>
+             <br/>
+             
+             Default: <Code>q</Code>
+            </p>
+          </>,
+        ],
+        [
+          "`collectionId`",
+          "string (required)",
+          <>
+            <p>
+            Fill with your own collection id,
+            <br/>
+              You can check out the example{" "}
+              <Link
+                target="_blank"
+                href="https://github.com/offstack/sledge-demo-store/blob/main/hydrogen/app/routes/(%24locale).collections.%24handle.tsx#L47"
+              >
+                code
+              </Link>
+            </p>
+          </>,
+        ],
+        [
+          "`collectionName`",
+          "string (required)",
+          <>
+            <p>
+            Fill with your own collection name,
+            <br/>
+              You can check out the example{" "}
+              <Link
+                target="_blank"
+                href="https://github.com/offstack/sledge-demo-store/blob/main/hydrogen/app/routes/(%24locale).collections.%24handle.tsx#L47"
+              >
+                code
+              </Link>
+            </p>
+          </>,
+        ],
+    ],
+
+}}
+/>
+
+#### Create collections route
+
+Create a new route for your collections page named `collections.$handle.tsx`
+
+<FileTree>
+  <FileTree.Folder name="app" defaultOpen>
+    <FileTree.Folder name="routes" defaultOpen>
+      <FileTree.File name="collections.$handle.tsx" />
+    </FileTree.Folder>
+  </FileTree.Folder>
+</FileTree>
+
+In `collections.$handle.tsx`, import your `SledgeProductFilterWidget.tsx` component and use it to render `ProductFilterWidget`
+
+```tsx filename="app/routes/collections.$handle.tsx" showLineNumbers copy
+import { SledgeProductFilterWidget } from "~/components/SledgeProductFilterWidget";
+import { useLoaderData } from "@remix-run/react";
+import { defer, LoaderArgs } from "@shopify/remix-oxygen";
+
+export async function loader({ params, context }: LoaderArgs) {
+  const { handle } = params;
+  const { collection } = await context.storefront.query(COLLECTION_QUERY, {
+    variables: {
+      handle,
+    },
+  });
+
+  return defer({
+    collection,
+  });
+}
+
+export default function Collections() {
+  const { collection } = useLoaderData<typeof loader>();
+
+  return <SledgeProductFilterWidget collection={collection} />;
+}
+
+const COLLECTION_QUERY = `#graphql
+  query CollectionDetails($handle: String!) {
+    collection(handle: $handle) {
+      id
+      title
+      description
+      handle
+    }
+  }
+`;
+```
+
+### Add a content security policy
+
+On store site, open [browser devtools](https://developer.mozilla.org/en-US/docs/Learn/Common_questions/Tools_and_setup/What_are_browser_developer_tools) › `Network` tab.<br />
+If store success to fetch sledge api you can skip this step.
+
+<Image
+  className="mt-3 w-auto"
+  src={IMAGE_FETCH_SUCCESS}
+  alt="sledge-image-docs"
+/>
+
+```tsx filename="app/entry.server.tsx" showLineNumbers copy
+...
+const {nonce, header, NonceProvider} = createContentSecurityPolicy({
+  connectSrc: [
+    "'self'",
+    'http://api.sledge-app.com',
+    'https://api.sledge-app.com',
+    '*',
+  ],
+  defaultSrc: [
+    'https://shopify.com',
+    'http://api.sledge-app.com',
+    'https://api.sledge-app.com',
+    'data:',
+    'blob:',
+    '*',
+  ],
+  imgSrc: ['*', 'https://api.sledge-app.com', 'data:'],
+});
+...
+```
+
+> <div className="not-italic">
+>   <div>
+>     If `createContentSecurityPolicy` does not exist on your Hydrogen app,
+>     follow [this shopify
+>     docs](https://shopify.dev/docs/custom-storefronts/hydrogen/content-security-policy)
+>     for adding a content security policy.
+>   </div>
+> </div>
+
+### Widget completely running
+
+Sledge's product filters widget is now ready to be used.
+
+<Image 
+  className="mt-3 w-auto max-h-[359px]"
+  src={IMAGE_APPS_IS_PF_RESULT}
+  alt="sledge-image-docs"
+/>
+</Steps>
+
+## Learn more
+
+Congratulations! Now that the installation is complete, you can use all Sledge's widgets and start integrating to your Hydrogen storefront.
+
+- [Integrate Wishlist](/wishlist)
+- [Integrate Product Review](/product-review)
+- [Integrate Instant Search](/instant-search)
+- [Integrate Product Filters](/product-filters)
+- [API References - @sledge-app/react-instant-search](/sledge-app-react-instant-search)
+- [How to add Callback Functions](/callback-functions)
+- [How to add Custom Components](/custom-components)

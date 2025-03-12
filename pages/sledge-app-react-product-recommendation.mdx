@@ -1,0 +1,131 @@
+import Image from "next/image";
+import { IMAGE_APPS_PR_RECENTLY_VIEWED } from "~/lib/const";
+
+# @sledge-app/react-product-recommendation
+
+You can use our React-built widget by using the `@sledge-app/react-product-recommendation` package.
+
+`@sledge-app/react-product-recommendation` provides several components you can use to integrate it with your store.
+
+Available components :
+
+- [Recently Viewed](#recently-viewed)
+
+## `Recently Viewed`
+
+Recently Viewed is an Product Recommendation's widget you can use to see a list of products that you have previously opened, this widget can be placed on all your store pages.<br/>
+
+[See example](/recently-viewed) <br/><br/>
+
+<div className="flex gap-4">
+  
+  <Image
+    src={ IMAGE_APPS_PR_RECENTLY_VIEWED }
+    alt="Recently Viewed"
+    width="1391"
+    height="646"
+    className="rounded-2xl"
+  />
+
+</div>
+
+### Anatomy
+
+```tsx showLineNumbers copy
+import { RecentlyViewed } from "@sledge-app/react-product-recommendation";
+
+export default function SledgeRecentlyViewed() {
+  return (
+    <RecentlyViewed
+      params={{
+        productId: "",
+      }}
+      hiddenProductIds=""
+      displayLimit=""
+      useSlider=""
+    >
+      <RecentlyViewedHeaderTitle text="" />
+      <RecentlyViewedHeaderDescription text="" />
+      <RecentlyViewedList />
+    </RecentlyViewed>
+  );
+}
+```
+
+### API reference
+
+#### <span className="text-2xl gradient-text-primary font-bold">`<RecentlyViewed>`</span>
+<br />
+
+<div className="pl-0 md:pl-[20px]">
+    ##### <span className="text-xl font-bold">`params.productId`</span>
+
+    Store the product to the recently viewed component. 
+
+    - Type: `number` | `string`
+    - Required: `false`
+    - Example: `123456789` | `'gid://shopify/Product/123456789'`
+
+    <br />
+    ##### <span className="text-xl font-bold">`hiddenProductIds`</span>
+
+    Does not display for the selected product by ids.
+
+    - Type: `number[]` | `string[]`
+    - Required: `false`
+    - Example: `[123,456]` | `['gid://shopify/Product/123','gid://shopify/Product/456']`
+
+    <br />
+
+    ##### <span className="text-xl font-bold">`displayLimit`</span>
+
+    Set maximum number of products that can be displayed on RecentlyViewed.
+
+    - Type: `number`
+    - Required: `false`
+    - Example : `10`
+
+    <br />
+
+    ##### <span className="text-xl font-bold">`useSlider`</span>
+
+    Switch the RecentlyViewed component to a Carousel or Grid, set it true to switch the component to a Carousel
+
+    - Type: `boolean`
+    - Required: `false`
+    - Example : `true`
+
+    <br />
+</div>
+
+#### <span className="text-2xl gradient-text-primary font-bold">`<RecentlyViewedHeaderTitle>`</span>
+
+<div className="pl-0 md:pl-[20px]">
+    ##### <span className="text-xl font-bold">`text`</span>
+
+    Customize section title text
+
+    - Type: `string`
+    - Default: `'Recently Viewed'`
+
+    <br />
+</div>
+
+#### <span className="text-2xl gradient-text-primary font-bold">`<RecentlyViewedHeaderDescription>`</span>
+
+<div className="pl-0 md:pl-[20px]">
+    ##### <span className="text-xl font-bold">`text`</span>
+
+    Customize section description text
+
+    - Type: `string`
+    - Default: `''`
+</div>
+
+## Learn more
+
+Congratulations! Now that you've learned the `@sledge-app/react-product-recommendation` API references, you can start integrating Sledge to your store. Useful resources about integrating Sledge
+
+- [How to use Recently Viewed](/recently-viewed)
+- [How to add Callback Functions](/callback-functions)
+- [How to add Custom Components](/custom-components)

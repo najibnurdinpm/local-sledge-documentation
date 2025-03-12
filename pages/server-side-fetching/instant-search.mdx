@@ -1,0 +1,127 @@
+import { Tabs, Tab } from "~/components/global";
+import { Steps } from "nextra/components";
+import { NextJs, Hydrogen } from "~/components/icons";
+
+# Instant Search
+
+If you prefer to fetch Sledge data on the server instead doing fetch on the client browser. You can use Sledge's API package called [@sledge-app/api](/sledge-app-api).
+
+Basically the steps as simple as fetching data on server then pass that data to Sledge components, follow steps by steps below to see how to do the server side fetching.
+
+## Search Result
+
+<Tabs storageKey="selected-tech-stack" items={[
+    <div className="flex items-center gap-2">
+        <Hydrogen width={24} height={24} />
+        <span>Hydrogen</span>
+    </div>,
+    <div className="flex items-center gap-2">
+        <NextJs width={24} height={24} />
+        <span>Next.js</span>
+    </div>
+]}>
+    <Tab>
+        <Steps>
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Add fetching data</h3>
+
+            ```tsx filename="app/search-result.tsx" showLineNumbers copy
+            import { useLoaderData } from '@remix-run/react';
+            import { LoaderFunction } from '@shopify/remix-oxygen';
+            import { getResult, getSledgeSettings } from '@sledge-app/api';
+
+            export const loader: LoaderFunction = async ({context, request}) => {
+                const paramsString = new URL(request.url).searchParams.toString();
+                const searchParams = new URLSearchParams(paramsString);
+
+                let sledgeSession = context.session.get('sledgeSession');
+                const sledgeSettings = await getSledgeSettings( { sledgeSession } );
+
+                const data = await getResult({
+                    sledgeSession,
+                    sledgeSettings,
+                    instantSearchApiKey: context.env.SLEDGE_INSTANT_SEARCH_API_KEY || '',
+                    searchParams,
+                    keyword: searchParams.get('q') || '',
+                });
+
+                return {
+                    ...data,
+                };
+            };
+            ```
+
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Add data to component props</h3>
+
+            ```tsx showLineNumbers copy
+            import { SearchResultWidget } from '@sledge-app/react-instant-search';
+
+            export default function SearchResult() {
+                const data = useLoaderData();
+
+                return (
+                    <SearchResultWidget
+                        query={{keyword: 'q'}}
+                        data={data}
+                        onAfterAddToCart={() => {}}
+                        onAfterAddWishlist={() => {}}
+                        onAfterRemoveWishlist={() => {}}
+                        onAfterRenderProduct={() => {}}
+                    />
+                );
+            }
+            ```
+        </Steps>
+    </Tab>
+    <Tab>
+        <Steps>
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Setup widget become component</h3>
+
+            ```tsx filename="components/sledge/instantsearch/search-result.tsx" showLineNumbers copy
+            'use client';
+
+            import { SearchResultWidget } from '@sledge-app/react-instant-search';
+            import React from 'react'
+
+            export default function SearchResult( { data }: { data?: any } ) {
+                return (
+                    <SearchResultWidget
+                        data={ data }
+                        query={{
+                            keyword: 'q',
+                        }}
+                        onAfterAddToCart={(state) => {}}
+                        onAfterAddWishlist={(state) => {}}
+                        onAfterRemoveWishlist={(state) => {}}
+                        onAfterRenderProduct={(state) => {}}
+                    />
+                )
+            }
+            ```
+
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Add fetching data to server component</h3>
+
+            ```tsx showLineNumbers copy
+            import { SearchResult } from 'components/sledge/instantsearch';
+            import { getResult, getSledgeSettings } from '@sledge-app/api';
+            import { cookies } from 'next/headers';
+
+            export default async function Page({ params, searchParams }: { params: { page: string }, searchParams: { [key: string]: string | string[] | undefined }; }) {
+                let sledgeSession = cookies().get( 'sledgeSession' )?.value;
+                sledgeSession = JSON.parse( sledgeSession || "{}" );
+
+                const sledgeSettings = await getSledgeSettings( {sledgeSession} );
+                const data = await getResult({
+                    sledgeSession,
+                    sledgeSettings,
+                    instantSearchApiKey: process.env.SLEDGE_IS_KEY || '',
+                    searchParams,
+                    keyword: searchParams?.q?.toString()
+                });
+
+                return <SearchResult data={ data } sledgeSettings={sledgeSettings} />
+            }
+            ```
+        </Steps>
+    </Tab>
+
+</Tabs>

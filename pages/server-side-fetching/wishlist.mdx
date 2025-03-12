@@ -1,0 +1,343 @@
+import { Tabs, Tab } from "~/components/global";
+import { Steps } from "nextra/components";
+import { NextJs, Hydrogen } from "~/components/icons";
+
+# Wishlist
+
+If you prefer to fetch Sledge data on the server instead doing fetch on the client browser. You can use Sledge's API package called [@sledge-app/api](/sledge-app-api).
+
+Basically the steps as simple as fetching data on server then pass that data to Sledge components, follow steps by steps below to see how to do the server side fetching.
+
+## Badge
+
+<Tabs storageKey="selected-tech-stack" items={[
+    <div className="flex items-center gap-2">
+        <Hydrogen width={24} height={24} />
+        <span>Hydrogen</span>
+    </div>,
+    <div className="flex items-center gap-2">
+        <NextJs width={24} height={24} />
+        <span>Next.js</span>
+    </div>
+]}>
+    <Tab>
+        <Steps>
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Add fetching data</h3>
+
+            ```tsx showLineNumbers copy
+            import { getWishlistInfo } from '@sledge-app/api';
+
+            export async function loader({context}: LoaderArgs) {
+                ...
+                const wishlistInfo = await getWishlistInfo( {sledgeSession} );
+
+                return defer({
+                    ...
+                    wishlistInfo,
+                })
+            }
+            ```
+
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Add data to component props</h3>
+
+            ```tsx showLineNumbers copy
+            import { Badge } from '@sledge-app/react-wishlist';
+            import { Link } from '@remix-run/react';
+
+            export function HeaderMenu(){
+                return (
+                    ...
+                    <Link to="/wishlist">
+                        <Badge data={data?.wishlistInfo} />
+                    </Link>
+                    ...
+                )
+            }
+            ```
+        </Steps>
+    </Tab>
+    <Tab>
+        <Steps>
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Setup widget become component</h3>
+
+            ```tsx filename="components/sledge/wishlist/wishlist-header-menu.tsx" showLineNumbers copy
+            'use client';
+
+            import { Badge } from '@sledge-app/react-wishlist';
+            import Link from 'next/link';
+
+            export default function WishlistHeaderMenu( { data }: { data: any }) {
+                return (
+                    <Link href="/wishlist" className="flex items-center">
+                        <Badge data={ data } />
+                    </Link>
+                );
+            }
+            ```
+
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Add fetching data to server component</h3>
+
+            ```tsx filename="components/layout/header.tsx" showLineNumbers copy
+            import { WishlistHeaderMenu } from 'components/sledge/wishlist';
+            ...
+            export default async function Header() {
+                ...
+                const sledgeSession = JSON.parse( cookies().get( 'sledgeSession' )?.value || "{}" );
+                const wishlistInfo = await getWishlistInfo( {sledgeSession} );
+
+                return (
+                    ...
+                    <WishlistHeaderMenu data={ wishlistInfo } />
+                    ...
+                )
+            }
+            ```
+        </Steps>
+    </Tab>
+
+</Tabs>
+
+## Trigger
+
+<Tabs storageKey="selected-tech-stack" items={[
+    <div className="flex items-center gap-2">
+        <Hydrogen width={24} height={24} />
+        <span>Hydrogen</span>
+    </div>,
+    <div className="flex items-center gap-2">
+        <NextJs width={24} height={24} />
+        <span>Next.js</span>
+    </div>
+]}>
+    <Tab>
+        <Steps>
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Add fetching data</h3>
+
+            ```tsx showLineNumbers copy
+            import { wishlistCheck } from '@sledge-app/api';
+
+            export async function loader({ request, context }: LoaderArgs) {
+                ...
+                // list id of product
+                const productIds = ['8003210969391','8003210969392','8003210969393'];
+                const wishlists = await wishlistCheck({sledgeSession, productIds});
+
+                return defer({
+                    ...
+                    wishlists
+                });
+            }
+            ```
+
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Add data to component props</h3>
+
+            ```tsx showLineNumbers copy
+            import {Trigger} from '@sledge-app/react-wishlist';
+            ...
+            export default function Product() {
+                const data = useLoaderData<typeof loader>();
+                ...
+                return (
+                    ...
+                    <Trigger
+                        params={{
+                            productId: parseGid(product.id).id,
+                            productVariantId: selectedVariant.id,
+                            productName: product.title,
+                            productVendor: product.vendor,
+                            productSku: selectedVariant.sku,
+                            productVariantName: selectedVariant.name,
+                            productLink: `${storeUrl}/products/${product.handle}`,
+                            productImage: product.images.nodes[0].url,
+                            productCurrency: product.priceRange.minVariantPrice.currencyCode,
+                            productPrice: product.priceRange.minVariantPrice.amount,
+                        }}
+                        wishlistChecked={data?.wishlists[parseGid(product.id).id]}
+                    />
+                )
+            }
+            ```
+        </Steps>
+    </Tab>
+    <Tab>
+        <Steps>
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Setup widget become component</h3>
+
+            ```tsx filename="components/sledge/wishlist/wishlist-trigger.tsx" showLineNumbers copy
+            'use client';
+
+            import { Trigger } from '@sledge-app/react-wishlist';
+            import parseGid from 'lib/shopify/parse-gid';
+            import { Product } from 'lib/shopify/types';
+
+            export default function WishlistTrigger({ product, wishlistChecked }: { product: Product, wishlistChecked?: boolean }) {
+                return (
+                    <Trigger
+                        params={{
+                            productId: parseGid(product.id).id,
+                            productVariantId: parseGid(product?.variants?.[0]?.id || '').id,
+                            productName: product.title,
+                            productVendor: product.vendor,
+                            productSku: product.variants?.[0]?.sku || '',
+                            productVariantName: `${product.variants?.[0]?.selectedOptions?.[0]?.value} / ${product.variants?.[0]?.selectedOptions?.[1]?.value}`,
+                            productLink: `${process.env.NEXT_PUBLIC_STORE_URL}/products/${product.handle}`,
+                            productImage: product.featuredImage?.url,
+                            productCurrency: product.variants?.[0]?.price?.currencyCode,
+                            productPrice: product.variants?.[0]?.price?.amount
+                        }}
+                        onAfterAddWishlist={(state) => {}}
+                        onAfterRemoveWishlist={(state) => {}}
+                        wishlistChecked={wishlistChecked}
+                    />
+                );
+            }
+            ```
+
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Add fetching data to server component</h3>
+
+            ```tsx showLineNumbers copy
+            ...
+            import { WishlistTrigger } from 'components/sledge/wishlist';
+            import { getProductsReviewInfo, wishlistCheck } from '@sledge-app/api';
+
+            export default async function Product(){
+                ...
+                const sledgeSession = JSON.parse(cookies().get('sledgeSession')?.value || '{}');
+                const productIds = ['8003210969391','8003210969392','8003210969393'];
+                const wislistsChecked = await wishlistCheck( {sledgeSession, productIds} );
+
+                return (
+                    ...
+                    <WishlistTrigger product={product} wishlistChecked={ wislistsChecked[product.id].id } />
+                )
+            }
+            ```
+        </Steps>
+    </Tab>
+
+</Tabs>
+
+## List
+
+<Tabs storageKey="selected-tech-stack" items={[
+    <div className="flex items-center gap-2">
+        <Hydrogen width={24} height={24} />
+        <span>Hydrogen</span>
+    </div>,
+    <div className="flex items-center gap-2">
+        <NextJs width={24} height={24} />
+        <span>Next.js</span>
+    </div>
+]}>
+    <Tab>
+        <Steps>
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Add fetching data</h3>
+
+            ```tsx showLineNumbers copy
+            import {LoaderFunction} from '@shopify/remix-oxygen';
+            import {
+                getProductsReviewInfo,
+                getWishlist,
+                getWishlistInfo,
+            } from '@sledge-app/api';
+
+            export const loader: LoaderFunction = async ({context}) => {
+                const sledgeSession = context.session.get('sledgeSession');
+                const wishlists = await getWishlist({sledgeSession});
+                const wishlistInfo = await getWishlistInfo( {sledgeSession} );
+                const productIds = wishlists.data.map((v: any) => v.product.id);
+                const reviews = await getProductsReviewInfo({sledgeSession, productIds});
+                return {wishlists, wishlistInfo, reviews};
+            };
+            ```
+
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Add data to component props</h3>
+
+            ```tsx showLineNumbers copy
+            import {Widget, WidgetHeader} from '@sledge-app/react-wishlist';
+            ...
+            export default function Wishlist() {
+                const data = useLoaderData();
+                return (
+                    <Widget.Root
+                        data={data.wishlists}
+                        dataInfo={data.wishlistInfo}
+                        dataReviews={data.reviews}
+                    >
+                        <WidgetHeader>
+                            <WidgetHeader.Title text="My Wishlist" />
+                            <WidgetHeader.SearchForm placeholder="Search product" />
+                            <WidgetHeader.ClearTrigger buttonText="Clear Wishlist" />
+                            <WidgetHeader.ShareTrigger buttonText="Share Wishlist" />
+                            <WidgetHeader.Sort />
+                            <WidgetHeader.Limit options={[10, 25, 50, 100]} />
+                        </WidgetHeader>
+                        <Widget.List gridType="large" />
+                    </Widget.Root>
+                );
+            }
+            ```
+        </Steps>
+    </Tab>
+    <Tab>
+        <Steps>
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Setup widget become component</h3>
+
+            ```tsx filename="components/sledge/wishlist/wishlist-page.tsx" showLineNumbers copy
+            'use client';
+
+            import { Widget, WidgetHeader } from '@sledge-app/react-wishlist';
+            export default function WishlistPage({ data, dataInfo, dataReviews }: { data?: any, dataInfo?: any, dataReviews: any }) {
+                return (
+                    <div className='max-w-[640px] md:max-w-[768px] lg:max-w-[1024px] xl:max-w-[1290px] m-auto'>
+                        <Widget.Root
+                            query={{
+                                shareId: dataInfo?.share_id
+                            }}
+                            onAfterAddToCart={(state) => {}}
+                            onAfterAddWishlist={(state) => {}}
+                            onAfterRemoveWishlist={(state) => {}}
+                            onAfterRenderProduct={(state) => {}}
+                            data={ data }
+                            dataInfo={ dataInfo }
+                            dataReviews={ dataReviews }
+                        >
+                            <WidgetHeader>
+                                <WidgetHeader.Title text="My Wishlist" />
+                                <WidgetHeader.SearchForm placeholder="Search product" />
+                                <WidgetHeader.ClearTrigger buttonText="Clear Wishlist" />
+                                <WidgetHeader.ShareTrigger buttonText="Share Wishlist" />
+                                <WidgetHeader.Sort />
+                                <WidgetHeader.Limit options={[10, 25, 50, 100]} />
+                            </WidgetHeader>
+                            <Widget.List gridType="large" />
+                        </Widget.Root>
+                    </div>
+                );
+            }
+            ```
+
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Add fetching data to server component</h3>
+
+            ```tsx showLineNumbers copy
+            import { getProductsReviewInfo, getWishlist, getWishlistInfo } from '@sledge-app/api';
+            import { WishlistPage } from 'components/sledge/wishlist';
+            import { cookies } from 'next/headers';
+
+            export default async function Wishlist({ searchParams }: { searchParams: { [key: string]: string | string[] | undefined }; }) {
+                const { share } = searchParams;
+                const sledgeSession = JSON.parse( cookies().get( 'sledgeSession' )?.value || "{}" );
+                const wishlist = await getWishlist({sledgeSession, shareId: share});
+                const wishlistInfo = await getWishlistInfo( {sledgeSession} );
+                const productIds = wishlist?.data?.map( (v: any) => v.product?.id );
+                const reviews = await getProductsReviewInfo( {sledgeSession, productIds} );
+
+                return (
+                    <WishlistPage data={ wishlist } dataInfo={ wishlistInfo } dataReviews={ reviews } />
+                );
+            }
+            ```
+        </Steps>
+    </Tab>
+
+</Tabs>

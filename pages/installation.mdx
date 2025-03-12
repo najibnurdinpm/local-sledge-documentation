@@ -1,0 +1,92 @@
+import { Cards, Card } from "nextra/components";
+import { Tabs, Tab } from "~/components/global";
+import Image from "next/image";
+import {
+  Webflow,
+  Liquid,
+  NextJs,
+  Hydrogen,
+  AppBlock,
+  Code,
+} from "~/components/icons";
+import { IMAGE_TAB_CODE, IMAGE_TAB_CUSTOMIZER } from "~/lib/const";
+
+# Installation
+
+To get started, pick one of the following step-by-step quickstart guidelines. If you're using headless storefront there are 2 options you can pick : [Hydrogen](/installation/hydrogen) or [Next.js Commerce](/installation/nextjs).
+
+For [Liquid](/installation/liquid), There are 2 options that you can pick,
+If you want to easily install Sledge's app, you can pick Theme Customizer or pick Code for more advanced settings.
+
+<Tabs
+  storageKey="selected-method"
+  items={[
+    <div className="flex items-center gap-2">
+      <AppBlock />
+      <span>Theme Customizer</span>
+    </div>,
+    <div className="flex items-center gap-2">
+      <Code />
+      <span>Code</span>
+    </div>,
+  ]}
+>
+  <Tab>
+    Sledge provides app embeds via Theme Customizer which merchants can easily add Sledge's app to your store
+    without necessarily delving into custom coding. You will be guided via Sledge dashboard to install each of the Sledge's app.
+
+    App embeds are supported in [Online Store 2.0](https://www.shopify.com/partners/blog/shopify-online-store) themes.
+
+    <Cards>
+      <Card
+        icon={<AppBlock fill="white" />}
+        title="Theme Customizer"
+        href="/installation/liquid/theme-customizer"
+        arrow={true}
+      />
+    </Cards>
+
+  </Tab>
+  <Tab>
+    Different from Theme Customizer, 
+    Sledge's app can be installed by inserting code snippets into sections file and [customize the style](/custom-styles) or more advanced settings for your theme.
+    <Cards>
+      <Card
+        icon={<Code fill="white" />}
+        title="Code"
+        href="/installation/liquid/code"
+        arrow={true}
+      />
+    </Cards>
+
+  </Tab>
+</Tabs>
+
+Finally, pick [Webflow](/installation/webflow) if your storefront is using no-code tools like Webflow.
+
+<Cards className="!grid-cols-2">
+  <Card
+    icon={<Hydrogen width={24} height={24} />}
+    title="Hydrogen"
+    href="/installation/hydrogen"
+    arrow={true}
+  />
+  <Card
+    icon={<NextJs width={24} height={24} />}
+    title="Next.js"
+    href="/installation/nextjs"
+    arrow={true}
+  />
+  <Card
+    icon={<Liquid width={24} height={24} />}
+    title="Liquid"
+    href="/installation/liquid"
+    arrow={true}
+  />
+  <Card
+    icon={<Webflow width={24} height={24} />}
+    title="Webflow"
+    href="/installation/webflow"
+    arrow={true}
+  />
+</Cards>

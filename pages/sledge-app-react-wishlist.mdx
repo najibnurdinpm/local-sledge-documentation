@@ -1,0 +1,530 @@
+import Image from "next/image";
+import {
+  IMAGE_APPS_WISHLIST_HEADER_MENU,
+  IMAGE_APPS_WISHLIST_FLOATING_BUTTON,
+  IMAGE_APPS_WISHLIST_FLOATING_ICON,
+  IMAGE_APPS_WISHLIST_TRIGGER,
+  IMAGE_APPS_WISHLIST_BADGE,
+  IMAGE_APPS_WISHLIST_BUTTON_DETAIL,
+  IMAGE_APPS_WISHLIST_LIST
+} from "~/lib/const"
+
+# @sledge-app/react-wishlist
+
+You can use our React-built widget by using the `@sledge-app/react-wishlist` package.
+
+`@sledge-app/react-wishlist` provides several components you can use to integrate it with your store.
+
+Available components :
+
+- [Badge](#badge)
+- [Trigger](#trigger)
+- [Button Detail](#buttondetail)
+- [Widget](#widget)
+
+
+## `Badge`
+
+Badge is a Wishlist's widget you can use to display your wishlist's total in a small text box or an icon.<br/>
+
+[See example](/wishlist#badge) <br/><br/>
+
+<div className="flex gap-4">
+  
+  <Image
+    src={ IMAGE_APPS_WISHLIST_HEADER_MENU }
+    alt="Badge Header Menu"
+    width="217"
+  />
+  
+  <Image
+    src={ IMAGE_APPS_WISHLIST_FLOATING_BUTTON }
+    alt="Badge Floating Full"
+    width="217"
+
+  />
+
+  <Image
+    src={ IMAGE_APPS_WISHLIST_FLOATING_ICON }
+    alt="Badge Floating Icon"
+    width="217"
+  />
+
+</div>
+
+### Anatomy
+
+```tsx showLineNumbers copy
+import { Badge } from "@sledge-app/react-wishlist";
+import SledgeProductCard from "~/components/SledgeProductCard";
+
+export default function SledgeWishlistBadge() {
+  return (
+    <Badge
+      useProxyUrl={false}
+      position="left"
+      useWishlistFlyout={false}
+      urlWishlistWidget={'/pages/wishlist'}
+    />
+  );
+}
+```
+
+### API reference
+
+#### <span className="text-xl font-bold">`useProxyUrl`</span>
+
+Define the url widgets on page that should be displayed (custom or proxy).
+
+- Type: `boolean`
+- Default: `false`
+
+#### <span className="text-xl font-bold">`position`</span>
+
+Define a widget position for Badge.
+
+- Type: `none` | `left` | `right` | `bottom-left` | `bottom-right`
+- Default: `none`
+
+#### <span className="text-xl font-bold">`useWishlistFlyout`</span>
+
+Display your wishlist items in a sliding panel by activating the [Wishlist - Flyout Widget](/wishlist#flyout-widget).
+
+- Type: `boolean`
+- Default: `false`
+
+#### <span className="text-xl font-bold">`urlWishlistWidget`</span>
+
+Fill up the route URL page where your Wishlist widget is located.
+
+<div>e.g: `https://your-online-store.com/{value}`</div>
+
+- Type: `string`
+
+## `Trigger`
+
+Trigger is a Wishlist's widget you can use to trigger add or remove a wishlist item in an icon.<br/>
+
+[See example](/wishlist#trigger) <br/><br/>
+
+<Image
+  src={ IMAGE_APPS_WISHLIST_TRIGGER }
+  alt="Trigger"
+  width="132"
+  height="108"
+/> <br />
+
+
+### Anatomy
+
+```tsx showLineNumbers copy
+import { Trigger } from "@sledge-app/react-wishlist";
+
+export default function WishlistTrigger() {
+  return (
+    <Trigger
+        params={{
+            productId: "",
+            productVariantId: "",
+            productName: "",
+            productVendor: "",
+            productSku: "",
+            productVariantName: "",
+            productLink: "",
+            productImage: "",
+            productCurrency: "",
+            productPrice: "",
+        }}
+        onAfterAddWishlist={(state) => {
+            // Your custom function
+        }}
+        onAfterRemoveWishlist={(state) => {
+            // Your custom function
+        }}
+    />
+  );
+}
+```
+
+### API reference
+
+<br />
+#### <span className="text-xl font-bold">`params.productId`</span>
+
+Fill with your own product id
+
+- Type: `string`
+
+<br />
+#### <span className="text-xl font-bold">`params.productVariantId`</span>
+
+Fill with your own product variant id
+
+- Type: `string`
+
+<br />
+#### <span className="text-xl font-bold">`params.productName`</span>
+
+Fill with your own product name
+
+- Type: `string`
+
+<br />
+#### <span className="text-xl font-bold">`params.productVendor`</span>
+
+Fill with your own product vendor
+
+- Type: `string`
+
+<br />
+#### <span className="text-xl font-bold">`params.productSku`</span>
+
+Fill with your own product sku
+
+- Type: `string`
+
+<br />
+#### <span className="text-xl font-bold">`params.productVariantName`</span>
+
+Fill with your own product variant name
+
+- Type: `string`
+
+<br />
+#### <span className="text-xl font-bold">`params.productLink`</span>
+
+Fill with your own product URL that link to PDP
+
+- Type: `string`
+
+<br />
+#### <span className="text-xl font-bold">`params.productImage`</span>
+
+Fill with your own product image URL
+
+- Type: `string`
+
+<br />
+#### <span className="text-xl font-bold">`params.productCurrency`</span>
+
+Fill with your own product currency, eg: `IDR` | `$`
+
+- Type: `string`
+
+<br />
+#### <span className="text-xl font-bold">`params.productPrice`</span>
+
+Fill with your own product price
+
+- Type: `string`
+
+<br />
+#### <span className="text-xl font-bold">`onAfterAddWishlist(state: boolean)`</span>
+
+Running using your own custom function
+
+- Type: `function`
+- Required: `false`
+
+<br />
+#### <span className="text-xl font-bold">`onAfterRemoveWishlist(state: boolean)`</span>
+
+Running using your own custom function
+
+- Type: `function`
+- Required: `false`
+
+## `ButtonDetail`
+
+Button Detail is a Wishlist's widget you can use to trigger add or remove a wishlist item in a button form. Typically used on product detail page.<br/>
+
+[See example](/wishlist#button-detail)<br/><br/>
+
+<Image
+  src={ IMAGE_APPS_WISHLIST_BUTTON_DETAIL }
+  alt="Button Detail"
+  width="323"
+  height="88"
+/> <br />
+
+
+### Anatomy
+
+```tsx showLineNumbers copy
+import { ButtonDetail } from "@sledge-app/react-wishlist";
+
+export default function WishlistButtonDetail() {
+  return (
+    <ButtonDetail
+        params={{
+            productId: "",
+            productVariantId: "",
+            productName: "",
+            productVendor: "",
+            productSku: "",
+            productVariantName: "",
+            productLink: "",
+            productImage: "",
+            productCurrency: "",
+            productPrice: "",
+        }}
+        onAfterAddWishlist={(state) => {
+            // Your custom function
+        }}
+        onAfterRemoveWishlist={(state) => {
+            // Your custom function
+        }}
+    />
+  );
+}
+```
+
+### API reference
+
+<br />
+#### <span className="text-xl font-bold">`params.productId`</span>
+
+Fill with your own product id
+
+- Type: `string`
+
+<br />
+#### <span className="text-xl font-bold">`params.productVariantId`</span>
+
+Fill with your own product variant id
+
+- Type: `string`
+
+<br />
+#### <span className="text-xl font-bold">`params.productName`</span>
+
+Fill with your own product name
+
+- Type: `string`
+
+<br />
+#### <span className="text-xl font-bold">`params.productVendor`</span>
+
+Fill with your own product vendor
+
+- Type: `string`
+
+<br />
+#### <span className="text-xl font-bold">`params.productSku`</span>
+
+Fill with your own product sku
+
+- Type: `string`
+
+<br />
+#### <span className="text-xl font-bold">`params.productVariantName`</span>
+
+Fill with your own product variant name
+
+- Type: `string`
+
+<br />
+#### <span className="text-xl font-bold">`params.productLink`</span>
+
+Fill with your own product URL that link to PDP
+
+- Type: `string`
+
+<br />
+#### <span className="text-xl font-bold">`params.productImage`</span>
+
+Fill with your own product image URL
+
+- Type: `string`
+
+<br />
+#### <span className="text-xl font-bold">`params.productCurrency`</span>
+
+Fill with your own product currency, eg: `IDR` | `$`
+
+- Type: `string`
+
+<br />
+#### <span className="text-xl font-bold">`params.productPrice`</span>
+
+Fill with your own product price
+
+- Type: `string`
+
+<br />
+#### <span className="text-xl font-bold">`onAfterAddWishlist(state: boolean)`</span>
+
+Running using your own custom function
+
+- Type: `function`
+- Required: `false`
+
+<br />
+#### <span className="text-xl font-bold">`onAfterRemoveWishlist(state: boolean)`</span>
+
+Running using your own custom function
+
+- Type: `function`
+- Required: `false`
+
+## `Widget`
+
+You can use Widget to display list data of user's wishlist.<br/>
+
+[See example](/wishlist#list)<br/><br/>
+
+<Image
+  src={ IMAGE_APPS_WISHLIST_LIST }
+  alt="List"
+  width="1339"
+  height="749"
+/> <br />
+
+### Anatomy
+
+```tsx showLineNumbers copy
+import { Widget, WidgetHeader } from "@sledge-app/react-wishlist";
+
+export default function WishlistWidget() {
+  return (
+    <Widget.Root
+      query={{
+        shareId: "share",
+      }}
+      width="1180px"
+      limitOptions={[12, 24, 36, 48, 120]}
+      onAfterAddWishlist={(state) => {
+        // Your custom function
+      }}
+      onAfterRemoveWishlist={(state) => {
+        // Your custom function
+      }}
+      onAfterRenderProduct={(state) => {
+        // Your custom function
+      }}
+    >
+      <WidgetHeader>
+        <WidgetHeader.Title text="My Wishlist" />
+        <WidgetHeader.SearchForm placeholder="Search product" />
+        <WidgetHeader.ClearTrigger buttonText="Clear Wishlist" />
+        <WidgetHeader.ShareTrigger buttonText="Share Wishlist" />
+        <WidgetHeader.Sort />
+        <WidgetHeader.Limit />
+      </WidgetHeader>
+      <Widget.List gridType="large" />
+    </Widget.Root>
+  );
+}
+```
+
+### API reference
+
+#### <span className="text-2xl gradient-text-primary font-bold">`<Widget.Root>`</span>
+
+<br />
+##### <span className="text-xl font-bold">`query.shareId`</span>
+
+Fill up your unique queryParam name for share id.
+
+<div>e.g: `https://your-online-store.com/pages/wishlist/?{value}=`</div>
+
+- Type: `string`
+- Default: `'share'`
+
+<br />
+##### <span className="text-xl font-bold">`width`</span>
+
+Customize max width of element.
+
+- Type: `string`
+- Default: `'1180px'`
+
+<br />
+##### <span className="text-xl font-bold">`limitOptions`</span>
+
+Customize limit options in widget.
+
+- Type: `string[] | number[]`
+- Default: `[12, 24, 36, 48, 120]`
+
+<br />
+##### <span className="text-xl font-bold">`onAfterAddWishlist(state: boolean)`</span>
+
+Running using your own custom function
+
+- Type: `function`
+- Required: `false`
+
+<br />
+##### <span className="text-xl font-bold">`onAfterRemoveWishlist(state: boolean)`</span>
+
+Running using your own custom function
+
+- Type: `function`
+- Required: `false`
+
+<br />
+##### <span className="text-xl font-bold">`onAfterRenderProduct(state: boolean)`</span>
+
+Running using your own custom function
+
+- Type: `function`
+- Required: `false`
+
+#### <span className="text-2xl gradient-text-primary font-bold">`<WidgetHeader.Title>`</span>
+
+<br />
+##### <span className="text-xl font-bold">`text`</span>
+
+Customize header title in widget
+
+- Type: `string`
+- Default: `'My Wishlist'`
+
+#### <span className="text-2xl gradient-text-primary font-bold">`<WidgetHeader.SearchForm>`</span>
+
+<br />
+##### <span className="text-xl font-bold">`placeholder`</span>
+
+Customize placeholder search form in widget
+
+- Type: `string`
+- Default: `'Search product...'`
+
+#### <span className="text-2xl gradient-text-primary font-bold">`<WidgetHeader.ClearTrigger>`</span>
+
+<br />
+##### <span className="text-xl font-bold">`buttonText`</span>
+
+Customize clear button title in widget
+
+- Type: `string`
+- Default: `'Clear Wishlist'`
+
+#### <span className="text-2xl gradient-text-primary font-bold">`<WidgetHeader.ShareTrigger>`</span>
+
+<br />
+##### <span className="text-xl font-bold">`buttonText`</span>
+
+Customize share button title in widget
+
+- Type: `string`
+- Default: `'Share Wishlist'`
+
+#### <span className="text-2xl gradient-text-primary font-bold">`<Widget.Limit>`</span>
+
+<br />
+##### <span className="text-xl font-bold">`gridType`</span>
+
+Customize grid size product card in widget
+
+- Type: `'small' | 'medium' | 'large'`
+- Default: `'large'`
+
+## Learn more
+
+Congratulations! Now that you've learned the `@sledge-app/react-wishlist` API references, you can start integrating Sledge to your store. Useful resources about integrating Sledge : 
+
+- [How to use Wishlist app](/wishlist)
+- [How to add Callback Functions](/callback-functions)
+- [How to add Custom Components](/custom-components)

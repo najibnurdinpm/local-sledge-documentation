@@ -1,0 +1,164 @@
+import { Steps, Code, Pre, Callout } from "nextra/components";
+import Image from "next/image";
+import { Table } from "~/components/global";
+import {
+  IMAGE_APPS_PR_RECENTLY_VIEWED,IMAGE_CUSTOM_STYLES_PR_RECENTLY_VIEWED_GRID
+} from "~/lib/const";
+
+# Recently Viewed
+
+All of Sledge's themes use of several kinds of classes. To assist you in customizing CSS to your needs, the most frequently used element selectors and classes are listed below.
+
+- [Recently Viewed](#recently-viewed)
+
+## Recently Viewed
+
+<Image
+  src={IMAGE_APPS_PR_RECENTLY_VIEWED}
+  alt="Recently Viewed"
+  width="1391"
+  height="646"
+  className="rounded-2xl mt-3"
+/>
+
+## Grid
+
+<Image
+  src={IMAGE_CUSTOM_STYLES_PR_RECENTLY_VIEWED_GRID}
+  alt="Recently Viewed Grid"
+  width="1391"
+  height="646"
+  className="rounded-2xl mt-3"
+/>
+
+<Table
+  overflow={true}
+  data={{
+    thead: [{ title: "Class" }, { title: "Description" }],
+    tbody: [
+      [
+        "`sledge-recently-viewed__wrapper `",
+        "Recently Viewed wrapper",
+      ],
+      [
+        "sledge-recently-viewed__header-title",
+        "Section Title wrapper"
+      ],
+      [
+        "sledge-recently-viewed__header-description",
+        "Section Description wrapper"
+      ]
+    ],
+  }}
+/>
+
+<Callout type="info">
+  You can edit `Title` text with `Using Backend` in `Widget Title` section, check out
+  [here](/backend-product-recommendation#widget-title).
+</Callout>
+
+<Callout type="info">
+  You can edit `Description` text with `Using Backend` in `Widget Description` section, check out
+  [here](/backend-product-recommendation#widget-description).
+</Callout>
+
+<Callout type="info">
+  For `Product Card`, you can check out
+  [here](/custom-styles/global#product-card).
+</Callout>
+
+### Using Selector
+
+<Table
+  overflow={false}
+  data={{
+    thead: [{ title: "Selector" }, { title: "Description" }],
+    tbody: [
+      [
+        "`.sledge-recently-viewed__header-title h1`",
+        "Section Title text",
+      ],
+      [
+        "`.sledge-recently-viewed__header-description h3`",
+        "Section Description text",
+      ]
+    ],
+  }}
+/>
+
+## Carousel
+
+<Image
+  src={IMAGE_APPS_PR_RECENTLY_VIEWED}
+  alt="Filter vertical"
+  className="mt-3 w-auto rounded-[14px]"
+/>
+
+<Table
+  overflow={true}
+  data={{
+    thead: [{ title: "Class" }, { title: "Description" }],
+    tbody: [
+      ["`sledge-recently-viewed__carousel`", "Recently Viewed Carousel wrapper"],
+      [
+        "sledge-recently-viewed__header-title",
+        "Section Title wrapper"
+      ],
+      [
+        "sledge-recently-viewed__header-description",
+        "Section Description wrapper"
+      ]
+    ],
+
+}}
+/>
+
+<Callout type="info">
+  You can edit `Title` text with `Using Backend` in `Widget Title` section, check out
+  [here](/backend-product-recommendation#widget-title).
+</Callout>
+
+<Callout type="info">
+  You can edit `Description` text with `Using Backend` in `Widget Description` section, check out
+  [here](/backend-product-recommendation#widget-description).
+</Callout>
+
+<Callout type="info">
+  For `Product Card`, you can check out
+  [here](/custom-styles/global#product-card).
+</Callout>
+
+### Using Selector
+
+<Table
+  overflow={true}
+  data={{
+    thead: [{ title: "Selector" }, { title: "Description" }],
+    tbody: [
+      [
+        "`.sledge-recently-viewed__header-title h1`",
+        "Section Title text",
+      ],
+      [
+        "`.sledge-recently-viewed__header-description h3`",
+        "Section Description text",
+      ],
+      [
+        "`.sledge-recently-viewed__carousel .sledge__product-grid`",
+        "Carousel Product wrapper"
+      ],
+      [
+        "`.sledge-recently-viewed__carousel .sledge__product-grid .sledge__product-grid-card`",
+        "Product cards"
+      ],
+      [
+        "`.sledge-recently-viewed__carousel .sledge__product-grid .sledge__carousel-button-prev`",
+        "Previous button"
+      ],
+      [
+        "`.sledge-recently-viewed__carousel .sledge__product-grid .sledge__carousel-button-next`",
+        "Next button"
+      ],
+    ],
+  }}
+/>

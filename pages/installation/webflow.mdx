@@ -1,0 +1,242 @@
+import { Steps, Code, Pre, FileTree } from "nextra/components";
+import { Table } from "~/components/global";
+import Link from "next/link";
+import Image from "next/image";
+import {
+  IMAGE_WEBFLOW_CUSTOM_CODE,
+  IMAGE_WEBFLOW_CREATE_BLOCK_ELEMENT_ZOOM,
+  IMAGE_WEBFLOW_CREATE_BLOCK,
+  IMAGE_WEBFLOW_ADD_ATTRIBUTE,
+  IMAGE_WEBFLOW_ADD_ATTRIBUTE_ZOOM,
+  IMAGE_APPS_IS_PF_RESULT,
+} from "~/lib/const";
+
+# Start using Sledge and Webflow
+
+Prior using all Sledge's widgets, follow the steps below to start integrating Sledge into your Webflow storefront.
+
+## Quickstart
+
+<Steps>
+### Setup Sledge Core
+
+First, copy this code and paste it later inside the `<head>` tag
+
+```html showLineNumbers copy
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sledge-app/js@latest/dist/style.css" />
+
+<script
+    type="module"
+    id="sledge-embed-script"
+    src="https://cdn.jsdelivr.net/npm/@sledge-app/js@latest/dist/sledge.min.js"
+></script>
+
+<script>
+    var sledge = sledge || {};
+    sledge.config = {
+      userId: "",
+      userEmail: "",
+      userFullname: "",
+      domain: "",
+    };
+</script>
+```
+
+#### `sledge.config` Parameters
+
+Let's look on list of all available parameters:
+
+<br />
+
+<Table
+  data={{
+    thead: [
+      { title: "Parameter" },
+      { title: "Type" },
+      { title: "Description" },
+    ],
+    tbody: [
+      [
+        "`userId`",
+        "string",
+        <>
+          <p>
+            Fill with your own user logined data
+          </p>
+        </>,
+      ],
+      [
+        "`userEmail`",
+        "string",
+        <>
+          <p>
+            Fill with your own user logined data
+          </p>
+        </>,
+      ],
+      [
+        "`userFullname`",
+        "string",
+        <>
+          <p>
+            Fill with your own user logined data
+          </p>
+        </>,
+      ],
+      [
+        "`domain`",
+        "string (required)",
+        <>
+          <p>
+            Fill with your shop's <code>.myshopify.com</code> domain name
+          </p>
+        </>,
+      ],
+    ],
+  }}
+/>
+
+### Place embed code above to your project
+
+You can paste it inside `<head>` tag
+
+<Image
+  className="mt-3 w-auto max-h-[359px]"
+  src={IMAGE_WEBFLOW_CUSTOM_CODE}
+  alt="sledge-image-docs"
+/>
+
+### Create a element
+
+Example below using `Div Block`
+
+<div className="flex items-start gap-[22.68px]">
+  <Image
+    className="mt-3 max-w-[226.822px] h-auto"
+    src={IMAGE_WEBFLOW_CREATE_BLOCK_ELEMENT_ZOOM}
+    alt="sledge-image-docs"
+  />
+  <Image
+    className="mt-3 w-auto max-h-[296px]"
+    src={IMAGE_WEBFLOW_CREATE_BLOCK}
+    alt="sledge-image-docs"
+  />
+</div>
+
+### Implement widget
+
+You can use a sledge's widget by add the attribute into your element
+
+<div className="flex items-start gap-[22.68px]">
+  <Image
+    className="mt-3 w-auto max-h-[296px]"
+    src={IMAGE_WEBFLOW_ADD_ATTRIBUTE}
+    alt="sledge-image-docs"
+  />
+  <Image
+    className="mt-3 max-w-[226.822px] h-auto"
+    src={IMAGE_WEBFLOW_ADD_ATTRIBUTE_ZOOM}
+    alt="sledge-image-docs"
+  />
+</div>
+
+Or you can place this code in custom code webflow, see the <a href="https://university.webflow.com/lesson/custom-code-embed" target="_blank" className="nx-text-primary-600 nx-underline nx-decoration-from-font [text-underline-position:from-font]">documentation</a> about custom code embed at webflow
+
+```html showLineNumbers copy
+<div
+  data-component="instant-search-product-filter-widget"
+  data-query-keyword="q"
+  data-collection-id=""
+  data-collection-name=""
+></div>
+```
+
+#### `instant-search-product-filter-widget` Parameters
+
+Let's look on list of all available parameters:
+
+<br />
+
+<Table
+  data={{
+    thead: [
+      { title: "Parameter" },
+      { title: "Type" },
+      { title: "Description" },
+    ],
+    tbody: [
+      [
+        "`data-query-keyword`",
+        "string",
+        <>
+          <p>
+            Fill up your unique <Code>data-query-keyword</Code>.
+            <br />
+            e.g:{" "}
+            <Code>https://your-online-store.com/collection/all?q=hoodie</Code>
+            <br />
+            <br />
+            Default: <Code>q</Code>
+          </p>
+        </>,
+      ],
+      [
+        "`data-collection-id`",
+        "number (required)",
+        <>
+          <p>
+            Fill with your own collection id,
+            <br />
+            You can check out{" "}
+            <Link
+              target="_blank"
+              href="/html-data-attribute#data-collection-id"
+            >
+              here
+            </Link>
+          </p>
+        </>,
+      ],
+      [
+        "`data-collection-name`",
+        "string (required)",
+        <>
+          <p>
+            Fill with your own collection name,
+            <br />
+            You can check out{" "}
+            <Link
+              target="_blank"
+              href="/html-data-attribute#data-collection-name"
+            >
+              here
+            </Link>
+          </p>
+        </>,
+      ],
+    ],
+  }}
+/>
+
+### Widget completely running
+
+Sledge's product filters widget is now ready to be used.
+
+<Image
+  className="mt-3 w-auto max-h-[359px]"
+  src={IMAGE_APPS_IS_PF_RESULT}
+  alt="sledge-image-docs"
+/>
+</Steps>
+
+## Learn more
+
+Congratulations! Now that the installation is complete, you can use all Sledge's widgets and start integrating to your Webflow storefront.
+
+- [Integrate Wishlist](/wishlist)
+- [Integrate Product Review](/product-review)
+- [Integrate Instant Search](/instant-search)
+- [Integrate Product Filters](/product-filters)
+- [API References - HTML Data Attribute](/html-data-attribute)
+- [How to add Callback Functions](/callback-functions)
+- [How to add Custom Components](/custom-components)

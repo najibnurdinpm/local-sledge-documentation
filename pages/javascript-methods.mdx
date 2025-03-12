@@ -1,0 +1,653 @@
+import { Table } from "~/components/global";
+import { Code } from "nextra/components";
+
+export function WishlistToggleParameter() {
+  return (
+    <Table
+		data={{
+			thead: [
+				{ title: "Parameter" },
+				{ title: "Type" },
+				{ title: "Description" },
+				{ title: "Required" },
+			],
+			tbody: [
+				[
+					"`productId`",
+					"string",
+					<>
+					<p>
+						Fill with your own product id
+					</p>
+					</>,
+					<><center>✅</center></>
+				],
+				[
+					"`productVariantId`",
+					"string",
+					<>
+					<p>
+						Fill with your own product variant id
+					</p>
+					</>,
+					<><center>✅</center></>
+				],
+				[
+					"`productName`",
+					"string",
+					<>
+					<p>
+						Fill with your own product name
+					</p>
+					</>,
+					<><center>✅</center></>
+				],
+				[
+					"`productVendor`",
+					<>string | ""</>,
+					<>
+					<p>
+						Fill with your own product vendor
+					</p>
+					</>,
+					<></>
+				],
+				[
+					"`productVariantName`",
+					"string",
+					<>
+					<p>
+						Fill with your own product variant name
+					</p>
+					</>,
+					<><center>✅</center></>
+				],
+				[
+					"`productLink`",
+					"string",
+					<>
+					<p>
+						Fill with your own product URL that link to PDP
+					</p>
+					</>,
+					<><center>✅</center></>
+				],
+				[
+					"`productImage`",
+					<>string | ""</>,
+					<>
+					<p>
+						Fill with your own product image URL
+					</p>
+					</>,
+					<></>
+				],
+				[
+					"`productCurrency`",
+					"string",
+					<>
+					<p>
+						Fill with your own product currency <br />
+						eg: <Code>IDR</Code> | <Code>USD</Code>
+					</p>
+					</>,
+					<><center>✅</center></>
+				],
+				[
+					"`productPrice`",
+					"string",
+					<>
+					<p>
+						Fill with your own product price
+					</p>
+					</>,
+					<><center>✅</center></>
+				],
+			],
+		}}
+	/>
+  )
+}
+
+export function InitParameter() {
+	return (
+		<Table
+			data={{
+				thead: [
+					{ title: "Parameter" },
+					{ title: "Type" },
+					{ title: "Description" },
+					{ title: "Required" },
+				],
+				tbody: [
+					[
+						"`widgetSelector`",
+						<>string | ""</>,
+						<>
+						<p>
+							Identifier of the widget selector that will be initialized. <br />
+							This parameter is optional
+						</p>
+						</>,
+						<></>
+					],
+				],
+			}}
+		/>
+	)
+}
+
+export function SearchParameter() {
+	return (
+		<Table
+			data={{
+				thead: [
+					{ title: "Parameter" },
+					{ title: "Type" },
+					{ title: "Description" },
+					{ title: "Required" },
+				],
+				tbody: [
+					[
+						"`searchKeyword`",
+						<>string | ""</>,
+						<>
+						<p>
+							Input the search keyword. <br />
+							This parameter is optional
+						</p>
+						</>,
+						<></>
+					],
+				],
+			}}
+		/>
+	)
+}
+
+# Javascript Methods
+
+JavaScript Methods offer a range of possibilities to engage with Sledge Widgets through code, empowering you to effortlessly spark exciting actions.
+
+## Methods
+
+Available methods :
+
+- [Global](#global)
+    - [`sledge.initAllElements`](#sledgeinitallelements)
+<p></p>
+- [Wishlist](#wishlist)
+    - [`sledge.wishlist.add`](#sledgewishlistadd)
+    - [`sledge.wishlist.remove`](#sledgewishlistremove)
+    - [`sledge.wishlist.toggle`](#sledgewishlisttoggle)
+    - [`sledge.wishlist.badge.init`](#sledgewishlistbadgeinit)
+    - [`sledge.wishlist.trigger.init`](#sledgewishlisttriggerinit)
+    - [`sledge.wishlist.buttonDetail.init`](#sledgewishlistbuttondetailinit)
+    - [`sledge.wishlist.widget.init`](#sledgewishlistwidgetinit)
+<p></p>
+- [Product Review](#product-review)
+    - [`sledge.productReview.widget.init`](#sledgeproductreviewwidgetinit)
+    - [`sledge.productReview.rating.init`](#sledgeproductreviewratinginit)
+    - [`sledge.productReview.happyCustomersPage.init`](#sledgeproductreviewhappycustomerspageinit)
+    - [`sledge.productReview.trustBadge.init`](#sledgeproductreviewtrustbadgeinit)
+    - [`sledge.productReview.snippet.init`](#sledgeproductreviewsnippetinit)
+<p></p>
+- [Instant Search](#instant-search)
+    - [`sledge.instantSearch.productFilter.init`](#sledgeinstantsearchproductfilterinit)
+    - [`sledge.instantSearch.productFilter.search`](#sledgeinstantsearchproductfiltersearch)
+    - [`sledge.instantSearch.productFilter.filter`](#sledgeinstantsearchproductfilterfilter)
+    - [`sledge.instantSearch.searchResult.init`](#sledgeinstantsearchsearchresultinit)
+    - [`sledge.instantSearch.searchResult.search`](#sledgeinstantsearchsearchresultsearch)
+    - [`sledge.instantSearch.searchResult.filter`](#sledgeinstantsearchsearchresultfilter)
+	- [`sledge.instantSearch.searchIconPopup.init`](#sledgeinstantsearchsearchiconpopupinit)
+    - [`sledge.instantSearch.searchWidget.init`](#sledgeinstantsearchsearchwidgetinit)
+<p></p>
+- [Product Recommendation](#product-recommendation)
+    - [`sledge.productRecommendation.recentlyViewed.init`](#sledgeproductrecommendationrecentlyviewedinit)
+
+### Global
+
+#### <span className="text-xl font-bold gradient-text-primary">`sledge.initAllElements`</span>
+
+Initializes or reinitializes every Sledge's element on the current page.
+
+<br />
+<div className="text-lg font-bold">Example Usage</div>
+```js filename="" showLineNumbers copy
+sledge.initAllElements()
+```
+
+### Wishlist
+
+#### <span className="text-xl font-bold gradient-text-primary">`sledge.wishlist.add`</span>
+
+Use to trigger add a wishlist item.
+
+<br />
+<div className="text-lg font-bold">Example Usage</div>
+```js filename="" showLineNumbers copy
+sledge.wishlist.add({
+    productId: 8546332377366,
+    productVariantId: 46125813629206,
+    productName: 'Puffer',
+    productVendor: 'Sledge',
+    productVariantName: 'Small / Green',
+    productLink: 'https://sledge-demo-store.myshopify.com/products/puffer',
+    productImage: 'https://cdn.shopify.com/s/files/1/0819/5761/7942/files/green_1080x1080_crop_center_9fa291a1-797a-4ec5-86da-61a1042e7c88.png?v=1693963988',
+    productCurrency: 'USD',
+    productPrice: '80'
+});
+```
+
+<br />
+<div className="text-lg font-bold">Parameters</div>
+
+Let's look on list of all available parameters:
+
+<br />
+
+<WishlistToggleParameter />
+
+#### <span className="text-xl font-bold gradient-text-primary">`sledge.wishlist.remove`</span>
+
+Use to trigger remove a wishlist item.
+
+<br />
+<div className="text-lg font-bold">Example Usage</div>
+```js filename="" showLineNumbers copy
+sledge.wishlist.remove({
+    productId: 8546332377366,
+    productVariantId: 46125813629206,
+    productName: 'Puffer',
+    productVendor: 'Sledge',
+    productVariantName: 'Small / Green',
+    productLink: 'https://sledge-demo-store.myshopify.com/products/puffer',
+    productImage: 'https://cdn.shopify.com/s/files/1/0819/5761/7942/files/green_1080x1080_crop_center_9fa291a1-797a-4ec5-86da-61a1042e7c88.png?v=1693963988',
+    productCurrency: 'USD',
+    productPrice: '80'
+});
+```
+
+<br />
+<div className="text-lg font-bold">Parameters</div>
+
+Let's look on list of all available parameters:
+
+<br />
+
+<WishlistToggleParameter />
+
+#### <span className="text-xl font-bold gradient-text-primary">`sledge.wishlist.toggle`</span>
+
+Use to trigger add or remove a wishlist item.
+
+<br />
+<div className="text-lg font-bold">Example Usage</div>
+```js filename="" showLineNumbers copy
+sledge.wishlist.toggle({
+    productId: 8546332377366,
+    productVariantId: 46125813629206,
+    productName: 'Puffer',
+    productVendor: 'Sledge',
+    productVariantName: 'Small / Green',
+    productLink: 'https://sledge-demo-store.myshopify.com/products/puffer',
+    productImage: 'https://cdn.shopify.com/s/files/1/0819/5761/7942/files/green_1080x1080_crop_center_9fa291a1-797a-4ec5-86da-61a1042e7c88.png?v=1693963988',
+    productCurrency: 'USD',
+    productPrice: '80'
+});
+```
+
+<br />
+<div className="text-lg font-bold">Parameters</div>
+
+Let's look on list of all available parameters:
+
+<br />
+
+<WishlistToggleParameter />
+
+#### <span className="text-xl font-bold gradient-text-primary">`sledge.wishlist.badge.init`</span>
+
+Initializes or reinitializes a [Wishlist - Badge](/wishlist#badge) element on the current page.
+
+<br />
+<div className="text-lg font-bold">Example Usage</div>
+```js filename="" showLineNumbers copy
+const widgetSelector = `[data-component="wishlist-badge"]`
+sledge.wishlist.badge.init(widgetSelector);
+```
+
+<br />
+<div className="text-lg font-bold">Parameters</div>
+
+Let's look on list of all available parameters:
+
+<br />
+
+<InitParameter />
+
+#### <span className="text-xl font-bold gradient-text-primary">`sledge.wishlist.trigger.init`</span>
+
+Initializes or reinitializes a [Wishlist - Trigger](/wishlist#trigger) element on the current page.
+
+<br />
+<div className="text-lg font-bold">Example Usage</div>
+```js filename="" showLineNumbers copy
+const widgetSelector = `[data-component="wishlist-trigger"]`
+sledge.wishlist.trigger.init(widgetSelector);
+```
+
+<br />
+<div className="text-lg font-bold">Parameters</div>
+
+Let's look on list of all available parameters:
+
+<br />
+
+<InitParameter />
+
+#### <span className="text-xl font-bold gradient-text-primary">`sledge.wishlist.buttonDetail.init`</span>
+
+Initializes or reinitializes a [Wishlist - Button Detail](/wishlist#button-detail) element on the current page.
+
+<br />
+<div className="text-lg font-bold">Example Usage</div>
+```js filename="" showLineNumbers copy
+const widgetSelector = `[data-component="wishlist-button-detail"]`
+sledge.wishlist.buttonDetail.init(widgetSelector);
+```
+
+<br />
+<div className="text-lg font-bold">Parameters</div>
+
+Let's look on list of all available parameters:
+
+<br />
+
+<InitParameter />
+
+#### <span className="text-xl font-bold gradient-text-primary">`sledge.wishlist.widget.init`</span>
+
+Initializes or reinitializes a [Wishlist - Widget](/wishlist#widget) element on the current page.
+
+<br />
+<div className="text-lg font-bold">Example Usage</div>
+```js filename="" showLineNumbers copy
+const widgetSelector = `[data-component="wishlist-widget"]`
+sledge.wishlist.widget.init(widgetSelector);
+```
+
+<br />
+<div className="text-lg font-bold">Parameters</div>
+
+Let's look on list of all available parameters:
+
+<br />
+
+<InitParameter />
+
+### Product Review
+
+#### <span className="text-xl font-bold gradient-text-primary">`sledge.productReview.widget.init`</span>
+
+Initializes or reinitializes a [Product Review - Widget](/product-review#widget) element on the current page.
+
+<br />
+<div className="text-lg font-bold">Example Usage</div>
+```js filename="" showLineNumbers copy
+const widgetSelector = `[data-component="product-review-widget"]`
+sledge.productReview.widget.init(widgetSelector);
+```
+
+<br />
+<div className="text-lg font-bold">Parameters</div>
+
+Let's look on list of all available parameters:
+
+<br />
+
+<InitParameter />
+
+#### <span className="text-xl font-bold gradient-text-primary">`sledge.productReview.rating.init`</span>
+
+Initializes or reinitializes a [Product Review - Rating](/product-review#rating) element on the current page.
+
+<br />
+<div className="text-lg font-bold">Example Usage</div>
+```js filename="" showLineNumbers copy
+const widgetSelector = `[data-component="product-review-rating"]`
+sledge.productReview.rating.init(widgetSelector);
+```
+
+<br />
+<div className="text-lg font-bold">Parameters</div>
+
+Let's look on list of all available parameters:
+
+<br />
+
+<InitParameter />
+
+#### <span className="text-xl font-bold gradient-text-primary">`sledge.productReview.happyCustomersPage.init`</span>
+
+Initializes or reinitializes a [Product Review - Happy Customers Page](/product-review#happy-customers-page) element on the current page.
+
+<br />
+<div className="text-lg font-bold">Example Usage</div>
+```js filename="" showLineNumbers copy
+const widgetSelector = `[data-component="product-review-happy-customers-page"]`
+sledge.productReview.happyCustomersPage.init(widgetSelector);
+```
+
+<br />
+<div className="text-lg font-bold">Parameters</div>
+
+Let's look on list of all available parameters:
+
+<br />
+
+<InitParameter />
+
+#### <span className="text-xl font-bold gradient-text-primary">`sledge.productReview.trustBadge.init`</span>
+
+Initializes or reinitializes a [Product Review - Trust Badge](/product-review#trust-badge) element on the current page.
+
+<br />
+<div className="text-lg font-bold">Example Usage</div>
+```js filename="" showLineNumbers copy
+const widgetSelector = `[data-component="product-review-trust-badge"]`
+sledge.productReview.trustBadge.init(widgetSelector);
+```
+
+<br />
+<div className="text-lg font-bold">Parameters</div>
+
+Let's look on list of all available parameters:
+
+<br />
+
+<InitParameter />
+
+#### <span className="text-xl font-bold gradient-text-primary">`sledge.productReview.snippet.init`</span>
+
+Initializes or reinitializes a [Product Review - Snippet Carousel Widget](/product-review#snippet-carousel-widget) element on the current page.
+
+<br />
+<div className="text-lg font-bold">Example Usage</div>
+```js filename="" showLineNumbers copy
+const widgetSelector = `[data-component="product-review-snippet"]`
+sledge.productReview.snippet.init(widgetSelector);
+```
+
+<br />
+<div className="text-lg font-bold">Parameters</div>
+
+Let's look on list of all available parameters:
+
+<br />
+
+<InitParameter />
+
+### Instant Search
+
+#### <span className="text-xl font-bold gradient-text-primary">`sledge.instantSearch.productFilter.init`</span>
+
+Initializes or reinitializes a [Instant Search - Product Filter](/product-filters#product-filter) element on the current page.
+
+<br />
+<div className="text-lg font-bold">Example Usage</div>
+```js filename="" showLineNumbers copy
+const widgetSelector = `[data-component="instant-search-product-filter-widget"]`
+sledge.instantSearch.productFilter.init(widgetSelector);
+```
+
+<br />
+<div className="text-lg font-bold">Parameters</div>
+
+Let's look on list of all available parameters:
+
+<br />
+
+<InitParameter />
+
+#### <span className="text-xl font-bold gradient-text-primary">`sledge.instantSearch.productFilter.search`</span>
+
+Use to trigger search on a [Instant Search - Product Filter](/product-filters#product-filter) element.
+
+<br />
+<div className="text-lg font-bold">Example Usage</div>
+```js filename="" showLineNumbers copy
+const searchKeyword = 'puffer'
+sledge.instantSearch.productFilter.search(searchKeyword);
+```
+
+<br />
+<div className="text-lg font-bold">Parameters</div>
+
+Let's look on list of all available parameters:
+
+<br />
+
+<SearchParameter />
+
+#### <span className="text-xl font-bold gradient-text-primary">`sledge.instantSearch.productFilter.filter`</span>
+
+Use to trigger update filter on a [Instant Search - Product Filter](/product-filters#product-filter) element.
+
+<br />
+<div className="text-lg font-bold">Example Usage</div>
+```js filename="" showLineNumbers copy
+sledge.instantSearch.productFilter.filter();
+```
+
+#### <span className="text-xl font-bold gradient-text-primary">`sledge.instantSearch.searchResult.init`</span>
+
+Initializes or reinitializes a [Instant Search - Search Result](/instant-search#search-result) element on the current page.
+
+<br />
+<div className="text-lg font-bold">Example Usage</div>
+```js filename="" showLineNumbers copy
+const widgetSelector = `[data-component="instant-search-result-widget"]`
+sledge.instantSearch.searchResult.init(widgetSelector);
+```
+
+<br />
+<div className="text-lg font-bold">Parameters</div>
+
+Let's look on list of all available parameters:
+
+<br />
+
+<InitParameter />
+
+#### <span className="text-xl font-bold gradient-text-primary">`sledge.instantSearch.searchResult.search`</span>
+
+Use to trigger search on a [Instant Search - Search Result](/instant-search#search-result) element.
+
+<br />
+<div className="text-lg font-bold">Example Usage</div>
+```js filename="" showLineNumbers copy
+const searchKeyword = 'puffer'
+sledge.instantSearch.searchResult.search(searchKeyword);
+```
+
+<br />
+<div className="text-lg font-bold">Parameters</div>
+
+Let's look on list of all available parameters:
+
+<br />
+
+<SearchParameter />
+
+#### <span className="text-xl font-bold gradient-text-primary">`sledge.instantSearch.searchResult.filter`</span>
+
+Use to trigger update filter on a [Instant Search - Search Result](/instant-search#search-result) element.
+
+<br />
+<div className="text-lg font-bold">Example Usage</div>
+```js filename="" showLineNumbers copy
+sledge.instantSearch.searchResult.filter();
+```
+
+#### <span className="text-xl font-bold gradient-text-primary">`sledge.instantSearch.searchIconPopup.init`</span>
+
+Initializes or reinitializes a [Instant Search - Search Icon Popup](/instant-search#search-icon-popup) element on the current page.
+
+<br />
+<div className="text-lg font-bold">Example Usage</div>
+```js filename="" showLineNumbers copy
+const widgetSelector = `[data-component="instant-search-icon-widget"]`
+sledge.instantSearch.searchIconPopup.init(widgetSelector);
+```
+
+<br />
+<div className="text-lg font-bold">Parameters</div>
+
+Let's look on list of all available parameters:
+
+<br />
+
+<InitParameter />
+
+#### <span className="text-xl font-bold gradient-text-primary">`sledge.instantSearch.searchWidget.init`</span>
+
+Initializes or reinitializes a [Instant Search - Search Widget](/instant-search#search-widget) element on the current page.
+
+<br />
+<div className="text-lg font-bold">Example Usage</div>
+```js filename="" showLineNumbers copy
+const widgetSelector = `[data-component="instant-search-widget"]`
+sledge.instantSearch.searchWidget.init(widgetSelector);
+```
+
+<br />
+<div className="text-lg font-bold">Parameters</div>
+
+Let's look on list of all available parameters:
+
+<br />
+
+<InitParameter />
+
+### Product Recommendation
+
+#### <span className="text-xl font-bold gradient-text-primary">`sledge.productRecommendation.recentlyViewed.init`</span>
+
+Initializes or reinitializes a [Recently Viewed](/recently-viewed) element on the current page.
+
+<br />
+<div className="text-lg font-bold">Example Usage</div>
+```js filename="" showLineNumbers copy
+const widgetSelector = `[data-component="product-recommendation-recently-viewed"]`
+sledge.productRecommendation.recentlyViewed.init(widgetSelector);
+```
+
+<br />
+<div className="text-lg font-bold">Parameters</div>
+
+Let's look on list of all available parameters:
+
+<br />
+
+<InitParameter />

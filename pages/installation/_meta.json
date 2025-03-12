@@ -1,0 +1,30 @@
+{
+  "hydrogen": {
+    "title": "Hydrogen",
+    "theme": {
+      "breadcrumb": true,
+      "toc": true
+    }
+  },
+  "nextjs": {
+    "title": "Next.js",
+    "theme": {
+      "breadcrumb": true,
+      "toc": true
+    }
+  },
+  "liquid": {
+    "title": "Liquid",
+    "theme": {
+      "breadcrumb": true,
+      "toc": true
+    }
+  },
+  "webflow": {
+    "title": "Webflow",
+    "theme": {
+      "breadcrumb": true,
+      "toc": true
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "theme-customizer": {
+    "title": "Theme Customizer",
+    "theme": {
+      "breadcrumb": true,
+      "toc": true
+    }
+  },
+  "code": {
+    "title": "Code",
+    "theme": {
+      "breadcrumb": true,
+      "toc": true
+    }
+  }
+}

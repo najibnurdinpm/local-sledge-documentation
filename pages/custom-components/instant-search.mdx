@@ -1,0 +1,2303 @@
+import { Tabs, Tab } from "~/components/global";
+import { Steps } from "nextra/components";
+import { Webflow, Liquid, NextJs, Hydrogen } from "~/components/icons";
+import Image from "next/image";
+import {
+    IMAGE_CC_OTHER_INDEX_LIST,
+    IMAGE_CC_VIEW_MORE,
+    IMAGE_CC_SUGGESTION_KEYWORD,
+    IMAGE_CC_COLLECTION_CARD,
+    IMAGE_CC_PAGE_CARD,
+    IMAGE_CC_BLOG_CARD,
+    IMAGE_CC_ARTICLE_CARD,
+} from "~/lib/const"
+
+# Instant Search
+
+Make the appearance of the Sledge instant search app remain in line with the theme you have using the custom components that Sledge provides.
+
+Available custom components :
+
+- [Other Index List](#other-index-list)
+- [Suggestion Keyword List](#suggestion-keyword-list)
+- [Search View More Result](#search-view-more-result)
+- [Collection Card](#collection-card)
+- [Page Card](#page-card)
+- [Blog Card](#blog-card)
+- [Article Card](#article-card)
+
+## Other Index List
+
+Other Index List is custom component for showing sidebar of popup search result except [Suggestion Keyword List](#suggestion-keyword-list).<br/><br/>
+
+<Image
+  src={ IMAGE_CC_OTHER_INDEX_LIST }
+  alt="Custom Component - Other Indec List"
+  width="250"
+  height="200"
+/> <br />
+
+<Tabs storageKey="selected-tech-stack"  items={[
+    <div className="flex items-center gap-2">
+        <Hydrogen width={24} height={24} />
+        <span>Hydrogen</span>
+    </div>,
+    <div className="flex items-center gap-2">
+        <NextJs width={24} height={24} />
+        <span>Next.js</span>
+    </div>,
+    <div className="flex items-center gap-2">
+        <Liquid width={24} height={24} />
+        <span>Liquid</span>
+    </div>,
+    <div className="flex items-center gap-2">
+        <Webflow width={24} height={24} />
+        <span>Webflow</span>
+    </div>
+]}>
+    <Tab>
+        <Steps>
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Build a custom component, e.g:</h3>
+
+            ```tsx filename="app/SledgeOtherIndexList.tsx" showLineNumbers copy
+            import { Link } from '@remix-run/react';
+
+            export default function SledgeOtherIndexList({
+                name,
+                items,
+                setShowPopupComponent,
+            }: any) {
+                return (
+                    <>
+                        <div className="sledge-instant-search__icon-widget-search-form-result-title">
+                            {name}
+                        </div>
+                        {items?.length ? (
+                            <ul className="sledge-instant-search__icon-widget-search-form-result-list">
+                            {items.map((hit: any, index: number) => {
+                                const {title, handle} = hit;
+
+                                let linkTo = '';
+
+                                if (String(name)?.toLowerCase().includes('collections')) {
+                                    linkTo = `/collections/${handle}`;
+                                } else if (String(name)?.toLowerCase().includes('pages')) {
+                                    linkTo = `/pages/${handle}`;
+                                } else if (String(name)?.toLowerCase().includes('blogs')) {
+                                    linkTo = `/blogs/${handle}`;
+                                } else if (String(name)?.toLowerCase().includes('articles')) {
+                                    linkTo = `/articles/${handle}`;
+                                }
+
+                                return (
+                                <li key={index}>
+                                    <Link
+                                        to={linkTo}
+                                        className="sledge-instant-search__icon-widget-search-form-result-list-link"
+                                        onClick={() =>
+                                            setShowPopupComponent && setShowPopupComponent(false)
+                                        }
+                                    >
+                                        {title}
+                                    </Link>
+                                </li>
+                                );
+                            })}
+                            </ul>
+                        ) : (
+                            <ul className="sledge-instant-search__icon-widget-search-form-result-list">
+                                <li className="sledge-instant-search__icon-widget-search-form-result-item-disabled">
+                                    No {name?.toLowerCase()} were found
+                                </li>
+                            </ul>
+                        )}
+                    </>
+                );
+            };
+            ```
+
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Call custom component to prop</h3>
+
+            Only provide the function name (without `()`), see the [API reference](/sledge-app-core#otherindexlist-name-items-setshowpopupcomponent-)
+
+            > <div className="not-italic">`<CustomComponent>` must be added as a child of another sledge's widget.</div>
+
+            ```tsx {31} showLineNumbers copy
+            import { CustomComponents } from "@sledge-app/core";
+            import { SearchIconWidget } from "@sledge-app/react-instant-search";
+            import SledgeOtherIndexList from "~/components/SledgeOtherIndexList";
+
+            export default function InstantSearchIconWidget() {
+                return (
+                    <SearchIconWidget
+                        size='sm'
+                        onAfterAddWishlist={(state) => {
+                            if (state) {
+                                // if condition is state === true, run your custom code
+                            } else {
+                                // if condition is state === true, run your custom code
+                            }
+                        }}
+                        onAfterRemoveWishlist={(state) => {
+                            if (state) {
+                                // if condition is state === true, run your custom code
+                            } else {
+                                // if condition is state === true, run your custom code
+                            }
+                        }}
+                        onAfterRenderProduct={(state) => {
+                            if (state) {
+                                // if condition is state === true, run your custom code
+                            } else {
+                                // if condition is state === true, run your custom code
+                            }
+                        }}
+                    >
+                        <CustomComponents otherIndexList={SledgeOtherIndexList} />
+                    </SearchIconWidget>
+                );
+            }
+            ```
+        </Steps>
+    </Tab>
+    <Tab>
+        <Steps>
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Build a custom component, e.g:</h3>
+
+            ```tsx filename="app/SledgeOtherIndexList.tsx" showLineNumbers copy
+            'use client';
+
+            import Link from 'next/link';
+
+            export default function SledgeOtherIndexList({
+                name,
+                items,
+                setShowPopupComponent,
+            }: any) {
+                return (
+                    <>
+                        <div className="sledge-instant-search__icon-widget-search-form-result-title">
+                            {name}
+                        </div>
+                        {items?.length ? (
+                            <ul className="sledge-instant-search__icon-widget-search-form-result-list">
+                            {items.map((hit: any, index: number) => {
+                                const {title, handle} = hit;
+
+                                let linkHref = '';
+
+                                if (String(name)?.toLowerCase().includes('collections')) {
+                                    linkHref = `/collections/${handle}`;
+                                } else if (String(name)?.toLowerCase().includes('pages')) {
+                                    linkHref = `/pages/${handle}`;
+                                } else if (String(name)?.toLowerCase().includes('blogs')) {
+                                    linkHref = `/blogs/${handle}`;
+                                } else if (String(name)?.toLowerCase().includes('articles')) {
+                                    linkHref = `/articles/${handle}`;
+                                }
+
+                                return (
+                                <li key={index}>
+                                    <Link
+                                        href={linkHref}
+                                        className="sledge-instant-search__icon-widget-search-form-result-list-link"
+                                        onClick={() =>
+                                            setShowPopupComponent && setShowPopupComponent(false)
+                                        }
+                                    >
+                                        {title}
+                                    </Link>
+                                </li>
+                                );
+                            })}
+                            </ul>
+                        ) : (
+                            <ul className="sledge-instant-search__icon-widget-search-form-result-list">
+                                <li className="sledge-instant-search__icon-widget-search-form-result-item-disabled">
+                                    No {name?.toLowerCase()} were found
+                                </li>
+                            </ul>
+                        )}
+                    </>
+                );
+            };
+            ```
+
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Call custom component to prop</h3>
+
+            Only provide the function name (without `()`), see the [API reference](/sledge-app-core#otherindexlist-name-items-setshowpopupcomponent-)
+
+            > <div className="not-italic">`<CustomComponent>` must be added as a child of another sledge's widget.</div>
+
+            ```tsx {33} showLineNumbers copy
+            'use client';
+
+            import { CustomComponents } from "@sledge-app/core";
+            import { SearchIconWidget } from "@sledge-app/react-instant-search";
+            import SledgeOtherIndexList from "~/components/SledgeOtherIndexList";
+
+            export default function InstantSearchIconWidget() {
+                return (
+                    <SearchIconWidget
+                        size='sm'
+                        onAfterAddWishlist={(state) => {
+                            if (state) {
+                                // if condition is state === true, run your custom code
+                            } else {
+                                // if condition is state === true, run your custom code
+                            }
+                        }}
+                        onAfterRemoveWishlist={(state) => {
+                            if (state) {
+                                // if condition is state === true, run your custom code
+                            } else {
+                                // if condition is state === true, run your custom code
+                            }
+                        }}
+                        onAfterRenderProduct={(state) => {
+                            if (state) {
+                                // if condition is state === true, run your custom code
+                            } else {
+                                // if condition is state === true, run your custom code
+                            }
+                        }}
+                    >
+                        <CustomComponents otherIndexList={SledgeOtherIndexList} />
+                    </SearchIconWidget>
+                );
+            }
+            ```
+        </Steps>
+    </Tab>
+    <Tab>
+        <Steps>
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Build a custom component, e.g:</h3>
+
+            ```html showLineNumbers copy
+            <script>
+                function renderOtherIndexList({ name, type, items }) {
+                    return `
+                    <div class="sledge-instant-search__icon-widget-search-form-result-title">
+                        ${name}
+                    </div>
+                    ${
+                        items?.length
+                            ? `
+                        <ul class="sledge-instant-search__icon-widget-search-form-result-list">
+                        ${items
+                            .map((hit, index) => {
+                                const { title, blog_handle, handle } = hit;
+
+                                let pathUrl = '';
+
+                                if (String(type)?.toLowerCase().includes('collection')) {
+                                    pathUrl = `/collections/${handle}`;
+                                } else if (String(type)?.toLowerCase().includes('page')) {
+                                    pathUrl = `/pages/${handle}`;
+                                } else if (String(type)?.toLowerCase().includes('blog')) {
+                                    pathUrl = `/blogs/${handle}`;
+                                } else if (String(type)?.toLowerCase().includes('article')) {
+                                    pathUrl = `/blogs/${blog_handle ? `${blog_handle}/` : ''}${handle}`;
+                                }
+
+                                return `
+                            <li>
+                                <a
+                                href="${pathUrl}"
+                                class="sledge-instant-search__icon-widget-search-form-result-list-link"
+                                >
+                                ${title}
+                                </a>
+                            </li>
+                            `;
+                            })
+                            .join('\n')}
+                        </ul>
+                    `
+                            : `
+                        <ul class="sledge-instant-search__icon-widget-search-form-result-list">
+                        <li class="sledge-instant-search__icon-widget-search-form-result-item-disabled">
+                            No ${name?.toLowerCase()} were found
+                        </li>
+                        </ul>
+                    `
+                    }
+                    `;
+                }
+            </script>
+            ```
+
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Call custom component to attribute</h3>
+
+            Only provide the function name (without `()`), see the [API reference](/html-data-attribute#data-render-other-index-list)
+
+            > <div className="not-italic">`<div data-component="custom-components">` must be added as a child of another sledge's widget.</div>
+
+            ```html {7} showLineNumbers copy
+            <div
+                data-component="instant-search-icon-widget"
+                data-icon-size="sm"
+            >
+                <div
+                    data-component="custom-components"
+                    data-render-other-index-list="renderOtherIndexList"
+                ></div>
+            </div>
+            ```
+        </Steps>
+    </Tab>
+    <Tab>
+        You can place these code in custom code webflow, see the <a href="https://university.webflow.com/lesson/custom-code-embed" target="_blank" className="nx-text-primary-600 nx-underline nx-decoration-from-font [text-underline-position:from-font]">documentation</a> about custom code embed at webflow
+
+        <Steps className="mt-3">
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Build a custom component, e.g:</h3>
+
+            ```html showLineNumbers copy
+            <script>
+                function renderOtherIndexList({ name, type, items }) {
+                    return `
+                    <div class="sledge-instant-search__icon-widget-search-form-result-title">
+                        ${name}
+                    </div>
+                    ${
+                        items?.length
+                            ? `
+                        <ul class="sledge-instant-search__icon-widget-search-form-result-list">
+                        ${items
+                            .map((hit, index) => {
+                                const { title, blog_handle, handle } = hit;
+
+                                let pathUrl = '';
+
+                                if (String(type)?.toLowerCase().includes('collection')) {
+                                    pathUrl = `/collections/${handle}`;
+                                } else if (String(type)?.toLowerCase().includes('page')) {
+                                    pathUrl = `/pages/${handle}`;
+                                } else if (String(type)?.toLowerCase().includes('blog')) {
+                                    pathUrl = `/blogs/${handle}`;
+                                } else if (String(type)?.toLowerCase().includes('article')) {
+                                    pathUrl = `/blogs/${blog_handle ? `${blog_handle}/` : ''}${handle}`;
+                                }
+
+                                return `
+                            <li>
+                                <a
+                                href="${pathUrl}"
+                                class="sledge-instant-search__icon-widget-search-form-result-list-link"
+                                >
+                                ${title}
+                                </a>
+                            </li>
+                            `;
+                            })
+                            .join('\n')}
+                        </ul>
+                    `
+                            : `
+                        <ul class="sledge-instant-search__icon-widget-search-form-result-list">
+                        <li class="sledge-instant-search__icon-widget-search-form-result-item-disabled">
+                            No ${name?.toLowerCase()} were found
+                        </li>
+                        </ul>
+                    `
+                    }
+                    `;
+                }
+            </script>
+            ```
+
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Call custom component to attribute</h3>
+
+            Only provide the function name (without `()`), see the [API reference](/html-data-attribute#data-render-other-index-list)
+
+            > <div className="not-italic">`<div data-component="custom-components">` must be added as a child of another sledge's widget.</div>
+
+            ```html {7} showLineNumbers copy
+            <div
+                data-component="instant-search-icon-widget"
+                data-icon-size="sm"
+            >
+                <div
+                    data-component="custom-components"
+                    data-render-other-index-list="renderOtherIndexList"
+                ></div>
+            </div>
+            ```
+        </Steps>
+    </Tab>
+
+</Tabs>
+
+## Suggestion Keyword List
+
+Suggestion Keyword List is custom component for showing suggestion keyword from [suggestion setting](/backend-instant-search-and-product-filters#suggestion-when-no-character) on backend.<br/><br/>
+
+<Image
+  src={ IMAGE_CC_SUGGESTION_KEYWORD }
+  alt="Custom Component - Suggestion Keyword List"
+  width="250"
+  height="200"
+/> <br />
+
+<Tabs storageKey="selected-tech-stack"  items={[
+    <div className="flex items-center gap-2">
+        <Hydrogen width={24} height={24} />
+        <span>Hydrogen</span>
+    </div>,
+    <div className="flex items-center gap-2">
+        <NextJs width={24} height={24} />
+        <span>Next.js</span>
+    </div>,
+    <div className="flex items-center gap-2">
+        <Liquid width={24} height={24} />
+        <span>Liquid</span>
+    </div>,
+    <div className="flex items-center gap-2">
+        <Webflow width={24} height={24} />
+        <span>Webflow</span>
+    </div>
+]}>
+    <Tab>
+        <Steps>
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Build a custom component, e.g:</h3>
+
+            ```tsx filename="app/SledgeSuggestionKeywordList.tsx" showLineNumbers copy
+            import { Link } from '@remix-run/react';
+
+            export default function SledgeSuggestionKeywordList({
+                keywords,
+                setShowPopupComponent,
+            }: any) {
+                return (
+                    <>
+                        <div className="sledge-instant-search__icon-widget-search-form-result-title">
+                            Suggestions
+                        </div>
+                        <ul className="sledge-instant-search__icon-widget-search-form-result-list">
+                            {keywords.map((keyword: string, index: number) => {
+                            return (
+                                <li key={index}>
+                                <Link
+                                    to={`/pages/search-result?q=${keyword}`}
+                                    className="sledge-instant-search__icon-widget-search-form-result-list-link sledge-instant-search__icon-widget-search-form-result-list-link-suggestion"
+                                    onClick={() => setShowPopupComponent && setShowPopupComponent(false)}
+                                >
+                                    <span className="sledge-icon__search">
+                                    <svg
+                                        width={12}
+                                        height={12}
+                                        viewBox="0 0 20 21"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                        fillRule="evenodd"
+                                        clipRule="evenodd"
+                                        d="M9.78283 2.16669C14.2578 2.16669 17.8978 5.80669 17.8978 10.2817C17.8978 12.393 17.0876 14.3186 15.7617 15.7638L18.3707 18.3673C18.6148 18.6114 18.6157 19.0064 18.3715 19.2506C18.2498 19.3739 18.089 19.4348 17.929 19.4348C17.7698 19.4348 17.6098 19.3739 17.4873 19.2523L14.8469 16.6192C13.4579 17.7316 11.6967 18.3975 9.78283 18.3975C5.30783 18.3975 1.66699 14.7567 1.66699 10.2817C1.66699 5.80669 5.30783 2.16669 9.78283 2.16669ZM9.78283 3.41669C5.99699 3.41669 2.91699 6.49585 2.91699 10.2817C2.91699 14.0675 5.99699 17.1475 9.78283 17.1475C13.5678 17.1475 16.6478 14.0675 16.6478 10.2817C16.6478 6.49585 13.5678 3.41669 9.78283 3.41669Z"
+                                        fill="#677487"
+                                        />
+                                    </svg>
+                                    </span>{' '}
+                                    {keyword}
+                                </Link>
+                                </li>
+                            );
+                            })}
+                        </ul>
+                    </>
+                );
+            };
+            ```
+
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Call custom component to prop</h3>
+
+            Only provide the function name (without `()`), see the [API reference](/sledge-app-core#suggestionkeywordlist-keywords-setshowpopupcomponent-)
+
+            > <div className="not-italic">`<CustomComponent>` must be added as a child of another sledge's widget.</div>
+
+            ```tsx {31} showLineNumbers copy
+            import { CustomComponents } from "@sledge-app/core";
+            import { SearchIconWidget } from "@sledge-app/react-instant-search";
+            import SledgeSuggestionKeywordList from "~/components/SledgeSuggestionKeywordList";
+
+            export default function InstantSearchIconWidget() {
+                return (
+                    <SearchIconWidget
+                        size='sm'
+                        onAfterAddWishlist={(state) => {
+                            if (state) {
+                                // if condition is state === true, run your custom code
+                            } else {
+                                // if condition is state === true, run your custom code
+                            }
+                        }}
+                        onAfterRemoveWishlist={(state) => {
+                            if (state) {
+                                // if condition is state === true, run your custom code
+                            } else {
+                                // if condition is state === true, run your custom code
+                            }
+                        }}
+                        onAfterRenderProduct={(state) => {
+                            if (state) {
+                                // if condition is state === true, run your custom code
+                            } else {
+                                // if condition is state === true, run your custom code
+                            }
+                        }}
+                    >
+                        <CustomComponents suggestionKeywordList={SledgeSuggestionKeywordList} />
+                    </SearchIconWidget>
+                );
+            }
+            ```
+        </Steps>
+    </Tab>
+    <Tab>
+        <Steps>
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Build a custom component, e.g:</h3>
+
+            ```tsx filename="app/SledgeSuggestionKeywordList.tsx" showLineNumbers copy
+            'use client';
+
+            import Link from 'next/link';
+
+            export default function SledgeSuggestionKeywordList({
+                keywords,
+                setShowPopupComponent,
+            }: any) {
+                return (
+                    <>
+                        <div className="sledge-instant-search__icon-widget-search-form-result-title">
+                            Suggestions
+                        </div>
+                        <ul className="sledge-instant-search__icon-widget-search-form-result-list">
+                            {keywords.map((keyword: string, index: number) => {
+                            return (
+                                <li key={index}>
+                                <Link
+                                    href={`/pages/search-result?q=${keyword}`}
+                                    className="sledge-instant-search__icon-widget-search-form-result-list-link sledge-instant-search__icon-widget-search-form-result-list-link-suggestion"
+                                    onClick={() => setShowPopupComponent && setShowPopupComponent(false)}
+                                >
+                                    <span className="sledge-icon__search">
+                                    <svg
+                                        width={12}
+                                        height={12}
+                                        viewBox="0 0 20 21"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                        fillRule="evenodd"
+                                        clipRule="evenodd"
+                                        d="M9.78283 2.16669C14.2578 2.16669 17.8978 5.80669 17.8978 10.2817C17.8978 12.393 17.0876 14.3186 15.7617 15.7638L18.3707 18.3673C18.6148 18.6114 18.6157 19.0064 18.3715 19.2506C18.2498 19.3739 18.089 19.4348 17.929 19.4348C17.7698 19.4348 17.6098 19.3739 17.4873 19.2523L14.8469 16.6192C13.4579 17.7316 11.6967 18.3975 9.78283 18.3975C5.30783 18.3975 1.66699 14.7567 1.66699 10.2817C1.66699 5.80669 5.30783 2.16669 9.78283 2.16669ZM9.78283 3.41669C5.99699 3.41669 2.91699 6.49585 2.91699 10.2817C2.91699 14.0675 5.99699 17.1475 9.78283 17.1475C13.5678 17.1475 16.6478 14.0675 16.6478 10.2817C16.6478 6.49585 13.5678 3.41669 9.78283 3.41669Z"
+                                        fill="#677487"
+                                        />
+                                    </svg>
+                                    </span>{' '}
+                                    {keyword}
+                                </Link>
+                                </li>
+                            );
+                            })}
+                        </ul>
+                    </>
+                );
+            };
+            ```
+
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Call custom component to prop</h3>
+
+            Only provide the function name (without `()`), see the [API reference](/sledge-app-core#suggestionkeywordlist-keywords-setshowpopupcomponent-)
+
+            > <div className="not-italic">`<CustomComponent>` must be added as a child of another sledge's widget.</div>
+
+            ```tsx {33} showLineNumbers copy
+            'use client';
+
+            import { CustomComponents } from "@sledge-app/core";
+            import { SearchIconWidget } from "@sledge-app/react-instant-search";
+            import SledgeSuggestionKeywordList from "~/components/SledgeSuggestionKeywordList";
+
+            export default function InstantSearchIconWidget() {
+                return (
+                    <SearchIconWidget
+                        size='sm'
+                        onAfterAddWishlist={(state) => {
+                            if (state) {
+                                // if condition is state === true, run your custom code
+                            } else {
+                                // if condition is state === true, run your custom code
+                            }
+                        }}
+                        onAfterRemoveWishlist={(state) => {
+                            if (state) {
+                                // if condition is state === true, run your custom code
+                            } else {
+                                // if condition is state === true, run your custom code
+                            }
+                        }}
+                        onAfterRenderProduct={(state) => {
+                            if (state) {
+                                // if condition is state === true, run your custom code
+                            } else {
+                                // if condition is state === true, run your custom code
+                            }
+                        }}
+                    >
+                        <CustomComponents suggestionKeywordList={SledgeSuggestionKeywordList} />
+                    </SearchIconWidget>
+                );
+            }
+            ```
+        </Steps>
+    </Tab>
+    <Tab>
+        <Steps>
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Build a custom component, e.g:</h3>
+
+            ```html showLineNumbers copy
+            <script>
+                function renderSuggestionKeywordList({ keywords }) {
+                    return `
+                    <div class="sledge-instant-search__icon-widget-search-form-result-title">
+                        Suggestions
+                    </div>
+                    <ul class="sledge-instant-search__icon-widget-search-form-result-list">
+                        ${keywords
+                            .map((keyword, index) => {
+                                return `
+                            <li>
+                            <a
+                                href="/pages/search-result?q=${keyword}"
+                                class="sledge-instant-search__icon-widget-search-form-result-list-link sledge-instant-search__icon-widget-search-form-result-list-link-suggestion"
+                            >
+                                <span class="sledge-icon__search">
+                                <svg width="12" height="12" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M9.78283 2.16669C14.2578 2.16669 17.8978 5.80669 17.8978 10.2817C17.8978 12.393 17.0876 14.3186 15.7617 15.7638L18.3707 18.3673C18.6148 18.6114 18.6157 19.0064 18.3715 19.2506C18.2498 19.3739 18.089 19.4348 17.929 19.4348C17.7698 19.4348 17.6098 19.3739 17.4873 19.2523L14.8469 16.6192C13.4579 17.7316 11.6967 18.3975 9.78283 18.3975C5.30783 18.3975 1.66699 14.7567 1.66699 10.2817C1.66699 5.80669 5.30783 2.16669 9.78283 2.16669ZM9.78283 3.41669C5.99699 3.41669 2.91699 6.49585 2.91699 10.2817C2.91699 14.0675 5.99699 17.1475 9.78283 17.1475C13.5678 17.1475 16.6478 14.0675 16.6478 10.2817C16.6478 6.49585 13.5678 3.41669 9.78283 3.41669Z" fill="currentColor"></path></svg>
+                                </span> ${keyword}
+                            </a>
+                            </li>
+                        `;
+                            })
+                            .join('\n')}
+                    </ul>`;
+                }
+            </script>
+            ```
+
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Call custom component to attribute</h3>
+
+            Only provide the function name (without `()`), see the [API reference](/html-data-attribute#data-render-suggestion-keyword-list)
+
+            > <div className="not-italic">`<div data-component="custom-components">` must be added as a child of another sledge's widget.</div>
+
+            ```html {7} showLineNumbers copy
+            <div
+                data-component="instant-search-icon-widget"
+                data-icon-size="sm"
+            >
+                <div
+                    data-component="custom-components"
+                    data-render-suggestion-keyword-list="renderSuggestionKeywordList"
+                ></div>
+            </div>
+            ```
+        </Steps>
+    </Tab>
+    <Tab>
+        You can place these code in custom code webflow, see the <a href="https://university.webflow.com/lesson/custom-code-embed" target="_blank" className="nx-text-primary-600 nx-underline nx-decoration-from-font [text-underline-position:from-font]">documentation</a> about custom code embed at webflow
+
+        <Steps className="mt-3">
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Build a custom component, e.g:</h3>
+
+            ```html showLineNumbers copy
+            <script>
+                function renderSuggestionKeywordList({ keywords }) {
+                    return `
+                    <div class="sledge-instant-search__icon-widget-search-form-result-title">
+                        Suggestions
+                    </div>
+                    <ul class="sledge-instant-search__icon-widget-search-form-result-list">
+                        ${keywords
+                            .map((keyword, index) => {
+                                return `
+                            <li>
+                            <a
+                                href="/pages/search-result?q=${keyword}"
+                                class="sledge-instant-search__icon-widget-search-form-result-list-link sledge-instant-search__icon-widget-search-form-result-list-link-suggestion"
+                            >
+                                <span class="sledge-icon__search">
+                                <svg width="12" height="12" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M9.78283 2.16669C14.2578 2.16669 17.8978 5.80669 17.8978 10.2817C17.8978 12.393 17.0876 14.3186 15.7617 15.7638L18.3707 18.3673C18.6148 18.6114 18.6157 19.0064 18.3715 19.2506C18.2498 19.3739 18.089 19.4348 17.929 19.4348C17.7698 19.4348 17.6098 19.3739 17.4873 19.2523L14.8469 16.6192C13.4579 17.7316 11.6967 18.3975 9.78283 18.3975C5.30783 18.3975 1.66699 14.7567 1.66699 10.2817C1.66699 5.80669 5.30783 2.16669 9.78283 2.16669ZM9.78283 3.41669C5.99699 3.41669 2.91699 6.49585 2.91699 10.2817C2.91699 14.0675 5.99699 17.1475 9.78283 17.1475C13.5678 17.1475 16.6478 14.0675 16.6478 10.2817C16.6478 6.49585 13.5678 3.41669 9.78283 3.41669Z" fill="currentColor"></path></svg>
+                                </span> ${keyword}
+                            </a>
+                            </li>
+                        `;
+                            })
+                            .join('\n')}
+                    </ul>`;
+                }
+            </script>
+            ```
+
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Call custom component to attribute</h3>
+
+            Only provide the function name (without `()`), see the [API reference](/html-data-attribute#data-render-suggestion-keyword-list)
+
+            > <div className="not-italic">`<div data-component="custom-components">` must be added as a child of another sledge's widget.</div>
+
+            ```html {7} showLineNumbers copy
+            <div
+                data-component="instant-search-icon-widget"
+                data-icon-size="sm"
+            >
+                <div
+                    data-component="custom-components"
+                    data-render-suggestion-keyword-list="renderSuggestionKeywordList"
+                ></div>
+            </div>
+            ```
+        </Steps>
+    </Tab>
+
+</Tabs>
+
+## Search View More Result
+
+Search View More Result is custom component for showing button for view all search result. You can add custom url and custom onclick action to button.<br/><br/>
+
+<Image
+  src={ IMAGE_CC_VIEW_MORE }
+  alt="Custom Component - View more result"
+  width="600"
+  height="200"
+/> <br />
+
+<Tabs storageKey="selected-tech-stack"  items={[
+    <div className="flex items-center gap-2">
+        <Hydrogen width={24} height={24} />
+        <span>Hydrogen</span>
+    </div>,
+    <div className="flex items-center gap-2">
+        <NextJs width={24} height={24} />
+        <span>Next.js</span>
+    </div>,
+    <div className="flex items-center gap-2">
+        <Liquid width={24} height={24} />
+        <span>Liquid</span>
+    </div>,
+    <div className="flex items-center gap-2">
+        <Webflow width={24} height={24} />
+        <span>Webflow</span>
+    </div>
+]}>
+    <Tab>
+        <Steps>
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Build a custom component, e.g:</h3>
+
+            ```tsx filename="app/SledgeSearchViewMoreResult.tsx" showLineNumbers copy
+            import { Link } from '@remix-run/react';
+
+            export default function SledgeSearchViewMoreResult({
+                keyword,
+                setShowPopupComponent,
+            }: any) {
+                return (
+                    <Link
+                        to={`/pages/search-result?q=${keyword}`}
+                        className="sledge-instant-search__icon-widget-button-more"
+                        onClick={() => setShowPopupComponent && setShowPopupComponent(false)}
+                    >
+                        View More Result
+                    </Link>
+                );
+            };
+            ```
+
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Call custom component to prop</h3>
+
+            Only provide the function name (without `()`), see the [API reference](/sledge-app-core#searchviewmoreresult-keyword-setshowpopupcomponent-)
+
+            > <div className="not-italic">`<CustomComponent>` must be added as a child of another sledge's widget.</div>
+
+            ```tsx {31} showLineNumbers copy
+            import { CustomComponents } from "@sledge-app/core";
+            import { SearchIconWidget } from "@sledge-app/react-instant-search";
+            import SledgeSearchViewMoreResult from "~/components/SledgeSearchViewMoreResult";
+
+            export default function InstantSearchIconWidget() {
+                return (
+                    <SearchIconWidget
+                        size='sm'
+                        onAfterAddWishlist={(state) => {
+                            if (state) {
+                                // if condition is state === true, run your custom code
+                            } else {
+                                // if condition is state === true, run your custom code
+                            }
+                        }}
+                        onAfterRemoveWishlist={(state) => {
+                            if (state) {
+                                // if condition is state === true, run your custom code
+                            } else {
+                                // if condition is state === true, run your custom code
+                            }
+                        }}
+                        onAfterRenderProduct={(state) => {
+                            if (state) {
+                                // if condition is state === true, run your custom code
+                            } else {
+                                // if condition is state === true, run your custom code
+                            }
+                        }}
+                    >
+                        <CustomComponents searchViewMoreResult={SledgeSearchViewMoreResult} />
+                    </SearchIconWidget>
+                );
+            }
+            ```
+        </Steps>
+    </Tab>
+    <Tab>
+        <Steps>
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Build a custom component, e.g:</h3>
+
+            ```tsx filename="app/SledgeSearchViewMoreResult.tsx" showLineNumbers copy
+            'use client';
+
+            import Link from 'next/link';
+
+            export default function SledgeSearchViewMoreResult({
+                keyword,
+                setShowPopupComponent,
+            }: any) {
+                return (
+                    <Link
+                        href={`/pages/search-result?q=${keyword}`}
+                        className="sledge-instant-search__icon-widget-button-more"
+                        onClick={() => setShowPopupComponent && setShowPopupComponent(false)}
+                    >
+                        View More Result
+                    </Link>
+                );
+            };
+            ```
+
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Call custom component to prop</h3>
+
+            Only provide the function name (without `()`), see the [API reference](/sledge-app-core#searchviewmoreresult-keyword-setshowpopupcomponent-)
+
+            > <div className="not-italic">`<CustomComponent>` must be added as a child of another sledge's widget.</div>
+
+            ```tsx {33} showLineNumbers copy
+            'use client';
+
+            import { CustomComponents } from "@sledge-app/core";
+            import { SearchIconWidget } from "@sledge-app/react-instant-search";
+            import SledgeSearchViewMoreResult from "~/components/SledgeSearchViewMoreResult";
+
+            export default function InstantSearchIconWidget() {
+                return (
+                    <SearchIconWidget
+                        size='sm'
+                        onAfterAddWishlist={(state) => {
+                            if (state) {
+                                // if condition is state === true, run your custom code
+                            } else {
+                                // if condition is state === true, run your custom code
+                            }
+                        }}
+                        onAfterRemoveWishlist={(state) => {
+                            if (state) {
+                                // if condition is state === true, run your custom code
+                            } else {
+                                // if condition is state === true, run your custom code
+                            }
+                        }}
+                        onAfterRenderProduct={(state) => {
+                            if (state) {
+                                // if condition is state === true, run your custom code
+                            } else {
+                                // if condition is state === true, run your custom code
+                            }
+                        }}
+                    >
+                        <CustomComponents searchViewMoreResult={SledgeSearchViewMoreResult} />
+                    </SearchIconWidget>
+                );
+            }
+            ```
+        </Steps>
+    </Tab>
+    <Tab>
+        <Steps>
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Build a custom component, e.g:</h3>
+
+            ```html showLineNumbers copy
+            <script>
+                function renderSearchViewMoreResult({ keyword }) {
+                    return `
+                        <a href="/pages/search-result?q=${keyword}" class="sledge-instant-search__icon-widget-button-more">
+                            View More Result
+                        </a>
+                    `;
+                }
+            </script>
+            ```
+
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Call custom component to attribute</h3>
+
+            Only provide the function name (without `()`), see the [API reference](/html-data-attribute#data-render-search-view-more-result)
+
+            > <div className="not-italic">`<div data-component="custom-components">` must be added as a child of another sledge's widget.</div>
+
+            ```html {7} showLineNumbers copy
+            <div
+                data-component="instant-search-icon-widget"
+                data-icon-size="sm"
+            >
+                <div
+                    data-component="custom-components"
+                    data-render-search-view-more-result="renderSearchViewMoreResult"
+                ></div>
+            </div>
+            ```
+        </Steps>
+    </Tab>
+    <Tab>
+        You can place these code in custom code webflow, see the <a href="https://university.webflow.com/lesson/custom-code-embed" target="_blank" className="nx-text-primary-600 nx-underline nx-decoration-from-font [text-underline-position:from-font]">documentation</a> about custom code embed at webflow
+
+        <Steps className="mt-3">
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Build a custom component, e.g:</h3>
+
+            ```html showLineNumbers copy
+            <script>
+                function renderSearchViewMoreResult({ keyword }) {
+                    return `
+                        <a href="/pages/search-result?q=${keyword}" class="sledge-instant-search__icon-widget-button-more">
+                            View More Result
+                        </a>
+                    `;
+                }
+            </script>
+            ```
+
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Call custom component to attribute</h3>
+
+            Only provide the function name (without `()`), see the [API reference](/html-data-attribute#data-render-search-view-more-result)
+
+            > <div className="not-italic">`<div data-component="custom-components">` must be added as a child of another sledge's widget.</div>
+
+            ```html {7} showLineNumbers copy
+            <div
+                data-component="instant-search-icon-widget"
+                data-icon-size="sm"
+            >
+                <div
+                    data-component="custom-components"
+                    data-render-search-view-more-result="renderSearchViewMoreResult"
+                ></div>
+            </div>
+            ```
+        </Steps>
+    </Tab>
+
+</Tabs>
+
+
+## Collection Card
+
+Collection card are component will show on tab collection of search result.<br/><br/>
+
+<Image
+  src={ IMAGE_CC_COLLECTION_CARD }
+  alt="Custom Component - Collection Card"
+  width="1391"
+  height="646"
+/> <br />
+
+<Tabs storageKey="selected-tech-stack"  items={[
+    <div className="flex items-center gap-2">
+        <Hydrogen width={24} height={24} />
+        <span>Hydrogen</span>
+    </div>,
+    <div className="flex items-center gap-2">
+        <NextJs width={24} height={24} />
+        <span>Next.js</span>
+    </div>,
+    <div className="flex items-center gap-2">
+        <Liquid width={24} height={24} />
+        <span>Liquid</span>
+    </div>,
+    <div className="flex items-center gap-2">
+        <Webflow width={24} height={24} />
+        <span>Webflow</span>
+    </div>
+]}>
+    <Tab>
+        This custom components works in these packages:
+        <ul className="mt-2 mb-8">
+            <li className="list-disc list-inside my-2">
+                <span>`@sledge-app/react-instant-search`</span>
+            </li>
+        </ul>
+
+        <Steps>
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Build a custom component, e.g:</h3>
+
+            ```tsx filename="app/SledgeCollectionCard.tsx" showLineNumbers copy
+            import { Link } from "@remix-run/react";
+
+            export default function SledgeCollectionCard({ data }: any) {
+                const { handle, image, title, body_html } = data;
+                return (
+                    <Link to={`/collections/${handle}`}>
+                        <div className="sledge__collection-grid-card">
+                            <div className="sledge__collection-grid-card-image-wrapper">
+                            <div className="sledge__collection-grid-card-image">
+                                <img src={image?.src} alt="sledge-card-image" loading="lazy" />
+                            </div>
+                            </div>
+                            <div className="sledge__collection-grid-card-content">
+                            <div className="sledge__collection-grid-card-content-title">
+                                {title}
+                            </div>
+                            <div
+                                className="sledge__collection-grid-card-content-description"
+                                dangerouslySetInnerHTML={{
+                                __html: body_html,
+                                }}
+                            />
+                            </div>
+                        </div>
+                    </Link>
+                );
+            }
+
+            ```
+
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Call custom component to prop</h3>
+
+            Only provide the function name (without `()`), see the [API reference](/sledge-app-core#collectioncard-data-)
+
+            > <div className="not-italic">`<CustomComponent>` must be added as a child of another sledge's widget.</div>
+
+            ```tsx {31} showLineNumbers copy
+            import { CustomComponents } from "@sledge-app/core";
+            import { SearchResultWidget } from "@sledge-app/react-instant-search";
+            import SledgeCollectionCard from "app/SledgeCollectionCard";
+
+            export default function SearchResultPage({ data }: { data?: any }) {
+                return (
+                    <SearchResultWidget
+                        query={{
+                            keyword: "q",
+                        }}
+                    >
+                        <CustomComponents collectionCard={SledgeCollectionCard} />
+                    </SearchResultWidget>
+                );
+            }
+            ```
+        </Steps>
+    </Tab>
+    <Tab>
+        This custom components works in these packages:
+        <ul className="mt-2 mb-8">
+            <li className="list-disc list-inside my-2">
+                <span>`@sledge-app/react-instant-search`</span>
+            </li>
+        </ul>
+
+        <Steps>
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Build a custom component, e.g:</h3>
+
+            ```tsx filename="app/SledgeCollectionCard.tsx" showLineNumbers copy
+            'use client';
+
+            import { Link } from "next/link";
+
+            export default function SledgeCollectionCard({ data }: any) {
+                const { handle, image, title, body_html } = data;
+                return (
+                    <Link href={`/collections/${handle}`} >
+                        <div className="sledge__collection-grid-card">
+                            <div className="sledge__collection-grid-card-image-wrapper">
+                            <div className="sledge__collection-grid-card-image">
+                                <img src={image?.src} alt="sledge-card-image" loading="lazy" />
+                            </div>
+                            </div>
+                            <div className="sledge__collection-grid-card-content">
+                            <div className="sledge__collection-grid-card-content-title">
+                                {title}
+                            </div>
+                            <div
+                                className="sledge__collection-grid-card-content-description"
+                                dangerouslySetInnerHTML={{
+                                __html: body_html,
+                                }}
+                            />
+                            </div>
+                        </div>
+                    </Link>
+                );
+            }
+            ```
+
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Call custom component to prop</h3>
+
+            Only provide the function name (without `()`), see the [API reference](/sledge-app-core#pagecard-data-)
+
+            > <div className="not-italic">`<CustomComponent>` must be added as a child of another sledge's widget.</div>
+
+            ```tsx {33} showLineNumbers copy
+            import { CustomComponents } from "@sledge-app/core";
+            import { SearchResultWidget } from "@sledge-app/react-instant-search";
+            import SledgeCollectionCard from "app/SledgeCollectionCard";
+            
+            export default function SearchResultPage({ data }: { data?: any }) {
+                return (
+                    <SearchResultWidget
+                        query={{
+                            keyword: "q",
+                        }}
+                    >
+                        <CustomComponents collectionCard={SledgeCollectionCard} />
+                    </SearchResultWidget>
+                );
+            }
+            ```
+        </Steps>
+    </Tab>
+    <Tab>
+        This custom components works on these widgets for attributes `[data-component]`:
+        <ul className="mt-2 mb-8">
+            <li className="list-disc list-inside my-2">
+                <span>`instant-search-result-widget`</span>
+            </li>
+        </ul>
+
+        <Steps>
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Build a custom component, e.g:</h3>
+
+            ```html showLineNumbers copy
+            <script>
+                function renderCollectionCard({ data }) {
+                    const { id, title, body_html, handle, image } = data;
+
+                    return `
+                    <a href="/collections/${handle}">
+                        <div class="sledge__collection-grid-card">
+                            <div class="sledge__collection-grid-card-image-wrapper">
+                                <div class="sledge__collection-grid-card-image">
+                                    <img src="${image?.src || `https://sledge-api-preprod.offstack.io/img/blank-image.png`}" alt="sledge-card-image" loading="lazy" />
+                                </div>
+                            </div>
+                            <div class="sledge__collection-grid-card-content">
+                                <div class="sledge__collection-grid-card-content-title">${title}</div>
+                                ${body_html ? `<div class="sledge__collection-grid-card-content-description">${body_html}</div>` : ''}
+                            </div>
+                        </div>
+                    </a>`;
+                }
+            </script>
+            ```
+
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Call custom component to attribute</h3>
+
+            Only provide the function name (without `()`), see the [API reference](/html-data-attribute#data-render-collection-card)
+
+            > <div className="not-italic">`<div data-component="custom-components">` must be added as a child of another sledge's widget.</div>
+
+            ```html {7} showLineNumbers copy
+            <div data-component="instant-search-result-widget" >
+                <div
+                    data-component="custom-components"
+                    data-render-collection-card="renderCollectionCard"
+                ></div>
+            </div>
+            ```
+        </Steps>
+    </Tab>
+    <Tab>
+        You can place these code in custom code webflow, see the <a href="https://university.webflow.com/lesson/custom-code-embed" target="_blank" className="nx-text-primary-600 nx-underline nx-decoration-from-font [text-underline-position:from-font]">documentation</a> about custom code embed at webflow.
+
+        This custom components works on these widgets for attributes `[data-component]`:
+        <ul className="mt-2 mb-8">
+            <li className="list-disc list-inside my-2">
+                <span>`instant-search-result-widget`</span>
+            </li>
+        </ul>
+
+        <Steps className="mt-3">
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Build a custom component, e.g:</h3>
+
+            ```html showLineNumbers copy
+            <script>
+                function renderCollectionCard({ data }) {
+                    const { id, title, body_html, handle, image } = data;
+
+                    return `
+                    <a href="/collections/${handle}">
+                        <div class="sledge__collection-grid-card">
+                            <div class="sledge__collection-grid-card-image-wrapper">
+                                <div class="sledge__collection-grid-card-image">
+                                    <img src="${image?.src || `https://sledge-api-preprod.offstack.io/img/blank-image.png`}" alt="sledge-card-image" loading="lazy" />
+                                </div>
+                            </div>
+                            <div class="sledge__collection-grid-card-content">
+                                <div class="sledge__collection-grid-card-content-title">${title}</div>
+                                ${body_html ? `<div class="sledge__collection-grid-card-content-description">${body_html}</div>` : ''}
+                            </div>
+                        </div>
+                    </a>`;
+                }
+            </script>
+            ```
+
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Call custom component to attribute</h3>
+
+            Only provide the function name (without `()`), see the [API reference](/html-data-attribute#data-render-collection-card)
+
+            > <div className="not-italic">`<div data-component="custom-components">` must be added as a child of another sledge's widget.</div>
+
+            ```html {7} showLineNumbers copy
+            <div
+                data-component="instant-search-result-widget"
+                data-icon-size="sm"
+            >
+                <div
+                    data-component="custom-components"
+                    data-render-collection-card="renderCollectionCard"
+                ></div>
+            </div>
+            ```
+        </Steps>
+    </Tab>
+
+</Tabs>
+
+
+## Page Card
+
+Page card are component will show on tab page of search result.<br/><br/>
+
+<Image
+  src={ IMAGE_CC_PAGE_CARD }
+  alt="Custom Component - Page Card"
+  width="1391"
+  height="646"
+/> <br />
+
+<Tabs storageKey="selected-tech-stack"  items={[
+    <div className="flex items-center gap-2">
+        <Hydrogen width={24} height={24} />
+        <span>Hydrogen</span>
+    </div>,
+    <div className="flex items-center gap-2">
+        <NextJs width={24} height={24} />
+        <span>Next.js</span>
+    </div>,
+    <div className="flex items-center gap-2">
+        <Liquid width={24} height={24} />
+        <span>Liquid</span>
+    </div>,
+    <div className="flex items-center gap-2">
+        <Webflow width={24} height={24} />
+        <span>Webflow</span>
+    </div>
+]}>
+    <Tab>
+        This custom components works in these packages:
+        <ul className="mt-2 mb-8">
+            <li className="list-disc list-inside my-2">
+                <span>`@sledge-app/react-instant-search`</span>
+            </li>
+        </ul>
+
+        <Steps>
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Build a custom component, e.g:</h3>
+
+            ```tsx filename="app/SledgePageCard.tsx" showLineNumbers copy
+            import { Link } from "@remix-run/react";
+
+            export default function SledgePageCard({ data }: any) {
+                const { id, title, body_html, handle, image } = data;
+                return (
+                    <Link to={`/pages/${handle}`}>
+                        <div className="sledge__page-grid-card">
+                            <div className="sledge__page-grid-card-image-wrapper">
+                                <div className="sledge__page-grid-card-image">
+                                    <img src="${image?.src}" alt="sledge-card-image" loading="lazy" />
+                                </div>
+                            </div>
+                            <div className="sledge__page-grid-card-content">
+                                <div className="sledge__page-grid-card-content-title">${title}</div>
+                                <div
+                                    className="sledge__page-grid-card-content-description"
+                                    dangerouslySetInnerHTML={{
+                                        __html: body_html,
+                                    }}
+                                />
+                            </div>
+                        </div>
+                    </Link>
+                );
+            }
+
+            ```
+
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Call custom component to prop</h3>
+
+            Only provide the function name (without `()`), see the [API reference](/sledge-app-core#pagecard-data-)
+
+            > <div className="not-italic">`<CustomComponent>` must be added as a child of another sledge's widget.</div>
+
+            ```tsx {31} showLineNumbers copy
+            import { CustomComponents } from "@sledge-app/core";
+            import { SearchResultWidget } from "@sledge-app/react-instant-search";
+            import SledgePageCard from "app/SledgePageCard";
+
+            export default function SearchResultPage({ data }: { data?: any }) {
+                return (
+                    <SearchResultWidget
+                        query={{
+                            keyword: "q",
+                        }}
+                    >
+                        <CustomComponents pageCard={SledgePageCard} />
+                    </SearchResultWidget>
+                );
+            }
+            ```
+        </Steps>
+    </Tab>
+    <Tab>
+        This custom components works in these packages:
+        <ul className="mt-2 mb-8">
+            <li className="list-disc list-inside my-2">
+                <span>`@sledge-app/react-instant-search`</span>
+            </li>
+        </ul>
+
+        <Steps>
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Build a custom component, e.g:</h3>
+
+            ```tsx filename="app/SledgePageCard.tsx" showLineNumbers copy
+            'use client';
+
+            import { Link } from "next/link";
+
+            export default function SledgePageCard({ data }: any) {
+                const { handle, image, title, body_html } = data;
+                return (
+                    <Link to={`/pages/${handle}`}>
+                        <div className="sledge__page-grid-card">
+                            <div className="sledge__page-grid-card-image-wrapper">
+                                <div className="sledge__page-grid-card-image">
+                                    <img src="${image?.src}" alt="sledge-card-image" loading="lazy" />
+                                </div>
+                            </div>
+                            <div className="sledge__page-grid-card-content">
+                                <div className="sledge__page-grid-card-content-title">${title}</div>
+                                <div
+                                    className="sledge__page-grid-card-content-description"
+                                    dangerouslySetInnerHTML={{
+                                        __html: body_html,
+                                    }}
+                                />
+                            </div>
+                        </div>
+                    </Link>
+                );
+            }
+            ```
+
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Call custom component to prop</h3>
+
+            Only provide the function name (without `()`), see the [API reference](/sledge-app-core#pagecard-data-)
+
+            > <div className="not-italic">`<CustomComponent>` must be added as a child of another sledge's widget.</div>
+
+            ```tsx {33} showLineNumbers copy
+            import { CustomComponents } from "@sledge-app/core";
+            import { SearchResultWidget } from "@sledge-app/react-instant-search";
+            import SledgePageCard from "app/SledgePageCard";
+            
+            export default function SearchResultPage({ data }: { data?: any }) {
+                return (
+                    <SearchResultWidget
+                        query={{
+                            keyword: "q",
+                        }}
+                    >
+                        <CustomComponents pageCard={SledgePageCard} />
+                    </SearchResultWidget>
+                );
+            }
+            ```
+        </Steps>
+    </Tab>
+    <Tab>
+        This custom components works on these widgets for attributes `[data-component]`:
+        <ul className="mt-2 mb-8">
+            <li className="list-disc list-inside my-2">
+                <span>`instant-search-result-widget`</span>
+            </li>
+        </ul>
+
+        <Steps>
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Build a custom component, e.g:</h3>
+
+            ```html showLineNumbers copy
+            <script>
+                function renderPageCard({ data }) {
+                    const { id, title, body_html, handle, image } = data;
+
+                    return `
+                        <a href="/pages/${handle}">
+                            <div class="sledge__page-grid-card">
+                                <div class="sledge__page-grid-card-image-wrapper">
+                                    <div class="sledge__page-grid-card-image">
+                                        <img src="${image?.src}" alt="sledge-card-image" loading="lazy" />
+                                    </div>
+                                </div>
+                                <div class="sledge__page-grid-card-content">
+                                    <div class="sledge__page-grid-card-content-title">${title}</div>
+                                    ${body_html ? `<div class="sledge__page-grid-card-content-description">${body_html}</div>` : ''}
+                                </div>
+                            </div>
+                        </a>`;
+                }
+            </script>
+            ```
+
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Call custom component to attribute</h3>
+
+            Only provide the function name (without `()`), see the [API reference](/html-data-attribute#data-render-page-card)
+
+            > <div className="not-italic">`<div data-component="custom-components">` must be added as a child of another sledge's widget.</div>
+
+            ```html {7} showLineNumbers copy
+            <div data-component="instant-search-result-widget" >
+                <div
+                    data-component="custom-components"
+                    data-render-page-card="renderPageCard"
+                ></div>
+            </div>
+            ```
+        </Steps>
+    </Tab>
+    <Tab>
+        You can place these code in custom code webflow, see the <a href="https://university.webflow.com/lesson/custom-code-embed" target="_blank" className="nx-text-primary-600 nx-underline nx-decoration-from-font [text-underline-position:from-font]">documentation</a> about custom code embed at webflow.
+
+        This custom components works on these widgets for attributes `[data-component]`:
+        <ul className="mt-2 mb-8">
+            <li className="list-disc list-inside my-2">
+                <span>`instant-search-result-widget`</span>
+            </li>
+        </ul>
+
+        <Steps className="mt-3">
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Build a custom component, e.g:</h3>
+
+            ```html showLineNumbers copy
+            <script>
+                function renderPageCard({ data }) {
+                    const { id, title, body_html, handle, image } = data;
+
+                    return `
+                    <a href="/pages/${handle}">
+                        <div class="sledge__page-grid-card">
+                            <div class="sledge__page-grid-card-image-wrapper">
+                                <div class="sledge__page-grid-card-image">
+                                    <img src="${image?.src}" alt="sledge-card-image" loading="lazy" />
+                                </div>
+                            </div>
+                            <div class="sledge__page-grid-card-content">
+                                <div class="sledge__page-grid-card-content-title">${title}</div>
+                                ${body_html ? `<div class="sledge__page-grid-card-content-description">${body_html}</div>` : ''}
+                            </div>
+                        </div>
+                    </a>`;
+                }
+            </script>
+            ```
+
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Call custom component to attribute</h3>
+
+            Only provide the function name (without `()`), see the [API reference](/html-data-attribute#data-render-page-card)
+
+            > <div className="not-italic">`<div data-component="custom-components">` must be added as a child of another sledge's widget.</div>
+
+            ```html {7} showLineNumbers copy
+            <div
+                data-component="instant-search-result-widget"
+                data-icon-size="sm"
+            >
+                <div
+                    data-component="custom-components"
+                    data-render-page-card="renderPageCard"
+                ></div>
+            </div>
+            ```
+        </Steps>
+    </Tab>
+
+</Tabs>
+
+
+
+## Blog Card
+
+Blog card are component will show on tab blog of search result.<br/><br/>
+
+<Image
+  src={ IMAGE_CC_BLOG_CARD }
+  alt="Custom Component - Blog Card"
+  width="500"
+  height="400"
+/> <br />
+
+<Tabs storageKey="selected-tech-stack"  items={[
+    <div className="flex items-center gap-2">
+        <Hydrogen width={24} height={24} />
+        <span>Hydrogen</span>
+    </div>,
+    <div className="flex items-center gap-2">
+        <NextJs width={24} height={24} />
+        <span>Next.js</span>
+    </div>,
+    <div className="flex items-center gap-2">
+        <Liquid width={24} height={24} />
+        <span>Liquid</span>
+    </div>,
+    <div className="flex items-center gap-2">
+        <Webflow width={24} height={24} />
+        <span>Webflow</span>
+    </div>
+]}>
+    <Tab>
+        This custom components works in these packages:
+        <ul className="mt-2 mb-8">
+            <li className="list-disc list-inside my-2">
+                <span>`@sledge-app/react-instant-search`</span>
+            </li>
+        </ul>
+
+        <Steps>
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Build a custom component, e.g:</h3>
+
+            ```tsx filename="app/SledgeBlogCard.tsx" showLineNumbers copy
+            import { Link } from "@remix-run/react";
+
+            export const SledgeBlogCard = ({data}) => {
+                const { title, created_at, url, image } = item;
+
+                return (
+                    <div className="sledge__blog-grid-card" key={index}>
+                        <div className="sledge__blog-grid-content">
+                            <div className="sledge__blog-grid-card-image">
+                                <a href={url}>
+                                    <img src={image?.src} alt="sledge-card-image" loading="lazy" />
+                                </a>
+                            </div>
+                            <div className="sledge__blog-grid-card-desc">
+                                <a href={url}>
+                                    <div className="sledge__blog-grid-card-title">{title}</div>
+                                </a>
+                                {created_at ? <div className="sledge__blog-grid-badge-vendor">{convertDate(created_at)}</div> : null}
+                            </div>
+                        </div>
+                        <div className="sledge__blog-grid-button-wrapper">
+                            <a href={url}>
+                                <Button type="button" colorType="light">
+                                    <NoteIcon width={16} height={16} color="#000000" />
+                                    <span>View Blog</span>
+                                </Button>
+                            </a>
+                        </div>
+                    </div>
+                );
+            };
+
+            ```
+
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Call custom component to prop</h3>
+
+            Only provide the function name (without `()`), see the [API reference](/sledge-app-core#blogcard-data-)
+
+            > <div className="not-italic">`<CustomComponent>` must be added as a child of another sledge's widget.</div>
+
+            ```tsx {31} showLineNumbers copy
+            import { CustomComponents } from "@sledge-app/core";
+            import { SearchResultWidget } from "@sledge-app/react-instant-search";
+            import SledgeBlogCard from "app/SledgeBlogCard";
+
+            export default function SearchResultPage({ data }: { data?: any }) {
+                return (
+                    <SearchResultWidget
+                        query={{
+                            keyword: "q",
+                        }}
+                    >
+                        <CustomComponents blogCard={SledgeBlogCard} />
+                    </SearchResultWidget>
+                );
+            }
+            ```
+        </Steps>
+    </Tab>
+    <Tab>
+        This custom components works in these packages:
+        <ul className="mt-2 mb-8">
+            <li className="list-disc list-inside my-2">
+                <span>`@sledge-app/react-instant-search`</span>
+            </li>
+        </ul>
+
+        <Steps>
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Build a custom component, e.g:</h3>
+
+            ```tsx filename="app/SledgeBlogCard.tsx" showLineNumbers copy
+            'use client';
+
+            import { Link } from "next/link";
+
+            export const SledgeBlogCard = ({data}) => {
+                const {title, image, created_at, handle} = data;
+
+                return (
+                    <div className="sledge__blog-grid-card" key={index}>
+                        <div className="sledge__blog-grid-content">
+                            <div className="sledge__blog-grid-card-image">
+                                <a href={url}>
+                                    <img src={image?.src} alt="sledge-card-image" loading="lazy" />
+                                </a>
+                            </div>
+                            <div className="sledge__blog-grid-card-desc">
+                                <a href={url}>
+                                    <div className="sledge__blog-grid-card-title">{title}</div>
+                                </a>
+                                {created_at ? <div className="sledge__blog-grid-badge-vendor">{convertDate(created_at)}</div> : null}
+                            </div>
+                        </div>
+                        <div className="sledge__blog-grid-button-wrapper">
+                            <a href={url}>
+                                <Button type="button" colorType="light">
+                                    <NoteIcon width={16} height={16} color="#000000" />
+                                    <span>View Blog</span>
+                                </Button>
+                            </a>
+                        </div>
+                    </div>
+                );
+            };
+            ```
+
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Call custom component to prop</h3>
+
+            Only provide the function name (without `()`), see the [API reference](/sledge-app-core#blogcard-data-)
+
+            > <div className="not-italic">`<CustomComponent>` must be added as a child of another sledge's widget.</div>
+
+            ```tsx {33} showLineNumbers copy
+            import { CustomComponents } from "@sledge-app/core";
+            import { SearchResultWidget } from "@sledge-app/react-instant-search";
+            import SledgeBlogCard from "app/SledgeBlogCard";
+            
+            export default function SearchResultPage({ data }: { data?: any }) {
+                return (
+                    <SearchResultWidget
+                        query={{
+                            keyword: "q",
+                        }}
+                    >
+                        <CustomComponents blogCard={SledgeBlogCard} />
+                    </SearchResultWidget>
+                );
+            }
+            ```
+        </Steps>
+    </Tab>
+    <Tab>
+        This custom components works on these widgets for attributes `[data-component]`:
+        <ul className="mt-2 mb-8">
+            <li className="list-disc list-inside my-2">
+                <span>`instant-search-result-widget`</span>
+            </li>
+        </ul>
+
+        <Steps>
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Build a custom component, e.g:</h3>
+
+            ```html showLineNumbers copy
+            <script>
+                function renderBlogCard({ data }) {
+                    const { id, title, created_at, handle, image } = data;
+
+                    return `
+                        <div class="relative h-full flex flex-col justify-between border-[0.9px] border-solid border-dark5 rounded-[21.593px]">
+                        <div>
+                            <a href="/blogs/${handle}" class="w-full block">
+                                <img class="h-[200px] w-full rounded-t-[21.593px] object-cover" src="${image?.src || `https://sledge-api-preprod.offstack.io/img/blank-image.png`}" alt="sledge-card-image" loading="lazy" />
+                            </a>
+                        </div>
+                        <div class="mt-[16px] px-[16px]">
+                            <a href="/blogs/${handle}">
+                                <div class="text-white text-[21.593px] font-bold leading-[25.912px]">${title}</div>
+                            </a>
+                        </div>
+                        <div class="mt-[8px] px-[16px] pb-[16px]">
+                            ${
+                            created_at
+                                ? `<div class="w-fit px-[9px] py-[3.6px] rounded-[323.9px] border-[0.9px] border-solid border-dark3 text-dark4 font-inter text-[10.797px] leading-[17.275px] tracking-[-0.216px]">${new Date(created_at).toLocaleString('en-US', {
+                                        timeZone: 'Asia/Jakarta',
+                                        year: 'numeric',
+                                        month: 'numeric',
+                                        day: 'numeric'
+                                    })}</div>`
+                                : ''
+                            }
+                            
+                            <a href="/blogs/${handle}" class="group/blog-button product-form__submit button relative z-10 inline-flex mt-[16px] items-center py-[11px] px-[16.33px] border-[0.9px] border-solid border-dark3 rounded-[323.9px] hover:bg-yellow disabled:bg-dark10 active:bg-yellow2 text-yellow hover:text-black active:text-black disabled:text-dark4 transition duration-200 w-full justify-center">
+                            <span class="sledge-icon__note">
+                                <svg
+                                    width="16"
+                                    height="16"
+                                    viewBox="0 0 17 16"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="group-hover/blog-button:fill-black fill-yellow group-disabled/blog-button:fill-dark4 group-active/blog-button:fill-black"
+                                >
+                                    <g id="vuesax/bold/note-2">
+                                        <path
+                                        id="Vector"
+                                        d="M8.95178 13.3046C9.13494 13.3473 9.15172 13.5871 8.97332 13.6466L7.91998 13.9933C5.27332 14.8466 3.87998 14.1333 3.01998 11.4866L2.16665 8.85328C1.31332 6.20661 2.01998 4.80661 4.66665 3.95328L4.67731 3.94975C5.08018 3.81633 5.48102 4.22359 5.37901 4.63553C5.37264 4.66126 5.3663 4.68718 5.35998 4.71328L4.70665 7.50661C3.97332 10.6466 5.04665 12.3799 8.18665 13.1266L8.95178 13.3046Z"
+                                        fill="#000000"
+                                        class="group-hover/blog-button:fill-black fill-yellow group-disabled/blog-button:fill-dark4 group-active/blog-button:fill-black"
+                                        ></path>
+                                        <path
+                                        id="Vector_2"
+                                        d="M11.9467 2.14033L10.8334 1.88033C8.6067 1.35366 7.28004 1.787 6.50004 3.40033C6.30004 3.807 6.14004 4.30033 6.00671 4.867L5.35337 7.66033C4.70004 10.447 5.56004 11.8203 8.34004 12.4803L9.46004 12.747C9.8467 12.8403 10.2067 12.9003 10.54 12.927C12.62 13.127 13.7267 12.1537 14.2867 9.747L14.94 6.96033C15.5934 4.17366 14.74 2.79366 11.9467 2.14033ZM10.6934 8.887C10.6334 9.11366 10.4334 9.26033 10.2067 9.26033C10.1667 9.26033 10.1267 9.25366 10.08 9.247L8.14004 8.75366C7.87337 8.687 7.71337 8.41366 7.78004 8.147C7.84671 7.88033 8.12004 7.72033 8.38671 7.787L10.3267 8.28033C10.6 8.347 10.76 8.62033 10.6934 8.887ZM12.6467 6.63366C12.5867 6.86033 12.3867 7.007 12.16 7.007C12.12 7.007 12.08 7.00033 12.0334 6.99366L8.80004 6.17366C8.53337 6.107 8.37337 5.83366 8.44004 5.567C8.50671 5.30033 8.78004 5.14033 9.04671 5.207L12.28 6.027C12.5534 6.087 12.7134 6.36033 12.6467 6.63366Z"
+                                        class="group-hover/blog-button:fill-black fill-yellow group-disabled/blog-button:fill-dark4 group-active/blog-button:fill-black"
+                                        fill="#000000"
+                                        ></path>
+                                    </g>
+                                </svg>
+                            </span>
+                            <span class="font-inter text-[12px] lg:text-[14px] font-semibold leading-[15.4px] tracking-[-0.56px] ml-[8px] text-yellow group-hover/blog-button:text-black">View Blog</span>
+                            </a>
+                        </div>
+                        </div>
+                    `;
+                }
+            </script>
+            ```
+
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Call custom component to attribute</h3>
+
+            Only provide the function name (without `()`), see the [API reference](/html-data-attribute#data-render-blog-card)
+
+            > <div className="not-italic">`<div data-component="custom-components">` must be added as a child of another sledge's widget.</div>
+
+            ```html {7} showLineNumbers copy
+            <div data-component="instant-search-result-widget" >
+                <div
+                    data-component="custom-components"
+                    data-render-blog-card="renderBlogCard"
+                ></div>
+            </div>
+            ```
+        </Steps>
+    </Tab>
+    <Tab>
+        You can place these code in custom code webflow, see the <a href="https://university.webflow.com/lesson/custom-code-embed" target="_blank" className="nx-text-primary-600 nx-underline nx-decoration-from-font [text-underline-position:from-font]">documentation</a> about custom code embed at webflow.
+
+        This custom components works on these widgets for attributes `[data-component]`:
+        <ul className="mt-2 mb-8">
+            <li className="list-disc list-inside my-2">
+                <span>`instant-search-result-widget`</span>
+            </li>
+        </ul>
+
+        <Steps className="mt-3">
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Build a custom component, e.g:</h3>
+
+            ```html showLineNumbers copy
+            <script>
+                function renderBlogCard({ data }) {
+                    const { id, title, created_at, handle, image } = data;
+
+                    return `
+                        <div class="relative h-full flex flex-col justify-between border-[0.9px] border-solid border-dark5 rounded-[21.593px]">
+                        <div>
+                            <a href="/blogs/${handle}" class="w-full block">
+                                <img class="h-[200px] w-full rounded-t-[21.593px] object-cover" src="${image?.src || `https://sledge-api-preprod.offstack.io/img/blank-image.png`}" alt="sledge-card-image" loading="lazy" />
+                            </a>
+                        </div>
+                        <div class="mt-[16px] px-[16px]">
+                            <a href="/blogs/${handle}">
+                                <div class="text-white text-[21.593px] font-bold leading-[25.912px]">${title}</div>
+                            </a>
+                        </div>
+                        <div class="mt-[8px] px-[16px] pb-[16px]">
+                            ${
+                            created_at
+                                ? `<div class="w-fit px-[9px] py-[3.6px] rounded-[323.9px] border-[0.9px] border-solid border-dark3 text-dark4 font-inter text-[10.797px] leading-[17.275px] tracking-[-0.216px]">${new Date(created_at).toLocaleString('en-US', {
+                                        timeZone: 'Asia/Jakarta',
+                                        year: 'numeric',
+                                        month: 'numeric',
+                                        day: 'numeric'
+                                    })}</div>`
+                                : ''
+                            }
+                            
+                            <a href="/blogs/${handle}" class="group/blog-button product-form__submit button relative z-10 inline-flex mt-[16px] items-center py-[11px] px-[16.33px] border-[0.9px] border-solid border-dark3 rounded-[323.9px] hover:bg-yellow disabled:bg-dark10 active:bg-yellow2 text-yellow hover:text-black active:text-black disabled:text-dark4 transition duration-200 w-full justify-center">
+                            <span class="sledge-icon__note">
+                                <svg
+                                    width="16"
+                                    height="16"
+                                    viewBox="0 0 17 16"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="group-hover/blog-button:fill-black fill-yellow group-disabled/blog-button:fill-dark4 group-active/blog-button:fill-black"
+                                >
+                                    <g id="vuesax/bold/note-2">
+                                        <path
+                                        id="Vector"
+                                        d="M8.95178 13.3046C9.13494 13.3473 9.15172 13.5871 8.97332 13.6466L7.91998 13.9933C5.27332 14.8466 3.87998 14.1333 3.01998 11.4866L2.16665 8.85328C1.31332 6.20661 2.01998 4.80661 4.66665 3.95328L4.67731 3.94975C5.08018 3.81633 5.48102 4.22359 5.37901 4.63553C5.37264 4.66126 5.3663 4.68718 5.35998 4.71328L4.70665 7.50661C3.97332 10.6466 5.04665 12.3799 8.18665 13.1266L8.95178 13.3046Z"
+                                        fill="#000000"
+                                        class="group-hover/blog-button:fill-black fill-yellow group-disabled/blog-button:fill-dark4 group-active/blog-button:fill-black"
+                                        ></path>
+                                        <path
+                                        id="Vector_2"
+                                        d="M11.9467 2.14033L10.8334 1.88033C8.6067 1.35366 7.28004 1.787 6.50004 3.40033C6.30004 3.807 6.14004 4.30033 6.00671 4.867L5.35337 7.66033C4.70004 10.447 5.56004 11.8203 8.34004 12.4803L9.46004 12.747C9.8467 12.8403 10.2067 12.9003 10.54 12.927C12.62 13.127 13.7267 12.1537 14.2867 9.747L14.94 6.96033C15.5934 4.17366 14.74 2.79366 11.9467 2.14033ZM10.6934 8.887C10.6334 9.11366 10.4334 9.26033 10.2067 9.26033C10.1667 9.26033 10.1267 9.25366 10.08 9.247L8.14004 8.75366C7.87337 8.687 7.71337 8.41366 7.78004 8.147C7.84671 7.88033 8.12004 7.72033 8.38671 7.787L10.3267 8.28033C10.6 8.347 10.76 8.62033 10.6934 8.887ZM12.6467 6.63366C12.5867 6.86033 12.3867 7.007 12.16 7.007C12.12 7.007 12.08 7.00033 12.0334 6.99366L8.80004 6.17366C8.53337 6.107 8.37337 5.83366 8.44004 5.567C8.50671 5.30033 8.78004 5.14033 9.04671 5.207L12.28 6.027C12.5534 6.087 12.7134 6.36033 12.6467 6.63366Z"
+                                        class="group-hover/blog-button:fill-black fill-yellow group-disabled/blog-button:fill-dark4 group-active/blog-button:fill-black"
+                                        fill="#000000"
+                                        ></path>
+                                    </g>
+                                </svg>
+                            </span>
+                            <span class="font-inter text-[12px] lg:text-[14px] font-semibold leading-[15.4px] tracking-[-0.56px] ml-[8px] text-yellow group-hover/blog-button:text-black">View Blog</span>
+                            </a>
+                        </div>
+                        </div>
+                    `;
+                }
+            </script>
+            ```
+
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Call custom component to attribute</h3>
+
+            Only provide the function name (without `()`), see the [API reference](/html-data-attribute#data-render-blog-card)
+
+            > <div className="not-italic">`<div data-component="custom-components">` must be added as a child of another sledge's widget.</div>
+
+            ```html {7} showLineNumbers copy
+            <div
+                data-component="instant-search-result-widget"
+                data-icon-size="sm"
+            >
+                <div
+                    data-component="custom-components"
+                    data-render-blog-card="renderBlogCard"
+                ></div>
+            </div>
+            ```
+        </Steps>
+    </Tab>
+
+</Tabs>
+
+
+
+## Article Card
+
+Article card are component will show on tab article of search result.<br/><br/>
+
+<Image
+  src={ IMAGE_CC_ARTICLE_CARD }
+  alt="Custom Component - Article Card"
+  width="500"
+  height="400"
+/> <br />
+
+<Tabs storageKey="selected-tech-stack"  items={[
+    <div className="flex items-center gap-2">
+        <Hydrogen width={24} height={24} />
+        <span>Hydrogen</span>
+    </div>,
+    <div className="flex items-center gap-2">
+        <NextJs width={24} height={24} />
+        <span>Next.js</span>
+    </div>,
+    <div className="flex items-center gap-2">
+        <Liquid width={24} height={24} />
+        <span>Liquid</span>
+    </div>,
+    <div className="flex items-center gap-2">
+        <Webflow width={24} height={24} />
+        <span>Webflow</span>
+    </div>
+]}>
+    <Tab>
+        This custom components works in these packages:
+        <ul className="mt-2 mb-8">
+            <li className="list-disc list-inside my-2">
+                <span>`@sledge-app/react-instant-search`</span>
+            </li>
+        </ul>
+
+        <Steps>
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Build a custom component, e.g:</h3>
+
+            ```tsx filename="app/SledgeArticleCard.tsx" showLineNumbers copy
+            import { Link } from "@remix-run/react";
+
+            export const SledgeArticleCard = ({data}) => {
+                const {
+                    title,
+                    image,
+                    body_html,
+                    summary_html,
+                    published_at,
+                    blog_handle,
+                    handle,
+                } = data;
+
+                return (
+                    <div className="sledge__article-grid-card" key={index}>
+                        <div className="sledge__article-grid-content">
+                            <div className="sledge__article-grid-card-image">
+                                <a href={url}>
+                                    <img src={image?.src} alt="sledge-card-image" loading="lazy" />
+                                </a>
+                            </div>
+                            <div className="sledge__article-grid-card-desc">
+                                <a href={url}>
+                                    <div className="sledge__article-grid-card-title">{title}</div>
+                                </a>
+                                {created_at ? <div className="sledge__article-grid-badge-vendor">{convertDate(created_at)}</div> : null}
+                                {summary_html ? <div className="sledge__article-grid-card-text" dangerouslySetInnerHTML={{ __html: summary_html }}></div> : null}
+                            </div>
+                        </div>
+                        <div className="sledge__article-grid-button-wrapper">
+                            <a href={url}>
+                                <Button type="button" colorType="light">
+                                    <NoteIcon width={16} height={16} color="#000000" />
+                                    <span>View Article</span>
+                                </Button>
+                            </a>
+                        </div>
+                    </div>
+                )
+            };
+            ```
+
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Call custom component to prop</h3>
+
+            Only provide the function name (without `()`), see the [API reference](/sledge-app-core#articlecard-data-)
+
+            > <div className="not-italic">`<CustomComponent>` must be added as a child of another sledge's widget.</div>
+
+            ```tsx {31} showLineNumbers copy
+            import { CustomComponents } from "@sledge-app/core";
+            import { SearchResultWidget } from "@sledge-app/react-instant-search";
+            import SledgeArticleCard from "app/SledgeArticleCard";
+
+            export default function SearchResultPage({ data }: { data?: any }) {
+                return (
+                    <SearchResultWidget
+                        query={{
+                            keyword: "q",
+                        }}
+                    >
+                        <CustomComponents articlecard={SledgeArticleCard} />
+                    </SearchResultWidget>
+                );
+            }
+            ```
+        </Steps>
+    </Tab>
+    <Tab>
+        This custom components works in these packages:
+        <ul className="mt-2 mb-8">
+            <li className="list-disc list-inside my-2">
+                <span>`@sledge-app/react-instant-search`</span>
+            </li>
+        </ul>
+
+        <Steps>
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Build a custom component, e.g:</h3>
+
+            ```tsx filename="app/SledgeArticleCard.tsx" showLineNumbers copy
+            'use client';
+
+            import { Link } from "next/link";
+
+            export const SledgeArticleCard = ({data}) => {
+                const {
+                    title,
+                    image,
+                    body_html,
+                    summary_html,
+                    published_at,
+                    blog_handle,
+                    handle,
+                } = data;
+
+                return (
+                    <div className="sledge__article-grid-card" key={index}>
+                        <div className="sledge__article-grid-content">
+                            <div className="sledge__article-grid-card-image">
+                                <a href={url}>
+                                    <img src={image?.src} alt="sledge-card-image" loading="lazy" />
+                                </a>
+                            </div>
+                            <div className="sledge__article-grid-card-desc">
+                                <a href={url}>
+                                    <div className="sledge__article-grid-card-title">{title}</div>
+                                </a>
+                                {created_at ? <div className="sledge__article-grid-badge-vendor">{convertDate(created_at)}</div> : null}
+                                {summary_html ? <div className="sledge__article-grid-card-text" dangerouslySetInnerHTML={{ __html: summary_html }}></div> : null}
+                            </div>
+                        </div>
+                        <div className="sledge__article-grid-button-wrapper">
+                            <a href={url}>
+                                <Button type="button" colorType="light">
+                                    <NoteIcon width={16} height={16} color="#000000" />
+                                    <span>View Article</span>
+                                </Button>
+                            </a>
+                        </div>
+                    </div>
+                )
+
+            };
+            ```
+
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Call custom component to prop</h3>
+
+            Only provide the function name (without `()`), see the [API reference](/sledge-app-core#articlecard-data-)
+
+            > <div className="not-italic">`<CustomComponent>` must be added as a child of another sledge's widget.</div>
+
+            ```tsx {33} showLineNumbers copy
+            import { CustomComponents } from "@sledge-app/core";
+            import { SearchResultWidget } from "@sledge-app/react-instant-search";
+            import SledgeArticleCard from "app/SledgeArticleCard";
+            
+            export default function SearchResultPage({ data }: { data?: any }) {
+                return (
+                    <SearchResultWidget
+                        query={{
+                            keyword: "q",
+                        }}
+                    >
+                        <CustomComponents articleCard={SledgeArticleCard} />
+                    </SearchResultWidget>
+                );
+            }
+            ```
+        </Steps>
+    </Tab>
+    <Tab>
+        This custom components works on these widgets for attributes `[data-component]`:
+        <ul className="mt-2 mb-8">
+            <li className="list-disc list-inside my-2">
+                <span>`instant-search-result-widget`</span>
+            </li>
+        </ul>
+
+        <Steps>
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Build a custom component, e.g:</h3>
+
+            ```html showLineNumbers copy
+            <script>
+                function renderArticleCard({ data }) {
+                    const { id, title, created_at, summary_html, blog_handle, handle, image } = data;
+
+                    return `
+                    <div class="sledge__article-grid-card">
+                        <div class="sledge__article-grid-content">
+                            <div class="sledge__article-grid-card-image">
+                                <a href="/blogs/${blog_handle}/${handle}">
+                                    <img src="${image?.src}" alt="sledge-card-image" loading="lazy" />
+                                </a>
+                            </div>
+                            <div class="sledge__article-grid-card-desc">
+                                <a href="/blogs/${blog_handle}/${handle}">
+                                    <div class="sledge__article-grid-card-title">${title}</div>
+                                </a>
+                                ${
+                                    created_at
+                                        ? `<div class="sledge__article-grid-badge-vendor">${new Date(created_at).toLocaleString('en-US', {
+                                            timeZone: 'Asia/Jakarta',
+                                            year: 'numeric',
+                                            month: 'numeric',
+                                            day: 'numeric'
+                                        })}</div>`
+                                        : ''
+                                }
+                                ${summary_html ? `<div class="sledge__article-grid-card-text">${summary_html}</div>` : ''}
+                            </div>
+                        </div>
+                        <div class="sledge__article-grid-button-wrapper">
+                            <a href="/blogs/${blog_handle}/${handle}">
+                                <button
+                                    class="sledge__button"
+                                    data-button-color-type="light"
+                                    data-button-full-width="false"
+                                    type="button"
+                                >
+                                    <span class="sledge-icon__note">
+                                        <svg
+                                            width="16"
+                                            height="16"
+                                            viewBox="0 0 17 16"
+                                            fill="none"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <g id="vuesax/bold/note-2">
+                                                <path
+                                                id="Vector"
+                                                d="M8.95178 13.3046C9.13494 13.3473 9.15172 13.5871 8.97332 13.6466L7.91998 13.9933C5.27332 14.8466 3.87998 14.1333 3.01998 11.4866L2.16665 8.85328C1.31332 6.20661 2.01998 4.80661 4.66665 3.95328L4.67731 3.94975C5.08018 3.81633 5.48102 4.22359 5.37901 4.63553C5.37264 4.66126 5.3663 4.68718 5.35998 4.71328L4.70665 7.50661C3.97332 10.6466 5.04665 12.3799 8.18665 13.1266L8.95178 13.3046Z"
+                                                fill="#000000"
+                                                ></path>
+                                                <path
+                                                id="Vector_2"
+                                                d="M11.9467 2.14033L10.8334 1.88033C8.6067 1.35366 7.28004 1.787 6.50004 3.40033C6.30004 3.807 6.14004 4.30033 6.00671 4.867L5.35337 7.66033C4.70004 10.447 5.56004 11.8203 8.34004 12.4803L9.46004 12.747C9.8467 12.8403 10.2067 12.9003 10.54 12.927C12.62 13.127 13.7267 12.1537 14.2867 9.747L14.94 6.96033C15.5934 4.17366 14.74 2.79366 11.9467 2.14033ZM10.6934 8.887C10.6334 9.11366 10.4334 9.26033 10.2067 9.26033C10.1667 9.26033 10.1267 9.25366 10.08 9.247L8.14004 8.75366C7.87337 8.687 7.71337 8.41366 7.78004 8.147C7.84671 7.88033 8.12004 7.72033 8.38671 7.787L10.3267 8.28033C10.6 8.347 10.76 8.62033 10.6934 8.887ZM12.6467 6.63366C12.5867 6.86033 12.3867 7.007 12.16 7.007C12.12 7.007 12.08 7.00033 12.0334 6.99366L8.80004 6.17366C8.53337 6.107 8.37337 5.83366 8.44004 5.567C8.50671 5.30033 8.78004 5.14033 9.04671 5.207L12.28 6.027C12.5534 6.087 12.7134 6.36033 12.6467 6.63366Z"
+                                                fill="#000000"
+                                                ></path>
+                                            </g>
+                                        </svg>
+                                    </span>
+                                    <span>View Blog</span>
+                                </button>
+                            </a>
+                        </div>
+                    </div>`;
+                }
+            </script>
+            ```
+
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Call custom component to attribute</h3>
+
+            Only provide the function name (without `()`), see the [API reference](/html-data-attribute#data-render-article-card)
+
+            > <div className="not-italic">`<div data-component="custom-components">` must be added as a child of another sledge's widget.</div>
+
+            ```html {7} showLineNumbers copy
+            <div data-component="instant-search-result-widget" >
+                <div
+                    data-component="custom-components"
+                    data-render-article-card="renderArticleCard"
+                ></div>
+            </div>
+            ```
+        </Steps>
+    </Tab>
+    <Tab>
+        You can place these code in custom code webflow, see the <a href="https://university.webflow.com/lesson/custom-code-embed" target="_blank" className="nx-text-primary-600 nx-underline nx-decoration-from-font [text-underline-position:from-font]">documentation</a> about custom code embed at webflow.
+
+        This custom components works on these widgets for attributes `[data-component]`:
+        <ul className="mt-2 mb-8">
+            <li className="list-disc list-inside my-2">
+                <span>`instant-search-result-widget`</span>
+            </li>
+        </ul>
+
+        <Steps className="mt-3">
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Build a custom component, e.g:</h3>
+
+            ```html showLineNumbers copy
+            <script>
+                function renderArticleCard({ data }) {
+                    const { id, title, created_at, summary_html, blog_handle, handle, image } = data;
+
+                    return `
+                    <div class="sledge__article-grid-card">
+                        <div class="sledge__article-grid-content">
+                            <div class="sledge__article-grid-card-image">
+                                <a href="/blogs/${blog_handle}/${handle}">
+                                    <img src="${image?.src}" alt="sledge-card-image" loading="lazy" />
+                                </a>
+                            </div>
+                            <div class="sledge__article-grid-card-desc">
+                                <a href="/blogs/${blog_handle}/${handle}">
+                                    <div class="sledge__article-grid-card-title">${title}</div>
+                                </a>
+                                ${
+                                    created_at
+                                        ? `<div class="sledge__article-grid-badge-vendor">${new Date(created_at).toLocaleString('en-US', {
+                                            timeZone: 'Asia/Jakarta',
+                                            year: 'numeric',
+                                            month: 'numeric',
+                                            day: 'numeric'
+                                        })}</div>`
+                                        : ''
+                                }
+                                ${summary_html ? `<div class="sledge__article-grid-card-text">${summary_html}</div>` : ''}
+                            </div>
+                        </div>
+                        <div class="sledge__article-grid-button-wrapper">
+                            <a href="/blogs/${blog_handle}/${handle}">
+                                <button
+                                    class="sledge__button"
+                                    data-button-color-type="light"
+                                    data-button-full-width="false"
+                                    type="button"
+                                >
+                                    <span class="sledge-icon__note">
+                                        <svg
+                                            width="16"
+                                            height="16"
+                                            viewBox="0 0 17 16"
+                                            fill="none"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <g id="vuesax/bold/note-2">
+                                                <path
+                                                id="Vector"
+                                                d="M8.95178 13.3046C9.13494 13.3473 9.15172 13.5871 8.97332 13.6466L7.91998 13.9933C5.27332 14.8466 3.87998 14.1333 3.01998 11.4866L2.16665 8.85328C1.31332 6.20661 2.01998 4.80661 4.66665 3.95328L4.67731 3.94975C5.08018 3.81633 5.48102 4.22359 5.37901 4.63553C5.37264 4.66126 5.3663 4.68718 5.35998 4.71328L4.70665 7.50661C3.97332 10.6466 5.04665 12.3799 8.18665 13.1266L8.95178 13.3046Z"
+                                                fill="#000000"
+                                                ></path>
+                                                <path
+                                                id="Vector_2"
+                                                d="M11.9467 2.14033L10.8334 1.88033C8.6067 1.35366 7.28004 1.787 6.50004 3.40033C6.30004 3.807 6.14004 4.30033 6.00671 4.867L5.35337 7.66033C4.70004 10.447 5.56004 11.8203 8.34004 12.4803L9.46004 12.747C9.8467 12.8403 10.2067 12.9003 10.54 12.927C12.62 13.127 13.7267 12.1537 14.2867 9.747L14.94 6.96033C15.5934 4.17366 14.74 2.79366 11.9467 2.14033ZM10.6934 8.887C10.6334 9.11366 10.4334 9.26033 10.2067 9.26033C10.1667 9.26033 10.1267 9.25366 10.08 9.247L8.14004 8.75366C7.87337 8.687 7.71337 8.41366 7.78004 8.147C7.84671 7.88033 8.12004 7.72033 8.38671 7.787L10.3267 8.28033C10.6 8.347 10.76 8.62033 10.6934 8.887ZM12.6467 6.63366C12.5867 6.86033 12.3867 7.007 12.16 7.007C12.12 7.007 12.08 7.00033 12.0334 6.99366L8.80004 6.17366C8.53337 6.107 8.37337 5.83366 8.44004 5.567C8.50671 5.30033 8.78004 5.14033 9.04671 5.207L12.28 6.027C12.5534 6.087 12.7134 6.36033 12.6467 6.63366Z"
+                                                fill="#000000"
+                                                ></path>
+                                            </g>
+                                        </svg>
+                                    </span>
+                                    <span>View Blog</span>
+                                </button>
+                            </a>
+                        </div>
+                    </div>`;
+                }
+            </script>
+            ```
+
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Call custom component to attribute</h3>
+
+            Only provide the function name (without `()`), see the [API reference](/html-data-attribute#data-render-article-card)
+
+            > <div className="not-italic">`<div data-component="custom-components">` must be added as a child of another sledge's widget.</div>
+
+            ```html {7} showLineNumbers copy
+            <div
+                data-component="instant-search-result-widget"
+                data-icon-size="sm"
+            >
+                <div
+                    data-component="custom-components"
+                    data-render-article-card="renderArticleCard"
+                ></div>
+            </div>
+            ```
+        </Steps>
+    </Tab>
+
+</Tabs>

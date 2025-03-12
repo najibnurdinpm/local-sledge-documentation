@@ -1,0 +1,343 @@
+import { Table } from "~/components/global";
+import { Code } from "nextra/components";
+
+# Javascript Events
+
+Javascript Events provide several ways to interact with Sledge Widgets through coding. you can use to execute your own function after Sledge function running.
+
+Let's say you want to show a 'thank you' notification after customer adding a review you can feed your own function by using event listener like `after-add-review`.
+
+## Events
+
+Available events :
+
+- [`after-add-wishlist`](#after-add-wishlist)
+- [`after-remove-wishlist`](#after-remove-wishlist)
+- [`after-add-review`](#after-add-review)
+- [`after-render-product`](#after-render-product)
+- [`after-render-collection`](#after-render-collection)
+- [`after-render-page`](#after-render-page)
+- [`after-render-blog`](#after-render-blog)
+- [`after-render-article`](#after-render-article)
+
+### <span className="text-xl font-bold gradient-text-primary">`after-add-wishlist`</span>
+
+This event triggered after add wishlist item. <br/>
+
+Using `document.addEventListener`
+```js filename="" showLineNumbers copy
+document.addEventListener('after-add-wishlist', ({ detail }) => {
+    const { state, product } = detail;
+
+    // for declare the event is 'success' or 'failed'
+    console.log('state', state);
+
+    // product data
+    console.log('product', product);
+
+    if (state === 'success') {
+        // Code here
+    } else {
+        // Code here
+    }
+});
+```
+
+Using `sledge.on`, wrap with `document.addEventListener("init-sledge", function);`
+```js filename="" showLineNumbers copy
+document.addEventListener("init-sledge", () => {
+  sledge.on("after-add-wishlist", ({ detail }) => {
+    const { state, product } = detail;
+
+    // for declare the event is 'success' or 'failed'
+    console.log('state', state);
+
+    // product data
+    console.log('product', product);
+
+    if (state === 'success') {
+        // Code here
+    } else {
+        // Code here
+    }
+  });
+});
+```
+
+### <span className="text-xl font-bold gradient-text-primary">`after-remove-wishlist`</span>
+
+This event triggered after remove wishlist item. <br/>
+
+Using `document.addEventListener`
+```js filename="" showLineNumbers copy
+document.addEventListener('after-remove-wishlist', ({ detail }) => {
+    const { state, product } = detail;
+
+    // for declare the event is 'success' or 'failed'
+    console.log('state', state);
+
+    // product data
+    console.log('product', product);
+
+    if (state === 'success') {
+        // Code here
+    } else {
+        // Code here
+    }
+});
+```
+
+Using `sledge.on`, wrap with `document.addEventListener("init-sledge", function);`
+```js filename="" showLineNumbers copy
+document.addEventListener("init-sledge", () => {
+  sledge.on("after-remove-wishlist", ({ detail }) => {
+    const { state, product } = detail;
+
+    // for declare the event is 'success' or 'failed'
+    console.log('state', state);
+
+    // product data
+    console.log('product', product);
+
+    if (state === 'success') {
+        // Code here
+    } else {
+        // Code here
+    }
+  });
+});
+```
+
+### <span className="text-xl font-bold gradient-text-primary">`after-add-review`</span>
+
+This event triggered after write a review. <br/>
+
+Using `document.addEventListener`
+```js filename="" showLineNumbers copy
+document.addEventListener('after-add-review', ({ detail }) => {
+    const { state, product } = detail;
+
+    // for declare the event is 'success' or 'failed'
+    console.log('state', state);
+
+    // product data
+    console.log('product', product);
+
+    if (state === 'success') {
+        // Code here
+    } else {
+        // Code here
+    }
+});
+```
+
+Using `sledge.on`, wrap with `document.addEventListener("init-sledge", function);`
+```js filename="" showLineNumbers copy
+document.addEventListener("init-sledge", () => {
+  sledge.on("after-add-review", ({ detail }) => {
+    const { state, product } = detail;
+
+    // for declare the event is 'success' or 'failed'
+    console.log('state', state);
+
+    // product data
+    console.log('product', product);
+
+    if (state === 'success') {
+        // Code here
+    } else {
+        // Code here
+    }
+  });
+});
+```
+
+### <span className="text-xl font-bold gradient-text-primary">`after-render-product`</span>
+
+This event triggered after product card rendered. <br/>
+
+Using `document.addEventListener`
+```js filename="" showLineNumbers copy
+document.addEventListener('after-render-product', ({ detail }) => {
+    const { state } = detail;
+
+    // for declare the event is 'success' or 'failed'
+    console.log('state', state);
+
+    if (state === 'success') {
+        // Code here
+    } else {
+        // Code here
+    }
+});
+```
+
+Using `sledge.on`, wrap with `document.addEventListener("init-sledge", function);`
+```js filename="" showLineNumbers copy
+document.addEventListener("init-sledge", () => {
+  sledge.on("after-render-product", ({ detail }) => {
+    const { state } = detail;
+
+    // for declare the event is 'success' or 'failed'
+    console.log('state', state);
+
+    if (state === 'success') {
+        // Code here
+    } else {
+        // Code here
+    }
+  });
+});
+```
+
+### <span className="text-xl font-bold gradient-text-primary">`after-render-collection`</span>
+
+This event triggered after collection card rendered. <br/>
+
+Using `document.addEventListener`
+```js filename="" showLineNumbers copy
+document.addEventListener('after-render-collection', ({ detail }) => {
+    const { state } = detail;
+
+    // for declare the event is 'success' or 'failed'
+    console.log('state', state);
+
+    if (state === 'success') {
+        // Code here
+    } else {
+        // Code here
+    }
+});
+```
+
+Using `sledge.on`, wrap with `document.addEventListener("init-sledge", function);`
+```js filename="" showLineNumbers copy
+document.addEventListener("init-sledge", () => {
+  sledge.on("after-render-collection", ({ detail }) => {
+    const { state } = detail;
+
+    // for declare the event is 'success' or 'failed'
+    console.log('state', state);
+
+    if (state === 'success') {
+        // Code here
+    } else {
+        // Code here
+    }
+  });
+});
+```
+
+### <span className="text-xl font-bold gradient-text-primary">`after-render-page`</span>
+
+This event triggered after page card rendered. <br/>
+
+Using `document.addEventListener`
+```js filename="" showLineNumbers copy
+document.addEventListener('after-render-page', ({ detail }) => {
+    const { state } = detail;
+
+    // for declare the event is 'success' or 'failed'
+    console.log('state', state);
+
+    if (state === 'success') {
+        // Code here
+    } else {
+        // Code here
+    }
+});
+```
+
+Using `sledge.on`, wrap with `document.addEventListener("init-sledge", function);`
+```js filename="" showLineNumbers copy
+document.addEventListener("init-sledge", () => {
+  sledge.on("after-render-page", ({ detail }) => {
+    const { state } = detail;
+
+    // for declare the event is 'success' or 'failed'
+    console.log('state', state);
+
+    if (state === 'success') {
+        // Code here
+    } else {
+        // Code here
+    }
+  });
+});
+```
+
+### <span className="text-xl font-bold gradient-text-primary">`after-render-blog`</span>
+
+This event triggered after blog card rendered. <br/>
+
+Using `document.addEventListener`
+```js filename="" showLineNumbers copy
+document.addEventListener('after-render-blog', ({ detail }) => {
+    const { state } = detail;
+
+    // for declare the event is 'success' or 'failed'
+    console.log('state', state);
+
+    if (state === 'success') {
+        // Code here
+    } else {
+        // Code here
+    }
+});
+```
+
+Using `sledge.on`, wrap with `document.addEventListener("init-sledge", function);`
+```js filename="" showLineNumbers copy
+document.addEventListener("init-sledge", () => {
+  sledge.on("after-render-blog", ({ detail }) => {
+    const { state } = detail;
+
+    // for declare the event is 'success' or 'failed'
+    console.log('state', state);
+
+    if (state === 'success') {
+        // Code here
+    } else {
+        // Code here
+    }
+  });
+});
+```
+
+### <span className="text-xl font-bold gradient-text-primary">`after-render-article`</span>
+
+This event triggered after article card rendered. <br/>
+
+Using `document.addEventListener`
+```js filename="" showLineNumbers copy
+document.addEventListener('after-render-article', ({ detail }) => {
+    const { state } = detail;
+
+    // for declare the event is 'success' or 'failed'
+    console.log('state', state);
+
+    if (state === 'success') {
+        // Code here
+    } else {
+        // Code here
+    }
+});
+```
+
+Using `sledge.on`, wrap with `document.addEventListener("init-sledge", function);`
+```js filename="" showLineNumbers copy
+document.addEventListener("init-sledge", () => {
+  sledge.on("after-render-article", ({ detail }) => {
+    const { state } = detail;
+
+    // for declare the event is 'success' or 'failed'
+    console.log('state', state);
+
+    if (state === 'success') {
+        // Code here
+    } else {
+        // Code here
+    }
+  });
+});
+```

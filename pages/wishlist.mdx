@@ -1,0 +1,1004 @@
+import { Tabs, Tab } from "~/components/global";
+import { Callout } from "nextra-theme-docs";
+import Image from "next/image";
+import {
+  Webflow,
+  Liquid,
+  NextJs,
+  Hydrogen,
+  AppBlock,
+  Code,
+} from "~/components/icons";
+import { Dropdown, Button } from "~/components/global";
+import {
+  IMAGE_APPS_WISHLIST_BADGE,
+  IMAGE_APPS_WISHLIST_TRIGGER,
+  IMAGE_APPS_WISHLIST_BUTTON_DETAIL,
+  IMAGE_APPS_WISHLIST_LIST,
+  IMAGE_APPS_WISHLIST_LIST_FLYOUT,
+  IMAGE_LIQUID_SHOPIFY_APP_WL_EMBED_1,
+  IMAGE_LIQUID_SHOPIFY_APP_WL_EMBED_1_1,
+  IMAGE_LIQUID_SHOPIFY_APP_WL_EMBED_2,
+  IMAGE_LIQUID_SHOPIFY_APP_WL_EMBED_3,
+  IMAGE_LIQUID_SHOPIFY_APP_EMBED_GUIDE_1,
+  IMAGE_LIQUID_SHOPIFY_APP_WL_BUTTON_1,
+  IMAGE_LIQUID_SHOPIFY_APP_WL_BUTTON_2,
+  IMAGE_LIQUID_SHOPIFY_APP_EMBED_WISHLIST_WIDGET_1,
+  IMAGE_LIQUID_SHOPIFY_APP_EMBED_WISHLIST_WIDGET_2,
+  IMAGE_LIQUID_SHOPIFY_APP_EMBED_WISHLIST_WIDGET_3,
+  IMAGE_LIQUID_SHOPIFY_APP_EMBED_WISHLIST_TRIGGER_1,
+  IMAGE_LIQUID_SHOPIFY_APP_EMBED_WISHLIST_TRIGGER_2,
+  IMAGE_LIQUID_SHOPIFY_APP_EMBED_WISHLIST_WIDGET_NEW_1,
+  IMAGE_LIQUID_SHOPIFY_APP_EMBED_WISHLIST_WIDGET_NEW_2,
+  IMAGE_LIQUID_SHOPIFY_APP_EMBED_WISHLIST_WIDGET_NEW_3,
+  IMAGE_LIQUID_SHOPIFY_APP_EMBED_WISHLIST_WIDGET_NEW_4,
+  IMAGE_LIQUID_SHOPIFY_APP_EMBED_WISHLIST_WIDGET_NEW_5,
+  IMAGE_LIQUID_SHOPIFY_APP_EMBED_WISHLIST_WIDGET_NEW_6,
+  IMAGE_LIQUID_SHOPIFY_APP_EMBED_WISHLIST_FLYOUT_WIDGET_1,
+} from "~/lib/const";
+
+# Wishlist
+
+Increase engagement and sales on your stores by allowing customers to save their desired products for later purchase.
+
+Sledge provides several widgets you can use to integrate it with your store.
+
+Available widgets :
+
+- [Badge](#badge)
+- [Trigger](#trigger)
+- [Button Detail](#button-detail)
+- [Widget](#widget)
+- [Flyout Widget](#flyout-widget)
+
+<Callout type="info">
+  If you're using `Hydrogen` or `Next.js`, <br/> make sure to install the `@sledge-app/react-wishlist` package first.
+</Callout>
+
+```sh copy
+npm i @sledge-app/react-wishlist
+```
+
+## Badge
+
+Badge is a Wishlist's widget you can use to display your wishlist's total in a small text box or an icon.<br/><br/>
+
+<Image
+  src={IMAGE_APPS_WISHLIST_BADGE}
+  alt="Badge Header Menu"
+  width="86"
+  height="116"
+/> <br />
+
+<Tabs
+  storageKey="selected-method"
+  items={[
+    <div className="flex items-center gap-2">
+      <AppBlock />
+      <span>Theme Customizer</span>
+    </div>,
+    <div className="flex items-center gap-2">
+      <Code />
+      <span>Code</span>
+    </div>,
+  ]}
+>
+  <Tab>
+    Here is a step-by-step guide to adding this widget with block.
+    
+    - In the Theme Installation, click `Integrate to my theme` on `Wishlist` option.
+
+    <Image
+      className="mt-3 rounded-[24px] w-auto border border-[rgba(67,198,172,1)]"
+      src={IMAGE_LIQUID_SHOPIFY_APP_WL_EMBED_1}
+      alt="sledge-image-docs"
+    />
+
+    - Then click `Add widget to my theme` on `Add wishlist badge` option.
+
+    <Image
+      className="mt-3 rounded-[24px] w-auto border border-[rgba(67,198,172,1)]"
+      src={IMAGE_LIQUID_SHOPIFY_APP_WL_EMBED_1_1}
+      alt="sledge-image-docs"
+    />
+
+    - You will be directed to the Editor, and the Badge will have been added automatically.
+
+     <Image
+      className="mt-3 rounded-[24px] w-auto border border-[rgba(67,198,172,1)]"
+      src={IMAGE_LIQUID_SHOPIFY_APP_WL_EMBED_2}
+      alt="sledge-image-docs"
+    />
+
+    - You can customize the Wishlist Badge by click the `Wishlist badge` Block.
+
+     <Image
+      className="mt-3 rounded-[24px] w-auto border border-[rgba(67,198,172,1)]"
+      src={IMAGE_LIQUID_SHOPIFY_APP_WL_EMBED_3}
+      alt="sledge-image-docs"
+    />
+
+    - When ready, `Save` your changes.
+
+    <Dropdown text={`If the position is not suitable, you can add it manually by selecting the`}
+    trigger={`block`}>
+
+    <Image
+      className="mt-3 rounded-[24px] w-auto max-h-[540px] border border-[rgba(67,198,172,1)]"
+      src={IMAGE_LIQUID_SHOPIFY_APP_EMBED_GUIDE_1}
+      alt="sledge-image-docs"
+    />
+    - Click `+ Add Block` > Search `Sledge` > select the `Sldege's Widget` you want to apply.
+    - You can rearrange widget by Click and drag the ⋮⋮ icon
+    - When ready, `Save` your changes.
+    </Dropdown>
+
+  </Tab>
+  <Tab>
+    Here is a step-by-step guide to adding this widget with code.
+    <Tabs tabVariant="gradient" storageKey="selected-tech-stack" uniqueClass="tech-stack-tabs"  items={[
+        <div className="flex items-center gap-2">
+            <Hydrogen color="#677487" width={24} height={24} />
+            <span>Hydrogen</span>
+        </div>,
+        <div className="flex items-center gap-2">
+            <NextJs color="#677487" width={24} height={24} />
+            <span>Next.js</span>
+        </div>,
+        <div className="flex items-center gap-2">
+            <Liquid color="#677487" width={24} height={24} />
+            <span>Liquid</span>
+        </div>,
+        <div className="flex bg-re items-center gap-2">
+            <Webflow color="#677487" width={24} height={24} />
+            <span>Webflow</span>
+        </div>
+    ]}>
+      <Tab>
+        See the [API reference](/sledge-app-react-wishlist#api-reference) for code below.
+
+        ```tsx filename="app/SledgeWishlistBadge.tsx" showLineNumbers copy
+        import { Link } from '@remix-run/react';
+        import { Badge } from "@sledge-app/react-wishlist";
+
+        export default function SledgeWishlistBadge() {
+          return (
+            <Link to="/pages/wishlist">
+              <Badge />
+            </Link>
+          );
+        }
+        ```
+
+      </Tab>
+      <Tab>
+        See the [API reference](/sledge-app-react-wishlist#api-reference) for code below.
+
+        ```tsx filename="app/SledgeWishlistBadge.tsx" showLineNumbers copy
+        'use client';
+
+        import Link from "next/link"
+        import { Badge } from "@sledge-app/react-wishlist";
+
+        export default function SledgeWishlistBadge() {
+          return (
+            <Link href="/pages/wishlist">
+              <Badge />
+            </Link>
+          );
+        }
+        ```
+
+      </Tab>
+      <Tab>
+        See the [API reference](/html-data-attribute#api-reference-1) for code below.
+
+        ```html showLineNumbers copy
+        <a href="/pages/wishlist">
+          <div class="header__icon" data-component="wishlist-badge"></div>
+        </a>
+        ```
+
+      </Tab>
+      <Tab>
+        You can place these code in custom code webflow, see the <a href="https://university.webflow.com/lesson/custom-code-embed" target="_blank" className="nx-text-primary-600 nx-underline nx-decoration-from-font [text-underline-position:from-font]">documentation</a> about custom code embed at webflow
+
+        See the [API reference](/html-data-attribute#api-reference-1) for code below.
+
+        ```html showLineNumbers copy
+        <a href="/wishlist">
+          <div data-component="wishlist-badge"></div>
+        </a>
+        ```
+
+      </Tab>
+
+    </Tabs>
+
+  </Tab>
+</Tabs>
+
+## Trigger
+
+Trigger is a Wishlist's widget you can use to trigger add or remove a wishlist item in an icon.<br/><br/>
+
+<Image
+  src={IMAGE_APPS_WISHLIST_TRIGGER}
+  alt="Trigger"
+  width="132"
+  height="108"
+/> <br />
+
+<Tabs
+  storageKey="selected-method"
+  items={[
+    <div className="flex items-center gap-2">
+      <AppBlock />
+      <span>Theme Customizer</span>
+    </div>,
+    <div className="flex items-center gap-2">
+      <Code />
+      <span>Code</span>
+    </div>,
+  ]}
+>
+  <Tab>
+    Here is a step-by-step guide to adding this widget with block.
+
+    - From your Shopify admin, navigate to `Online Store` > `Themes` > click the `Customize` button.
+
+    - Navigate to the drop-down menu at the top, select `Products` > select a default product.
+
+    <Image
+      className="mt-5 rounded-[24px] w-auto max-h-[459px] border border-[rgba(67,198,172,1)]"
+      src={IMAGE_LIQUID_SHOPIFY_APP_EMBED_WISHLIST_TRIGGER_1}
+      alt="sledge-image-docs"
+    />
+
+    - Click `+ Add Block` > Search `wishlist trigger` > select the `Wishlist Trigger` section.
+
+    <Image
+      className="mt-5 rounded-[24px] w-auto max-h-[459px] border border-[rgba(67,198,172,1)]"
+      src={IMAGE_LIQUID_SHOPIFY_APP_EMBED_WISHLIST_TRIGGER_2}
+      alt="sledge-image-docs"
+    />
+
+    - You can rearrange Wishlist Trigger by Click and drag the `⋮⋮` icon
+
+    - When ready, `Save` your changes.
+
+  </Tab>
+  <Tab>
+    Here is a step-by-step guide to adding this widget with code.
+    <Tabs tabVariant="gradient" storageKey="selected-tech-stack" uniqueClass="tech-stack-tabs"  items={[
+        <div className="flex items-center gap-2">
+            <Hydrogen color="#677487" width={24} height={24} />
+            <span>Hydrogen</span>
+        </div>,
+        <div className="flex items-center gap-2">
+            <NextJs color="#677487" width={24} height={24} />
+            <span>Next.js</span>
+        </div>,
+        <div className="flex items-center gap-2">
+            <Liquid color="#677487" width={24} height={24} />
+            <span>Liquid</span>
+        </div>,
+        <div className="flex bg-re items-center gap-2">
+            <Webflow color="#677487" width={24} height={24} />
+            <span>Webflow</span>
+        </div>
+    ]}>
+      <Tab>
+        See the [API reference](/sledge-app-react-wishlist#api-reference-1) for code below.
+
+        ```tsx filename="app/SledgeWishlistTrigger.tsx" showLineNumbers copy
+        import { Trigger } from "@sledge-app/react-wishlist";
+
+        export default function SledgeWishlistTrigger() {
+          return (
+            <Trigger
+                params={{
+                    productId: "",
+                    productVariantId: "",
+                    productName: "",
+                    productVendor: "",
+                    productSku: "",
+                    productVariantName: "",
+                    productLink: "",
+                    productImage: "",
+                    productCurrency: "",
+                    productPrice: "",
+                }}
+            />
+          );
+        }
+        ```
+
+      </Tab>
+      <Tab>
+        See the [API reference](/sledge-app-react-wishlist#api-reference-1) for code below.
+
+        ```tsx filename="app/SledgeWishlistTrigger.tsx" showLineNumbers copy
+        'use client';
+
+        import { Trigger } from "@sledge-app/react-wishlist";
+
+        export default function SledgeWishlistTrigger() {
+          return (
+            <Trigger
+                params={{
+                    productId: "",
+                    productVariantId: "",
+                    productName: "",
+                    productVendor: "",
+                    productSku: "",
+                    productVariantName: "",
+                    productLink: "",
+                    productImage: "",
+                    productCurrency: "",
+                    productPrice: "",
+                }}
+            />
+          );
+        }
+        ```
+
+      </Tab>
+      <Tab>
+        See the [API reference](/html-data-attribute#api-reference-1) for code below.
+
+        ```html showLineNumbers copy
+        {% assign image = product.featured_image %}
+        {% assign name = product.title %}
+        {% capture url %}https://{{ shop.domain }}{{ product.url }}{% endcapture %}
+        {% for var in product.variants %}
+          {% if product.selected_or_first_available_variant.id == var.id %}
+            {% if var.image and var.image.src %}
+              {% assign image = var.image.src %}
+            {% endif %}
+            {% if var.url %}
+              {% comment %} {%  assign url = var.url %} {% endcomment %}
+              {% capture url %}https://{{ shop.domain }}{{ var.url }}{% endcapture %}
+            {% endif %}
+            {% if var.name %}
+              {% assign name = var.name %}
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+
+        <div
+          data-component="wishlist-trigger"
+          data-product-id="{{product.id}}"
+          data-product-variant-id="{{product.selected_or_first_available_variant.id}}"
+          data-product-name="{{name | strip_html }}"
+          data-product-vendor="{{ product.vendor }}"
+          data-product-sku="{{ product.selected_or_first_available_variant.sku }}"
+          data-product-variant-name="{{product.selected_or_first_available_variant.name}}"
+          data-product-link="{{url}}"
+          data-product-image="https:{{image | img_url: '1024x'}}"
+          data-product-currency="{{shop.currency}}"
+          data-product-price="{{product.selected_or_first_available_variant.price | remove: '.' | remove: ',' | divided_by: 100.0 }}"
+          data-on-after-add-wishlist=""
+          data-on-after-remove-wishlist=""
+        ></div>
+        ```
+
+      </Tab>
+      <Tab>
+        You can place these code in custom code webflow, see the <a href="https://university.webflow.com/lesson/custom-code-embed" target="_blank" className="nx-text-primary-600 nx-underline nx-decoration-from-font [text-underline-position:from-font]">documentation</a> about custom code embed at webflow
+
+        See the [API reference](/html-data-attribute#api-reference-1) for code below.
+
+        ```html showLineNumbers copy
+        <div
+          data-component="wishlist-trigger"
+          data-product-id=""
+          data-product-variant-id=""
+          data-product-name=""
+          data-product-vendor=""
+          data-product-sku=""
+          data-product-variant-name=""
+          data-product-link=""
+          data-product-image=""
+          data-product-currency=""
+          data-product-price=""
+          data-on-after-add-wishlist=""
+          data-on-after-remove-wishlist=""
+        ></div>
+        ```
+
+      </Tab>
+
+    </Tabs>
+
+  </Tab>
+</Tabs>
+
+## Button Detail
+
+Button Detail is a Wishlist's widget you can use to trigger add or remove a wishlist item in a button form. Typically used on product detail page.<br/><br/>
+
+<Image
+  src={IMAGE_APPS_WISHLIST_BUTTON_DETAIL}
+  alt="Button Detail"
+  width="323"
+  height="88"
+/> <br />
+
+<Tabs
+  storageKey="selected-method"
+  items={[
+    <div className="flex items-center gap-2">
+      <AppBlock />
+      <span>Theme Customizer</span>
+    </div>,
+    <div className="flex items-center gap-2">
+      <Code />
+      <span>Code</span>
+    </div>,
+  ]}
+>
+  <Tab>
+    Here is a step-by-step guide to adding this widget with block.
+    
+    - In the Wishlist Theme Installation, click `Add widget to my theme` on `Add wishlist button` option.
+
+    <Image
+      className="mt-3 rounded-[24px] w-auto border border-[rgba(67,198,172,1)]"
+      src={IMAGE_LIQUID_SHOPIFY_APP_WL_BUTTON_1}
+      alt="sledge-image-docs"
+    />
+
+    - You will be directed to the Editor, and the Button Detail will have been added automatically.
+
+     <Image
+      className="mt-3 rounded-[24px] w-auto border border-[rgba(67,198,172,1)]"
+      src={IMAGE_LIQUID_SHOPIFY_APP_WL_BUTTON_2}
+      alt="sledge-image-docs"
+    />
+
+    - When ready, `Save` your changes.
+
+    <Dropdown text={`If the position is not suitable, you can add it manually by selecting the`}
+    trigger={`block`}>
+
+    <Image
+      className="mt-3 rounded-[24px] w-auto max-h-[540px] border border-[rgba(67,198,172,1)]"
+      src={IMAGE_LIQUID_SHOPIFY_APP_EMBED_GUIDE_1}
+      alt="sledge-image-docs"
+    />
+    - Click `+ Add Block` > Search `Sledge` > select the `Sldege's Widget` you want to apply.
+    - You can rearrange widget by Click and drag the ⋮⋮ icon
+    - When ready, `Save` your changes.
+    </Dropdown>
+
+  </Tab>
+  <Tab>
+    Here is a step-by-step guide to adding this widget with code.
+    <Tabs tabVariant="gradient" storageKey="selected-tech-stack" uniqueClass="tech-stack-tabs"  items={[
+        <div className="flex items-center gap-2">
+            <Hydrogen color="#677487" width={24} height={24} />
+            <span>Hydrogen</span>
+        </div>,
+        <div className="flex items-center gap-2">
+            <NextJs color="#677487" width={24} height={24} />
+            <span>Next.js</span>
+        </div>,
+        <div className="flex items-center gap-2">
+            <Liquid color="#677487" width={24} height={24} />
+            <span>Liquid</span>
+        </div>,
+        <div className="flex bg-re items-center gap-2">
+            <Webflow color="#677487" width={24} height={24} />
+            <span>Webflow</span>
+        </div>
+    ]}>
+      <Tab>
+        See the [API reference](/sledge-app-react-wishlist#api-reference-2) for code below.
+
+        ```tsx filename="app/SledgeWishlistButtonDetail.tsx" showLineNumbers copy
+        import { ButtonDetail } from "@sledge-app/react-wishlist";
+
+        export default function SledgeWishlistButtonDetail() {
+          return (
+            <ButtonDetail
+                params={{
+                    productId: "",
+                    productVariantId: "",
+                    productName: "",
+                    productVendor: "",
+                    productSku: "",
+                    productVariantName: "",
+                    productLink: "",
+                    productImage: "",
+                    productCurrency: "",
+                    productPrice: "",
+                }}
+            />
+          );
+        }
+        ```
+
+      </Tab>
+      <Tab>
+        See the [API reference](/sledge-app-react-wishlist#api-reference-2) for code below.
+
+        ```tsx filename="app/SledgeWishlistButtonDetail.tsx" showLineNumbers copy
+        'use client';
+
+        import { ButtonDetail } from "@sledge-app/react-wishlist";
+
+        export default function SledgeWishlistButtonDetail() {
+          return (
+            <ButtonDetail
+                params={{
+                    productId: "",
+                    productVariantId: "",
+                    productName: "",
+                    productVendor: "",
+                    productSku: "",
+                    productVariantName: "",
+                    productLink: "",
+                    productImage: "",
+                    productCurrency: "",
+                    productPrice: "",
+                }}
+            />
+          );
+        }
+        ```
+
+      </Tab>
+      <Tab>
+        See the [API reference](/html-data-attribute#api-reference-1) for code below.
+
+        ```html showLineNumbers copy
+        {% assign image = product.featured_image %}
+        {% assign name = product.title %}
+        {% capture url %}https://{{ shop.domain }}{{ product.url }}{% endcapture %}
+        {% for var in product.variants %}
+          {% if product.selected_or_first_available_variant.id == var.id %}
+            {% if var.image and var.image.src %}
+              {% assign image = var.image.src %}
+            {% endif %}
+            {% if var.url %}
+              {% comment %} {%  assign url = var.url %} {% endcomment %}
+              {% capture url %}https://{{ shop.domain }}{{ var.url }}{% endcapture %}
+            {% endif %}
+            {% if var.name %}
+              {% assign name = var.name %}
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+
+        <div
+          data-component="wishlist-button-detail"
+          data-product-id="{{product.id}}"
+          data-product-variant-id="{{product.selected_or_first_available_variant.id}}"
+          data-product-name="{{name | strip_html }}"
+          data-product-vendor="{{ product.vendor }}"
+          data-product-sku="{{ product.selected_or_first_available_variant.sku }}"
+          data-product-variant-name="{{product.selected_or_first_available_variant.name}}"
+          data-product-link="{{url}}"
+          data-product-image="https:{{image | img_url: '1024x'}}"
+          data-product-currency="{{shop.currency}}"
+          data-product-price="{{product.selected_or_first_available_variant.price | remove: '.' | remove: ',' | divided_by: 100.0 }}"
+          data-on-after-add-wishlist=""
+          data-on-after-remove-wishlist=""
+        ></div>
+        ```
+
+      </Tab>
+      <Tab>
+        You can place these code in custom code webflow, see the <a href="https://university.webflow.com/lesson/custom-code-embed" target="_blank" className="nx-text-primary-600 nx-underline nx-decoration-from-font [text-underline-position:from-font]">documentation</a> about custom code embed at webflow
+
+        See the [API reference](/html-data-attribute#api-reference-1) for code below.
+
+        ```html showLineNumbers copy
+        <div
+          data-component="wishlist-button-detail"
+          data-product-id=""
+          data-product-variant-id=""
+          data-product-name=""
+          data-product-vendor=""
+          data-product-sku=""
+          data-product-variant-name=""
+          data-product-link=""
+          data-product-image=""
+          data-product-currency=""
+          data-product-price=""
+          data-on-after-add-wishlist=""
+          data-on-after-remove-wishlist=""
+        ></div>
+        ```
+
+      </Tab>
+    </Tabs>
+
+  </Tab>
+</Tabs>
+
+## Widget
+
+Widget is a Wishlist's widget you can use to display list data of user's wishlist.<br/><br/>
+
+<Image src={IMAGE_APPS_WISHLIST_LIST} alt="Widget" width="1339" height="749" /> <br />
+
+<Tabs
+  storageKey="selected-method"
+  items={[
+    <div className="flex items-center gap-2">
+      <AppBlock />
+      <span>Theme Customizer</span>
+    </div>,
+    <div className="flex items-center gap-2">
+      <Code />
+      <span>Code</span>
+    </div>,
+  ]}
+>
+  <Tab>
+    <Callout type="info">
+     <div className="not-italic"> 
+      By default, Sledge provides you a proxy page that links to <br/> 
+      <span className=""> `https://YOUR-SHOPIFY-STORE.myshopify.com/apps/sledge/wishlist` </span>
+     </div>
+    </Callout>
+
+    If you want to create a custom URL for the Wishlist widget as you desire, <br/>
+    you can put a wishlist widget on the new page. <br/> <br/>
+    Here is a step-by-step guide to adding this widget to new page.
+
+    - From your Shopify admin, navigate to `Online Store` > `Themes` > click the `Customize` button.
+
+    - Navigate to the drop-down menu at the top, select `Pages` > `+ Create template`.
+
+    <Image
+      className="mt-5 rounded-[24px] w-auto max-h-[459px] border border-[rgba(67,198,172,1)]"
+      src={IMAGE_LIQUID_SHOPIFY_APP_EMBED_WISHLIST_WIDGET_1}
+      alt="sledge-image-docs"
+    />
+
+    <Image
+      className="mt-5 rounded-[24px] w-auto h-full max-h-[459px] border border-[rgba(67,198,172,1)]"
+      src={IMAGE_LIQUID_SHOPIFY_APP_EMBED_WISHLIST_WIDGET_NEW_1}
+      alt="sledge-image-docs"
+    />
+
+    - For example, you can create a template named `wishlist` and select Based on `Default page`.
+    When ready, you can save the template by click `Create template` button.
+
+    <Image
+      className="mt-5 rounded-[24px] w-auto h-full max-h-[459px] border border-[rgba(67,198,172,1)]"
+      src={IMAGE_LIQUID_SHOPIFY_APP_EMBED_WISHLIST_WIDGET_NEW_2}
+      alt="sledge-image-docs"
+    />
+
+    - Once you've `Created wishlist` template, You will be directed to the Wishlist page editor.
+
+    - Click `+ Add Section` > Search `wishlist widget` > Slides to `Apps` > select the `Wishlist Widget`.
+
+    <Image
+      className="mt-5 rounded-[24px] w-auto max-h-[459px] border border-[rgba(67,198,172,1)]"
+      src={IMAGE_LIQUID_SHOPIFY_APP_EMBED_WISHLIST_WIDGET_2}
+      alt="sledge-image-docs"
+    />
+
+    - You can customize the Wishlist widget by click the `Wishlist Widget` Block.
+
+    <Image
+      className="mt-5 rounded-[24px] w-auto max-h-[459px] border border-[rgba(67,198,172,1)]"
+      src={IMAGE_LIQUID_SHOPIFY_APP_EMBED_WISHLIST_WIDGET_3}
+      alt="sledge-image-docs"
+    />
+
+    - Click `Save` located in the upper-right corner.
+
+    - Once you've adding Wishlist Widget, now it's time to `Create a Page`.
+    - From your Shopify admin, navigate to `Online Store` > `Pages` > click the `Add page` button.
+
+    <Image
+      className="mt-5 rounded-[24px] w-auto h-full max-h-[459px] border border-[rgba(67,198,172,1)]"
+      src={IMAGE_LIQUID_SHOPIFY_APP_EMBED_WISHLIST_WIDGET_NEW_3}
+      alt="sledge-image-docs"
+    />
+
+    - Add a `title`, and select Theme template you created earlier, for example: `Wishlist`,<br/>
+    When ready, click `Save`.
+
+    <Image
+      className="mt-5 rounded-[24px] w-auto h-full max-h-[459px] border border-[rgba(67,198,172,1)]"
+      src={IMAGE_LIQUID_SHOPIFY_APP_EMBED_WISHLIST_WIDGET_NEW_4}
+      alt="sledge-image-docs"
+    />
+
+    - Once you've creating a Wishlist Page, Let's change URL on `Wishlist Badge`.
+
+    > <span className="not-italic">
+    > If you haven't added a `Wishlist badge` yet, look [here](/wishlist#badge) to see how to add the badge.
+    > </span>
+
+    - From your Shopify admin, navigate to `Online Store` > `Themes` > click the `Customize` button.
+    - Click on your `Wishlist Badge` > Click `URL Wishlist Widget` > Select `Pages` > Select `Wishlist`
+
+    <div className="flex gap-2">
+      <Image
+        className="mt-5 rounded-[24px] w-[70%] h-full max-h-[459px] border border-[rgba(67,198,172,1)]"
+        src={IMAGE_LIQUID_SHOPIFY_APP_EMBED_WISHLIST_WIDGET_NEW_5}
+        alt="sledge-image-docs"
+      />
+
+      <Image
+        className="mt-5 rounded-[24px] w-[30%] h-full max-h-[459px] border border-[rgba(67,198,172,1)]"
+        src={IMAGE_LIQUID_SHOPIFY_APP_EMBED_WISHLIST_WIDGET_NEW_6}
+        alt="sledge-image-docs"
+      />
+    </div>
+
+    - After you've ready, you can simply click `Save` located in the upper-right corner.
+    - You can see the Wishlist page at `https://YOUR-SHOPIFY-STORE.myshopify.com/pages/wishlist`
+
+  </Tab>
+  <Tab>
+    Here is a step-by-step guide to adding this widget with code.
+    <Tabs tabVariant="gradient" storageKey="selected-tech-stack" uniqueClass="tech-stack-tabs"  items={[
+        <div className="flex items-center gap-2">
+            <Hydrogen color="#677487" width={24} height={24} />
+            <span>Hydrogen</span>
+        </div>,
+        <div className="flex items-center gap-2">
+            <NextJs color="#677487" width={24} height={24} />
+            <span>Next.js</span>
+        </div>,
+        <div className="flex items-center gap-2">
+            <Liquid color="#677487" width={24} height={24} />
+            <span>Liquid</span>
+        </div>,
+        <div className="flex bg-re items-center gap-2">
+            <Webflow color="#677487" width={24} height={24} />
+            <span>Webflow</span>
+        </div>
+    ]}>
+      <Tab>
+        See the [API reference](/sledge-app-react-wishlist#api-reference-3) for code below.
+
+        ```tsx filename="app/SledgeWishlistWidget.tsx" showLineNumbers copy
+        import { Widget, WidgetHeader } from "@sledge-app/react-wishlist";
+
+        export default function SledgeWishlistWidget() {
+          return (
+            <Widget.Root
+              query={{
+                shareId: "share",
+              }}
+            >
+              <WidgetHeader>
+                <WidgetHeader.Title text="My Wishlist" />
+                <WidgetHeader.SearchForm placeholder="Search product" />
+                <WidgetHeader.ClearTrigger buttonText="Clear Wishlist" />
+                <WidgetHeader.ShareTrigger buttonText="Share Wishlist" />
+                <WidgetHeader.Sort />
+                <WidgetHeader.Limit options={[10, 25, 50, 100]} />
+              </WidgetHeader>
+              <Widget.List gridType="large" />
+            </Widget.Root>
+          );
+        }
+        ```
+
+      </Tab>
+      <Tab>
+        See the [API reference](/sledge-app-react-wishlist#api-reference-3) for code below.
+
+        ```tsx filename="app/SledgeWishlistWidget.tsx" showLineNumbers copy
+        'use client';
+
+        import { Widget, WidgetHeader } from "@sledge-app/react-wishlist";
+
+        export default function SledgeWishlistWidget() {
+          return (
+            <Widget.Root
+              query={{
+                shareId: "share",
+              }}
+            >
+              <WidgetHeader>
+                <WidgetHeader.Title text="My Wishlist" />
+                <WidgetHeader.SearchForm placeholder="Search product" />
+                <WidgetHeader.ClearTrigger buttonText="Clear Wishlist" />
+                <WidgetHeader.ShareTrigger buttonText="Share Wishlist" />
+                <WidgetHeader.Sort />
+                <WidgetHeader.Limit options={[10, 25, 50, 100]} />
+              </WidgetHeader>
+              <Widget.List gridType="large" />
+            </Widget.Root>
+          );
+        }
+        ```
+
+      </Tab>
+      <Tab>
+        See the [API reference](/html-data-attribute#api-reference-1) for code below.
+
+    ```html showLineNumbers copy
+    <div
+      data-component="wishlist-widget"
+      data-query-share-id="share"
+      data-on-after-add-wishlist=""
+      data-on-after-remove-wishlist=""
+      data-on-after-render-product=""
+    ></div>
+    ```
+
+      </Tab>
+      <Tab>
+        You can place these code in custom code webflow, see the <a href="https://university.webflow.com/lesson/custom-code-embed" target="_blank" className="nx-text-primary-600 nx-underline nx-decoration-from-font [text-underline-position:from-font]">documentation</a> about custom code embed at webflow
+
+        See the [API reference](/html-data-attribute#api-reference-1) for code below.
+
+        ```html showLineNumbers copy
+        <div
+          data-component="wishlist-widget"
+          data-query-share-id="share"
+          data-on-after-add-wishlist=""
+          data-on-after-remove-wishlist=""
+          data-on-after-render-product=""
+        ></div>
+        ```
+
+      </Tab>
+
+    </Tabs>
+
+  </Tab>
+</Tabs>
+
+## Flyout Widget
+
+Flyout Widget is a Wishlist's widget you can use to display list data of user's wishlist in a flyout.<br/><br/>
+
+<Image src={IMAGE_APPS_WISHLIST_LIST_FLYOUT} alt="Widget" width="1339" height="749" /> <br />
+
+<Tabs
+  storageKey="selected-method"
+  items={[
+    <div className="flex items-center gap-2">
+      <AppBlock />
+      <span>Theme Customizer</span>
+    </div>,
+    <div className="flex items-center gap-2">
+      <Code />
+      <span>Code</span>
+    </div>,
+  ]}
+>
+  <Tab>
+    Here is a step-by-step guide to adding this widget with block.
+
+    - For adding this widget, first you need to `Add wishlist badge` widget to your theme. Follow the detailed steps [here](#badge) for adding wishlist badge.
+
+    <Image
+      className="mt-3 rounded-[24px] w-auto border border-[rgba(67,198,172,1)]"
+      src={IMAGE_LIQUID_SHOPIFY_APP_WL_EMBED_1_1}
+      alt="sledge-image-docs"
+    />
+
+    - Once you've added the `Wishlist Badge`, simply turn on the `Use Wishlist Flyout` toggle switch here.
+
+    <Image
+      className="mt-3 rounded-[24px] w-auto border border-[rgba(67,198,172,1)]"
+      src={IMAGE_LIQUID_SHOPIFY_APP_EMBED_WISHLIST_FLYOUT_WIDGET_1}
+      alt="sledge-image-docs"
+    />
+
+    - When ready, `Save` your changes.
+
+  </Tab>
+  <Tab>
+    You can add this widget by activating it through a property / attribute on the [Badge](#badge) widget, as shown in the highlighted code below.
+    <Tabs tabVariant="gradient" storageKey="selected-tech-stack" uniqueClass="tech-stack-tabs"  items={[
+        <div className="flex items-center gap-2">
+            <Hydrogen color="#677487" width={24} height={24} />
+            <span>Hydrogen</span>
+        </div>,
+        <div className="flex items-center gap-2">
+            <NextJs color="#677487" width={24} height={24} />
+            <span>Next.js</span>
+        </div>,
+        <div className="flex items-center gap-2">
+            <Liquid color="#677487" width={24} height={24} />
+            <span>Liquid</span>
+        </div>,
+        <div className="flex bg-re items-center gap-2">
+            <Webflow color="#677487" width={24} height={24} />
+            <span>Webflow</span>
+        </div>
+    ]}>
+      <Tab>
+        See the [API reference](/sledge-app-react-wishlist#api-reference) for code below.
+
+        ```tsx {8-9} filename="app/SledgeWishlistBadge.tsx" showLineNumbers copy
+        import { Link } from '@remix-run/react';
+        import { Badge } from "@sledge-app/react-wishlist";
+
+        export default function SledgeWishlistBadge() {
+          return (
+            <Link to="/pages/wishlist">
+              <Badge
+                useWishlistFlyout={true}
+                urlWishlistWidget="/pages/wishlist"
+              />
+            </Link>
+          );
+        }
+        ```
+
+      </Tab>
+      <Tab>
+        See the [API reference](/sledge-app-react-wishlist#api-reference) for code below.
+
+        ```tsx {10-11} filename="app/SledgeWishlistBadge.tsx" showLineNumbers copy
+        'use client';
+
+        import Link from "next/link"
+        import { Badge } from "@sledge-app/react-wishlist";
+
+        export default function SledgeWishlistBadge() {
+          return (
+            <Link href="/pages/wishlist">
+              <Badge
+                useWishlistFlyout={true}
+                urlWishlistWidget="/pages/wishlist"
+              />
+            </Link>
+          );
+        }
+        ```
+
+      </Tab>
+      <Tab>
+        See the [API reference](/html-data-attribute#api-reference-1) for code below.
+
+        ```html {5-6} showLineNumbers copy
+        <a href="/pages/wishlist">
+          <div
+            class="header__icon"
+            data-component="wishlist-badge"
+            data-use-wishlist-flyout="true"
+            data-url-wishlist-widget="/pages/wishlist"
+          ></div>
+        </a>
+        ```
+
+      </Tab>
+      <Tab>
+        You can place these code in custom code webflow, see the <a href="https://university.webflow.com/lesson/custom-code-embed" target="_blank" className="nx-text-primary-600 nx-underline nx-decoration-from-font [text-underline-position:from-font]">documentation</a> about custom code embed at webflow
+
+        See the [API reference](/html-data-attribute#api-reference-1) for code below.
+
+        ```html {4-5} showLineNumbers copy
+        <a href="/wishlist">
+          <div
+            data-component="wishlist-badge"
+            data-use-wishlist-flyout="true"
+            data-url-wishlist-widget="/wishlist"
+          ></div>
+        </a>
+        ```
+
+      </Tab>
+
+    </Tabs>
+
+  </Tab>
+</Tabs>
+
+## Learn more
+
+Congratulations! Now that you've learned usage of Wishlist widgets, you can start implementing Wishlist into your store.
+
+If your store requires custom layout and custom callback for the widget, you can learn more on how to modify them based on your needs :
+
+- [How to add Callback Functions](/callback-functions)
+- [How to add Custom Components](/custom-components)
+- [How to add Custom Style](/custom-styles)

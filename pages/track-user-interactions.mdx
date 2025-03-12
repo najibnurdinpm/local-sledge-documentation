@@ -1,0 +1,347 @@
+import { Tabs, Tab } from "~/components/global";
+import { Webflow, Liquid, NextJs, Hydrogen } from "~/components/icons";
+
+# Track User Interactions
+
+When using Custom Components you might want to track user interactions like add to cart or product click on a [Product Card](/custom-components/global#product-card) so that the information can be stored in the [Dashboard](/backend-instant-search-and-product-filters#dashboard).
+
+Available trigger functions for support Track User Interations :
+
+- [Add to Cart](#add-to-cart)
+- [Product Click](#product-click)
+
+You can include a trigger function in your Custom Component by following example code below :
+
+## Add to Cart
+
+<Tabs storageKey="selected-tech-stack" items={[
+    <div className="flex items-center gap-2">
+        <Hydrogen width={24} height={24} />
+        <span>Hydrogen</span>
+    </div>,
+    <div className="flex items-center gap-2">
+        <NextJs width={24} height={24} />
+        <span>Next.js</span>
+    </div>,
+    <div className="flex items-center gap-2">
+        <Liquid width={24} height={24} />
+        <span>Liquid</span>
+    </div>,
+    <div className="flex items-center gap-2">
+        <Webflow width={24} height={24} />
+        <span>Webflow</span>
+    </div>
+]}>
+    <Tab>
+        See the [API reference](/sledge-app-api#api-reference-8) of `addToCartTrigger`.
+
+        ```tsx {1, 14-17} showLineNumbers copy
+        import { addToCartTrigger } from '@sledge-app/api';
+
+        ...
+
+        export default function SledgeProductCard({ product, sourceApp }: any) {
+            ...
+            return (
+                ...
+                <button
+                    type="button"
+                    onClick={() => {
+                        // Put your add to cart functionality here
+
+                        addToCartTrigger({
+                            sourceApp,
+                            productId: product.id,
+                        });
+                    }}
+                >
+                    Add to Cart
+                </button>
+                ...
+            );
+        }
+        ```
+    </Tab>
+    <Tab>
+        See the [API reference](/sledge-app-api#api-reference-8) of `addToCartTrigger`.
+
+        ```tsx {3, 16-19} showLineNumbers copy
+        'use client';
+
+        import { addToCartTrigger } from '@sledge-app/api';
+
+        ...
+
+        export default function SledgeProductCard({ product, sourceApp }: any) {
+            ...
+            return (
+                ...
+                <button
+                    type="button"
+                    onClick={() => {
+                        // Put your add to cart functionality here
+
+                        addToCartTrigger({
+                            sourceApp,
+                            productId: product.id,
+                        });
+                    }}
+                >
+                    Add to Cart
+                </button>
+                ...
+            );
+        }
+        ```
+    </Tab>
+    <Tab>
+        See the [API reference](/sledge-app-api#api-reference-8) of `addToCartTrigger`.
+
+        ```html {14-17, 26} showLineNumbers copy
+        ...
+        <div data-component="instant-search-icon-widget">
+            <div
+                data-component="custom-components"
+                data-render-product-card="renderProductCard"
+            ></div>
+        </div>
+        ...
+
+        <script>
+            function handleAddToCart({ sourceApp, productId }) {
+                // Put your add to cart functionality here
+
+                window.sledge.addToCartTrigger({
+                    sourceApp,
+                    productId
+                });
+            }
+
+            function renderProductCard({ product, sourceApp }) {
+                ...
+                return `
+                ...
+                <button
+                    type="button"
+                    onclick="handleAddToCart({ sourceApp: '${sourceApp}', productId: '${product.id}' });"
+                >
+                    Add to Cart
+                </button>
+                ...`;
+            }
+        </script>
+        ```
+    </Tab>
+    <Tab>
+        You can place this code in custom code webflow, see the <a href="https://university.webflow.com/lesson/custom-code-embed" target="_blank" className="nx-text-primary-600 nx-underline nx-decoration-from-font [text-underline-position:from-font]">documentation</a> about custom code embed at webflow.
+
+        See the [API reference](/sledge-app-api#api-reference-8) of `addToCartTrigger`.
+
+        ```html {14-17, 26} showLineNumbers copy
+        ...
+        <div data-component="instant-search-icon-widget">
+            <div
+                data-component="custom-components"
+                data-render-product-card="renderProductCard"
+            ></div>
+        </div>
+        ...
+
+        <script>
+            function handleAddToCart({ sourceApp, productId }) {
+                // Put your add to cart functionality here
+
+                window.sledge.addToCartTrigger({
+                    sourceApp,
+                    productId
+                });
+            }
+
+            function renderProductCard({ product, sourceApp }) {
+                ...
+                return `
+                ...
+                <button
+                    type="button"
+                    onclick="handleAddToCart({ sourceApp: '${sourceApp}', productId: '${product.id}' });"
+                >
+                    Add to Cart
+                </button>
+                ...`;
+            }
+        </script>
+        ```
+    </Tab>
+
+</Tabs>
+
+## Product Click
+
+<Tabs storageKey="selected-tech-stack" items={[
+    <div className="flex items-center gap-2">
+        <Hydrogen width={24} height={24} />
+        <span>Hydrogen</span>
+    </div>,
+    <div className="flex items-center gap-2">
+        <NextJs width={24} height={24} />
+        <span>Next.js</span>
+    </div>,
+    <div className="flex items-center gap-2">
+        <Liquid width={24} height={24} />
+        <span>Liquid</span>
+    </div>,
+    <div className="flex items-center gap-2">
+        <Webflow width={24} height={24} />
+        <span>Webflow</span>
+    </div>
+]}>
+    <Tab>
+        See the [API reference](/sledge-app-api#api-reference-9) of `productClickTrigger`.
+
+        ```tsx {1, 15-18} showLineNumbers copy
+        import { productClickTrigger } from '@sledge-app/api';
+        import { Link } from '@remix-run/react';
+
+        ...
+
+        export default function SledgeProductCard({ product, sourceApp }: any) {
+            ...
+            return (
+                ...
+                <Link
+                    to={'/products/' + product.handle}
+                    onClick={() => {
+                        // Put your add to cart functionality here
+
+                        productClickTrigger({
+                            sourceApp,
+                            productId: product.id,
+                        });
+                    }}
+                >
+                    {product.title}
+                </Link>
+                ...
+            );
+        }
+        ```
+    </Tab>
+    <Tab>
+        See the [API reference](/sledge-app-api#api-reference-9) of `productClickTrigger`.
+
+        ```tsx {3, 17-20} showLineNumbers copy
+        'use client';
+
+        import { productClickTrigger } from '@sledge-app/api';
+        import Link from "next/link"
+
+        ...
+
+        export default function SledgeProductCard({ product, sourceApp }: any) {
+            ...
+            return (
+                ...
+                <Link
+                    href={'/products/' + product.handle}
+                    onClick={() => {
+                        // Put your add to cart functionality here
+
+                        productClickTrigger({
+                            sourceApp,
+                            productId: product.id,
+                        });
+                    }}
+                >
+                    {product.title}
+                </Link>
+                ...
+            );
+        }
+        ```
+    </Tab>
+    <Tab>
+        See the [API reference](/sledge-app-api#api-reference-9) of `productClickTrigger`.
+
+        ```html {12-19, 26-30} showLineNumbers copy
+        ...
+        <div data-component="instant-search-icon-widget">
+            <div
+                data-component="custom-components"
+                data-render-product-card="renderProductCard"
+            ></div>
+        </div>
+        ...
+
+        <script>
+            function productClickTrigger({ sourceApp, productId, url }) {
+                window.sledge
+                    .productClickTrigger({
+                        sourceApp,
+                        productId
+                    })
+                    .then(() => {
+                        window.location.href = url;
+                    });
+            }
+
+            function renderProductCard({ product, sourceApp }) {
+                ...
+                return `
+                ...
+                <a href="#" onclick="productClickTrigger({
+                    sourceApp: '${sourceApp}',
+                    productId: '${product.id}',
+                    url: '/products/${product.handle}'
+                })">
+                    ${product.title}
+                </a>
+                ...`;
+            }
+        </script>
+        ```
+    </Tab>
+    <Tab>
+        You can place this code in custom code webflow, see the <a href="https://university.webflow.com/lesson/custom-code-embed" target="_blank" className="nx-text-primary-600 nx-underline nx-decoration-from-font [text-underline-position:from-font]">documentation</a> about custom code embed at webflow.
+
+        See the [API reference](/sledge-app-api#api-reference-9) of `productClickTrigger`.
+
+        ```html {12-19, 26-30} showLineNumbers copy
+        ...
+        <div data-component="instant-search-icon-widget">
+            <div
+                data-component="custom-components"
+                data-render-product-card="renderProductCard"
+            ></div>
+        </div>
+        ...
+
+        <script>
+            function productClickTrigger({ sourceApp, productId, url }) {
+                window.sledge
+                    .productClickTrigger({
+                        sourceApp,
+                        productId
+                    })
+                    .then(() => {
+                        window.location.href = url;
+                    });
+            }
+
+            function renderProductCard({ product, sourceApp }) {
+                ...
+                return `
+                ...
+                <a href="#" onclick="productClickTrigger({
+                    sourceApp: '${sourceApp}',
+                    productId: '${product.id}',
+                    url: '/products/${product.handle}'
+                })">
+                    ${product.title}
+                </a>
+                ...`;
+            }
+        </script>
+        ```
+    </Tab>
+
+</Tabs>

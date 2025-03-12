@@ -1,0 +1,242 @@
+import { Tabs, Tab } from "~/components/global";
+import { Steps } from "nextra/components";
+import { Webflow, Liquid, NextJs, Hydrogen } from "~/components/icons";
+import Image from "next/image";
+import { IMAGE_CC_REVIEW_PRODUCT_INFO } from "~/lib/const"
+
+# Product Review
+
+Make the appearance of the Sledge Product Review app remain in line with the theme you have using the custom components that Sledge provides.
+
+Available custom components :
+
+- [Review Product Info](#review-product-info)
+
+## Review Product Info
+
+Review Product Info is custom component, will change product information each review cards.<br/><br/>
+
+<Image
+  src={ IMAGE_CC_REVIEW_PRODUCT_INFO }
+  alt="Custom Component - Review Product Info"
+  className="rounded-3xl"
+/> <br />
+
+<Tabs storageKey="selected-tech-stack"  items={[
+    <div className="flex items-center gap-2">
+        <Hydrogen width={24} height={24} />
+        <span>Hydrogen</span>
+    </div>,
+    <div className="flex items-center gap-2">
+        <NextJs width={24} height={24} />
+        <span>Next.js</span>
+    </div>,
+    <div className="flex items-center gap-2">
+        <Liquid width={24} height={24} />
+        <span>Liquid</span>
+    </div>,
+    <div className="flex items-center gap-2">
+        <Webflow width={24} height={24} />
+        <span>Webflow</span>
+    </div>
+]}>
+    <Tab>
+        <Steps>
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Build a custom component, e.g:</h3>
+
+            ```tsx filename="app/components/SledgeReviewProductInfo.tsx" showLineNumbers copy
+            import { Link } from '@remix-run/react';
+
+            interface IReviewProductInfo {
+                product: {name: string; url: string};
+            }
+
+            export function SledgeReviewProductInfo({product}: IReviewProductInfo) {
+                const {name, url = '#'} = product || {};
+
+                return (
+                    <div className="sledge-product-review__widget-about-product-text">
+                        About{' '}
+                        <Link
+                            className="sledge-product-review__widget-about-product-link"
+                            to={'/products/' + url}
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            {name}
+                        </Link>
+                    </div>
+                );
+            }
+            ```
+
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Call custom component to prop</h3>
+
+            > <div className="not-italic">`<CustomComponent>` must be added as a child of another sledge's widget.</div>
+
+            ```tsx {8} showLineNumbers copy
+            import { CustomComponents } from "@sledge-app/core";
+            import { HappyCustomersPage } from '@sledge-app/react-product-review';
+            import SledgeHappyCustomersPage from "~/components/SledgeHappyCustomersPage";
+
+            export default function SledgeHappyCustomersPage() {
+                return (
+                <HappyCustomersPage.Root>
+                    <CustomComponents
+                        reviewProductInfo={({product}: any) => {
+                            return <SledgeReviewProductInfo product={product} />;
+                        }}
+                    />
+                    <HappyCustomersPage.Header />
+                    <HappyCustomersPage.List />
+                </HappyCustomersPage.Root>
+                );
+            }
+            ```
+        </Steps>
+    </Tab>
+    <Tab>
+        <Steps>
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Build a custom component, e.g:</h3>
+
+            ```tsx filename="components/SledgeReviewProductInfo.tsx" showLineNumbers copy
+            'use client';
+
+            import Link from 'next/link';
+
+            interface IReviewProductInfo {
+                product: {name: string; url: string};
+            }
+
+            export function SledgeReviewProductInfo({product}: IReviewProductInfo) {
+                const {name, url = '#'} = product || {};
+
+                return (
+                    <div className="sledge-product-review__widget-about-product-text">
+                        About{' '}
+                        <Link
+                            className="sledge-product-review__widget-about-product-link"
+                            to={'/products/' + url}
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            {name}
+                        </Link>
+                    </div>
+                );
+            }
+            ```
+
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Call custom component to prop</h3>
+
+            > <div className="not-italic">`<CustomComponent>` must be added as a child of another sledge's widget.</div>
+
+            ```tsx {10} showLineNumbers copy
+            'use client';
+
+            import { CustomComponents } from "@sledge-app/core";
+            import { HappyCustomersPage } from '@sledge-app/react-product-review';
+            import SledgeHappyCustomersPage from "~/components/SledgeHappyCustomersPage";
+
+            export default function SledgeHappyCustomersPage() {
+                return (
+                <HappyCustomersPage.Root>
+                    <CustomComponents
+                        reviewProductInfo={({product}: any) => {
+                            return <SledgeReviewProductInfo product={product} />;
+                        }}
+                    />
+                    <HappyCustomersPage.Header />
+                    <HappyCustomersPage.List />
+                </HappyCustomersPage.Root>
+                );
+            }
+            ```
+        </Steps>
+    </Tab>
+    <Tab>
+        <Steps>
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Build a custom component, e.g:</h3>
+
+            ```html showLineNumbers copy
+            <script>
+                function renderReviewProductInfo({ product }) {
+                    const { name, url = '#' } = product || {};
+
+                    return `
+                        <div class="sledge-product-review__widget-about-product-text">
+                        About 
+                            <a href="/products/${url}" class="sledge-product-review__widget-about-product-link" onclick="handleClickReviewProductLink(event)">
+                                ${name}
+                            </a>
+                        </div>
+                    `;
+                }
+            </script>
+            ```
+
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Call custom component to attribute</h3>
+
+            Only provide the function name (without `()`), see the [API reference](/html-data-attribute#data-render-review-product-info)
+
+            > <div className="not-italic">`<div data-component="custom-components">` must be added as a child of another sledge's widget.</div>
+
+            ```html {6} showLineNumbers copy
+            <div 
+                data-component="product-review-happy-customers-page" 
+                data-width-element="1170px" 
+                data-on-after-add-review="onAfterAddReview"
+            >
+                <div 
+                    data-component="custom-components" 
+                    data-render-review-product-info="renderReviewProductInfo"
+                >
+                </div>
+            </div>
+            ```
+        </Steps>
+    </Tab>
+    <Tab>
+        You can place these code in custom code webflow, see the <a href="https://university.webflow.com/lesson/custom-code-embed" target="_blank" className="nx-text-primary-600 nx-underline nx-decoration-from-font [text-underline-position:from-font]">documentation</a> about custom code embed at webflow
+
+        <Steps className="mt-3">
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Build a custom component, e.g:</h3>
+
+            ```html showLineNumbers copy
+            <script>
+                function renderReviewProductInfo({ product }) {
+                    const { name, url = '#' } = product || {};
+
+                    return `
+                        <div class="sledge-product-review__widget-about-product-text">
+                        About 
+                            <a href="/products/${url}" class="sledge-product-review__widget-about-product-link" onclick="handleClickReviewProductLink(event)">
+                                ${name}
+                            </a>
+                        </div>
+                    `;
+                }
+            </script>
+            ```
+
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Call custom component to attribute</h3>
+
+            Only provide the function name (without `()`), see the [API reference](/html-data-attribute#data-render-review-product-info)
+
+            > <div className="not-italic">`<div data-component="custom-components">` must be added as a child of another sledge's widget.</div>
+
+            ```html {6} showLineNumbers copy
+            <div 
+                data-component="product-review-happy-customers-page" 
+                data-width-element="1170px" 
+                data-on-after-add-review="onAfterAddReview"
+            >
+                <div 
+                    data-component="custom-components" 
+                    data-render-review-product-info="renderReviewProductInfo"
+                >
+                </div>
+            </div>
+            ```
+        </Steps>
+    </Tab>
+
+</Tabs>

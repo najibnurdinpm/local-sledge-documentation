@@ -1,0 +1,266 @@
+import { Steps, Code, Pre, Callout } from "nextra/components";
+import Image from "next/image";
+import { Table } from "~/components/global";
+import {
+  IMAGE_CUSTOM_STYLES_PAGINATION,
+  IMAGE_CUSTOM_STYLES_SELECT_FIELD,
+  IMAGE_CUSTOM_STYLES_INPUT_FIELD,
+  IMAGE_CUSTOM_STYLES_SEARCH_INPUT_FIELD,
+  IMAGE_CUSTOM_STYLES_PRODUCT_CARDS,
+  IMAGE_CUSTOM_STYLES_TOAST_NOTIFICATION,
+  IMAGE_CUSTOM_STYLES_CONFIRMATION_POPUP,
+  IMAGE_CUSTOM_STYLES_ALERT,
+} from "~/lib/const";
+
+# Global
+
+All of Sledge's themes use of several kinds of classes. To assist you in customizing CSS to your needs, the most frequently used element selectors and classes are listed below.
+
+- [Select Field](#select-field)
+- [Input Field](#input-field)
+- [Search Input Field](#search-input-field)
+- [Pagination](#pagination)
+- [Product Card](#product-card)
+- [Toast Notification](#toast-notification)
+- [Confirmation Popup](#confirmation-popup)
+
+## Select Field
+
+<Image
+  className="mt-3 rounded-[24px] w-auto max-h-[359px] border border-[rgba(67,198,172,1)]"
+  src={IMAGE_CUSTOM_STYLES_SELECT_FIELD}
+  alt="sledge-image-docs"
+/>
+
+<Table
+  data={{
+    thead: [{ title: "Class" }, { title: "Description" }],
+    tbody: [
+      ["`sledge__select-field-wrapper`", "Select field wrapper"],
+      ["`sledge__button sledge__select-field`", "Select field button"],
+      ["`sledge__select-field-icon`", "Select field icon"],
+      ["`sledge-icon__swap`", "Select field icon swap"],
+      ["`sort-trigger-icon`", "Select field trigger icon"],
+      [
+        "`sledge-icon__arrow-down`",
+        "Select field trigger arrow up or down icon",
+      ],
+    ],
+  }}
+/>
+
+## Input Field
+
+<Image
+  className="mt-3 rounded-[24px] w-auto max-h-[359px] border border-[rgba(67,198,172,1)]"
+  src={IMAGE_CUSTOM_STYLES_INPUT_FIELD}
+  alt="sledge-image-docs"
+/>
+
+<Table
+  data={{
+    thead: [{ title: "Class" }, { title: "Description" }],
+    tbody: [
+      ["`sledge__input-field-wrapper`", "Input wrapper"],
+      ["`sledge__input-field`", "Input field"],
+    ],
+  }}
+/>
+
+## Search Input Field
+
+<Image
+  className="mt-3 rounded-[24px] w-auto max-h-[359px] border border-[rgba(67,198,172,1)]"
+  src={IMAGE_CUSTOM_STYLES_SEARCH_INPUT_FIELD}
+  alt="sledge-image-docs"
+/>
+
+<Table
+  data={{
+    thead: [{ title: "Class" }, { title: "Description" }],
+    tbody: [
+      ["`sledge__search-input-field-wrapper`", "Search input wrapper"],
+      ["`sledge__search-input-field-icon`", "Search input icon"],
+      ["`sledge__search-input-field`", "Search input field"],
+      ["`sledge-icon__search`", "Search input search icon"],
+      ["`sledge__clear-field`", "Search input clear button wrapper"],
+      ["`sledge-icon__close`", "Search input clear icon"],
+    ],
+  }}
+/>
+
+## Pagination
+
+<Image
+  className="mt-3 rounded-[24px] w-auto max-h-[359px] border border-[rgba(67,198,172,1)]"
+  src={IMAGE_CUSTOM_STYLES_PAGINATION}
+  alt="sledge-image-docs"
+/>
+
+<Table
+  data={{
+    thead: [{ title: "Class" }, { title: "Description" }],
+    tbody: [
+      ["`sledge__pagination`", "Pagination wrapper"],
+      ["`sledge__pagination-navigation`", "Pagination button"],
+      ["`sledge-icon__arrow-left`", "Pagination arrow left icon"],
+      ["`sledge-icon__arrow-right`", "Pagination arrow right icon"],
+    ],
+  }}
+/>
+
+## Product Card
+
+<Image
+  className="mt-3 rounded-[24px] w-auto max-h-[359px] border border-[rgba(67,198,172,1)]"
+  src={IMAGE_CUSTOM_STYLES_PRODUCT_CARDS}
+  alt="sledge-image-docs"
+/>
+
+<Table
+  data={{
+    thead: [{ title: "Class" }, { title: "Description" }],
+    tbody: [
+      ["`sledge__product-grid`", "Product card wrapper"],
+      ["`sledge__product-grid-card`", "Product card parent class"],
+      ["`sledge__product-grid-content`", "Product card content wrapper"],
+      ["`sledge__product-grid-card-image`", "Product card image wrapper"],
+      [
+        "`sledge-wishlist__trigger-parent-element`",
+        "Product card wishlist trigger",
+      ],
+      [
+        "`sledge__product-grid-card-desc`",
+        <>
+          Product card description wrapper for:
+          <br />
+          title, price & etc
+        </>,
+      ],
+      ["`sledge__product-grid-card-price`", "Product price"],
+      ["`sledge__product-grid-badge-vendor`", "Product vendor"],
+      ["`sledge__product-grid-card-product-name`", "Product title"],
+      ["`sledge__product-grid-card-text`", "Product SKU & First variant name"],
+      [
+        "`sledge__product-grid-button-wrapper`",
+        "Product card add to cart button wrapper",
+      ],
+    ],
+  }}
+/>
+
+<Callout type="info">
+  For `Wishlist Trigger`, you can check out
+  [here](/custom-styles/wishlist#trigger).
+</Callout>
+
+<Callout type="info">
+  For `Rating stars`, you can check out
+  [here](/custom-styles/product-review#rating).
+</Callout>
+
+### Using Selector
+
+<Table
+  data={{
+    thead: [{ title: "Selector" }, { title: "Description" }],
+    tbody: [
+      [
+        "`.sledge__product-grid-button-wrapper .sledge__button`",
+        "Product card add to cart button",
+      ],
+      ["`.sledge__product-grid-card-image img`", "Product image"],
+    ],
+  }}
+/>
+
+## Toast Notification
+
+<Image
+  className="mt-3 rounded-[24px] w-auto max-h-[359px] border border-[rgba(67,198,172,1)]"
+  src={IMAGE_CUSTOM_STYLES_TOAST_NOTIFICATION}
+  alt="sledge-image-docs"
+/>
+
+<Table
+  data={{
+    thead: [{ title: "Class" }, { title: "Description" }],
+    tbody: [
+      ["`sledge__toast-viewport`", "Toast wrapper"],
+      ["`sledge__toast-icon-wrapper`", "Toast icon wrapper"],
+      ["`sledge__toast-message-wrapper`", "Toast message wrapper"],
+      ["`sledge__toast-action-wrapper`", "Toast action wrapper"],
+    ],
+  }}
+/>
+
+### Using Selector
+
+<Table
+  data={{
+    thead: [{ title: "Selector" }, { title: "Description" }],
+    tbody: [
+      ["`.sledge__toast-icon-wrapper .sledge-icon__heart`", "Toast heart icon"],
+      ["`.sledge__toast-message-wrapper .sledge__toast-title`", "Toast title"],
+      [
+        "`.sledge__toast-message-wrapper .sledge__toast-description`",
+        "Toast description",
+      ],
+      [
+        "`.sledge__toast-action-wrapper button.sledge__toast-action`",
+        "Toast dismiss button",
+      ],
+    ],
+  }}
+/>
+
+## Confirmation Popup
+
+<Image
+  className="mt-3 rounded-[24px] w-auto max-h-[359px] border border-[rgba(67,198,172,1)]"
+  src={IMAGE_CUSTOM_STYLES_CONFIRMATION_POPUP}
+  alt="sledge-image-docs"
+/>
+
+<Table
+  data={{
+    thead: [{ title: "Class" }, { title: "Description" }],
+    tbody: [
+      ["`sledge__alert-dialog-content`", "Confirmation Popup wrapper"],
+      [
+        "`sledge__alert-dialog-content-close`",
+        "Confirmation Popup close button",
+      ],
+      ["`sledge__alert-dialog-title`", "Confirmation Popup title"],
+      ["`sledge__alert-dialog-description`", "Confirmation Popup descripion"],
+      [
+        "`sledge__alert-dialog-button-cancel`",
+        "Confirmation Popup 'cancel' button",
+      ],
+    ],
+  }}
+/>
+
+### Using Selector
+
+<Table
+  className="!max-w-fit !block !overflow-scroll"
+  data={{
+    thead: [{ title: "Selector" }, { title: "Description" }],
+    tbody: [
+      [
+        '`.sledge__alert-dialog-button[data-button-color-type="success"]`',
+        "Confirmation Popup add review button",
+      ],
+      [
+        "`.sledge__alert-dialog-button .sledge-icon__message-add`",
+        "Confirmation Popup add icon",
+      ],
+      ["`.sledge__alert-dialog-button span`", "Confirmation Popup add icon"],
+      [
+        '`.sledge__button[data-button-color-type="success"] span:nth-child(2)`',
+        "Confirmation Popup add button text",
+      ],
+    ],
+  }}
+/>

@@ -1,0 +1,180 @@
+import { Tabs, Tab } from "~/components/global";
+import { Steps } from "nextra/components";
+import { NextJs, Hydrogen } from "~/components/icons";
+
+# Global
+
+If you prefer to fetch Sledge data on the server instead doing fetch on the client browser. You can use Sledge's API package called [@sledge-app/api](/sledge-app-api).
+
+Basically the steps as simple as fetching data on server then pass that data to Sledge components, follow steps by steps below to see how to do the server side fetching.
+
+## Sledge Provider
+
+<Tabs storageKey="selected-tech-stack" items={[
+    <div className="flex items-center gap-2">
+        <Hydrogen width={24} height={24} />
+        <span>Hydrogen</span>
+    </div>,
+    <div className="flex items-center gap-2">
+        <NextJs width={24} height={24} />
+        <span>Next.js</span>
+    </div>
+]}>
+    <Tab>
+        <Steps>
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Add fetching data</h3>
+
+            ```tsx filename="app/root.tsx" showLineNumbers copy
+            import { getSledgeSettings } from '@sledge-app/api';
+
+            export async function loader({context}: LoaderArgs) {
+                ...
+                const headers = new Headers();
+                
+                const sledgeSettings = await getSledgeSettings({
+                    userId: parseGid(customer?.id).id,
+                    userEmail: "Fill with customer email",
+                    userFullname: "Fill with customer full name",
+                    domain: "Fill with your shop's .myshopify.com domain name",
+                });
+
+                return defer(
+                    {
+                        ...
+                        sledgeSettings
+                    },
+                    {headers},
+                );
+                ...
+            }
+            ```
+
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Setup `SledgeProvider`</h3>
+
+            ```tsx filename="app/root.tsx" showLineNumbers copy
+            import sledgeStyle from '@sledge-app/core/style.css';
+
+            return [
+                ...
+                {rel: 'stylesheet', href: sledgeStyle},
+                ...
+            ]
+
+            export default function App() {
+                const data = useLoaderData<typeof loader>();
+                ...
+                <SledgeProvider
+                    config={{
+                        userId: parseGid(customer?.id).id,
+                        userEmail: "Fill with customer email",
+                        userFullname: "Fill with customer full name",
+                        domain: "Fill with your shop's .myshopify.com domain name",
+                        sledgeSettings: data.sledgeSettings
+                    }}
+                >
+                    <Layout {...data}>
+                        <Outlet />
+                    </Layout>
+                </SledgeProvider>
+                ...
+            }
+            ```
+        </Steps>
+    </Tab>
+    <Tab>
+        <Steps>
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Setup `SledgeProvider` become component</h3>
+
+            ```tsx filename="components/sledge/sledge-provider.tsx" showLineNumbers copy
+            'use client';
+
+            import { ReactNode } from 'react';
+            import { SledgeProvider } from '@sledge-app/core';
+            import { getSledgeSettings } from '@sledge-app/api';
+            import '@sledge-app/core/style.css';
+
+            type IProvider = {
+                children: ReactNode;
+                userId: string;
+                userEmail: string;
+                userFullname: string;
+                domain: string;
+                sledgeSettings?: any;
+            };
+
+            export default function SledgeProviderComponent({
+                children,
+                userId,
+                userEmail,
+                userFullname,
+                domain,
+                sledgeSettings
+            }: IProvider) {
+                const sledgeSettings = await getSledgeSettings({
+                    userId,
+                    userEmail,
+                    userFullname,
+                    domain,
+                });
+                
+                return (
+                    <SledgeProvider
+                        config={{
+                            userId,
+                            userEmail,
+                            userFullname,
+                            domain,
+                            sledgeSettings,
+                        }}
+                    >
+                        {children}
+                    </SledgeProvider>
+                );
+            }
+            ```
+
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Wrap `SledgeProviderComponent` in layout</h3>
+
+            ```tsx filename="app/layout.tsx" showLineNumbers copy
+            import { SledgeProviderComponent } from 'components/sledge';
+            import { cookies } from 'next/headers';
+
+            ...
+            export default async function RootLayout({ children }: { children: ReactNode }) {
+                return (
+                    ...
+                    <SledgeProviderComponent
+                        userId="Fill with customer id"
+                        userEmail="Fill with customer email"
+                        userFullname="Fill with customer full name"
+                        domain="Fill with your shop's .myshopify.com domain name"
+                    >
+                        <Suspense>
+                            <Navbar />
+                            <main>{children}</main>
+                        </Suspense>
+                    </SledgeProviderComponent>
+                    ...
+                );
+            }
+            ```
+        </Steps>
+    </Tab>
+
+</Tabs>
+
+## Gid Parser (optional)
+
+Parses [Shopify Global ID (GID)](https://shopify.dev/api/usage/gids) and returns the resource type and ID.
+
+```ts filename="lib/shopify/parse-gid.ts" showLineNumbers copy
+export default function parseGid(gid: string | undefined) {
+  if (!gid?.includes("/")) return { id: gid || "", type: undefined };
+
+  const arr = gid.split("/");
+  const id = arr[arr.length - 1] || "";
+  const type = arr[arr.length - 2];
+
+  return { id, type };
+}
+```

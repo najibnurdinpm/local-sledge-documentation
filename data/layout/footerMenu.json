@@ -1,0 +1,110 @@
+[
+  {
+    "title": "All Apps",
+    "url": "https://sledge-app.com/all-apps",
+    "isNewTab": true,
+    "subMenu": [
+      {
+        "title": "Wishlist",
+        "url": "https://sledge-app.com/apps/wishlist",
+        "isNew": false,
+        "isNewTab": true
+      },
+      {
+        "title": "Product Review",
+        "url": "https://sledge-app.com/apps/review",
+        "isNew": false,
+        "isNewTab": true
+      },
+      {
+        "title": "Instant Search",
+        "url": "https://sledge-app.com/apps/instant-search",
+        "isNew": false,
+        "isNewTab": true
+      },
+      {
+        "title": "Product Filters",
+        "url": "https://sledge-app.com/apps/product-filters",
+        "isNew": false,
+        "isNewTab": true
+      }
+    ]
+  },
+  {
+    "title": "Tech Stack",
+    "url": "https://sledge-app.com/tech-stacks",
+    "isNewTab": true,
+    "subMenu": [
+      {
+        "title": "Hydrogen",
+        "url": "https://sledge-app.com/tech-stacks/hydrogen",
+        "isNew": false,
+        "isNewTab": true
+      },
+      {
+        "title": "Next.js",
+        "url": "https://sledge-app.com/tech-stacks/next",
+        "isNew": false,
+        "isNewTab": true
+      },
+      {
+        "title": "Liquid",
+        "url": "https://sledge-app.com/tech-stacks/shopify",
+        "isNew": false,
+        "isNewTab": true
+      },
+      {
+        "title": "Webflow",
+        "url": "https://sledge-app.com/tech-stacks/webflow",
+        "isNew": false,
+        "isNewTab": true
+      }
+    ]
+  },
+  {
+    "title": "Resources",
+    "url": "https://sledge-app.com/resources",
+    "isNewTab": true,
+    "subMenu": [
+      {
+        "title": "Documentation",
+        "url": "/",
+        "isNew": false,
+        "isNewTab": false
+      },
+      {
+        "title": "FAQ",
+        "url": "https://sledge-app.com/supports/faq",
+        "isNew": false,
+        "isNewTab": true
+      }
+    ]
+  },
+  {
+    "title": "Demo",
+    "url": "/",
+    "isNewTab": true,
+    "subMenu": [
+      {
+        "title": "Hydrogen",
+        "url": "https://demo-hydrogen.sledge-app.com/",
+        "isNewTab": true
+      },
+      {
+        "title": "Next.js",
+        "url": "https://demo-nextjs.sledge-app.com/",
+        "isNewTab": true
+      },
+      {
+        "title": "Liquid",
+        "url": "https://sledge-demo-store.myshopify.com/",
+        "isNewTab": true
+      },
+      {
+        "title": "Webflow",
+        "url": "https://demo-webflow.sledge-app.com/",
+        "isNewTab": true
+      }
+    ]
+  }
+]

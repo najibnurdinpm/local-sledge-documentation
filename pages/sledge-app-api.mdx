@@ -1,0 +1,510 @@
+# @sledge-app/api
+
+`@sledge-app/api` provides functions collections that you can use to work with Sledge's Server Side Fetching method, make sure to read more about [Server Side Fetching](/server-side-fetching) prior to continuing working with this API.
+
+Available functions :
+
+- [getSledgeSession](#getsledgesession)
+- [getSledgeSettings](#getsledgesettings)
+- [getWishlist](#getwishlist)
+- [wishlistCheck](#wishlistcheck)
+- [getWishlistInfo](#getwishlistinfo)
+- [getProductsReviewInfo](#getproductsreviewinfo)
+- [getReview](#getreview)
+- [getResult](#getresult)
+- [addToCartTrigger](#addtocarttrigger)
+- [productClickTrigger](#productclicktrigger)
+- [shopifyFormatMoney](#shopifyformatmoney)
+
+## `getSledgeSession`
+
+This function can be used to get new user session. <br />
+
+`getSledgeSession` result can be saved to session as sledgeSession. Saved sledgeSession will be used for all `@sledge-app/api` request, including `getSledgeSession` request as well for `lastSession`. <br />
+
+[See example](/server-side-fetching/global#sledge-provider)
+
+### Anatomy
+
+```tsx filename="" showLineNumbers copy
+import { getSledgeSession } from "@sledge-app/api";
+
+const sledgeSession = await getSledgeSession({
+  lastSession: "",
+  apiKey: "",
+  instantSearchApiKey: "",
+  userId: "",
+  userEmail: "",
+  userFullname: "",
+});
+```
+
+### API reference
+
+#### <span className="text-xl font-bold">`lastSession`</span>
+
+Fill with last saved sledgeSession from `getSledgeSession`
+
+- Type: `undefined` | `any`
+
+<br />
+#### <span className="text-xl font-bold">`apiKey`</span>
+
+Fill with your own API Key
+
+> <div className="not-italic">
+>   <div>Your Shopify Admin › Apps › Sledge › General › API Key › API Key.</div>
+>   <div>
+>     Or see the [Using Backend - General - API Key](/backend-general#api-key)
+>     for more information.
+>   </div>
+> </div>
+
+- Type: `string`
+
+<br />
+#### <span className="text-xl font-bold">`instantSearchApiKey`</span>
+
+Fill with your own Instant Search API Key
+
+> <div className="not-italic">
+>   <div>
+>     Your Shopify Admin › Apps › Sledge › General › API Key › Instant Search
+>     Key.
+>   </div>
+>   <div>
+>     Or see the [Using Backend - General - API Key](/backend-general#api-key)
+>     for more information.
+>   </div>
+> </div>
+
+- Type: `string`
+
+<br />
+#### <span className="text-xl font-bold">`userId`</span>
+
+Fill with logged in user id
+
+- Type: `string`
+
+<br />
+#### <span className="text-xl font-bold">`userEmail`</span>
+
+Fill with logged in user email
+
+- Type: `string`
+
+<br />
+#### <span className="text-xl font-bold">`userFullname`</span>
+
+Fill with logged in user fullname
+
+- Type: `string`
+
+## `getSledgeSettings`
+
+This function can be used to get data setting for each apps. <br />
+
+[See example](/server-side-fetching/global#sledge-provider)
+
+### Anatomy
+
+```tsx filename="" showLineNumbers copy
+import { getSledgeSettings } from "@sledge-app/api";
+
+const sledgeSettings = await getSledgeSettings({
+  sledgeSession: "",
+});
+```
+
+### API reference
+
+#### <span className="text-xl font-bold">`sledgeSession`</span>
+
+Fill with saved sledgeSession, from [getSledgeSession](/sledge-app-api#getsledgesession)
+
+- Type: `any`
+
+## `getWishlist`
+
+This function can be used to get data wishlist for current user session or another user wishlist with share id. <br />
+
+[See example](/server-side-fetching/wishlist#list)
+
+### Anatomy
+
+```tsx filename="" showLineNumbers copy
+import { getWishlist } from "@sledge-app/api";
+
+const wishlist = await getWishlist({
+  sledgeSession: "",
+  shareId: "",
+});
+```
+
+### API reference
+
+#### <span className="text-xl font-bold">`sledgeSession`</span>
+
+Fill with saved sledgeSession, from [getSledgeSession](/sledge-app-api#getsledgesession)
+
+- Type: `any`
+
+<br />
+#### <span className="text-xl font-bold">`shareId`</span>
+
+Used for show another user wishlist who share links from wishlist pages.
+If not filled, `getWishlist` will return wishlist of current user session.
+
+- Type: `string`
+- Required: `false`
+
+## wishlistCheck
+
+This function can be used for checking products is on wishlist or not. <br />
+
+[See example](/server-side-fetching/wishlist#trigger)
+
+### Anatomy
+
+```tsx filename="" showLineNumbers copy
+import { wishlistCheck } from "@sledge-app/api";
+
+const wishlistChecked = await wishlistCheck({
+  sledgeSession: "",
+  productIds: [],
+});
+```
+
+### API reference
+
+#### <span className="text-xl font-bold">`sledgeSession`</span>
+
+Fill with saved sledgeSession, from [getSledgeSession](/sledge-app-api#getsledgesession)
+
+- Type: `any`
+
+<br />
+#### <span className="text-xl font-bold">`productIds`</span>
+
+Fill with array of product IDs want to check
+
+- Type: `array`
+
+## `getWishlistInfo`
+
+This function can be used for get data user wishlist info like share id for wishlist page and wishlist count for header menu. <br />
+
+[See example](/server-side-fetching/wishlist#badge)
+
+### Anatomy
+
+```tsx filename="" showLineNumbers copy
+import { getWishlistInfo } from "@sledge-app/api";
+
+const wishlistInfo = await getWishlistInfo({
+  sledgeSession: "",
+});
+```
+
+### API reference
+
+#### <span className="text-xl font-bold">`sledgeSession`</span>
+
+Fill with saved sledgeSession, from [getSledgeSession](/sledge-app-api#getsledgesession)
+
+- Type: `any`
+
+## `getProductsReviewInfo`
+
+This function can be used for get data reviews count and rating average of multiple products for Rating component. <br />
+
+[See example](/server-side-fetching/product-review#rating)
+
+### Anatomy
+
+```tsx filename="" showLineNumbers copy
+const reviews = await getProductsReviewInfo({
+  sledgeSession: "",
+  productIds: [],
+});
+```
+
+### API reference
+
+#### <span className="text-xl font-bold">`sledgeSession`</span>
+
+Fill with saved sledgeSession, from [getSledgeSession](/sledge-app-api#getsledgesession)
+
+- Type: `any`
+
+<br />
+
+#### <span className="text-xl font-bold">`productIds`</span>
+
+Fill with array of product IDs want to check
+
+- Type: `array`
+
+## `getReview`
+
+This function can be used for get reviews list of product to show on product detail page. <br/>
+
+[See example](/server-side-fetching/product-review#list)
+
+### Anatomy
+
+```tsx filename="" showLineNumbers copy
+import { getReview } from "@sledge-app/api";
+
+const reviewList = await getReview({
+  sledgeSession: "",
+  productId: "",
+});
+```
+
+### API reference
+
+#### <span className="text-xl font-bold">`sledgeSession`</span>
+
+Fill with saved sledgeSession, from [getSledgeSession](/sledge-app-api#getsledgesession)
+
+- Type: `any`
+
+<br />
+
+#### <span className="text-xl font-bold">`productId`</span>
+
+Fill with product ID want to show review list
+
+- Type: `string`
+
+## `getResult`
+
+This function can be used for get search result for search page or product listing page. <br />
+
+[See example](/server-side-fetching/instant-search#search-result)
+
+### Anatomy
+
+```tsx filename="" showLineNumbers copy
+import { getResult } from "@sledge-app/api";
+
+const searchResult = await getResult({
+  sledgeSession: "",
+  sledgeSettings: "",
+  instantSearchApiKey: "",
+  searchParams: "",
+  keyword: "",
+  collectionId: "",
+  layoutType: "",
+});
+```
+
+### API reference
+
+#### <span className="text-xl font-bold">`sledgeSession`</span>
+
+Fill with saved sledgeSession, from [getSledgeSession](/sledge-app-api#getsledgesession)
+
+- Type: `any`
+
+<br />
+
+#### <span className="text-xl font-bold">`sledgeSettings`</span>
+
+Fill with data setting from [getSledgeSettings](/sledge-app-api#getsledgesettings)
+
+- Type: `any`
+
+<br />
+
+#### <span className="text-xl font-bold">`instantSearchApiKey`</span>
+
+Fill with your own Instant Search API Key
+
+> <div className="not-italic">
+>   <div>
+>     Your Shopify Admin › Apps › Sledge › General › API Key › Instant Search
+>     Key.
+>   </div>
+>   <div>
+>     Or see the [Using Backend - General - API Key](/backend-general#api-key)
+>     for more information.
+>   </div>
+> </div>
+
+- Type: `string`
+
+<br />
+
+#### <span className="text-xl font-bold">`searchParams`</span>
+
+Fill with object from url query string parameter
+
+- Type: `object`
+
+<br />
+
+#### <span className="text-xl font-bold">`keyword`</span>
+
+Fill with typed search keyword from user
+
+- Type: `string`
+
+<br />
+
+#### <span className="text-xl font-bold">`collectionId`</span>
+
+Fill with collection id if want to show result only for specific collection. <br />
+If collection id not filled result while return data from all collection.
+
+- Type: `string`
+
+<br />
+
+#### <span className="text-xl font-bold">`layoutType`</span>
+
+Fill with `default` to return data for search result page, or fill with `product-filter` to return data for product listing page
+
+- Type: `string`
+
+## `addToCartTrigger`
+
+This function can be used to save information for dashboard analytics about cart addition activities. <br/>
+
+[See example](/track-user-interations#add-to-cart)
+
+### Anatomy
+
+#### React Version
+```tsx filename="" showLineNumbers copy
+import { addToCartTrigger } from '@sledge-app/api';
+
+await addToCartTrigger({
+  sourceApp: "",
+  productId: "",
+});
+```
+
+#### Vanilla JS Version
+```tsx filename="" showLineNumbers copy
+window.sledge.addToCartTrigger({
+  sourceApp: "",
+  productId: "",
+});
+```
+
+### API reference
+
+#### <span className="text-xl font-bold">`sourceApp`</span>
+
+Fill with name of app
+
+- Type: 
+  - `'wishlist'`
+  - `'instant-search'`
+  - `'recently-viewed'`
+  - `'related-product'`
+  - `'hand-picked'`
+  - `'new-arrival'`
+  - `'personalized-curated'`
+
+<br />
+
+#### <span className="text-xl font-bold">`productId`</span>
+
+Fill with product ID want to show review list
+
+- Type: `string`
+
+## `productClickTrigger`
+
+This function can be used to save information for dashboard analytics about product click activities. <br/>
+
+[See example](/track-user-interations#product-click)
+
+### Anatomy
+
+#### React Version
+```tsx filename="" showLineNumbers copy
+import { productClickTrigger } from '@sledge-app/api';
+
+await productClickTrigger({
+  sourceApp: "",
+  productId: "",
+});
+```
+
+#### Vanilla JS Version
+```tsx filename="" showLineNumbers copy
+window.sledge.productClickTrigger({
+  sourceApp: "",
+  productId: "",
+});
+```
+
+### API reference
+
+#### <span className="text-xl font-bold">`sourceApp`</span>
+
+Fill with name of app
+
+- Type: 
+  - `'wishlist'`
+  - `'instant-search'`
+  - `'recently-viewed'`
+  - `'related-product'`
+  - `'hand-picked'`
+  - `'new-arrival'`
+  - `'personalized-curated'`
+
+<br />
+
+#### <span className="text-xl font-bold">`productId`</span>
+
+Fill with product ID want to show review list
+
+- Type: `string`
+
+## `shopifyFormatMoney`
+
+This function can be used for money format handler. <br/>
+
+### Anatomy
+
+#### React Version
+```tsx filename="" showLineNumbers copy
+import { shopifyFormatMoney } from '@sledge-app/api';
+
+...
+<div>
+    {shopifyFormatMoney(price)}
+</div>
+...
+```
+
+#### Vanilla JS Version
+```tsx filename="" showLineNumbers copy
+window.sledge.shopifyFormatMoney(price)
+```
+
+### API reference
+
+#### <span className="text-xl font-bold">`price`</span>
+
+Fill with your price data
+
+- Type: `string | number`
+
+## Learn more
+
+Congratulations! Now that you've learned the `@sledge-app/api` API references, you can start integrating Sledge to your store. Useful resources about integrating Sledge : 
+
+- [How to use Server Side Fetching](/server-side-fetching)
+- [How to use Server Side Fetching for Wishlist app](/server-side-fetching/wishlist)
+- [How to use Server Side Fetching for Product Review app](/server-side-fetching/product-review)
+- [How to use Server Side Fetching for Instant Search app](/server-side-fetching/instant-search)
+- [How to use Server Side Fetching for Product Filters app](/server-side-fetching/product-filters)
+
+

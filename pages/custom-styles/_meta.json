@@ -1,0 +1,44 @@
+{
+  "global": {
+    "title": "Global",
+    "theme": {
+      "breadcrumb": true,
+      "toc": true
+    }
+  },
+  "wishlist": {
+    "title": "Wishlist",
+    "theme": {
+      "breadcrumb": true,
+      "toc": true
+    }
+  },
+  "product-review": {
+    "title": "Product Review",
+    "theme": {
+      "breadcrumb": true,
+      "toc": true
+    }
+  },
+  "instant-search": {
+    "title": "Instant Search",
+    "theme": {
+      "breadcrumb": true,
+      "toc": true
+    }
+  },
+  "product-filters": {
+    "title": "Product Filters",
+    "theme": {
+      "breadcrumb": true,
+      "toc": true
+    }
+  },
+  "recently-viewed": {
+    "title": "Recently Viewed",
+    "theme": {
+      "breadcrumb": true,
+      "toc": true
+    }
+  }
+}

@@ -1,0 +1,299 @@
+import { Steps, Code, Pre, FileTree } from "nextra/components";
+import Image from "next/image";
+import {
+  IMAGE_LIQUID_SHOPIFY_ADMIN_PANEL,
+  IMAGE_LIQUID_SHOPIFY_ADMIN_PANEL_2,
+  IMAGE_LIQUID_SHOPIFY_ADMIN_PANEL_3,
+  IMAGE_APPS_IS_PF_RESULT,
+} from "~/lib/const";
+
+import { Table } from "~/components/global";
+import Link from "next/link";
+
+# Start using Sledge and Liquid
+
+Prior using all Sledge's widgets, follow the steps below to start integrating Sledge into your Shopify theme.
+
+## Quickstart
+
+<Steps>
+### Setup Sledge Core
+
+First, follow the steps below:
+
+- Go to your Shopify Admin Panel
+- On sidebar, go to menu:
+  > <div className="not-italic mt-2">
+  >   Sales channels › Online Store › Themes
+  > </div>
+
+<Image
+  className="mt-3 rounded-[24px] w-auto max-h-[359px] border border-[rgba(67,198,172,1)]"
+  src={IMAGE_LIQUID_SHOPIFY_ADMIN_PANEL}
+  alt="sledge-image-docs"
+/>
+- On `current theme`, click more button and click "Edit code"
+
+<Image
+  className="mt-3 rounded-[24px] w-auto max-h-[359px] border border-[rgba(67,198,172,1)]"
+  src={IMAGE_LIQUID_SHOPIFY_ADMIN_PANEL_2}
+  alt="sledge-image-docs"
+/>
+
+- Find and open `layout/theme.liquid`.
+
+<FileTree>
+  <FileTree.Folder name="layout" defaultOpen>
+    <FileTree.File name="theme.liquid" />
+  </FileTree.Folder>
+</FileTree>
+
+<Image
+  className="mt-3 rounded-[24px] w-auto max-h-[359px] border border-[rgba(67,198,172,1)]"
+  src={IMAGE_LIQUID_SHOPIFY_ADMIN_PANEL_3}
+  alt="sledge-image-docs"
+/>
+
+You can paste code below inside `<head>` tag on your project.
+
+```liquid showLineNumbers copy
+{% comment %}
+  Start automatic get user data, do not change this code
+{% endcomment %}
+
+{% assign user_id = "" %}
+{% assign user_email = "" %}
+{% assign user_fullname = "" %}
+{% if customer %}
+  {% assign user_id = customer.id %}
+  {% assign user_email = customer.email %}
+  {% assign user_fullname = customer.name %}
+  {% if customer.name == null or customer.name == "" %}{% assign user_fullname = customer.email | split: "@" | first %}{% endif %}
+{% endif %}
+
+{% comment %}
+  End automatic get user data, do not change this code
+{% endcomment %}
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sledge-app/js@latest/dist/style.css" />
+
+<script
+    type="module"
+    id="sledge-embed-script"
+    src="https://cdn.jsdelivr.net/npm/@sledge-app/js@latest/dist/sledge.min.js"
+></script>
+
+<script>
+    var sledge = sledge || {};
+    sledge.config = {
+      userId: "{{ user_id }}",
+      userEmail: "{{ user_email }}",
+      userFullname: "{{ user_fullname }}",
+      domain: "{{ shop.permanent_domain }}",
+    };
+</script>
+```
+
+#### `sledge.config` Parameters
+
+Let's look on list of all available parameters:
+
+<br />
+
+<Table
+  data={{
+    thead: [
+      { title: "Parameter" },
+      { title: "Type" },
+      { title: "Description" },
+    ],
+    tbody: [
+      [
+        "`userId`",
+        "string",
+        <>
+          <p>
+            Fill with your own user logined data,
+            <br />
+            You can check out the example{" "}
+            <Link
+              target="_blank"
+              href="https://github.com/offstack/sledge-demo-store/blob/main/liquid/snippets/sledge_embed-script.liquid#L21"
+            >
+              code
+            </Link>
+          </p>
+        </>,
+      ],
+      [
+        "`userEmail`",
+        "string",
+        <>
+          <p>
+            Fill with your own user logined data,
+            <br />
+            You can check out the example{" "}
+            <Link
+              target="_blank"
+              href="https://github.com/offstack/sledge-demo-store/blob/main/liquid/snippets/sledge_embed-script.liquid#L22"
+            >
+              code
+            </Link>
+          </p>
+        </>,
+      ],
+      [
+        "`userFullname`",
+        "string",
+        <>
+          <p>
+            Fill with your own user logined data,
+            <br />
+            You can check out the example{" "}
+            <Link
+              target="_blank"
+              href="https://github.com/offstack/sledge-demo-store/blob/main/liquid/snippets/sledge_embed-script.liquid#L23"
+            >
+              code
+            </Link>
+          </p>
+        </>,
+      ],
+      [
+        "`domain`",
+        "string (required)",
+        <>
+          <p>
+            Fill with your shop's <Code>.myshopify.com</Code> domain name,
+            <br />
+            You can get it from <a href="https://shopify.dev/docs/api/liquid/objects/shop#shop-permanent_domain">liquid object</a> by using <Code>shop.permanent_domain</Code>
+          </p>
+        </>,
+      ],
+    ],
+  }}
+/>
+
+### Implement widget
+
+We're going to try implement product filters widget so,
+Create a new file named `sledge-instant-search-product-filter-widget.liquid` inside snippets folder.
+
+<FileTree>
+  <FileTree.Folder name="snippets" defaultOpen>
+    <FileTree.File name="sledge-instant-search-product-filter-widget.liquid" />
+  </FileTree.Folder>
+</FileTree>
+
+```html filename="snippets/sledge-instant-search-product-filter-widget.liquid" showLineNumbers copy
+<div
+  data-component="instant-search-product-filter-widget"
+  data-query-keyword="q"
+  data-collection-id="{{ collection.id }}"
+  data-collection-name="{{ collection.title }}"
+></div>
+```
+
+#### `instant-search-product-filter-widget` Parameters
+
+Let's look on list of all available parameters:
+
+<br />
+
+<Table
+  data={{
+    thead: [
+      { title: "Parameter" },
+      { title: "Type" },
+      { title: "Description" },
+    ],
+    tbody: [
+      [
+        "`data-query-keyword`",
+        "string",
+        <>
+          <p>
+            Fill up your unique <Code>data-query-keyword</Code>.
+            <br />
+            e.g:{" "}
+            <Code>https://your-online-store.com/collection/all?q=hoodie</Code>
+            <br />
+            <br />
+            Default: <Code>q</Code>
+          </p>
+        </>,
+      ],
+      [
+        "`data-collection-id`",
+        "number (required)",
+        <>
+          <p>
+            Fill with your own collection id,
+            <br />
+            You can check out the example{" "}
+            <Link
+              target="_blank"
+              href="https://github.com/offstack/sledge-demo-store/blob/main/liquid/snippets/sledge-instant-search-product-filter-widget.liquid#L4"
+            >
+              code
+            </Link>
+          </p>
+        </>,
+      ],
+      [
+        "`data-collection-name`",
+        "number (required)",
+        <>
+          <p>
+            Fill with your own collection name,
+            <br />
+            You can check out the example{" "}
+            <Link
+              target="_blank"
+              href="https://github.com/offstack/sledge-demo-store/blob/main/liquid/snippets/sledge-instant-search-product-filter-widget.liquid#L4"
+            >
+              code
+            </Link>
+          </p>
+        </>,
+      ],
+    ],
+  }}
+/>
+
+#### Render Product Filter Widget
+
+In `collection.liquid`, render your `sledge-instant-search-product-filter-widget.liquid` snippets and use it to render `ProductFilterWidget`
+
+<FileTree>
+  <FileTree.Folder name="templates" defaultOpen>
+    <FileTree.File name="collection.liquid" />
+  </FileTree.Folder>
+</FileTree>
+
+```liquid filename="templates/collection.liquid" showLineNumbers copy
+{% render 'sledge-instant-search-product-filter-widget', collection: collection %}
+```
+
+### Widget completely running
+
+Sledge's product filters widget is now ready to be used.
+
+<Image
+  className="mt-3 w-auto max-h-[359px]"
+  src={IMAGE_APPS_IS_PF_RESULT}
+  alt="sledge-image-docs"
+/>
+</Steps>
+
+## Learn more
+
+Congratulations! Now that the installation is complete, you can use all Sledge's widgets and start integrating to your Shopify theme.
+
+- [Integrate Wishlist](/wishlist)
+- [Integrate Product Review](/product-review)
+- [Integrate Instant Search](/instant-search)
+- [Integrate Product Filters](/product-filters)
+- [API References - HTML Data Attribute](/html-data-attribute)
+- [How to add Callback Functions](/callback-functions)
+- [How to add Custom Components](/custom-components)

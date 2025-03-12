@@ -1,0 +1,292 @@
+# @sledge-app/core
+
+You can use our React-built widget by using the `@sledge-app/core` package.
+
+`@sledge-app/core` provides several components you can use to integrate it with your store.
+
+Available components :
+
+- [SledgeProvider](#sledgeprovider)
+- [CustomComponents](#customcomponents)
+
+
+## `SledgeProvider`
+
+`SledgeProvider` is a required component for sharing global user session and settings throughout the hierarchy of all sledge applications. <br />
+
+See example:
+- [Hydrogen](/installation/hydrogen#setup-the-sledgeprovider)
+- [Next.js](/installation/nextjs#setup-the-sledgeprovider)
+
+### Anatomy
+
+```tsx filename="app/root.tsx" showLineNumbers copy
+import { SledgeProvider } from "@sledge-app/core";
+
+export default function App() {
+  return (
+    <SledgeProvider
+      config={{
+        userId: "",
+        userEmail: "",
+        userFullname: "",
+        domain: "",
+        locale: ""
+      }}
+    >
+      {/* Routes, Pages, etc */}
+    </SledgeProvider>
+  );
+}
+```
+
+### API reference
+
+<br />
+#### <span className="text-xl font-bold">`config.userId`</span>
+
+Fill with your own user logined data
+
+- Type: `string`
+
+<br />
+#### <span className="text-xl font-bold">`config.userEmail`</span>
+
+Fill with your own user logined data
+
+- Type: `string`
+
+<br />
+#### <span className="text-xl font-bold">`config.userFullname`</span>
+
+Fill with your own user logined data
+
+- Type: `string`
+
+<br />
+#### <span className="text-xl font-bold">`config.domain`</span>
+
+Fill with your shop's `.myshopify.com` domain name
+
+- Type: `string`
+
+<br />
+#### <span className="text-xl font-bold">`config.locale`</span>
+
+Fill with your locale language
+
+- Type: `string`
+
+## `CustomComponents`
+
+Sledge provides default layout and components like product cards, instant search results, etc. With CustomComponents you can build your own layout based on your store branding or design, navigate through link example below to see how flexible CustomComponents is or read through its API reference below. <br />
+
+See example:
+- [Global](/custom-components/global)
+- [Wishlist](/custom-components/wishlist)
+- [Instant Search](/custom-components/instant-search)
+
+### Anatomy
+
+```tsx showLineNumbers copy
+import { CustomComponents } from "@sledge-app/core";
+
+<CustomComponents
+  otherIndexList={({ name, items, setShowPopupComponent }) => {
+    // Your custom component
+  }}
+  productCard={({ product, showPopupComponent, setShowPopupComponent, sourceApp }) => {
+    // Your custom component
+  }}
+  searchViewMoreResult={({ keyword, setShowPopupComponent, setRenderSearchResult, redirectObjectDirection }) => {
+    // Your custom component
+  }}
+  suggestionKeywordList={({ keywords, setShowPopupComponent, setRenderSearchResult }) => {
+    // Your custom component
+  }}
+  wishlistWidgetAlert={() => {
+    // Your custom component
+  }}
+  collectionCard={({ data }) => {
+    // Your custom component
+  }}
+  pageCard={({ data }) => {
+    // Your custom component
+  }}
+  blogCard={({ data }) => {
+    // Your custom component
+  }}
+  articleCard={({ data }) => {
+    // Your custom component
+  }}
+/>;
+```
+
+### API reference
+
+<br />
+#### <span className="text-xl font-bold">`otherIndexList({ name, items, setShowPopupComponent })`</span>
+
+Render your own custom component in the app
+
+> <div className="not-italic">
+>   This attribute works in these packages:
+>   <ul className="mt-2">
+>     <li className="list-disc list-inside my-2">
+>       <span>`@sledge-app/react-instant-search`</span>
+>     </li>
+>   </ul>
+> </div>
+
+- Type: `ReactNode`
+- Default: `null`
+
+<br />
+#### <span className="text-xl font-bold">`productCard({ product, showPopupComponent, setShowPopupComponent, sourceApp })`</span>
+
+Render your own custom component in the app
+
+> <div className="not-italic">
+>   This attribute works in these packages:
+>   <ul className="mt-2">
+>     <li className="list-disc list-inside my-2">
+>       <span>`@sledge-app/react-wishlist`</span>
+>     </li>
+>     <li className="list-disc list-inside my-2">
+>       <span>`@sledge-app/react-instant-search`</span>
+>     </li>
+>   </ul>
+> </div>
+
+- Type: `ReactNode`
+- Default: `null`
+
+<br />
+#### <span className="text-xl font-bold">`searchViewMoreResult({ keyword, setShowPopupComponent, setRenderSearchResult, redirectObjectDirection })`</span>
+
+Render your own custom component in the app
+
+> <div className="not-italic">
+>   This attribute works in these packages:
+>   <ul className="mt-2">
+>     <li className="list-disc list-inside my-2">
+>       <span>`@sledge-app/react-instant-search`</span>
+>     </li>
+>   </ul>
+> </div>
+
+- Type: `ReactNode`
+- Default: `null`
+
+<br />
+#### <span className="text-xl font-bold">`suggestionKeywordList({ keywords, setShowPopupComponent, setRenderSearchResult })`</span>
+
+Render your own custom component in the app
+
+> <div className="not-italic">
+>   This attribute works in these packages:
+>   <ul className="mt-2">
+>     <li className="list-disc list-inside my-2">
+>       <span>`@sledge-app/react-instant-search`</span>
+>     </li>
+>   </ul>
+> </div>
+
+- Type: `ReactNode`
+- Default: `null`
+
+<br />
+#### <span className="text-xl font-bold">`wishlistWidgetAlert()`</span>
+
+Render your own custom component in the app
+
+> <div className="not-italic">
+>   This attribute works in these packages:
+>   <ul className="mt-2">
+>     <li className="list-disc list-inside my-2">
+>       <span>`@sledge-app/react-wishlist`</span>
+>     </li>
+>   </ul>
+> </div>
+
+- Type: `ReactNode`
+- Default: `null`
+
+<br />
+#### <span className="text-xl font-bold">`collectionCard({ data })`</span>
+
+Render your own custom component in the app
+
+> <div className="not-italic">
+>   This attribute works in these packages:
+>   <ul className="mt-2">
+>     <li className="list-disc list-inside my-2">
+>       <span>`@sledge-app/react-instant-search`</span>
+>     </li>
+>   </ul>
+> </div>
+
+- Type: `ReactNode`
+- Default: `null`
+
+<br />
+#### <span className="text-xl font-bold">`pageCard({ data })`</span>
+
+Render your own custom component in the app
+
+> <div className="not-italic">
+>   This attribute works in these packages:
+>   <ul className="mt-2">
+>     <li className="list-disc list-inside my-2">
+>       <span>`@sledge-app/react-instant-search`</span>
+>     </li>
+>   </ul>
+> </div>
+
+- Type: `ReactNode`
+- Default: `null`
+
+<br />
+#### <span className="text-xl font-bold">`blogCard({ data })`</span>
+
+Render your own custom component in the app
+
+> <div className="not-italic">
+>   This attribute works in these packages:
+>   <ul className="mt-2">
+>     <li className="list-disc list-inside my-2">
+>       <span>`@sledge-app/react-instant-search`</span>
+>     </li>
+>   </ul>
+> </div>
+
+- Type: `ReactNode`
+- Default: `null`
+
+<br />
+#### <span className="text-xl font-bold">`articleCard({ data })`</span>
+
+Render your own custom component in the app
+
+> <div className="not-italic">
+>   This attribute works in these packages:
+>   <ul className="mt-2">
+>     <li className="list-disc list-inside my-2">
+>       <span>`@sledge-app/react-instant-search`</span>
+>     </li>
+>   </ul>
+> </div>
+
+- Type: `ReactNode`
+- Default: `null`
+
+## Learn more
+
+Congratulations! Now that you've learned the `@sledge-app/core` API references, you can start integrating Sledge to your store. Useful resources about integrating Sledge : 
+
+- [How to use Wishlist app](/wishlist)
+- [How to use Product Review app](/product-review)
+- [How to use Instant Search app](/instant-search)
+- [How to use Product Filters app](/product-filters)
+- [How to add Callback Functions](/callback-functions)
+- [How to add Custom Components](/custom-components)

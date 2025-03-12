@@ -1,0 +1,37 @@
+import { Cards, Card } from "nextra/components";
+import { CHANGE_LOG_VERSIONS } from "~/data/changelog";
+
+# Sledge Changelog
+
+<p className="py-4">List of all sledge's app changelog</p>
+
+<Cards className="!grid-cols-1 max-w-2xl [&_.nextra-card>span]:justify-between">
+    {
+        CHANGE_LOG_VERSIONS.map((changeLog) => {
+            return (
+                changeLog.show && //TODO: remove this condition when the package version has been applied
+                <Card
+                    key={changeLog.title}
+                    title={
+                        <div className="flex flex-col">
+                            <span className="font-bold gradient-text-primary">{changeLog.title}</span>
+                            {
+                                changeLog.latestVersion && 
+                                    <div className="text-xs mt-2 text-gray-3">Latest version: {changeLog.latestVersion} 
+                                        {
+                                            changeLog.latestVersionDate && <span className="mx-1">•</span>
+                                        }
+                                        <span className="font-thin">{changeLog.latestVersionDate}</span>
+                                    </div>
+                            }
+                        </div>
+                    }
+                    href={changeLog.href}
+                    arrow={true}
+                />
+            )
+        })
+    }
+</Cards>
+
+

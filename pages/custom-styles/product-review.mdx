@@ -1,0 +1,954 @@
+import { Steps, Code, Pre, Callout } from "nextra/components";
+import Image from "next/image";
+import { Table } from "~/components/global";
+import {
+  IMAGE_CUSTOM_STYLES_RATING,
+  IMAGE_APPS_REVIEW_RATING,
+  IMAGE_APPS_REVIEW_LIST,
+  IMAGE_CUSTOM_STYLES_REVIEW_POPUP,
+  IMAGE_CUSTOM_STYLES_REVIEW_FORM_STEP_1,
+  IMAGE_CUSTOM_STYLES_REVIEW_FORM_STEP_2,
+  IMAGE_CUSTOM_STYLES_REVIEW_FORM_STEP_3,
+  IMAGE_CUSTOM_STYLES_CONFIRMATION_POPUP,
+  IMAGE_CUSTOM_STYLES_REVIEW_LIST_TYPE,
+  IMAGE_APPS_REVIEW_HAPPY_CUSTOMER_PAGE,
+  IMAGE_CUSTOM_STYLES_REVIEW_IMAGE_LIST,
+  IMAGE_APPS_REVIEW_STICKY_REVIEW_BADGE,
+  IMAGE_APPS_REVIEW_TRUST_BADGE,
+  IMAGE_APPS_REVIEW_SNIPPET_WIDGET
+} from "~/lib/const";
+
+# Product Review
+
+All of Sledge's themes use of several kinds of classes. To assist you in customizing CSS to your needs, the most frequently used element selectors and classes are listed below.
+
+- [Rating](#rating)
+- [List](#list)
+- [Review Popup](#review-popup)
+- [Write Review Form](#write-review-form)
+- [Happy Customers Page](#happy-customers-page)
+- [Sticky Sidebar Widget](#sticky-sidebar-widget)
+- [Trust Badge](#trust-badge)
+- [Snippet Carousel Widget](#snippet-carousel-widget)
+
+## Rating
+
+<Image
+  src={IMAGE_CUSTOM_STYLES_RATING}
+  alt="sledge-image-docs"
+  className="mt-3 rounded-[12px] w-auto max-h-[359px]"
+/>
+
+<Table
+  data={{
+    thead: [{ title: "Class" }, { title: "Description" }],
+    tbody: [
+      ["`sledge-product-review__rating`", "Rating component"],
+      ["`sledge-product-review__rating-summary-total`", "Rating count"],
+    ],
+  }}
+/>
+
+<Callout type="info">
+  You can edit this component with `Using Backend` in `Star Rating Color`
+  section, check out [here](/backend-product-review#star-rating-color).
+</Callout>
+
+### Using Selector
+
+<Table
+  data={{
+    thead: [{ title: "Selector" }, { title: "Description" }],
+    tbody: [
+      [
+        "`#sledge-product-review-icons-rating-icon-fill path`",
+        <>
+          Rating color,
+          <br />
+          you can use this selector to edit rating color
+          <br />
+          <br />
+          e.g : `fill:yellow`
+        </>,
+      ],
+    ],
+  }}
+/>
+
+## List
+
+### Grid Type
+
+<Image
+  src={IMAGE_APPS_REVIEW_LIST}
+  alt="sledge-image-docs"
+  className="mt-5"
+  width="668"
+  height="164"
+/>
+
+<Table
+  data={{
+    thead: [{ title: "Class" }, { title: "Description" }],
+    tbody: [
+      [
+        "`sledge-product-review__widget-review-wrapper`",
+        "Review lists wrapper",
+      ],
+      [
+        "`sledge-product-review__widget-review-card-content`",
+        "Review card content wrapper",
+      ],
+      ["`sledge-product-review__widget-review-card-customer`", "Reviewer name"],
+      ["`sledge-product-review__widget-review-card-date`", "Review submitted"],
+      ["`sledge-product-review__widget-review-card-message`", "Review message"],
+      [
+        "`sledge-product-review__widget-review-card-reply`",
+        "Review Reply wrapper",
+      ],
+      [
+        "`sledge-product-review__widget-review-card-reply-name`",
+        "Review Reply name",
+      ],
+      [
+        "`sledge-product-review__widget-review-card-verified-text`",
+        "Review Reply verified badge",
+      ],
+      [
+        "`sledge-product-review__widget-review-card-reply-message`",
+        "Review Reply message",
+      ],
+    ],
+  }}
+/>
+
+<Callout type="info">
+  You can edit `Write a Review` button with `Using Backend` in `Button : Write a
+  Review` section, check out
+  [here](/backend-product-review#button--write-a-review).
+</Callout>
+
+<Callout type="info">
+  You can edit `Verified` badge with `Using Backend` in `Verified Badge`
+  section, check out [here](/backend-product-review#verified-badge).
+</Callout>
+
+<Callout type="info">
+  You can edit `Load More` button with `Using Backend` in `Button : Load More`
+  section, check out [here](/backend-product-review#button--load-more).
+</Callout>
+
+<Callout type="info">
+  For `Rating stars` component, you can check out
+  [here](/custom-styles/product-review#rating).
+</Callout>
+
+#### Using Selector
+
+<Table
+  data={{
+    thead: [{ title: "Selector" }, { title: "Description" }],
+    tbody: [
+      [
+        "`.sledge-product-review__widget-review-card-image img`",
+        <>
+          Review image,
+          <br />
+          you can use this selector to edit review image
+        </>,
+      ],
+      [
+        "`.sledge-product-review__widget-review-card-reply-title img`",
+        <>
+          Admin avatar,
+          <br />
+          you can use this selector to edit admin avatar
+        </>,
+      ],
+    ],
+  }}
+/>
+
+### List Type
+
+<Image
+  src={IMAGE_CUSTOM_STYLES_REVIEW_LIST_TYPE}
+  alt="sledge-image-docs"
+  className="mt-3 rounded-[12px] w-auto max-h-[359px] border"
+  width="668"
+  height="164"
+/>
+
+<Table
+  data={{
+    thead: [{ title: "Class" }, { title: "Description" }],
+    tbody: [
+      [
+        "`sledge-product-review__widget-review-wrapper`",
+        "Review lists wrapper",
+      ],
+      [
+        "`sledge-product-review__widget-review-card`",
+        "Review card content wrapper",
+      ],
+      ["`sledge-product-review__widget-review-card-customer`", "Reviewer name"],
+      ["`sledge-product-review__widget-review-card-date`", "Review submitted"],
+      ["`sledge-product-review__widget-review-card-message`", "Review message"],
+      [
+        "`sledge-product-review__widget-review-card-reply`",
+        "Review Reply wrapper",
+      ],
+      [
+        "`sledge-product-review__widget-review-card-reply-name`",
+        "Review Reply name",
+      ],
+      [
+        "`sledge-product-review__widget-review-card-verified-text`",
+        "Review Reply verified badge",
+      ],
+      [
+        "`sledge-product-review__widget-review-card-reply-message`",
+        "Review Reply message",
+      ],
+    ],
+  }}
+/>
+
+<Callout type="info">
+  You can edit `Write a Review` button with `Using Backend` in `Button : Write a
+  Review` section, check out
+  [here](/backend-product-review#button--write-a-review).
+</Callout>
+
+<Callout type="info">
+  You can edit `Verified` badge with `Using Backend` in `Verified Badge`
+  section, check out [here](/backend-product-review#verified-badge).
+</Callout>
+
+<Callout type="info">
+  For `Rating stars` component, you can check out
+  [here](/custom-styles/product-review#rating).
+</Callout>
+
+<Callout type="info">
+  For `Pagination` component, you can check out
+  [here](/custom-styles/global#pagination).
+</Callout>
+
+#### Using Selector
+
+<Table
+  data={{
+    thead: [{ title: "Selector" }, { title: "Description" }],
+    tbody: [
+      [
+        "`.sledge-product-review__widget-review-card-image img`",
+        <>
+          Review image,
+          <br />
+          you can use this selector to edit review image
+        </>,
+      ],
+      [
+        "`.sledge-product-review__widget-review-card-reply-title img`",
+        <>
+          Admin avatar,
+          <br />
+          you can use this selector to edit admin avatar
+        </>,
+      ],
+    ],
+  }}
+/>
+
+### Rating Summary
+
+<Image
+  src={IMAGE_APPS_REVIEW_RATING}
+  alt="sledge-image-docs"
+  className="mt-5"
+  width="244"
+  height="59"
+/>
+
+<Table
+  data={{
+    thead: [{ title: "Class" }, { title: "Description" }],
+    tbody: [
+      ["`sledge-product-review__rating`", "Rating component"],
+      ["`sledge-product-review__widget-summary-average`", "Review average"],
+      ["`sledge-product-review__widget-summary-total`", "Review total"],
+      [
+        "`sledge-product-review__widget-summary-total-desc`",
+        "Review total text",
+      ],
+      ["`summary-trigger-icon`", "Review summary trigger icon"],
+    ],
+  }}
+/>
+
+<Callout type="info">
+  You can edit `Summary Bar Colors` badge with `Using Backend` in `Summary Bar
+  Colors` section, check out [here](/backend-product-review#summary-bar-colors).
+</Callout>
+
+<Callout type="info">
+  For `Rating stars` component, you can check out
+  [here](/custom-styles/product-review#rating).
+</Callout>
+
+## Review Popup
+
+<Image
+  src={IMAGE_CUSTOM_STYLES_REVIEW_POPUP}
+  alt="sledge-image-docs"
+  className="mt-3 rounded-[12px] w-auto max-h-[359px] border"
+/>
+
+<Table
+  data={{
+    thead: [{ title: "Class" }, { title: "Description" }],
+    tbody: [
+      ["`sledge-product-review__widget-popup-flex`", "Review popup wrapper"],
+      [
+        "`sledge-product-review__widget-popup-close`",
+        "Review popup close button",
+      ],
+      ["`sledge-review-card-image`", "Review popup images"],
+      [
+        "`sledge-product-review__widget-popup-media-nav`",
+        "Review popup image next and prev button",
+      ],
+      [
+        "`sledge-product-review__widget-popup-content-title`",
+        "Review popup name",
+      ],
+      [
+        "`sledge-product-review__widget-popup-content-title`",
+        "Review popup name",
+      ],
+      [
+        "`sledge-product-review__widget-popup-content-date`",
+        "Review popup submitted date",
+      ],
+      [
+        "`sledge-product-review__widget-popup-content-title-description`",
+        "Review popup title",
+      ],
+      [
+        "`sledge-product-review__widget-popup-content-message`",
+        "Review popup message",
+      ],
+      [
+        "`sledge-product-review__widget-review-card-reply-profile-image`",
+        "Admin avatar",
+      ],
+      ["`sledge-product-review__widget-review-card-reply-name`", "Admin name"],
+      [
+        "`sledge-product-review__widget-review-card-verified-text`",
+        "verified badge",
+      ],
+    ],
+  }}
+/>
+
+<Callout type="info">
+  You can edit `Verified` badge with `Using Backend` in `Verified Badge`
+  section, check out [here](/backend-product-review#verified-badge).
+</Callout>
+
+<Callout type="info">
+  For `Rating stars` component, you can check out
+  [here](/custom-styles/product-review#rating).
+</Callout>
+
+## Write Review Form
+
+### Select Rating
+
+<Image
+  src={IMAGE_CUSTOM_STYLES_REVIEW_FORM_STEP_1}
+  alt="sledge-image-docs"
+  className="mt-3 rounded-[12px] w-auto max-h-[359px]"
+/>
+
+<Table
+  data={{
+    thead: [{ title: "Class" }, { title: "Description" }],
+    tbody: [
+      [
+        "`sledge-product-review__widget-form-add-content`",
+        "Review form wrapper",
+      ],
+      [
+        "`sledge-product-review__widget-form-add-step-close`",
+        "Review form close button",
+      ],
+      ["`sledge-product-review__widget-form-title`", "Review form title"],
+      [
+        "`sledge-product-review__widget-form-select-rate-list-item`",
+        "Review form select rate",
+      ],
+      [
+        "`sledge-product-review__widget-form-select-rate-text`",
+        "Review form select rate text",
+      ],
+    ],
+  }}
+/>
+
+<Callout type="info">
+  For `Rating stars` component, you can check out
+  [here](/custom-styles/product-review#rating).
+</Callout>
+
+#### Using Selector
+
+<Table
+  overflow={true}
+  data={{
+    thead: [{ title: "Selector" }, { title: "Description" }],
+    tbody: [
+      [
+        "`.sledge-product-review__widget-form-select-rate-list-item.selected`",
+        <>
+          Selected rate,
+          <br />
+          you can use this selector to edit background color
+          <br />
+          when rate is selected
+        </>,
+      ],
+      [
+        "`.sledge-product-review__widget-form-add-step-navigator .sledge__button`",
+        <>
+          Next button,
+          <br />
+          you can use this selector to edit size, background color & etc
+        </>,
+      ],
+    ],
+  }}
+/>
+
+### Write Review
+
+<Image
+  src={IMAGE_CUSTOM_STYLES_REVIEW_FORM_STEP_2}
+  alt="sledge-image-docs"
+  className="mt-3 rounded-[12px] w-auto max-h-[359px]"
+/>
+
+<Table
+  data={{
+    thead: [{ title: "Class" }, { title: "Description" }],
+    tbody: [
+      [
+        "`sledge-product-review__widget-form-add-content`",
+        "Review form wrapper",
+      ],
+      [
+        "`sledge-product-review__widget-form-add-step-back`",
+        "Review form step back button",
+      ],
+      ["`sledge-product-review__widget-form-title`", "Review form title"],
+      ["`sledge__text-area-field`", "Review form text area fields"],
+      ["`sledge__text-area-field-counter`", "Review form text area counter"],
+      [
+        "`sledge-product-review__widget-form-upload-media-file`",
+        "Review form media upload",
+      ],
+      ["`sledge-icon__upload`", "Review form upload icon"],
+    ],
+  }}
+/>
+
+#### Using Selector
+
+<Table
+  overflow={true}
+  data={{
+    thead: [{ title: "Selector" }, { title: "Description" }],
+    tbody: [
+      [
+        "`.sledge-product-review__widget-form-upload-media-text>span`",
+        <>
+          Media upload text,
+          <br />
+          you can use this selector to edit text size, color & etc
+        </>,
+      ],
+      [
+        "`.sledge-product-review__widget-form-add-step-navigator .sledge__button`",
+        <>
+          Next button,
+          <br />
+          you can use this selector to edit size, background color & etc
+        </>,
+      ],
+    ],
+  }}
+/>
+
+### Input User Information
+
+<Image
+  src={IMAGE_CUSTOM_STYLES_REVIEW_FORM_STEP_3}
+  alt="sledge-image-docs"
+  className="mt-3 rounded-[12px] w-auto max-h-[359px]"
+/>
+
+<Table
+  data={{
+    thead: [{ title: "Class" }, { title: "Description" }],
+    tbody: [
+      [
+        "`sledge-product-review__widget-form-add-content`",
+        "Review form wrapper",
+      ],
+      [
+        "`sledge-product-review__widget-form-add-step-back`",
+        "Review form step back button",
+      ],
+      ["`sledge-product-review__widget-form-title`", "Review form title"],
+      [
+        "`sledge-product-review__widget-form-review-description`",
+        "Review form description",
+      ],
+    ],
+  }}
+/>
+
+<Callout type="info">
+  For `input` field, you can check out
+  [here](/custom-styles/global#input-field).
+</Callout>
+
+#### Using Selector
+
+<Table
+  overflow={true}
+  data={{
+    thead: [{ title: "Selector" }, { title: "Description" }],
+    tbody: [
+      [
+        "`.sledge-product-review__widget-form-add-step-navigator .sledge__button`",
+        <>
+          Add review button,
+          <br />
+          you can use this selector to edit size, background color & etc
+        </>,
+      ],
+    ],
+  }}
+/>
+
+### Confirmation Popup
+
+<Image
+  className="mt-3 rounded-[24px] w-auto max-h-[359px] border border-[rgba(67,198,172,1)]"
+  src={IMAGE_CUSTOM_STYLES_CONFIRMATION_POPUP}
+  alt="sledge-image-docs"
+/>
+
+<Callout type="info">
+  For `Confirmation Popup` component, you can check out
+  [here](/custom-styles/global#confirmation-popup).
+</Callout>
+
+## Happy Customers Page
+
+<Image
+  className="mt-3 rounded-[24px] w-auto max-h-[460px] border border-[rgba(67,198,172,1)]"
+  src={IMAGE_APPS_REVIEW_HAPPY_CUSTOMER_PAGE}
+  alt="sledge-image-docs"
+/>
+
+<Table
+  data={{
+    thead: [{ title: "Class" }, { title: "Description" }],
+    tbody: [
+      [
+        "`sledge-product-review__happy-customers-page-widget-wrapper`",
+        "Happy Customers Page wrapper",
+      ],
+      [
+        "`sledge-product-review__happy-customers-page-widget-header`",
+        "Happy Customers Page header wrapper",
+      ],
+      [
+        "`sledge-product-review__happy-customers-page-widget-header`",
+        "Happy Customers Page header wrapper",
+      ],
+    ],
+  }}
+/>
+
+<Callout type="info">
+  For `Rating stars` component, you can check out
+  [here](/custom-styles/product-review#rating).
+</Callout>
+
+<Callout type="info">
+  You can edit this component with `Using Backend` in `Happy Customer Page`
+  section, check out [here](/backend-product-review#happy-customers-page).
+</Callout>
+
+#### Using Selector
+
+<Table
+  overflow={true}
+  data={{
+    thead: [{ title: "Selector" }, { title: "Description" }],
+    tbody: [
+      [
+        "`.sledge-product-review__happy-customers-page-widget-average .sledge-product-review__widget-summary-average`",
+        <>
+          Average number,
+          <br/>
+          you can use this selector to edit font size & color.
+        </>,
+      ],
+      [
+        "`.sledge-product-review__happy-customers-page-widget-summary-rating .sledge-product-review__rating`",
+        <>
+          Average rating,
+          <br/>
+          you can use this selector to edit rating width.
+        </>,
+      ],
+      [
+        "`.sledge-product-review__happy-customers-page-widget-summary-total span`",
+        <>
+          Average total,
+          <br/>
+          you can use this selector to edit font size & color.
+        </>,
+      ],
+      [
+        "`.sledge-product-review__happy-customers-page-widget-tab button`",
+        <>
+          Product review & Shop Review button,
+          <br/>
+          you can use this selector to edit button or font size & color.
+        </>,
+      ],
+      [
+        "`.sledge-product-review__happy-customers-page-widget-header .sledge-product-review__widget-summary`",
+        <>
+          Review Summary bar wrapper,
+          <br/>
+          you can use this selector to edit summary width.
+        </>,
+      ],
+      [
+        "`.sledge-product-review__happy-customers-page-widget-header .sledge-product-review__widget-summary .sledge-product-review__rating`",
+        <>
+          Review Summary bar rating,
+          <br/>
+          you can use this selector to edit rating width.
+        </>,
+      ],
+      [
+        "`.sledge-product-review__happy-customers-page-widget-header .sledge-product-review__widget-summary .sledge__progress`",
+        <>
+          Review Summary bar progress,
+          <br/>
+          you can use this selector to edit progress width & etc.
+        </>,
+      ],
+      [
+        "`.sledge-product-review__happy-customers-page-widget-header .sledge-product-review__widget-summary .sledge-product-review__happy-customers-page-widget-summary-dist-total`",
+        <>
+          Review Summary bar total,
+          <br/>
+          you can use this selector to edit font size & color.
+        </>,
+      ],
+      [
+        "`.sledge-product-review__happy-customers-page-widget-header .sledge-product-review__happy-customers-page-widget-header-buttons-flex`",
+        <>
+          Write Store Review button & Sort button wrapper,
+          <br/>
+          you can use this selector to edit element width.
+        </>,
+      ],
+      [
+        "`.sledge-product-review__happy-customers-page-widget-header .sledge-product-review__happy-customers-page-widget-header-buttons-flex button`",
+        <>
+          Write Store Review button & Sort button,
+          <br/>
+          you can use this selector to edit button width & color.
+        </>,
+      ],
+      [
+        "`.sledge-product-review__happy-customers-page-widget-wrapper .sledge-product-review__widget-about-product-text`",
+        <>
+          About Product link
+          <br/>
+          you can use this selector to edit font size & color.
+        </>,
+      ],
+    ],
+  }}
+/>
+
+### Image Grid Type
+
+<Image
+  src={IMAGE_CUSTOM_STYLES_REVIEW_IMAGE_LIST}
+  alt="sledge-image-docs"
+  className="mt-5 rounded-3xl"
+  width="568"
+  height="124"
+/>
+
+<Table
+  data={{
+    thead: [{ title: "Class" }, { title: "Description" }],
+    tbody: [
+      [
+        "`sledge-product-review__widget-review-card-image-grid-wrapper`",
+        "Review card image wrapper",
+      ],
+    ],
+  }}
+/>
+
+<Callout type="info">
+  You can edit this component with `Using Backend` in `Happy Customer Page`
+  section, check out [here](/backend-product-review#happy-customers-page).
+</Callout>
+
+#### Using Selector
+
+<Table
+  overflow={true}
+  data={{
+    thead: [{ title: "Selector" }, { title: "Description" }],
+    tbody: [
+      [
+        "`.sledge-product-review__widget-review-card-image-grid-more-image span`",
+        <>
+          Review more images label,
+          <br/>
+          you can use this selector to edit font size & color.
+        </>,
+      ],
+      [
+        "`.sledge-product-review__widget-review-card-image-grid-more-image .sledge-icon__gallery-add`",
+        <>
+          Review more images icon.
+          <br/>
+          you can use this selector to edit icon width, height & color.
+        </>,
+      ],
+      [
+        "`.sledge-product-review__widget-review-card-image-grid-wrapper img`",
+        <>
+          Review card image.
+          <br/>
+          you can use this selector to edit image width, height & position.
+        </>,
+      ],
+    ],
+  }}
+/>
+
+
+### Grid Type
+
+<Image
+  src={IMAGE_APPS_REVIEW_LIST}
+  alt="sledge-image-docs"
+  className="mt-5"
+  width="668"
+  height="164"
+/>
+
+<Callout type="info">
+  For `Grid` type, you can check out
+  [here](/custom-styles/product-review#grid-type).
+</Callout>
+
+<Callout type="info">
+  You can edit this component with `Using Backend` in `Happy Customer Page`
+  section, check out [here](/backend-product-review#happy-customers-page).
+</Callout>
+
+### List Type
+
+<Image
+  src={IMAGE_CUSTOM_STYLES_REVIEW_LIST_TYPE}
+  alt="sledge-image-docs"
+  className="mt-3 rounded-[12px] w-auto max-h-[359px] border"
+  width="668"
+  height="164"
+/>
+
+<Callout type="info">
+  For `List` type, you can check out
+  [here](/custom-styles/product-review#list-type).
+</Callout>
+
+<Callout type="info">
+  You can edit this component with `Using Backend` in `Happy Customer Page`
+  section, check out [here](/backend-product-review#happy-customers-page).
+</Callout>
+
+## Trust Badge
+
+<Image
+  src={IMAGE_APPS_REVIEW_TRUST_BADGE}
+  alt="sledge-image-docs"
+  className="mt-3 rounded-[12px] w-auto max-h-[359px]"
+/>
+
+<Table
+  data={{
+    thead: [{ title: "Class" }, { title: "Description" }],
+    tbody: [
+      ["`sledge-product-review__trust-badge`", "Trust badge component"],
+      ["`sledge-product-review__trust-badge-average-text`", "Trust badge average text"],
+      ["`sledge-product-review__trust-badge-text`", "Trust badge text"],
+      ["`sledge-product-review__trust-badge-logo-text`", "Trust badge logo text"],
+    ],
+  }}
+/>
+
+<Callout type="info">
+  You can edit this component with `Using Backend` in `Trust Badge Widget`
+  section, check out [here](/backend-product-review#trust-badge-widget).
+</Callout>
+
+### Using Selector
+
+<Table
+  data={{
+    thead: [{ title: "Selector" }, { title: "Description" }],
+    tbody: [
+      [
+        "`#sledge-product-review-icons-rating-icon-fill path`",
+        <>
+          Rating color,
+          <br />
+          you can use this selector to edit rating color
+          <br />
+          <br />
+          e.g : `fill:yellow`
+        </>,
+      ],
+    ],
+  }}
+/>
+
+## Sticky Sidebar Widget
+
+<Image
+  className="mt-3 rounded-[24px] w-auto max-h-[460px] border border-[rgba(67,198,172,1)]"
+  src={IMAGE_APPS_REVIEW_STICKY_REVIEW_BADGE}
+  alt="sledge-image-docs"
+  width="105"
+  height="290"
+/>
+
+<Table
+  data={{
+    thead: [{ title: "Class" }, { title: "Description" }],
+    tbody: [
+      [
+        "`sledge-product-review__badge-floating`",
+        "Sticky Sidebar Widget wrapper"
+      ],
+      [
+        "`sledge-product-review__badge-floating-icon-link`",
+        <>
+          Sticky Sidebar Widget total & rating wrapper,
+          <br/>
+          you can use this class to edit button color & size.
+        </>
+      ],
+      [
+        "`sledge-product-review__badge-floating-text`",
+        <>
+          Sticky Sidebar Widget total text,
+          <br/>
+          you can use this class to edit font color & size.
+        </>
+      ]
+    ],
+  }}
+/>
+
+<Callout type="info">
+  For `Rating stars` component, you can check out
+  [here](/custom-styles/product-review#rating).
+</Callout>
+
+<Callout type="info">
+  You can edit this component with `Using Backend` in `Sticky Sidebar Widget`
+  section, check out [here](/backend-product-review#sticky-sidebar-widget).
+</Callout>
+
+## Snippet Carousel Widget
+
+<Image
+  className="mt-3 rounded-[24px] w-auto max-h-[460px] border border-[rgba(67,198,172,1)]"
+  src={IMAGE_APPS_REVIEW_SNIPPET_WIDGET}
+  alt="sledge-image-docs"
+  width="464"
+  height="130"
+/>
+
+<Table
+  data={{
+    thead: [{ title: "Class" }, { title: "Description" }],
+    tbody: [
+      [
+        "`sledge-product-review__snippet`",
+        "Snippet Widget wrapper"
+      ],
+      [
+        "`sledge-product-review__snippet-card-image`",
+        "Snippet Widget review image"
+      ],
+      [
+        "`sledge-product-review__snippet-card-name`",
+        "Snippet Widget reviewer name"
+      ],
+      [
+        "`sledge-product-review__snippet-card-rating`",
+        "Snippet Widget rating"
+      ],
+      [
+        "`sledge__carousel`",
+        "Carousel wrapper"
+      ],
+      [
+        "`sledge__carousel-button`",
+        "Carousel button"
+      ],
+      [
+        "`sledge__carousel-button-prev`",
+        "Carousel prev button"
+      ],
+      [
+        "`sledge__carousel-button-next`",
+        "Carousel next button"
+      ],
+      [
+        "`sledge__carousel-viewport`",
+        "Carousel viewport"
+      ],
+      [
+        "`sledge__carousel-container`",
+        "Carousel container"
+      ],
+    ],
+  }}
+/>
+
+<Callout type="info">
+  You can edit this component with `Using Backend` in `Snippet Widget`
+  section, check out [here](/backend-product-review#snippet-widget).
+</Callout>

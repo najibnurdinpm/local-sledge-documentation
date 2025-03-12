@@ -1,0 +1,85 @@
+import { Steps } from "nextra/components";
+import Image from "next/image";
+import {
+  IMAGE_BACKEND_WISHLIST_ACTIVITY_SEARCH,
+  IMAGE_BACKEND_WISHLIST_ACTIVITY_SAVED_VIEWS_POINT_1,
+  IMAGE_BACKEND_WISHLIST_ACTIVITY_SAVED_VIEWS_POINT_2,
+  IMAGE_BACKEND_WISHLIST_ACTIVITY_SAVED_VIEWS_POINT_3,
+  IMAGE_BACKEND_WISHLIST_ACTIVITY_SAVED_VIEWS_POINT_4
+} from "~/lib/const";
+
+# Using Backend
+
+## Search Functionality
+
+Using flexible data searches. Searching in all or use key to specific.
+
+### Works on Menu
+<div>
+- Sledge App › Wishlist › Activity
+- Sledge App › Review › Manage
+- Sledge App › Review › Activity
+</div>
+
+### List of Key
+<div className="mb-6">
+- Wishlist - Activity
+    - `customer`, eg. `customer`: keyword.
+    - `product`, eg. `product`: keyword.
+    - `action`, eg. `action`: keyword.
+- Review - Manage
+    - `customer`, eg. `customer`: keyword.
+    - `product`, eg. `product`: keyword.
+    - `review`, eg. `action`: keyword.
+- Review - Activity
+    - `customer`, eg. `customer`: keyword.
+    - `product`, eg. `product`: keyword.
+    - `action`, eg. `action`: keyword.
+</div>
+
+For example:
+<Image
+  className="mt-3 rounded-[24px] w-auto max-h-[359px] border border-[rgba(67,198,172,1)]"
+  src={IMAGE_BACKEND_WISHLIST_ACTIVITY_SEARCH}
+  alt="sledge-image-docs"
+/>
+
+## Saved Views
+
+Allow you to search, sort, and filter the information in their index tables, then use the results to build customised saved views by following the steps below:
+
+<Steps>
+### Use tables to search, sort, and filter
+
+<Image
+  className="mt-3 rounded-[24px] w-auto max-h-[359px] border border-[rgba(67,198,172,1)]"
+  src={IMAGE_BACKEND_WISHLIST_ACTIVITY_SAVED_VIEWS_POINT_1}
+  alt="sledge-image-docs"
+/>
+
+### Save as view
+
+<Image
+  className="mt-3 rounded-[24px] w-auto max-h-[359px] border border-[rgba(67,198,172,1)]"
+  src={IMAGE_BACKEND_WISHLIST_ACTIVITY_SAVED_VIEWS_POINT_2}
+  alt="sledge-image-docs"
+/>
+
+### Input name view and save
+
+<Image
+  className="mt-3 rounded-[24px] w-auto max-h-[359px] border border-[rgba(67,198,172,1)]"
+  src={IMAGE_BACKEND_WISHLIST_ACTIVITY_SAVED_VIEWS_POINT_3}
+  alt="sledge-image-docs"
+/>
+
+### Finish
+
+Congratulations! Now you can see the result by clicking saved view tabs.
+
+<Image
+  className="mt-3 rounded-[24px] w-auto max-h-[359px] border border-[rgba(67,198,172,1)]"
+  src={IMAGE_BACKEND_WISHLIST_ACTIVITY_SAVED_VIEWS_POINT_4}
+  alt="sledge-image-docs"
+/>
+</Steps>

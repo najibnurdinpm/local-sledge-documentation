@@ -1,0 +1,345 @@
+import Image from "next/image";
+import {
+  IMAGE_APPS_REVIEW_RATING,
+  IMAGE_APPS_REVIEW_LIST,
+  IMAGE_APPS_REVIEW_HAPPY_CUSTOMER_PAGE,
+  IMAGE_APPS_REVIEW_TRUST_BADGE,
+  IMAGE_APPS_REVIEW_STICKY_REVIEW_BADGE,
+  IMAGE_APPS_REVIEW_SNIPPET_WIDGET
+} from "~/lib/const";
+
+# @sledge-app/react-product-review
+
+You can use our React-built widget by using the `@sledge-app/react-product-review` package.
+
+`@sledge-app/react-product-review` provides several components you can use to integrate it with your store.
+
+Available components :
+
+- [Rating](#rating)
+- [Widget](#widget)
+- [Happy Customers Page](#happy-customers-page)
+- [Trust Badge](#trust-badge)
+- [Sticky Sidebar Widget](#sticky-sidebar-widget)
+- [Snippet Carousel Widget](#snippet-carousel-widget)
+
+## `Rating`
+
+Rating is a Product Review's widget you can use to display your review's score and total rating of your product.<br/>
+
+[See example](/product-review#rating) <br/><br/>
+
+<Image
+  src={ IMAGE_APPS_REVIEW_RATING }
+  alt="Rating"
+  width="244"
+  height="59"
+/> <br />
+
+### Anatomy
+
+```tsx showLineNumbers copy
+import { Rating } from "@sledge-app/react-product-review";
+
+export default function SledgeProductReviewRating() {
+  return (
+    <Rating
+        params={{
+            productId: "",
+        }}
+        size="md"
+    />
+  );
+}
+```
+
+### API reference
+
+<br />
+##### <span className="text-xl font-bold">`params.productId`</span>
+
+Fill with your own product id
+
+- Type: `string`
+
+<br />
+##### <span className="text-xl font-bold">`size`</span>
+
+Customize rating size.
+
+- Type: `'xs' | 'sm' | 'md'`
+- Default: `'md'`
+
+## `Widget`
+
+You can use Widget to display list data of your product reviews. Typically used on product detail page.<br/>
+
+[See example](/product-review#list) <br/><br/>
+
+<Image
+  src={ IMAGE_APPS_REVIEW_LIST }
+  alt="List"
+  width="668"
+  height="164"
+/> <br />
+
+
+### Anatomy
+
+```tsx showLineNumbers copy
+import { Widget, WidgetHeader } from "@sledge-app/react-product-review";
+
+export default function SledgeProductReviewWidget() {
+  return (
+    <Widget.Root
+        params={{
+            productId: "",
+            productVariantId: "",
+        }}
+        width="1180px"
+        onAfterAddReview={(state) => {
+            // Your custom function
+        }}
+    >
+        <WidgetHeader>
+            <WidgetHeader.Summary />
+            <WidgetHeader.AddTrigger text="Add review" />
+            <WidgetHeader.Sort />
+        </WidgetHeader>
+        <Widget.List />
+    </Widget.Root>
+  );
+}
+```
+
+### API reference
+
+#### <span className="text-2xl gradient-text-primary font-bold">`<Widget.Root>`</span>
+
+<br />
+##### <span className="text-xl font-bold">`params.productId`</span>
+
+Fill with your own product id
+
+- Type: `string`
+
+<br />
+##### <span className="text-xl font-bold">`params.productVariantId`</span>
+
+Fill with your own product variant id
+
+- Type: `string`
+
+<br />
+##### <span className="text-xl font-bold">`width`</span>
+
+Customize max width of element.
+
+- Type: `string`
+- Default: `'1180px'`
+
+<br />
+##### <span className="text-xl font-bold">`onAfterAddReview(state: boolean)`</span>
+
+Running using your own custom function
+
+- Type: `function`
+- Required: `false`
+
+#### <span className="text-2xl gradient-text-primary font-bold">`<WidgetHeader.AddTrigger>`</span>
+
+<br />
+##### <span className="text-xl font-bold">`text`</span>
+
+Customize write review button title in widget
+
+- Type: `string`
+- Default: `'Add review'`
+
+## `Happy Customers Page`
+
+Happy Customers Page is a Product Review widget that you can use to display all reviews of your store, aimed at building credibility, trust, and confidence in potential customers by showcasing the real-life experiences of others who have interacted positively with your store.<br/>
+
+[See example](/product-review#happy-customers-page) <br/><br/>
+
+<Image
+  src={ IMAGE_APPS_REVIEW_HAPPY_CUSTOMER_PAGE }
+  alt="Happy Customers Page"
+  className="rounded-3xl"
+/> <br />
+
+### Anatomy
+
+```tsx showLineNumbers copy
+import { HappyCustomersPage } from '@sledge-app/react-product-review';
+ 
+export default function SledgeHappyCustomersPage() {
+  return (
+    <HappyCustomersPage.Root width=''>
+      <HappyCustomersPage.Header />
+      <HappyCustomersPage.List />
+    </HappyCustomersPage.Root>
+  );
+}
+```
+
+### API reference
+
+<br />
+#### <span className="text-2xl gradient-text-primary font-bold">`<HappyCustomersPage.Root>`</span>
+
+##### <span className="text-xl font-bold">`width`</span>
+
+Customize max width of element.
+
+- Type: `string`
+- Default: `'1180px'`
+- Required: `false`
+
+<br />
+
+## `Sticky Sidebar Widget`
+
+Sticky Sidebar Widget is a Product Review widget that you can use to display all reviews associated with store and products. This badge remains 'sticky' on your store, drawing attention to all reviews or ratings for potential customers.<br/>
+
+[See example](/product-review#sticky-sidebar-widget) <br/><br/>
+
+<Image
+  src={ IMAGE_APPS_REVIEW_STICKY_REVIEW_BADGE }
+  alt="Sticky Sidebar Widget"
+  className="rounded-3xl"
+  width="105"
+  height="290"
+/> <br />
+
+### Anatomy
+
+```tsx showLineNumbers copy
+import { StickySidebarWidget } from '@sledge-app/react-product-review';
+ 
+export default function SledgeStickySidebar() {
+  return (
+    <StickySidebarWidget position="" showRatingAverage="" />
+  );
+}
+```
+
+### API reference
+
+<br />
+
+##### <span className="text-xl font-bold">`position`</span>
+
+Place the widget based on the selected position.
+
+- Type: `string`
+- Value : `'none' | 'left' | 'right'`
+- Required: `false`
+
+<br />
+
+##### <span className="text-xl font-bold">`showRatingAverage`</span>
+
+Customize the rating average to be visible or not.
+
+- Type: `boolean`
+- Required: `false`
+
+<br />
+
+## `Trust Badge`
+
+The Trust Badge is a Product Review widget that you can use to display review scores from all of your products.<br/>
+
+[See example](/product-review#trust-badge) <br/><br/>
+
+<Image className="rounded-[24px] w-auto border" src={IMAGE_APPS_REVIEW_TRUST_BADGE} alt="Trust Badge" width="668" height="164" /> <br />
+
+### Anatomy
+
+```tsx showLineNumbers copy
+import { TrustBadge } from "@sledge-app/react-product-review";
+
+export default function SledgeTrustBadge() {
+    return (
+        <TrustBadge variant="medium-logo" fillColor="" outlineColor="" />
+    );
+}
+```
+
+### API reference
+
+<br />
+##### <span className="text-xl font-bold">`variant`</span>
+
+Changes the visual appearance of the Trust Badge.
+
+- Type: `'medium-logo' | 'medium' | 'small-logo'`
+- Default: `'medium-logo'`
+
+<br />
+##### <span className="text-xl font-bold">`fillColor`</span>
+
+Set the color for the SVG fill.
+
+- Type: `'string'`
+
+<br />
+##### <span className="text-xl font-bold">`outlineColor`</span>
+
+Set the color for the SVG outline.
+
+- Type: `'string'`
+
+<br/>
+
+## `Snippet Carousel Widget`
+
+Snippet Carousel Widget is a Product Review widget that you can use to display product reviews and ratings in a carousel format<br/>
+
+[See example](/product-review#snippet-carousel-widget) <br/><br/>
+
+<Image
+  className="rounded-[24px] border"
+  src={IMAGE_APPS_REVIEW_SNIPPET_WIDGET}
+  alt="Snippet Carousel Widget"
+  width="464"
+  height="130"
+/> <br />
+
+### Anatomy
+
+```tsx showLineNumbers copy
+import { Snippet } from "@sledge-app/react-product-review";
+
+export default function SledgeSnippetWidget() {
+  return <Snippet productId="" maxWidth="" />;
+}
+```
+
+### API reference
+
+<br />
+##### <span className="text-xl font-bold">`productId`</span>
+
+Fill with your own product id
+
+- Type: `string`
+- Required: `true`
+
+<br />
+##### <span className="text-xl font-bold">`maxWidth`</span>
+
+Customize max width of element.
+
+- Type: `string`
+- Required: `false`
+
+<br />
+
+## Learn more
+
+Congratulations! Now that you've learned the `@sledge-app/react-product-review` API references, you can start integrating Sledge to your store. Useful resources about integrating Sledge : 
+
+- [How to use Product Review app](/product-review)
+- [How to add Callback Functions](/callback-functions)

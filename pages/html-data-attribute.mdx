@@ -1,0 +1,951 @@
+# HTML Data Attribute
+
+You can use our JavaScript-built widget by using the `HTML Data Attribute` feature. Sledge provides several data attributes you can use to integrate it with your store.
+
+Available data attributes for :
+- [Embed script](#embed-script)
+- [Widgets](#widgets)
+
+
+## Embed script
+
+`Embed script` is a required element for sharing global user session and settings throughout the hierarchy of all sledge applications. <br />
+
+See example:
+- [Liquid](/installation/liquid#setup-with-embed-code-below)
+- [Webflow](/installation/webflow#setup-with-embed-code-below)
+
+### Anatomy
+
+```html showLineNumbers copy
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sledge-app/js@latest/dist/style.css" />
+
+<script
+    type="module"
+    id="sledge-embed-script"
+    src="https://cdn.jsdelivr.net/npm/@sledge-app/js@latest/dist/sledge.min.js"
+></script>
+
+<script>
+    var sledge = sledge || {};
+    sledge.config = {
+      userId: "",
+      userEmail: "",
+      userFullname: "",
+      domain: "",
+      locale: ""
+    };
+</script>
+```
+
+### API reference
+
+<br />
+#### <span className="text-xl font-bold gradient-text-primary">`sledge.config.userId`</span>
+
+Fill with your own user logined data
+
+- Type: `string`
+
+<br />
+#### <span className="text-xl font-bold gradient-text-primary">`sledge.config.userEmail`</span>
+
+Fill with your own user logined data
+
+- Type: `string`
+
+<br />
+#### <span className="text-xl font-bold gradient-text-primary">`sledge.config.userFullname`</span>
+
+Fill with your own user logined data
+
+- Type: `string`
+
+<br />
+#### <span className="text-xl font-bold gradient-text-primary">`sledge.config.domain`</span>
+
+Fill with your shop's `.myshopify.com` domain name
+
+- Type: `string`
+
+<br />
+#### <span className="text-xl font-bold gradient-text-primary">`sledge.config.locale`</span>
+
+Fill with your locale language
+
+- Type: `string`
+
+## Widgets
+
+`Widgets` are elements that provide attribute data needed for integration, each element of each application requires different attributes. <br />
+
+See example:
+- [Liquid](/installation/liquid#implement-widget)
+- [Webflow](/installation/webflow#implement-widget)
+
+### Anatomy
+
+```html showLineNumbers copy
+<div
+  data-component=""
+  data-width-element=""
+  data-icon-size=""
+  data-rating-size=""
+  data-query-keyword=""
+  data-query-share-id=""
+  data-url-search-result=""
+  data-use-proxy-url=""
+  data-position-widget=""
+  data-product-id=""
+  data-product-variant-id=""
+  data-product-name=""
+  data-product-vendor=""
+  data-product-sku=""
+  data-product-variant-name=""
+  data-product-link=""
+  data-product-image=""
+  data-product-currency=""
+  data-product-price=""
+  data-collection-id=""
+  data-collection-name=""
+  data-on-after-add-wishlist="customFunctionName"
+  data-on-after-remove-wishlist="customFunctionName"
+  data-on-after-add-review="customFunctionName"
+  data-on-after-render-product="customFunctionName"
+  data-on-after-render-collection="customFunctionName"
+  data-on-after-render-page="customFunctionName"
+  data-on-after-render-blog="customFunctionName"
+  data-on-after-render-article="customFunctionName"
+  data-render-other-index-list=""
+  data-render-product-card=""
+  data-render-collection-card=""
+  data-render-page-card=""
+  data-render-blog-card=""
+  data-render-article-card=""
+
+  data-render-search-view-more-result=""
+  data-render-suggestion-keyword-list=""
+  data-render-wishlist-widget-alert=""
+  data-render-review-product-info=""
+></div>
+
+<script>
+  function customFunctionName({ state }) {
+      if (state === 'success') {
+          // if condition is state === true, run your custom code
+      } else {
+          // if condition is state === true, run your custom code
+      }
+  }
+</script>
+```
+
+### API reference
+
+<br />
+#### <span className="text-xl font-bold gradient-text-primary">`data-component`</span>
+
+To specify the widget to be used.
+
+- Type:
+  - Wishlist:
+    - `'wishlist-badge'`
+    - `'wishlist-trigger'`
+    - `'wishlist-button-detail'`
+    - `'wishlist-widget'`
+  - Product Review:
+    - `'product-review-rating'`
+    - `'product-review-widget'`
+    - `'product-review-happy-customers-page'`
+    - `'product-review-sticky-sidebar-widget'`
+    - `'product-review-trust-badge'`
+    - `'product-review-snippet'`
+  - Instant Search:
+    - `'instant-search-widget'`
+    - `'instant-search-icon-widget'`
+    - `'instant-search-result-widget'`
+  - Product Filters:
+    - `'instant-search-product-filter-widget'`
+  - Product Recommendation:
+    - `'product-recommendation-recently-viewed'`
+
+<br />
+#### <span className="text-xl font-bold gradient-text-primary">`data-width-element`</span>
+
+Customize element width.
+
+<div>e.g: `'400px'`</div>
+
+> <div className="not-italic">
+>   This attribute works for widget 
+> 
+>   `'instant-search-widget' | 'product-review-happy-customers-page'
+>   | 'product-review-snippet'`.
+> </div>
+
+- Type: `string`
+
+<br />
+#### <span className="text-xl font-bold gradient-text-primary">`data-icon-size`</span>
+
+Customize icon size.
+
+> <div className="not-italic">
+>   This attribute works for widget `'instant-search-icon-widget'`.
+> </div>
+
+- Type: `'xs' | 'sm' | 'md'`
+- Default: `'sm'`
+
+<br />
+#### <span className="text-xl font-bold gradient-text-primary">`data-rating-size`</span>
+
+Customize rating size.
+
+> <div className="not-italic">
+>   This attribute works for widget `'product-review-rating'`.
+> </div>
+
+- Type: `'xs' | 'sm' | 'md'`
+- Default: `'md'`
+
+<br />
+#### <span className="text-xl font-bold gradient-text-primary">`data-fill-color`</span>
+
+Customize fill color svg.
+
+> <div className="not-italic">
+>   This attribute works for widget `'product-review-trust-badge'`.
+> </div>
+
+- Type: `'string'`
+
+<br />
+#### <span className="text-xl font-bold gradient-text-primary">`data-outline-color`</span>
+
+Customize outline color svg.
+
+> <div className="not-italic">
+>   This attribute works for widget `'product-review-trust-badge'`.
+> </div>
+
+- Type: `'string'`
+
+<br />
+#### <span className="text-xl font-bold gradient-text-primary">`data-query-keyword`</span>
+
+Fill up your unique queryParam name for keyword.
+
+> <div className="not-italic">
+>   This attribute works for widget `'instant-search-result-widget' |
+>   'instant-search-product-filter-widget'`.
+> </div>
+
+e.g: `https://your-online-store.com/collection/all?{value}=`
+
+- Type: `string`
+- Default: `'q'`
+
+<br />
+#### <span className="text-xl font-bold gradient-text-primary">`data-query-sort-by`</span>
+
+Fill up your unique queryParam name for sort by.
+
+> <div className="not-italic">
+>   This attribute works for widget `'instant-search-result-widget' |
+>   'instant-search-product-filter-widget'`.
+> </div>
+
+e.g: `https://your-online-store.com/collection/all?{value}=`
+
+- Type: `string`
+- Default: `'sort_by'`
+
+<br />
+#### <span className="text-xl font-bold gradient-text-primary">`data-query-page`</span>
+
+Fill up your unique queryParam name for page.
+
+> <div className="not-italic">
+>   This attribute works for widget `'instant-search-result-widget' |
+>   'instant-search-product-filter-widget'`.
+> </div>
+
+e.g: `https://your-online-store.com/collection/all?{value}=`
+
+- Type: `string`
+- Default: `'page'`
+
+<br />
+#### <span className="text-xl font-bold gradient-text-primary">`data-query-limit`</span>
+
+Fill up your unique queryParam name for limit.
+
+> <div className="not-italic">
+>   This attribute works for widget `'instant-search-result-widget' |
+>   'instant-search-product-filter-widget'`.
+> </div>
+
+e.g: `https://your-online-store.com/collection/all?{value}=`
+
+- Type: `string`
+- Default: `'limit'`
+
+<br />
+#### <span className="text-xl font-bold gradient-text-primary">`data-query-share-id`</span>
+
+Fill up your unique queryParam name for share id.
+
+<div>e.g: `https://your-online-store.com/pages/wishlist/?{value}=`</div>
+
+> <div className="not-italic">
+>   This attribute works for widget `'wishlist-widget'`.
+> </div>
+
+- Type: `string`
+- Default: `'share'`
+
+<br />
+#### <span className="text-xl font-bold gradient-text-primary">`data-url-search-result`</span>
+
+Fill up the route URL page where your Search Result widget is located.
+
+<div>e.g: `https://your-online-store.com/{value}`</div>
+
+> <div className="not-italic">
+>   This attribute works for widget `'instant-search'`.
+> </div>
+
+- Type: `string`
+
+<br />
+#### <span className="text-xl font-bold gradient-text-primary">`data-limit-options`</span>
+
+Customize limit options in widget.
+
+> <div className="not-italic">
+>   This attribute works for widget `'wishlist-widget'`.
+> </div>
+
+- Type: `string`
+- Default: `12, 24, 36, 48, 120`
+
+<br />
+#### <span className="text-xl font-bold gradient-text-primary">`data-use-proxy-url`</span>
+
+Define the url widgets on page that should be displayed (custom or proxy).
+
+> <div className="not-italic">
+>   This attribute works for widget `'wishlist-widget'`.
+> </div>
+
+- Type: `boolean`
+- Default: `false`
+
+<br />
+#### <span className="text-xl font-bold gradient-text-primary">`data-position-widget`</span>
+
+Place the widget based on the selected position.
+
+> <div className="not-italic">
+>   This attribute works for widget `'product-review-sticky-sidebar-widget'`
+> </div>
+
+- Type: `string`
+- Value: `'none' | 'left' | 'right'`
+- Required: `false`
+
+<br />
+#### <span className="text-xl font-bold gradient-text-primary">`data-product-id`</span>
+
+Fill with your own product id
+
+> <div className="not-italic">
+>   This attribute works for widget `'wishlist-trigger' |
+>   'wishlist-button-detail' | 'product-review-rating' |
+>   'product-review-widget' | 'product-recommendation-recently-viewed'
+>   'product-review-snippet`.
+> </div>
+
+- Type: `string`
+
+<br />
+#### <span className="text-xl font-bold gradient-text-primary">`data-product-variant-id`</span>
+
+Fill with your own product variant id
+
+> <div className="not-italic">
+>   This attribute works for widget `'wishlist-trigger' |
+>   'wishlist-button-detail' | 'product-review-widget'`.
+> </div>
+
+- Type: `string`
+
+<br />
+#### <span className="text-xl font-bold gradient-text-primary">`data-product-name`</span>
+
+Fill with your own product name
+
+> <div className="not-italic">
+>   This attribute works for widget `'wishlist-trigger' |
+>   'wishlist-button-detail'`.
+> </div>
+
+- Type: `string`
+
+<br />
+#### <span className="text-xl font-bold gradient-text-primary">`data-product-vendor`</span>
+
+Fill with your own product vendor
+
+> <div className="not-italic">
+>   This attribute works for widget `'wishlist-trigger' |
+>   'wishlist-button-detail'`.
+> </div>
+
+- Type: `string`
+
+<br />
+#### <span className="text-xl font-bold gradient-text-primary">`data-product-sku`</span>
+
+Fill with your own product sku
+
+> <div className="not-italic">
+>   This attribute works for widget `'wishlist-trigger' |
+>   'wishlist-button-detail'`.
+> </div>
+
+- Type: `string`
+
+<br />
+#### <span className="text-xl font-bold gradient-text-primary">`data-product-variant-name`</span>
+
+Fill with your own product variant name
+
+> <div className="not-italic">
+>   This attribute works for widget `'wishlist-trigger' |
+>   'wishlist-button-detail'`.
+> </div>
+
+- Type: `string`
+
+<br />
+#### <span className="text-xl font-bold gradient-text-primary">`data-product-link`</span>
+
+Fill with your own product URL that link to PDP
+
+> <div className="not-italic">
+>   This attribute works for widget `'wishlist-trigger' |
+>   'wishlist-button-detail'`.
+> </div>
+
+- Type: `string`
+
+<br />
+#### <span className="text-xl font-bold gradient-text-primary">`data-product-image`</span>
+
+Fill with your own product image URL
+
+> <div className="not-italic">
+>   This attribute works for widget `'wishlist-trigger' |
+>   'wishlist-button-detail'`.
+> </div>
+
+- Type: `string`
+
+<br />
+#### <span className="text-xl font-bold gradient-text-primary">`data-product-currency`</span>
+
+Fill with your own product currency, eg: `IDR` | `$`
+
+> <div className="not-italic">
+>   This attribute works for widget `'wishlist-trigger' |
+>   'wishlist-button-detail'`.
+> </div>
+
+- Type: `string`
+
+<br />
+#### <span className="text-xl font-bold gradient-text-primary">`data-product-price`</span>
+
+Fill with your own product price
+
+> <div className="not-italic">
+>   This attribute works for widget `'wishlist-trigger' |
+>   'wishlist-button-detail'`.
+> </div>
+
+- Type: `string`
+
+<br />
+#### <span className="text-xl font-bold gradient-text-primary">`data-collection-id`</span>
+
+Fill with your own collection id
+
+> <div className="not-italic">
+>   This attribute works for widget `'instant-search-product-filter-widget'`.
+> </div>
+
+- Type: `string | number`
+
+<br />
+#### <span className="text-xl font-bold gradient-text-primary">`data-collection-name`</span>
+
+Fill with your own collection name
+
+> <div className="not-italic">
+>   This attribute works for widget `'instant-search-product-filter-widget'`.
+> </div>
+
+- Type: `string`
+
+<br />
+
+#### <span className="text-xl font-bold gradient-text-primary">`data-display-limit`</span>
+
+Customize limit in widget.
+
+<div>e.g: `10`</div>
+
+> <div className="not-italic">
+>   This attribute works for widget `'product-recommendation-recently-viewed'`.
+> </div>
+
+- Type: `string | number`
+
+<br />
+
+#### <span className="text-xl font-bold gradient-text-primary">`data-hidden-product-ids`</span>
+
+Fill with your own product ids
+
+<div>e.g: `'123,456,789'`</div>
+
+> <div className="not-italic">
+>   This attribute works for widget `'product-recommendation-recently-viewed'`.
+> </div>
+
+- Type: `string`
+
+<br />
+
+#### <span className="text-xl font-bold gradient-text-primary">`data-on-after-add-wishlist`</span>
+
+Running using your own custom function, only provide the function name (without `()`)
+
+<div>e.g: `onAfterAddWishlist`</div>
+<div>
+  wrong: <span className="line-through">`onAfterAddWishlist()`</span>
+</div>
+
+> <div className="not-italic">
+>   This attribute works for widget `'wishlist-trigger' |
+>   'wishlist-button-detail' | 'wishlist-widget' | 'instant-search-widget' |
+>   'instant-search-icon-widget' | 'instant-search-result-widget' |
+>   'instant-search-product-filter-widget'`.
+> </div>
+
+- Type: `string`
+
+<br />
+#### <span className="text-xl font-bold gradient-text-primary">`data-on-after-remove-wishlist`</span>
+
+Running using your own custom function, only provide the function name (without `()`)
+
+<div>e.g: `onAfterRemoveWishlist`</div>
+<div>
+  wrong: <span className="line-through">`onAfterRemoveWishlist()`</span>
+</div>
+
+> <div className="not-italic">
+>   This attribute works for widget `'wishlist-trigger' |
+>   'wishlist-button-detail' | 'wishlist-widget' | 'instant-search-widget' |
+>   'instant-search-icon-widget' | 'instant-search-result-widget' |
+>   'instant-search-product-filter-widget'`.
+> </div>
+
+- Type: `string`
+
+<br />
+#### <span className="text-xl font-bold gradient-text-primary">`data-on-after-add-review`</span>
+
+Running using your own custom function, only provide the function name (without `()`)
+
+<div>e.g: `onAfterAddReview`</div>
+<div>
+  wrong: <span className="line-through">`onAfterAddReview()`</span>
+</div>
+
+> <div className="not-italic">
+>   This attribute works for widget `'product-review-widget'`.
+> </div>
+
+- Type: `string`
+
+<br />
+#### <span className="text-xl font-bold gradient-text-primary">`data-on-after-render-product`</span>
+
+Running using your own custom function, only provide the function name (without `()`)
+
+<div>e.g: `onAfterRenderProduct`</div>
+<div>
+  wrong: <span className="line-through">`onAfterRenderProduct()`</span>
+</div>
+
+> <div className="not-italic">
+>   This attribute works for widget `'wishlist-widget' | 'instant-search-widget'
+>   | 'instant-search-icon-widget' | 'instant-search-result-widget' |
+>   'instant-search-product-filter-widget'`.
+> </div>
+
+- Type: `string`
+
+<br />
+#### <span className="text-xl font-bold gradient-text-primary">`data-on-after-render-collection`</span>
+
+Running using your own custom function, only provide the function name (without `()`)
+
+<div>e.g: `onAfterRenderCollection`</div>
+<div>
+  wrong: <span className="line-through">`onAfterRenderCollection()`</span>
+</div>
+
+> <div className="not-italic">
+>   This attribute works for widget `'instant-search-result-widget'`.
+> </div>
+
+- Type: `string`
+
+<br />
+#### <span className="text-xl font-bold gradient-text-primary">`data-on-after-render-page`</span>
+
+Running using your own custom function, only provide the function name (without `()`)
+
+<div>e.g: `onAfterRenderPage`</div>
+<div>
+  wrong: <span className="line-through">`onAfterRenderPage()`</span>
+</div>
+
+> <div className="not-italic">
+>   This attribute works for widget `'instant-search-result-widget'`.
+> </div>
+
+- Type: `string`
+
+<br />
+#### <span className="text-xl font-bold gradient-text-primary">`data-on-after-render-blog`</span>
+
+Running using your own custom function, only provide the function name (without `()`)
+
+<div>e.g: `onAfterRenderBlog`</div>
+<div>
+  wrong: <span className="line-through">`onAfterRenderBlog()`</span>
+</div>
+
+> <div className="not-italic">
+>   This attribute works for widget `'instant-search-result-widget'`.
+> </div>
+
+- Type: `string`
+
+<br />
+#### <span className="text-xl font-bold gradient-text-primary">`data-on-after-render-article`</span>
+
+Running using your own custom function, only provide the function name (without `()`)
+
+<div>e.g: `onAfterRenderArticle`</div>
+<div>
+  wrong: <span className="line-through">`onAfterRenderArticle()`</span>
+</div>
+
+> <div className="not-italic">
+>   This attribute works for widget `'instant-search-result-widget'`.
+> </div>
+
+- Type: `string`
+
+<br />
+#### <span className="text-xl font-bold gradient-text-primary">`data-render-other-index-list`</span>
+
+Render your own custom component in the app, only provide the function name (without `()`)
+
+<div>e.g: `renderOtherIndexList`</div>
+<div>
+  wrong: <span className="line-through">`renderOtherIndexList()`</span>
+</div>
+
+> <div className="not-italic">
+>   This attribute works for widget `'instant-search-widget' |
+>   'instant-search-icon-widget'`.
+> </div>
+
+- Type: `string`
+
+<br />
+#### <span className="text-xl font-bold gradient-text-primary">`data-render-product-card`</span>
+
+Render your own custom component in the app, only provide the function name (without `()`)
+
+<div>e.g: `renderProductCard`</div>
+<div>
+  wrong: <span className="line-through">`renderProductCard()`</span>
+</div>
+
+> <div className="not-italic">
+>   This attribute works for widget `'wishlist-widget' | 'instant-search-widget'
+>   | 'instant-search-icon-widget' | 'instant-search-result-widget' |
+>   'instant-search-product-filter-widget'`.
+> </div>
+
+- Type: `string`
+
+<br />
+#### <span className="text-xl font-bold gradient-text-primary">`data-render-collection-card`</span>
+
+Render your own custom component in the app, only provide the function name (without `()`)
+
+<div>e.g: `renderCollectionCard`</div>
+<div>
+  wrong: <span className="line-through">`renderCollectionCard()`</span>
+</div>
+
+> <div className="not-italic">
+>   This attribute works for widget `'instant-search-result-widget'`.
+> </div>
+
+- Type: `string`
+
+<br />
+#### <span className="text-xl font-bold gradient-text-primary">`data-render-page-card`</span>
+
+Render your own custom component in the app, only provide the function name (without `()`)
+
+<div>e.g: `renderPageCard`</div>
+<div>
+  wrong: <span className="line-through">`renderPageCard()`</span>
+</div>
+
+> <div className="not-italic">
+>   This attribute works for widget `'instant-search-result-widget'`.
+> </div>
+
+- Type: `string`
+
+<br />
+#### <span className="text-xl font-bold gradient-text-primary">`data-render-blog-card`</span>
+
+Render your own custom component in the app, only provide the function name (without `()`)
+
+<div>e.g: `renderBlogCard`</div>
+<div>
+  wrong: <span className="line-through">`renderBlogCard()`</span>
+</div>
+
+> <div className="not-italic">
+>   This attribute works for widget `'instant-search-result-widget'`.
+> </div>
+
+- Type: `string`
+
+<br />
+#### <span className="text-xl font-bold gradient-text-primary">`data-render-article-card`</span>
+
+Render your own custom component in the app, only provide the function name (without `()`)
+
+<div>e.g: `renderArticleCard`</div>
+<div>
+  wrong: <span className="line-through">`renderArticleCard()`</span>
+</div>
+
+> <div className="not-italic">
+>   This attribute works for widget `'instant-search-result-widget'`.
+> </div>
+
+- Type: `string`
+
+<br />
+#### <span className="text-xl font-bold gradient-text-primary">`data-render-search-view-more-result`</span>
+
+Render your own custom component in the app, only provide the function name (without `()`)
+
+<div>e.g: `renderSearchViewMoreResult`</div>
+<div>
+  wrong: <span className="line-through">`renderSearchViewMoreResult()`</span>
+</div>
+
+> <div className="not-italic">
+>   This attribute works for widget `'instant-search-widget' |
+>   'instant-search-icon-widget'`.
+> </div>
+
+- Type: `string`
+
+<br />
+#### <span className="text-xl font-bold gradient-text-primary">`data-render-suggestion-keyword-list`</span>
+
+Render your own custom component in the app, only provide the function name (without `()`)
+
+<div>e.g: `renderSuggestionKeywordList`</div>
+<div>
+  wrong: <span className="line-through">`renderSuggestionKeywordList()`</span>
+</div>
+
+> <div className="not-italic">
+>   This attribute works for widget `'instant-search-widget' |
+>   'instant-search-icon-widget'`.
+> </div>
+
+- Type: `string`
+
+<br />
+#### <span className="text-xl font-bold gradient-text-primary">`data-render-wishlist-widget-alert`</span>
+
+Render your own custom component in the app, only provide the function name (without `()`)
+
+<div>e.g: `renderWishlistWidgetAlert`</div>
+<div>
+  wrong: <span className="line-through">`renderWishlistWidgetAlert()`</span>
+</div>
+
+> <div className="not-italic">
+>   This attribute works for widget `'wishlist-widget'`.
+> </div>
+
+- Type: `string`
+
+<br />
+#### <span className="text-xl font-bold gradient-text-primary">`data-render-review-product-info`</span>
+
+Render your own custom component in the app, only provide the function name (without `()`)
+
+<div>e.g: `renderReviewProductInfo`</div>
+<div>
+  wrong: <span className="line-through">`renderReviewProductInfo()`</span>
+</div>
+
+> <div className="not-italic">
+>   This attribute works for widget `'product-review-happy-customers-page"'`.
+> </div>
+
+- Type: `string`
+
+<br />
+
+#### <span className="text-xl font-bold gradient-text-primary">`data-section-description`</span>
+
+Customize section description text
+
+> <div className="not-italic">
+>   This attribute works for widget `'product-recommendation-recently-viewed'`.
+> </div>
+
+- Type: `string`
+
+<br />
+#### <span className="text-xl font-bold gradient-text-primary">`data-section-title`</span>
+
+Customize section title text
+
+<div>e.g: `Recently Viewed`</div>
+
+> <div className="not-italic">
+>   This attribute works for widget `'product-recommendation-recently-viewed'`.
+> </div>
+
+- Type: `string`
+
+<br />
+#### <span className="text-xl font-bold gradient-text-primary">`data-show-rating-average`</span>
+
+Customize the rating average to be visible or not.
+
+> <div className="not-italic">
+>   This attribute works for widget `'product-review-sticky-sidebar-widget'`.
+> </div>
+
+- Type: `boolean`
+- Required: `false`
+
+<br />
+#### <span className="text-xl font-bold gradient-text-primary">`data-use-slider`</span>
+
+Switch the component to a Carousel or Grid, set it true to switch the component to a Carousel
+
+<div>e.g: `true`</div>
+
+> <div className="not-italic">
+>   This attribute works for widget `'product-recommendation-recently-viewed'`.
+> </div>
+
+- Type: `boolean`
+
+<br />
+#### <span className="text-xl font-bold gradient-text-primary">`data-trigger-badge`</span>
+
+Specifies whether adding an item to the wishlist will refresh the `wishlist-badge` element or just update the counter.
+
+> <div className="not-italic">
+>   This attribute works for widget `'wishlist-trigger' | 'wishlist-button-detail' | 'wishlist-widget'`.
+> </div>
+
+- Type: `'default' | 'rerender'`
+- Default: `'default'`
+
+<br />
+#### <span className="text-xl font-bold gradient-text-primary">`data-use-wishlist-flyout`</span>
+
+Display your wishlist items in a sliding panel by activating the [Wishlist - Flyout Widget](/wishlist#flyout-widget).
+
+> <div className="not-italic">
+>   This attribute works for widget `'wishlist-badge'`.
+> </div>
+
+- Type: `boolean`
+- Default: `false`
+
+<br />
+#### <span className="text-xl font-bold gradient-text-primary">`data-url-wishlist-widget`</span>
+
+Fill up the route URL page where your Wishlist widget is located.
+
+<div>e.g: `https://your-online-store.com/{value}`</div>
+
+> <div className="not-italic">
+>   This attribute works for widget `'wishlist-badge'`.
+> </div>
+
+- Type: `string`
+
+<br />
+#### <span className="text-xl font-bold gradient-text-primary">`data-current-tags`</span>
+
+This attribute is used to filter the products based on the current tags.
+
+<div>e.g: `'men, women, accessories'`</div>
+
+<br />
+
+In Liquid, you can use this snippet to get the current tags:
+
+```liquid
+data-current-tags="{{ current_tags | join: ', ' }}"
+```
+
+See the [Tag Filtering Shopify](https://shopify.dev/docs/storefronts/themes/navigation-search/filtering/tag-filtering) documentation for more information.
+
+> <div className="not-italic">
+>   This attribute works for widget `'instant-search-product-filter-widget'`.
+> </div>
+
+- Type: `string`
+
+## Learn more
+
+Congratulations! Now that you've learned the `HTML Data Attribute` API references, you can start integrating Sledge to your store. Useful resources about integrating Sledge :
+
+- [How to use Wishlist app](/wishlist)
+- [How to use Product Review app](/product-review)
+- [How to use Instant Search app](/instant-search)
+- [How to use Product Filters app](/product-filters)
+- [How to add Callback Functions](/callback-functions)
+- [How to add Custom Components](/custom-components)

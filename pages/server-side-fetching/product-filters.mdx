@@ -1,0 +1,155 @@
+import { Tabs, Tab } from "~/components/global";
+import { Steps } from "nextra/components";
+import { NextJs, Hydrogen } from "~/components/icons";
+
+# Product Filters
+
+If you prefer to fetch Sledge data on the server instead doing fetch on the client browser. You can use Sledge's API package called [@sledge-app/api](/sledge-app-api).
+
+Basically the steps as simple as fetching data on server then pass that data to Sledge components, follow steps by steps below to see how to do the server side fetching.
+
+## Product Filter Result
+
+<Tabs storageKey="selected-tech-stack" items={[
+    <div className="flex items-center gap-2">
+        <Hydrogen width={24} height={24} />
+        <span>Hydrogen</span>
+    </div>,
+    <div className="flex items-center gap-2">
+        <NextJs width={24} height={24} />
+        <span>Next.js</span>
+    </div>
+]}>
+    <Tab>
+        <Steps>
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Add fetching data</h3>
+
+            ```tsx showLineNumbers copy
+            import {json, redirect, type LoaderArgs} from '@shopify/remix-oxygen';
+            import {useLoaderData, Link} from '@remix-run/react';
+            import { parseGid} from '@shopify/hydrogen';
+            import {getResult, getSledgeSettings} from '@sledge-app/api';
+
+            export async function loader({request, params, context}: LoaderArgs) {
+                ...
+                const paramsString = new URL(request.url).searchParams.toString();
+                const searchParams = new URLSearchParams(paramsString);
+
+                let sledgeSession = context.session.get('sledgeSession');
+                const sledgeSettings = await getSledgeSettings( { sledgeSession } );
+
+                const data = await getResult({
+                    sledgeSession,
+                    sledgeSettings,
+                    instantSearchApiKey: context.env.SLEDGE_INSTANT_SEARCH_API_KEY || '',
+                    searchParams,
+                    keyword: searchParams.get('q') || '',
+                    collectionId: parseGid(collection?.id).id,
+                    layoutType: 'product-filter',
+                });
+                return json({collection, data});
+            }
+            ```
+
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Add data to component props</h3>
+
+            ```tsx showLineNumbers copy
+            import { ProductFilterWidget } from '@sledge-app/react-instant-search';
+
+            export default function Collection() {
+                const data = useLoaderData<typeof loader>();
+
+                return (
+                    <ProductFilterWidget
+                        data={data.data}
+                        query={{
+                            keyword: 'q'
+                        }}
+                        params={{
+                            collectionId: data.collection?.id,
+                            collectionName: data.collection?.title,
+                        }}
+                        onAfterAddToCart={() => {}}
+                        onAfterAddWishlist={() => {}}
+                        onAfterRemoveWishlist={() => {}}
+                        onAfterRenderProduct={() => {}}
+                    />
+                );
+            }
+            ```
+        </Steps>
+    </Tab>
+    <Tab>
+        <Steps>
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Setup widget become component</h3>
+
+            ```tsx filename="components/sledge/instantsearch/product-filter.tsx" showLineNumbers copy
+            'use client';
+
+            import { ProductFilterWidget } from '@sledge-app/react-instant-search';
+            import parseGid from 'lib/shopify/parse-gid';
+
+            type IPDP = {
+                collection: any;
+                data: any;
+            };
+
+            export default function ProductFilter({ collection, data }: IPDP) {
+                return (
+                    <ProductFilterWidget
+                        data={data}
+                        sledgeSettings={sledgeSettings}
+                        query={{
+                            keyword: 'q'
+                        }}
+                        params={{
+                            collectionId: Number(parseGid(collection?.id).id),
+                            collectionName: collection?.title,
+                        }}
+                        onAfterAddToCart={(state) => {}}
+                        onAfterAddWishlist={(state) => {}}
+                        onAfterRemoveWishlist={(state) => {}}
+                        onAfterRenderProduct={(state) => {}}
+                    />
+                );
+            }
+            ```
+
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Add fetching data to server component</h3>
+
+            ```tsx showLineNumbers copy
+            import { getResult, getSledgeSettings } from '@sledge-app/api';
+            import { ProductFilter } from 'components/sledge/instantsearch';
+            import { getCollection } from 'lib/shopify';
+            import parseGid from 'lib/shopify/parse-gid';
+            import { cookies } from 'next/headers';
+
+            export default async function Collection({ params, searchParams }: any) {
+                let sledgeSession = cookies().get( 'sledgeSession' )?.value;
+                sledgeSession = JSON.parse( sledgeSession || "{}" );
+
+                const collection = await getCollection(params.slug);
+                const sledgeSettings = await getSledgeSettings({ sledgeSession });
+                const data = await getResult({
+                    sledgeSession,
+                    sledgeSettings,
+                    instantSearchApiKey: process.env.SLEDGE_IS_KEY || '',
+                    searchParams,
+                    keyword: searchParams?.q?.toString(),
+                    collectionId: parseGid(collection?.id).id,
+                    layoutType: 'product-filter'
+                });
+
+                return (
+                    <ProductFilter
+                        collection={collection}
+                        data={data}
+                        sledgeSettings={sledgeSettings}
+                    />
+                );
+            }
+            ```
+        </Steps>
+    </Tab>
+
+</Tabs>

@@ -1,0 +1,793 @@
+import { Tabs, Tab } from "~/components/global";
+import { Steps } from "nextra/components";
+import { Webflow, Liquid, NextJs, Hydrogen } from "~/components/icons";
+import Image from "next/image";
+import { IMAGE_CC_WIDGET_ALERT, IMAGE_CC_PRODUCT_CARD_WISHLIST_FLYOUT } from "~/lib/const"
+
+# Wishlist
+
+Make the appearance of the Sledge wishlist app remain in line with the theme you have using the custom components that Sledge provides.
+
+Available custom components :
+
+- [Widget Alert](#widget-alert)
+- [Product Card Flyout Widget](#product-card-flyout-widget)
+
+## Widget Alert
+
+Widget Alert is custom component will show on top of wishlist page or wihslist pop up for notify not logged in user.<br/><br/>
+
+<Image
+  src={ IMAGE_CC_WIDGET_ALERT }
+  alt="Custom Component - Other Indec List"
+  width="800"
+  height="200"
+/> <br />
+
+<Tabs storageKey="selected-tech-stack"  items={[
+    <div className="flex items-center gap-2">
+        <Hydrogen width={24} height={24} />
+        <span>Hydrogen</span>
+    </div>,
+    <div className="flex items-center gap-2">
+        <NextJs width={24} height={24} />
+        <span>Next.js</span>
+    </div>,
+    <div className="flex items-center gap-2">
+        <Liquid width={24} height={24} />
+        <span>Liquid</span>
+    </div>,
+    <div className="flex items-center gap-2">
+        <Webflow width={24} height={24} />
+        <span>Webflow</span>
+    </div>
+]}>
+    <Tab>
+        <Steps>
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Build a custom component, e.g:</h3>
+
+            ```tsx filename="app/SledgeWishlistWidgetAlert.tsx" showLineNumbers copy
+            import { Link } from '@remix-run/react';
+
+            export default function SledgeWishlistWidgetAlert() {
+                return (
+                    <div className="sledge-wishlist__widget-alert">
+                        <div className="sledge-wishlist__widget-alert-text">
+                            Please login to save your wishlist across devices.
+                            <Link
+                                to="/account/login"
+                                className="sledge-wishlist__widget-alert-link"
+                            >
+                                Login Here
+                            </Link>
+                        </div>
+                    </div>
+                );
+            };
+            ```
+
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Call custom component to prop</h3>
+
+            Only provide the function name (without `()`), see the [API reference](/sledge-app-core#wishlistwidgetalert)
+
+            > <div className="not-italic">`<CustomComponent>` must be added as a child of another sledge's widget.</div>
+
+            ```tsx {21} showLineNumbers copy
+            import { CustomComponents } from "@sledge-app/core";
+            import { Widget, WidgetHeader } from "@sledge-app/react-wishlist";
+            import SledgeWishlistWidgetAlert from "~/components/SledgeWishlistWidgetAlert";
+
+            export default function WishlistWidget() {
+                return (
+                    <Widget.Root
+                        query={{
+                            shareId: "share",
+                        }}
+                        onAfterAddWishlist={(state) => {
+                            // Your custom function
+                        }}
+                        onAfterRemoveWishlist={(state) => {
+                            // Your custom function
+                        }}
+                        onAfterRenderProduct={(state) => {
+                            // Your custom function
+                        }}
+                    >
+                        <CustomComponents wishlistWidgetAlert={SledgeWishlistWidgetAlert}/>
+                        <WidgetHeader>
+                            <WidgetHeader.Title text="My Wishlist" />
+                            <WidgetHeader.SearchForm placeholder="Search product" />
+                            <WidgetHeader.ClearTrigger buttonText="Clear Wishlist" />
+                            <WidgetHeader.ShareTrigger buttonText="Share Wishlist" />
+                            <WidgetHeader.Sort />
+                            <WidgetHeader.Limit options={[10, 25, 50, 100]} />
+                        </WidgetHeader>
+                        <Widget.List gridType="large" />
+                    </Widget.Root>
+                );
+            }
+            ```
+        </Steps>
+    </Tab>
+    <Tab>
+        <Steps>
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Build a custom component, e.g:</h3>
+
+            ```tsx filename="app/SledgeWishlistWidgetAlert.tsx" showLineNumbers copy
+            'use client';
+
+            import Link from 'next/link';
+
+            export default function SledgeWishlistWidgetAlert() {
+                return (
+                    <div className="sledge-wishlist__widget-alert">
+                        <div className="sledge-wishlist__widget-alert-text">
+                            Please login to save your wishlist across devices.
+                            <Link
+                                href="/account/login"
+                                className="sledge-wishlist__widget-alert-link"
+                            >
+                                Login Here
+                            </Link>
+                        </div>
+                    </div>
+                );
+            };
+            ```
+
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Call custom component to prop</h3>
+
+            Only provide the function name (without `()`), see the [API reference](/sledge-app-core#wishlistwidgetalert)
+
+            > <div className="not-italic">`<CustomComponent>` must be added as a child of another sledge's widget.</div>
+
+            ```tsx {23} showLineNumbers copy
+            'use client';
+
+            import { CustomComponents } from "@sledge-app/core";
+            import { Widget, WidgetHeader } from "@sledge-app/react-wishlist";
+            import SledgeWishlistWidgetAlert from "~/components/SledgeWishlistWidgetAlert";
+
+            export default function WishlistWidget() {
+                return (
+                    <Widget.Root
+                        query={{
+                            shareId: "share",
+                        }}
+                        onAfterAddWishlist={(state) => {
+                            // Your custom function
+                        }}
+                        onAfterRemoveWishlist={(state) => {
+                            // Your custom function
+                        }}
+                        onAfterRenderProduct={(state) => {
+                            // Your custom function
+                        }}
+                    >
+                        <CustomComponents wishlistWidgetAlert={SledgeWishlistWidgetAlert}/>
+                        <WidgetHeader>
+                            <WidgetHeader.Title text="My Wishlist" />
+                            <WidgetHeader.SearchForm placeholder="Search product" />
+                            <WidgetHeader.ClearTrigger buttonText="Clear Wishlist" />
+                            <WidgetHeader.ShareTrigger buttonText="Share Wishlist" />
+                            <WidgetHeader.Sort />
+                            <WidgetHeader.Limit options={[10, 25, 50, 100]} />
+                        </WidgetHeader>
+                        <Widget.List gridType="large" />
+                    </Widget.Root>
+                );
+            }
+            ```
+        </Steps>
+    </Tab>
+    <Tab>
+        <Steps>
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Build a custom component, e.g:</h3>
+
+            ```html showLineNumbers copy
+            <script>
+                function renderWishlistWidgetAlert() {
+                    return `
+                        <div class="sledge-wishlist__widget-alert">
+                            <div class="sledge-wishlist__widget-alert-text">
+                                Please login to save your wishlist across devices.
+                                <a href="/account/login" class="sledge-wishlist__widget-alert-link">
+                                    Login Here
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                }
+            </script>
+            ```
+
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Call custom component to attribute</h3>
+
+            Only provide the function name (without `()`), see the [API reference](/html-data-attribute#data-render-wishlist-widget-alert)
+
+            > <div className="not-italic">`<div data-component="custom-components">` must be added as a child of another sledge's widget.</div>
+
+            ```html {8-11} showLineNumbers copy
+            <div
+                data-component="wishlist-widget"
+                data-query-share-id="share"
+                data-on-after-add-wishlist="onAfterAddWishlist"
+                data-on-after-remove-wishlist="onAfterRemoveWishlist"
+                data-on-after-render-product="onAfterRenderProduct"
+            >
+                <div
+                    data-component="custom-components"
+                    data-render-wishlist-widget-alert="renderWishlistWidgetAlert"
+                ></div>
+            </div>
+            ```
+        </Steps>
+    </Tab>
+    <Tab>
+        You can place these code in custom code webflow, see the <a href="https://university.webflow.com/lesson/custom-code-embed" target="_blank" className="nx-text-primary-600 nx-underline nx-decoration-from-font [text-underline-position:from-font]">documentation</a> about custom code embed at webflow
+
+        <Steps className="mt-3">
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Build a custom component, e.g:</h3>
+
+            ```html showLineNumbers copy
+            <script>
+                function renderWishlistWidgetAlert() {
+                    return `
+                        <div class="sledge-wishlist__widget-alert">
+                            <div class="sledge-wishlist__widget-alert-text">
+                                Please login to save your wishlist across devices.
+                                <a href="/account/login" class="sledge-wishlist__widget-alert-link">
+                                    Login Here
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                }
+            </script>
+            ```
+
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Call custom component to attribute</h3>
+
+            Only provide the function name (without `()`), see the [API reference](/html-data-attribute#data-render-wishlist-widget-alert)
+
+            > <div className="not-italic">`<div data-component="custom-components">` must be added as a child of another sledge's widget.</div>
+
+            ```html {8-11} showLineNumbers copy
+            <div
+                data-component="wishlist-widget"
+                data-query-share-id="share"
+                data-on-after-add-wishlist="onAfterAddWishlist"
+                data-on-after-remove-wishlist="onAfterRemoveWishlist"
+                data-on-after-render-product="onAfterRenderProduct"
+            >
+                <div
+                    data-component="custom-components"
+                    data-render-wishlist-widget-alert="renderWishlistWidgetAlert"
+                ></div>
+            </div>
+            ```
+        </Steps>
+    </Tab>
+
+</Tabs>
+
+## Product Card Flyout Widget
+
+Product Card Flyout Widget is custom component for displaying wishlist item in a flyout.<br/><br/>
+
+<Image
+  src={ IMAGE_CC_PRODUCT_CARD_WISHLIST_FLYOUT }
+  alt="Custom Component - Product Card Wishlist Flyout"
+  width="400"
+  height="600"
+/> <br />
+
+<Tabs storageKey="selected-tech-stack"  items={[
+    <div className="flex items-center gap-2">
+        <Hydrogen width={24} height={24} />
+        <span>Hydrogen</span>
+    </div>,
+    <div className="flex items-center gap-2">
+        <NextJs width={24} height={24} />
+        <span>Next.js</span>
+    </div>,
+    <div className="flex items-center gap-2">
+        <Liquid width={24} height={24} />
+        <span>Liquid</span>
+    </div>,
+    <div className="flex items-center gap-2">
+        <Webflow width={24} height={24} />
+        <span>Webflow</span>
+    </div>
+]}>
+    <Tab>
+        <Steps>
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Build a custom component, e.g:</h3>
+
+            ```tsx filename="app/SledgeProductCardWishlistFlyout.tsx" showLineNumbers copy
+            export default function SledgeProductCardWishlistFlyout({ product }: any) {
+                const {
+                    id,
+                    admin_graphql_api_id,
+                    title,
+                    image,
+                    handle,
+                    url,
+                    vendor,
+                    currency,
+                    variants,
+                } = product || {};
+                const {
+                    id: variant_id = '',
+                    admin_graphql_api_id: variant_admin_graphql_api_id = '',
+                    title: variant_title = '',
+                    price = '',
+                    sku = '',
+                    is_out_of_stock = false,
+                } = variants?.length ? variants[0] : {};
+
+                const isOnSale = parseFloat(String(compare_at_price)) ? parseFloat(String(compare_at_price)) > parseFloat(String(price)) : false;
+
+                return (
+                    <div className="sledge__product-grid-card-flyout">
+                        <div className="sledge__product-grid-card-flyout-wishlist-trigger">
+                            <Trigger
+                                params={{
+                                    productId: id,
+                                    productVariantId: variant_id,
+                                    productName: title,
+                                    productVendor: vendor,
+                                    productSku: sku,
+                                    productVariantName: variant_title,
+                                    productLink: url,
+                                    productImage: image?.src || '',
+                                    productCurrency: currency,
+                                    productPrice: price,
+                                }}
+                                onAfterAddWishlist={(state) => {
+                                    if (state === 'success') {
+                                        // if condition is state === true, run your custom code
+                                    } else {
+                                        // if condition is state === true, run your custom code
+                                    }
+                                }}
+                                onAfterRemoveWishlist={(state) => {
+                                    if (state === 'success') {
+                                        // if condition is state === true, run your custom code
+                                    } else {
+                                        // if condition is state === true, run your custom code
+                                    }
+                                }}
+                            />
+                        </div>
+
+                        <div className="sledge__product-grid-card-image-flyout">
+                            <Link to={'/products/' + handle}>
+                                <img
+                                    src={image?.src || ''}
+                                    alt="sledge-product-card-image"
+                                    className="sledge__product-grid-card-image-featured-image-flyout"
+                                    loading="lazy"
+                                />
+                            </Link>
+                        </div>
+
+                        <div className="sledge__product-grid-card-desc-flyout">
+                            {title ? (
+                                <Link to={'/products/' + handle}>
+                                    <h3 className="sledge__product-grid-card-product-name-flyout">
+                                        {title}
+                                    </h3>
+                                </Link>
+                            ) : null}
+
+                            <div className="sledge__product-grid-card-price-flyout">
+                                <div>
+                                    <p>
+                                        {currency}
+                                        {price}
+                                    </p>
+                                </div>
+                                {isOnSale && (
+                                    <div className="sledge__product-grid-card-compare-at-price-flyout">
+                                        <p>
+                                            {currency}
+                                            {compare_at_price}
+                                        </p>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                );
+            };
+            ```
+
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Call custom component to prop</h3>
+
+            Only provide the function name (without `()`), see the [API reference](/sledge-app-core#productcard-product-showpopupcomponent-setshowpopupcomponent-sourceapp-)
+
+            > <div className="not-italic">`<CustomComponent>` must be added as a child of another sledge's widget.</div>
+
+            ```tsx {11} showLineNumbers copy
+            import { CustomComponents } from "@sledge-app/core";
+            import { Badge } from "@sledge-app/react-wishlist";
+            import SledgeProductCardWishlistFlyout from "~/components/SledgeProductCardWishlistFlyout";
+
+            export default function WishlistBadge() {
+                return (
+                    <Badge
+                        useWishlistFlyout={true}
+                        urlWishlistWidget={'/pages/wishlist'}
+                    >
+                        <CustomComponents productCard={SledgeProductCardWishlistFlyout} />
+                    </Badge>
+                );
+            }
+            ```
+        </Steps>
+    </Tab>
+    <Tab>
+        <Steps>
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Build a custom component, e.g:</h3>
+
+            ```tsx filename="app/SledgeProductCardWishlistFlyout.tsx" showLineNumbers copy
+            'use client';
+
+            import Link from 'next/link';
+            
+            export default function SledgeProductCardWishlistFlyout({ product }: any) {
+                const {
+                    id,
+                    admin_graphql_api_id,
+                    title,
+                    image,
+                    handle,
+                    url,
+                    vendor,
+                    currency,
+                    variants,
+                } = product || {};
+                const {
+                    id: variant_id = '',
+                    admin_graphql_api_id: variant_admin_graphql_api_id = '',
+                    title: variant_title = '',
+                    price = '',
+                    sku = '',
+                    is_out_of_stock = false,
+                } = variants?.length ? variants[0] : {};
+
+                const isOnSale = parseFloat(String(compare_at_price)) ? parseFloat(String(compare_at_price)) > parseFloat(String(price)) : false;
+
+                return (
+                    <div className="sledge__product-grid-card-flyout">
+                        <div className="sledge__product-grid-card-flyout-wishlist-trigger">
+                            <Trigger
+                                params={{
+                                    productId: id,
+                                    productVariantId: variant_id,
+                                    productName: title,
+                                    productVendor: vendor,
+                                    productSku: sku,
+                                    productVariantName: variant_title,
+                                    productLink: url,
+                                    productImage: image?.src || '',
+                                    productCurrency: currency,
+                                    productPrice: price,
+                                }}
+                                onAfterAddWishlist={(state) => {
+                                    if (state === 'success') {
+                                        // if condition is state === true, run your custom code
+                                    } else {
+                                        // if condition is state === true, run your custom code
+                                    }
+                                }}
+                                onAfterRemoveWishlist={(state) => {
+                                    if (state === 'success') {
+                                        // if condition is state === true, run your custom code
+                                    } else {
+                                        // if condition is state === true, run your custom code
+                                    }
+                                }}
+                            />
+                        </div>
+
+                        <div className="sledge__product-grid-card-image-flyout">
+                            <Link to={'/products/' + handle}>
+                                <img
+                                    src={image?.src || ''}
+                                    alt="sledge-product-card-image"
+                                    className="sledge__product-grid-card-image-featured-image-flyout"
+                                    loading="lazy"
+                                />
+                            </Link>
+                        </div>
+
+                        <div className="sledge__product-grid-card-desc-flyout">
+                            {title ? (
+                                <Link to={'/products/' + handle}>
+                                    <h3 className="sledge__product-grid-card-product-name-flyout">
+                                        {title}
+                                    </h3>
+                                </Link>
+                            ) : null}
+
+                            <div className="sledge__product-grid-card-price-flyout">
+                                <div>
+                                    <p>
+                                        {currency}
+                                        {price}
+                                    </p>
+                                </div>
+                                {isOnSale && (
+                                    <div className="sledge__product-grid-card-compare-at-price-flyout">
+                                        <p>
+                                            {currency}
+                                            {compare_at_price}
+                                        </p>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                );
+            };
+            ```
+
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Call custom component to prop</h3>
+
+            Only provide the function name (without `()`), see the [API reference](/sledge-app-core#productcard-product-showpopupcomponent-setshowpopupcomponent-sourceapp-)
+
+            > <div className="not-italic">`<CustomComponent>` must be added as a child of another sledge's widget.</div>
+
+            ```tsx {13} showLineNumbers copy
+            'use client';
+
+            import { CustomComponents } from "@sledge-app/core";
+            import { Badge } from "@sledge-app/react-wishlist";
+            import SledgeProductCardWishlistFlyout from "~/components/SledgeProductCardWishlistFlyout";
+
+            export default function WishlistBadge() {
+                return (
+                    <Badge
+                        useWishlistFlyout={true}
+                        urlWishlistWidget={'/pages/wishlist'}
+                    >
+                        <CustomComponents productCard={SledgeProductCardWishlistFlyout} />
+                    </Badge>
+                );
+            }
+            ```
+        </Steps>
+    </Tab>
+    <Tab>
+        <Steps>
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Build a custom component, e.g:</h3>
+
+            ```html showLineNumbers copy
+            <script>
+                function renderProductCard({ product, sourceApp }) {
+                    const {
+                        id,
+                        admin_graphql_api_id,
+                        title,
+                        image,
+                        handle,
+                        url,
+                        vendor,
+                        currency,
+                        variants,
+                    } = product || {};
+                    const {
+                        id: variant_id = '',
+                        admin_graphql_api_id: variant_admin_graphql_api_id = '',
+                        title: variant_title = '',
+                        price = '',
+                        sku = '',
+                        is_out_of_stock = false,
+                    } = variants?.length ? variants[0] : {};
+
+                    const isOnSale = parseFloat(String(compare_at_price)) ? parseFloat(String(compare_at_price)) > parseFloat(String(price)) : false;
+
+                    return `
+                        <div class="sledge__product-grid-card-flyout">
+                            <div class="sledge__product-grid-card-flyout-wishlist-trigger">
+                                <div
+                                    data-component="wishlist-trigger"
+                                    data-product-id="${id}"
+                                    data-product-variant-id="${variant_id}"
+                                    data-product-name="${title}"
+                                    data-product-vendor="${vendor}"
+                                    data-product-sku="${sku}"
+                                    data-product-variant-name="${variant_title}"
+                                    data-product-link="${url}"
+                                    data-product-image="${image?.src || ''}"
+                                    data-product-currency="${currency}"
+                                    data-product-price="${price}"
+                                    data-trigger-badge="rerender"
+                                ></div>
+                            </div>
+
+                            <div class="sledge__product-grid-card-image-flyout">
+                                <a href="/products/${handle}">
+                                    <img
+                                        src="${image?.src || ''}"
+                                        alt="sledge-product-card-image"
+                                        class="sledge__product-grid-card-image-featured-image-flyout"
+                                        loading="lazy"
+                                    />
+                                </a>
+                            </div>
+
+                            <div class="sledge__product-grid-card-desc-flyout">
+                                ${title ? `
+                                    <a href="/products/${handle}">
+                                        <h3 class="sledge__product-grid-card-product-name-flyout">
+                                            ${title}
+                                        </h3>
+                                    </a>
+                                ` : ''}
+
+                                <div class="sledge__product-grid-card-price-flyout">
+                                    <div>
+                                        <p>
+                                            ${currency}
+                                            ${price}
+                                        </p>
+                                    </div>
+                                    ${isOnSale ? `
+                                        <div class="sledge__product-grid-card-compare-at-price-flyout">
+                                            <p>
+                                                ${currency}
+                                                ${compare_at_price}
+                                            </p>
+                                        </div>
+                                    ` : ''}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+            </script>
+            ```
+
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Call custom component to attribute</h3>
+
+            Only provide the function name (without `()`), see the [API reference](/html-data-attribute#data-render-product-card)
+
+            > <div className="not-italic">`<div data-component="custom-components">` must be added as a child of another sledge's widget.</div>
+
+            ```html {8-11} showLineNumbers copy
+            <a href="/pages/wishlist">
+                <div
+                    class="header__icon"
+                    data-component="wishlist-badge"
+                    data-use-wishlist-flyout="true"
+                    data-url-wishlist-widget="/pages/wishlist"
+                >
+                    <div
+                        data-component="custom-components"
+                        data-render-product-card="renderProductCard"
+                    ></div>
+                </div>
+            </a>
+            ```
+        </Steps>
+    </Tab>
+    <Tab>
+        You can place these code in custom code webflow, see the <a href="https://university.webflow.com/lesson/custom-code-embed" target="_blank" className="nx-text-primary-600 nx-underline nx-decoration-from-font [text-underline-position:from-font]">documentation</a> about custom code embed at webflow
+
+        <Steps className="mt-3">
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Build a custom component, e.g:</h3>
+
+            ```html showLineNumbers copy
+            <script>
+                function renderProductCard({ product, sourceApp }) {
+                    const {
+                        id,
+                        admin_graphql_api_id,
+                        title,
+                        image,
+                        handle,
+                        url,
+                        vendor,
+                        currency,
+                        variants,
+                    } = product || {};
+                    const {
+                        id: variant_id = '',
+                        admin_graphql_api_id: variant_admin_graphql_api_id = '',
+                        title: variant_title = '',
+                        price = '',
+                        sku = '',
+                        is_out_of_stock = false,
+                    } = variants?.length ? variants[0] : {};
+
+                    const isOnSale = parseFloat(String(compare_at_price)) ? parseFloat(String(compare_at_price)) > parseFloat(String(price)) : false;
+
+                    return `
+                        <div class="sledge__product-grid-card-flyout">
+                            <div class="sledge__product-grid-card-flyout-wishlist-trigger">
+                                <div
+                                    data-component="wishlist-trigger"
+                                    data-product-id="${id}"
+                                    data-product-variant-id="${variant_id}"
+                                    data-product-name="${title}"
+                                    data-product-vendor="${vendor}"
+                                    data-product-sku="${sku}"
+                                    data-product-variant-name="${variant_title}"
+                                    data-product-link="${url}"
+                                    data-product-image="${image?.src || ''}"
+                                    data-product-currency="${currency}"
+                                    data-product-price="${price}"
+                                    data-trigger-badge="rerender"
+                                ></div>
+                            </div>
+
+                            <div class="sledge__product-grid-card-image-flyout">
+                                <a href="/products/${handle}">
+                                    <img
+                                        src="${image?.src || ''}"
+                                        alt="sledge-product-card-image"
+                                        class="sledge__product-grid-card-image-featured-image-flyout"
+                                        loading="lazy"
+                                    />
+                                </a>
+                            </div>
+
+                            <div class="sledge__product-grid-card-desc-flyout">
+                                ${title ? `
+                                    <a href="/products/${handle}">
+                                        <h3 class="sledge__product-grid-card-product-name-flyout">
+                                            ${title}
+                                        </h3>
+                                    </a>
+                                ` : ''}
+
+                                <div class="sledge__product-grid-card-price-flyout">
+                                    <div>
+                                        <p>
+                                            ${currency}
+                                            ${price}
+                                        </p>
+                                    </div>
+                                    ${isOnSale ? `
+                                        <div class="sledge__product-grid-card-compare-at-price-flyout">
+                                            <p>
+                                                ${currency}
+                                                ${compare_at_price}
+                                            </p>
+                                        </div>
+                                    ` : ''}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+            </script>
+            ```
+
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Call custom component to attribute</h3>
+
+            Only provide the function name (without `()`), see the [API reference](/html-data-attribute#data-render-product-card)
+
+            > <div className="not-italic">`<div data-component="custom-components">` must be added as a child of another sledge's widget.</div>
+
+            ```html {7-10} showLineNumbers copy
+            <a href="/wishlist">
+                <div
+                    data-component="wishlist-badge"
+                    data-use-wishlist-flyout="true"
+                    data-url-wishlist-widget="/wishlist"
+                >
+                    <div
+                        data-component="custom-components"
+                        data-render-product-card="renderProductCard"
+                    ></div>
+                </div>
+            </a>
+            ```
+        </Steps>
+    </Tab>
+
+</Tabs>

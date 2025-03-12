@@ -1,0 +1,980 @@
+import Image from "next/image";
+import { Steps } from "nextra/components";
+import { WrapList, List } from "~/components/global";
+import {
+  FILTER_LIST,
+  COLOR_SWATCH,
+  MERGE_VALUE,
+  TITLE_FILTER,
+  OPTION_FILTER
+} from "~/lib/product-review-widget-image";
+import {
+  STEP,
+} from "~/lib/product-review-widget-image";
+
+# Product filter widget
+
+To Access the Product Filter Widget, Follow These Steps:
+
+
+Go to the Apps Sledge.
+
+<br />
+
+<Image
+  src={STEP.IMAGE_STEP_ONE}
+  alt="Badge Header Menu"
+  width="1391"
+  height="646"
+/> 
+
+Select the Customizer menu.
+
+<br />
+
+<Image
+  src={STEP.IMAGE_STEP_TWO}
+  alt="Badge Header Menu"
+  width="1391"
+  height="646"
+/> <br />
+
+Choose Product Filter Widget and click the "Start Customizing Widget" button.
+
+<br />
+
+<Image
+  src={STEP.IMAGE_STEP_THREE}
+  alt="Badge Header Menu"
+  width="1391"
+  height="646"
+/> <br />
+
+## Filter List
+
+Available settings:
+
+- [`Add Filter List`](#add-filter-list)
+- [`Filter By Prefix`](#filter-by-prefix)
+- [`Delete By Prefix`](#delete-by-prefix)
+- [`Filter Tree Collection`](#filter-tree-collection)
+- [`Filter Tree Product Type`](#filter-tree-product-type)
+- [`Chained Filter`](#chained-filter)
+- [`Add specific Filter List`](#add-specific-filter-list)
+
+### <span className="text-xl font-bold gradient-text-primary">`Add Filter List`</span>
+
+The Add Filter List feature allows you to add a list of filters, enabling you to display the specific criteria you need. For example, you can add filters for tags, product type, color, and collection. This feature applies to all collections by default, except for those that already have specifically defined filters.
+
+<WrapList>
+ <List 
+   title={`Select the Filter element on the right, then click the Settings tab and click the icon marked with a red arrow.`} 
+   imgSrc={FILTER_LIST.ADD_FILTER_LIST.FILTER_ELEMENT_ADD_FILTER_LIST} 
+ />
+ <List 
+   title={`Click the "View All" button to open a popup.`}
+   imgSrc={FILTER_LIST.ADD_FILTER_LIST.VIEW_ALL_ADD_FILTER_LIST} 
+ />
+  <List 
+   title={`Click the "Add" button`}
+   imgSrc={FILTER_LIST.ADD_FILTER_LIST.ADD_FILTER_FIRST_TIME} 
+  />
+  <List 
+   title={`Enter the desired filter list name and select the collection to be displayed in the filter list.`}
+   imgSrc={FILTER_LIST.ADD_FILTER_LIST.FILL_NAME_ADD_FILTER_LIST} 
+  />
+  <List 
+   title={`Choose the collection`}
+   imgSrc={FILTER_LIST.ADD_FILTER_LIST.CHOOSE_COLLECTION_ADD_FILTER_LIST} 
+  />
+  <List 
+   title={`Click Save Button`}
+   imgSrc={FILTER_LIST.ADD_FILTER_LIST.SAVE_ADD_FILTER_LIST} 
+  />
+  <List 
+   title={`The filter list has now been added, but its status is still inactive. Change it to active by clicking the icon indicated by the arrow on the right`}
+   imgSrc={FILTER_LIST.ADD_FILTER_LIST.SET_ACTIVE_ADD_FILTER_LIST} 
+  />
+  <List 
+   title={`The status will change to active. Next, click the edit icon as shown in the image below`}
+   imgSrc={FILTER_LIST.ADD_FILTER_LIST.EDIT_ICON_ADD_FILTER_LIST} 
+  />
+  <List 
+   title={`A new section will appear at the bottom. Click the "Add Item" button.`}
+   imgSrc={FILTER_LIST.ADD_FILTER_LIST.ADD_ITEM_ADD_FILTER_LIST} 
+  />
+  <List 
+   title={`Fill in the form with the desired details: Label, Type, Display, and Operator`}
+   imgSrc={FILTER_LIST.ADD_FILTER_LIST.EXPLANATION_ADD_FILTER_LIST} 
+   whosChildren="title"
+  >
+    Explanation:
+    <WrapList
+      list="list-disc"
+    >
+      <List 
+        title={`Label: The title displayed in the collection list as the parent category.`}
+      /> 
+      <List 
+        title={`Type: The type of filter to be displayed.`}
+      />
+      <List 
+        title={`Display: The input type used for filtering, such as Checkbox, Radio Button, Select Option, Swatch, or Tree.`}
+      /> 
+      <List 
+        title={`Operator: The logic that will be applied.`}
+      /> 
+    </WrapList>
+  </List>
+  <List 
+   title={`Example of a completed form`}
+   imgSrc={FILTER_LIST.ADD_FILTER_LIST.EXAMPLE_EXPLANATION_ADD_FILTER_LIST} 
+  />
+  <List 
+   title={`Once successfully added, the item will appear in the list below.`}
+   imgSrc={FILTER_LIST.ADD_FILTER_LIST.SUCCESS_ADD_FILTER_LIST} 
+  />
+  <List 
+   title={`Preview the filter list in the Customizer to verify its appearance.`}
+   imgSrc={FILTER_LIST.ADD_FILTER_LIST.MAKE_SURE_ADD_FILTER_LIST} 
+  />
+  <List 
+   title={`If the filter does not appear, exit the Customizer, re-enter, and select the Product Filter Widget.`}
+   imgSrc={FILTER_LIST.ADD_FILTER_LIST.RE_ENTER_CUSTOMIZER_ADD_FILTER_LIST} 
+  >
+    <WrapList
+      list="list-none"
+    >
+        <List 
+        imgSrc={FILTER_LIST.ADD_FILTER_LIST.RE_CHOOSE_PRODUCT_FILTER_WIDGET_ADD_FILTER_LIST} 
+        /> 
+    </WrapList>
+  </List>
+  <List 
+   title={`Below is the expected appearance once the filter list is successfully displayed.`}
+   imgSrc={FILTER_LIST.ADD_FILTER_LIST.SUCCESS_SHOW_ADD_FILTER_LIST} 
+  />
+</WrapList>
+
+### <span className="text-xl font-bold gradient-text-primary">`Filter by Prefix`</span>
+
+The Filter by Prefix feature allows you to refine which filters are displayed. For example, if there are numerous items within the filter tags, but you only want to show items related to "sport," this feature helps you achieve that efficiently.
+
+How to Apply Filter by Prefix
+
+<WrapList>
+ <List 
+   title={`Select the Filter element on the right, then click the Settings tab and click the icon marked with a red arrow.`} 
+   imgSrc={FILTER_LIST.FILTER_BY_PREFIX.FILTER_ELEMENT_BY_PREFIX} 
+ />
+ <List 
+   title={`Click the "View All" button to open a popup.`} 
+   imgSrc={FILTER_LIST.FILTER_BY_PREFIX.VIEW_ALL_BY_PREFIX} 
+ />
+ <List 
+   title={`Scroll down to find the filter item you want to set a prefix for, then click the icon indicated by the arrow.`} 
+   imgSrc={FILTER_LIST.FILTER_BY_PREFIX.ICON_EDIT_FILTER_ITEM_BY_PREFIX} 
+ />
+ <List 
+   title={`The Edit Filter Items form will appear. Scroll down to the Filter List section, select "Filter by Prefix", choose the list to apply the prefix filter to, and click the "Update" button.`} 
+   imgSrc={FILTER_LIST.FILTER_BY_PREFIX.SET_FILTER_BY_PREFIX} 
+ />
+ <List 
+   title={`Preview the changes to ensure the filter item is correctly filtered by prefix.`} 
+   imgSrc={FILTER_LIST.FILTER_BY_PREFIX.BEFORE_FILTER_BY_PREFIX} 
+ />
+ <List 
+   title={`Preview the changes to ensure the filter item is correctly filtered by prefix.`} 
+   whosChildren="title"
+ >
+  <WrapList
+   list="list-disc"
+  >
+    <List 
+      title={`Before applying the Filter by Prefix`} 
+      imgSrc={FILTER_LIST.FILTER_BY_PREFIX.BEFORE_FILTER_BY_PREFIX} 
+    />
+    <List 
+      title={`After applying the Filter by Prefix`} 
+      imgSrc={FILTER_LIST.FILTER_BY_PREFIX.AFTER_FILTER_BY_PREFIX} 
+    />
+  </WrapList> 
+ </List>
+</WrapList>
+
+### <span className="text-xl font-bold gradient-text-primary">`Delete By Prefix`</span>
+
+The Delete Prefix feature allows you to trim text from filter items. For example, if you have a filter item in the tags named "sport" and want to remove a specific part of the text, this feature enables you to do so efficiently.
+
+How to Remove the Applied Prefix Letter
+
+<WrapList>
+ <List 
+   title={`Select the Filter element on the right, then click the Settings tab and click the icon marked with a red arrow.`} 
+   imgSrc={FILTER_LIST.DELETE_PREFIX.FILTER_ELEMENT_DELETE_BY_PREFIX} 
+ />
+ <List 
+   title={`Click “View All” button to open a popup`} 
+   imgSrc={FILTER_LIST.DELETE_PREFIX.VIEW_ALL_DELETE_BY_PREFIX} 
+ />
+ <List 
+   title={`Scroll down to find the filter item you want to set a prefix for, then click the icon indicated by the arrow.`} 
+   imgSrc={FILTER_LIST.DELETE_PREFIX.ICON_EDIT_DELETE_BY_PREFIX} 
+ />
+ <List 
+   title={`The Edit Filter Items form will appear. Scroll down to the Filter List section, Enter the letter or character you want to remove from the filtered prefix list.`} 
+   imgSrc={FILTER_LIST.DELETE_PREFIX.REMOVE_ITEM_DELETE_BY_PREFIX} 
+ />
+ <List 
+   title={`Preview the changes to ensure the filter item is correctly filtered by prefix.`} 
+   whosChildren="title"
+ >
+   <WrapList 
+     list="list-disc"
+   >
+     <List 
+        title={`Before delete by prefix`} 
+        imgSrc={FILTER_LIST.DELETE_PREFIX.BEFORE_DELETE_BY_PREFIX} 
+      />
+     <List 
+        title={`After delete by prefix`} 
+        imgSrc={FILTER_LIST.DELETE_PREFIX.AFTER_DELETE_BY_PREFIX} 
+      />
+   </WrapList>
+ </List>
+</WrapList>
+
+### <span className="text-xl font-bold gradient-text-primary">`Filter Tree Collection`</span>
+
+The Filter Tree feature is designed to accommodate user needs by grouping collections based on the desired categorization.
+
+Follow these steps to create a filter tree collections:
+
+<WrapList>
+ <List 
+   title={`Click on the Filter element.`}
+ />
+ <List 
+   title={`Click the "View All" button to open a popup.`}
+   imgSrc={FILTER_LIST.FILTER_TREE_COLLECTION.VIEW_ALL_FILTER_TREE_COLLECTION} 
+ />
+ <List 
+   title={`Click the edit icon to open the Edit Filter form.`}
+   imgSrc={FILTER_LIST.FILTER_TREE_COLLECTION.ICON_EDIT_FILTER_TREE_COLLECTION} 
+ />
+ <List 
+   title={`Click the "Add Item" button.`}
+   imgSrc={FILTER_LIST.FILTER_TREE_COLLECTION.ADD_FILTER_ITEM_FILTER_TREE_COLLECTION} 
+ />
+  <List 
+   title={`Fill in the required fields in the Add Item form.`}
+   imgSrc={FILTER_LIST.FILTER_TREE_COLLECTION.FILL_ADD_FILTER_ITEM_FILTER_TREE_COLLECTION} 
+ />
+ <List 
+   title={`In the Display field, select "Filter Tree", then click the "Save" button.`}
+   imgSrc={FILTER_LIST.FILTER_TREE_COLLECTION.CHOOSE_DISPLAY_FILTER_TREE_COLLECTION} 
+ />
+ <List 
+   title={`A list of Filter Items will appear. Next, click the tree icon in the bottom left corner, as indicated by the arrow.`}
+   imgSrc={FILTER_LIST.FILTER_TREE_COLLECTION.ICON_TREE_FILTER_TREE_COLLECTION} 
+ />
+ <List 
+   title={`After clicking the icon, a new interface will appear for configuring the Filter Tree.`}
+   imgSrc={FILTER_LIST.FILTER_TREE_COLLECTION.CONFIGURE_FILTER_TREE_COLLECTION} 
+ />
+ <List 
+   title={`Drag and arrange the items according to the desired filter tree structure, then click the "Save" button`}
+   imgSrc={FILTER_LIST.FILTER_TREE_COLLECTION.DRAG_FILTER_TREE_COLLECTION} 
+ />
+ <List 
+   title={`Return to the Filter Element. If the Filter Tree does not appear, try exiting the Customizer and re-entering to refresh the changes.`}
+   imgSrc={FILTER_LIST.FILTER_TREE_COLLECTION.MAKE_SURE_FILTER_TREE_COLLECTION} 
+ />
+ <List 
+   title={`When the Customizer is closed, you will be redirected to the Dashboard. Re-enter the Customizer by clicking the Customizer menu.`}
+   imgSrc={FILTER_LIST.FILTER_TREE_COLLECTION.RE_ENTER_CUSTOMIZER_FILTER_TREE_COLLECTION} 
+ >
+    <WrapList
+      list="list-none"
+    >
+      <List 
+        imgSrc={FILTER_LIST.ADD_FILTER_LIST.RE_CHOOSE_PRODUCT_FILTER_WIDGET_ADD_FILTER_LIST} 
+      /> 
+    </WrapList>
+ </List>
+ <List 
+   title={`Once inside the Product Filter Widget, the Filter Tree should now be visible in the Filter Element.`}
+   whosChildren="title"
+ >
+  <WrapList 
+     list="list-disc"
+   >
+     <List 
+        title={`Before delete by prefix`} 
+        imgSrc={FILTER_LIST.DELETE_PREFIX.BEFORE_DELETE_BY_PREFIX} 
+      />
+     <List 
+        title={`After delete by prefix`} 
+        imgSrc={FILTER_LIST.DELETE_PREFIX.AFTER_DELETE_BY_PREFIX} 
+      />
+   </WrapList>
+ </List>
+</WrapList>
+
+### <span className="text-xl font-bold gradient-text-primary">`Filter Tree Product Type`</span>
+
+The Filter Tree Product Type feature is designed to help users group products based on their available data.
+
+Follow these steps to create a filter tree collections:
+
+<WrapList>
+  <List 
+    title={`Click on the Filter element.`} 
+    imgSrc={FILTER_LIST.FILTER_TREE_PRODUCT_TYPE.FILTER_ELEMENT_FILTER_TREE_PROD_TYPE}
+  />
+  <List 
+    title={`Click the "View All" button to open a popup.`} 
+    imgSrc={FILTER_LIST.FILTER_TREE_PRODUCT_TYPE.VIEW_ALL_FILTER_TREE_PROD_TYPE}
+  />
+  <List 
+    title={`Click the edit icon to open the Edit Filter form.`} 
+    imgSrc={FILTER_LIST.FILTER_TREE_PRODUCT_TYPE.EDIT_ICON_FILTER_TREE_PROD_TYPE}
+  />
+  <List 
+    title={`After the Filter List Form appears, click "Add Item".`} 
+    imgSrc={FILTER_LIST.FILTER_TREE_PRODUCT_TYPE.ADD_ITEM_FILTER_TREE_PROD_TYPE}
+  />
+  <List 
+    title={`Fill in the form with the desired details: Label, Type, Display, and Operator.`} 
+    imgSrc={FILTER_LIST.FILTER_TREE_PRODUCT_TYPE.EXPLANATION_FILTER_TREE_PROD_TYPE}
+    whosChildren="title"
+  >
+    Explanation:
+    <WrapList
+      list="list-disc"
+    >
+      <List 
+        title={`Label: The title displayed in the collection list as the parent category.`}
+      /> 
+      <List 
+        title={`Type: The type of filter to be displayed.`}
+      />
+      <List 
+        title={`Display: The input type used for filtering, such as Checkbox, Radio Button, Select Option, Swatch, or Tree.`}
+      /> 
+      <List 
+        title={`Operator: The logic that will be applied.`}
+      /> 
+    </WrapList>
+  </List>
+  <List 
+   title="Enter the Label as needed and set the Type field to Product Type."
+   imgSrc={FILTER_LIST.FILTER_TREE_PRODUCT_TYPE.CHOOSE_TYPE_FILTER_TREE_PROD_TYPE}
+  />
+  <List 
+   title="In the Display field, select Filter Tree."
+   imgSrc={FILTER_LIST.FILTER_TREE_PRODUCT_TYPE.CHOOSE_DISLAY_FILTER_TREE_PROD_TYPE}
+  />
+  <List 
+   title={`For the "When selected, hide siblings tree" option, choose according to your preference.`}
+   imgSrc={FILTER_LIST.FILTER_TREE_PRODUCT_TYPE.SIBLING_FILTER_TREE_PROD_TYPE}
+  />
+  <List 
+   title={`Fill in the "Type Separator" and "New Line Type Separator" fields based on your store's data. In the example below, the input follows this format because the store's data structure is "Winter > Man ### Winter > Woman"`}
+   imgSrc={FILTER_LIST.FILTER_TREE_PRODUCT_TYPE.TYPE_SEPARATOR_FILTER_TREE_PROD_TYPE}
+  />
+  <List 
+   title={`Once saved, the filter preview in the Customizer will update as shown below:`}
+   imgSrc={FILTER_LIST.FILTER_TREE_PRODUCT_TYPE.PREV_FILTER_TREE_PROD_TYPE}
+  />
+  <List 
+   title={`Here is the Type field as displayed on the Product Detail Page:`}
+   imgSrc={FILTER_LIST.FILTER_TREE_PRODUCT_TYPE.PDP_FILTER_TREE_PROD_TYPE}
+  />
+</WrapList>
+
+### <span className="text-xl font-bold gradient-text-primary">`Chained Filter`</span>
+
+Chained Filter is a method used to manage filters with dependencies. This feature utilizes Visibility Rules, making it useful for hiding filters that shouldn't be displayed until certain conditions are met.
+
+For example, consider a filter list with items such as price, product type, tags, collection, and size. The size filter is highly specific and only applies to products with the bundle tag.
+
+Follow these steps
+
+<WrapList>
+  <List 
+    title={`Select the Filter element on the right, then click the Settings tab and click the icon marked with a red arrow.`} 
+    imgSrc={FILTER_LIST.CHAINED_FILTER.FILTER_ELEMENT_CHAINED_FILTER}
+  />
+  <List 
+    title={`Click the “View All” button to open a popup`} 
+    imgSrc={FILTER_LIST.CHAINED_FILTER.VIEW_ALL_CHAINED_FILTER}
+  />
+  <List 
+    title={`Scroll down to find the filter item you want to set a chained filter for, then click the icon indicated by the arrow.`} 
+    imgSrc={FILTER_LIST.CHAINED_FILTER.EDIT_ITEM_CHAINED_FILTER}
+  />
+  <List 
+    title={`The Edit Filter Item form will appear. Scroll down to the Filter List section, select "Enable filter list visibility rules," and enable the checkbox`} 
+    imgSrc={FILTER_LIST.CHAINED_FILTER.ENABLE_FILTER_CHAINED_FILTER}
+  />
+  <List 
+    title={`The Visibility Rules section, highlighted with a red box, will appear`} 
+    imgSrc={FILTER_LIST.CHAINED_FILTER.VISIBILITY_RULE_CHAINED_FILTER}
+  />
+  <List 
+    title={`A pop-up will appear—click Add Rule.`} 
+    imgSrc={FILTER_LIST.CHAINED_FILTER.ADD_RULE_CHAINED_FILTER}
+  />
+  <List 
+    title={`A form will appear—fill it out based on your requirements.`} 
+    imgSrc={FILTER_LIST.CHAINED_FILTER.FILL_ADD_RULE_CHAINED_FILTER}
+  />
+  <List 
+    title={`For example, we will trigger the filter tags with the value bundle using the OR logic`} 
+    imgSrc={FILTER_LIST.CHAINED_FILTER.EXAMPLE_ADD_RULE_CHAINED_FILTER}
+  />
+  <List 
+    title={`Here’s how it appears on the storefront:`}
+    whosChildren="title"
+  >
+    <WrapList
+      list="list-disc"
+    >
+      <List 
+        title={`The Size filter does not appear because the bundle tag has not been selected.`}
+        imgSrc={FILTER_LIST.CHAINED_FILTER.BEFORE_SELECTED_CHAINED_FILTER}
+      /> 
+      <List 
+        title={`The Size filter remains hidden until the bundle tag is selected`}
+        imgSrc={FILTER_LIST.CHAINED_FILTER.AFTER_SELECTED_CHAINED_FILTER}
+      /> 
+    </WrapList>
+  </List>
+</WrapList>
+
+### <span className="text-xl font-bold gradient-text-primary">`Add Specific Filter List`</span>
+
+This feature is similar to Add Filter List, where the filter items you create will appear in a collection. The key difference is that this feature applies only to the specific collections you create, whereas Add Filter List applies to all collections.
+
+Follow this step
+
+<WrapList>
+  <List 
+    title={`Go to the Filter Element and click "View All" to open the popup.`} 
+    imgSrc={FILTER_LIST.ADD_SPECIFUC_FILTER.FILTER_ELEMENT_SPECIFIC_FILTER_LIST}
+  />
+  <List 
+    title={`Click the “View All” button to open a popup.`} 
+    imgSrc={FILTER_LIST.ADD_SPECIFUC_FILTER.VIEW_ALL_SPECIFIC_FILTER_LIST}
+  />
+  <List 
+    title={`Enter the desired filter list name and select the collection to be displayed in the filter list.`} 
+    imgSrc={FILTER_LIST.ADD_SPECIFUC_FILTER.ENTER_FORM_SPECIFIC_FILTER_LIST}
+  />
+  <List 
+    title={`Choose the collection.`} 
+    imgSrc={FILTER_LIST.ADD_SPECIFUC_FILTER.CHOOSE_SPECIFIC_FILTER_LIST}
+  />
+  <List 
+    title={`Click the "Save" button.`} 
+    imgSrc={FILTER_LIST.ADD_SPECIFUC_FILTER.SAVE_SPECIFIC_FILTER_LIST}
+  />
+  <List 
+    title={`The filter list has now been added, but its status is still inactive. Change it to active by clicking the icon indicated by the arrow on the right.`} 
+    imgSrc={FILTER_LIST.ADD_SPECIFUC_FILTER.INACTIVE_SPECIFIC_FILTER_LIST}
+  />
+  <List 
+    title={`The status will change to active. Next, click the edit icon as shown in the image below.`} 
+    imgSrc={FILTER_LIST.ADD_SPECIFUC_FILTER.ICON_EDIT_SPECIFIC_FILTER_LIST}
+  />
+  <List 
+    title={`A new section will appear at the bottom. Click the "Add Item" button.`} 
+    imgSrc={FILTER_LIST.ADD_SPECIFUC_FILTER.ADD_ITEM_SPECIFIC_FILTER_LIST}
+  />
+  <List 
+    title={`Fill in the form with the desired details: Label, Type, Display, and Operator.`} 
+    imgSrc={FILTER_LIST.ADD_SPECIFUC_FILTER.EXPLANATION_SPECIFIC_FILTER_LIST}
+    whosChildren="title"
+  >
+  Explanation
+     <WrapList
+      list="list-disc"
+    >
+      <List 
+        title={`Label: The title displayed in the collection list as the parent category.`}
+      /> 
+      <List 
+        title={`Type: The type of filter to be displayed.`}
+      /> 
+      <List 
+        title={`Display: The input type used for filtering, such as Checkbox, Radio Button, Select Option, Swatch, or Tree.`}
+      /> 
+      <List 
+        title={`Operator: The logic that will be applied.`}
+      /> 
+    </WrapList>
+  </List>
+  <List 
+    title={`Example of a completed form.`} 
+    imgSrc={FILTER_LIST.ADD_SPECIFUC_FILTER.EXAMPLE_SPECIFIC_FILTER_LIST}
+  />
+  <List 
+    title={`Once successfully added, the item will appear in the list below.`} 
+    imgSrc={FILTER_LIST.ADD_SPECIFUC_FILTER.SUCCESS_SPECIFIC_FILTER_LIST}
+  />
+</WrapList>
+
+## Color Swatch
+
+Available settings:
+
+- [`Add Color Swatch`](#add-color-swatch)
+
+ ### <span className="text-xl font-bold gradient-text-primary">`Add Color Swatch`</span>
+
+ Follow these steps to create a Filter color swatch:
+
+ <WrapList>
+  <List 
+    title={`Select the Filter element on the right, then click the Settings tab and click the icon marked with a red arrow.`} 
+    imgSrc={COLOR_SWATCH.ADD_COLOR_SWATCH.FILTER_ELEMENT_COLOR_SWATCH}
+  />
+  <List 
+    title={`Click the "View All" button to open a popup.`} 
+    imgSrc={COLOR_SWATCH.ADD_COLOR_SWATCH.VIEW_ALL_COLOR_SWATCH}
+  />
+  <List 
+    title={`Click the edit icon to open the Edit Filter form.`} 
+    imgSrc={COLOR_SWATCH.ADD_COLOR_SWATCH.ICON_EDIT_COLOR_SWATCH}
+  />
+  <List 
+    title={`After the Filter List Form appears, click "Add Item".`} 
+    imgSrc={COLOR_SWATCH.ADD_COLOR_SWATCH.ADD_ITEM_COLOR_SWATCH}
+  />
+  <List 
+    title={`Fill in the form with the desired details: Label, Type, Display, and Operator.`} 
+    imgSrc={COLOR_SWATCH.ADD_COLOR_SWATCH.EXPLANATION_COLOR_SWATCH}
+    whosChildren="title"
+  >
+    Explanation:
+    <WrapList
+      list="list-disc"
+    >
+      <List 
+        title={`Label: The title displayed in the collection list as the parent category`}
+      /> 
+      <List 
+        title={`Type: The type of filter to be displayed.`}
+      />
+      <List 
+        title={`Display: The input type used for filtering, such as Checkbox, Radio Button, Select Option, Swatch, or Tree.`}
+      /> 
+      <List 
+        title={`Operator: The logic that will be applied.`}
+      /> 
+    </WrapList>
+    </List>
+    <List 
+      title={`In the Type column, select Option Color.`} 
+      imgSrc={COLOR_SWATCH.ADD_COLOR_SWATCH.TYPE_COLOR_SWATCH}
+    />
+    <List 
+      title={`In the Display column, choose Swatch.`} 
+      imgSrc={COLOR_SWATCH.ADD_COLOR_SWATCH.DISPLAY_COLOR_SWATCH}
+    />
+    <List 
+      title={`Click the Save button.`} 
+      imgSrc={COLOR_SWATCH.ADD_COLOR_SWATCH.SAVE_COLOR_SWATCH}
+    />
+    <List 
+      title={`Check the results after adding the filter item.`} 
+      imgSrc={COLOR_SWATCH.ADD_COLOR_SWATCH.SUCCESS_ADD_COLOR_SWATCH}
+    />
+    <List 
+      title={`Close the previous form by clicking outside the popup, then select the Color Swatch Settings, indicated by the arrow in the image below.`} 
+      imgSrc={COLOR_SWATCH.ADD_COLOR_SWATCH.ICON_PLUS_ADD_COLOR_SWATCH}
+    />
+    <List 
+      title={`The Color Swatch Settings window will appear—click the View All button.`} 
+      imgSrc={COLOR_SWATCH.ADD_COLOR_SWATCH.VIEW_ALL_LIST_ADD_COLOR_SWATCH}
+    />
+    <List 
+      title={`To set the desired color, select a color from the box marked with an arrow.`} 
+      imgSrc={COLOR_SWATCH.ADD_COLOR_SWATCH.SET_COLOR_SWATCH}
+    />
+    <List 
+      title={`Choose your preferred color.`} 
+      imgSrc={COLOR_SWATCH.ADD_COLOR_SWATCH.CHOOSE_COLOR_SWATCH }
+    />
+    <List 
+      title={`You can also set the color using an image of your choice. However, if both color and image are selected, the swatch will prioritize the image.`} 
+      imgSrc={COLOR_SWATCH.ADD_COLOR_SWATCH.ADD_IMAGE_COLOR_SWATCH}
+    />
+    <List 
+      title={`Below is the appearance after the Color Swatch has been customized.`} 
+      imgSrc={COLOR_SWATCH.ADD_COLOR_SWATCH.PREV_COLOR_SWATCH}
+    />
+    <List 
+      title={`When the Filter Color is applied, it will filter data based on the selected Option Color.`} 
+      imgSrc={COLOR_SWATCH.ADD_COLOR_SWATCH.PRODUCT_COLOR_SWATCH}
+    />
+</WrapList>
+
+## Merge Value
+
+Available settings:
+
+- [`Add Merge Value`](#add-merge-value)
+
+### <span className="text-xl font-bold gradient-text-primary">`Add Merge Value`</span>
+
+Steps to Configure Merged Value:
+
+<WrapList>
+  <List 
+    title={`Select the Filter element and click Merged Value, following the guide in the image below.`} 
+    imgSrc={MERGE_VALUE.ADD_MERGE_VALUE.FILTER_ELEMENT_ADD_MERGE_VALUE}
+  />
+  <List 
+    title={`Once the Merged Value settings open, click the Add button.`} 
+    imgSrc={MERGE_VALUE.ADD_MERGE_VALUE.ADD_BUTTON_ADD_MERGE_VALUE}
+  />
+  <List 
+    title={`Fill in each field as follows:`} 
+    imgSrc={MERGE_VALUE.ADD_MERGE_VALUE.EXAMPLE_ADD_MERGE_VALUE}
+    whosChildren="titile"
+  >
+    <WrapList 
+      list="list-disc"
+    >
+      <List 
+        title={`Title Column: Enter the desired title, e.g., "Merged Tags".`} 
+      />
+      <List 
+        title={`Type Column: Select the type of value you want to merge, e.g., "Tags".`} 
+      />
+      <List 
+        title={`Values to Merge: Choose the values you want to merge, e.g., "Snow, Snowboard".`} 
+      />
+      <List 
+        title={`The entered Title Name will be displayed in the filter item.`} 
+      />
+    </WrapList>
+  </List>
+  <List 
+    title={`Here is an example of selecting Tags in the Type column.`} 
+    imgSrc={MERGE_VALUE.ADD_MERGE_VALUE.TYPE_ADD_MERGE_VALUE}
+  />
+  <List 
+    title={`In the Values to Merge field, an example selection would be "Snow" and "Snowboard".`} 
+    imgSrc={MERGE_VALUE.ADD_MERGE_VALUE.PREV_ADD_MERGE_VALUE}
+  />
+  <List 
+    title={`Below is the result after successfully merging the values.`} 
+    imgSrc={MERGE_VALUE.ADD_MERGE_VALUE.SUCCESS_ADD_MERGE_VALUE}
+  />
+</WrapList>
+
+## Title of Filter
+
+Available settings:
+
+- [`Color Palette`](#change-color-with-color-palette)
+- [`Font Size`](#font-size)
+- [`Font Weight`](#font-weight)
+- [`Text Transform`](#text-transform)
+
+### <span className="text-xl font-bold gradient-text-primary">`Color Palette`</span>
+
+Follow the steps below:
+
+<WrapList>
+  <List 
+    title={`Select the Filter element on the right, then click the Settings tab and click the icon marked with a red arrow.`} 
+    imgSrc={TITLE_FILTER.COLOR_PALETTE_TITLE_FILTER.FILTER_ELEMENT_PALETTE_COLOR_TITLE_FILTER}
+  />
+  <List 
+    title={`Click the Color Palette on the right side, which is also marked with a red arrow.`} 
+    imgSrc={TITLE_FILTER.COLOR_PALETTE_TITLE_FILTER.CLICK_PALETTE_COLOR_TITLE_FILTER}
+  />
+  <List 
+    title={`The Color Palette will appear. Click the right side of the palette where the red arrow and number 1 are indicated, then click the right side again where the red arrow and number 2 are marked.`} 
+    imgSrc={TITLE_FILTER.COLOR_PALETTE_TITLE_FILTER.SHOW_PALETTE_COLOR_TITLE_FILTER}
+  />
+  <List 
+    title={`The Filter Title element will change to the selected color.`} 
+    whosChildren="title"
+  >
+   <WrapList
+     list="list-disc"
+   >
+    <List 
+      title={`Example: Before color change settings`} 
+      imgSrc={TITLE_FILTER.COLOR_PALETTE_TITLE_FILTER.BEFORE_PALETTE_COLOR_TITLE_FILTER}
+     />
+    <List 
+      title={`Example: After color change settings`} 
+      imgSrc={TITLE_FILTER.COLOR_PALETTE_TITLE_FILTER.AFTER_PALETTE_COLOR_TITLE_FILTER}
+     />
+   </WrapList>
+  </List>
+</WrapList>
+
+### <span className="text-xl font-bold gradient-text-primary">`Font Size`</span>
+
+Follow the steps below:
+
+<WrapList>
+  <List 
+    title={`Select the Filter element on the right, then click the Settings tab and click the icon marked with a red arrow.`} 
+    imgSrc={TITLE_FILTER.FILTER_ELEMENT_TITLE_FILTER}
+  />
+  <List 
+    title={`On the right side, marked with a red arrow, you can change the font size to your desired value.`} 
+    imgSrc={TITLE_FILTER.FONT_SIZE_TITLE_FILTER.REAL_FONT_SIZE_TITLE_FILTER}
+    whosChildren="title"
+  >
+    <WrapList
+      list="list-none"
+    >
+      <List 
+        title={`Note: The font size format can be px, em, rem, %, or other units.`} 
+      />   
+    </WrapList>
+  </List>
+  <List
+    title={`For example, if you set the font size to 30px.`}
+    imgSrc={TITLE_FILTER.FONT_SIZE_TITLE_FILTER.CHANGE_FONT_SIZE_TITLE_FILTER}
+  />
+  <List
+    title={`The font size of the Filter Title element will adjust accordingly.`}
+    whosChildren="title"
+  >
+    <WrapList
+      list="list-disc"
+    >
+      <List
+        title={`Example: Before font size change settings`}
+        imgSrc={TITLE_FILTER.FONT_SIZE_TITLE_FILTER.BEFORE_FONT_SIZE_TITLE_FILTER}
+      />
+      <List
+        title={`Example: After font size change settings`}
+        imgSrc={TITLE_FILTER.FONT_SIZE_TITLE_FILTER.AFTER_FONT_SIZE_TITLE_FILTER}
+      />
+    </WrapList>
+  </List>
+</WrapList>
+
+### <span className="text-xl font-bold gradient-text-primary">`Font Weight`</span>
+
+Follow the steps below:
+
+<WrapList>
+  <List 
+    title={`Select the Filter element on the right, then click the Settings tab and click the icon marked with a red arrow.`} 
+    imgSrc={TITLE_FILTER.FILTER_ELEMENT_TITLE_FILTER}
+  />
+  <List 
+    title={`Then, click the Font Weight column marked with a red arrow.`} 
+    imgSrc={TITLE_FILTER.FONT_WEIGHT_TITLE_FILTER.REAL_WEIGHT_TITLE_FILTER}
+  />
+  <List 
+    title={`Select the font weight type you want. The available options are Thin, Extra Light, Light, Normal, Medium, Semi Bold, Bold and Extra Bold. In this example, we will choose Extra Bold.`} 
+    imgSrc={TITLE_FILTER.FONT_WEIGHT_TITLE_FILTER.SHOW_WEIGHT_TITLE_FILTER}
+  />
+  <List 
+    title={`For example, if you set the Font Weight to Font Bold.`} 
+    imgSrc={TITLE_FILTER.FONT_WEIGHT_TITLE_FILTER.CHANGE_WEIGHT_TITLE_FILTER}
+  />
+  <List 
+    title={`The text will be font weight according to your selected option.`} 
+    whosChildren="title"
+  >
+    <WrapList
+      list="list-disc"
+    >
+      <List 
+        title={`Example: Before Font weight change settings`} 
+        imgSrc={TITLE_FILTER.FONT_WEIGHT_TITLE_FILTER.BEFORE_WEIGHT_TITLE_FILTER} 
+      />
+      <List 
+        title={`Example: After Font weight change settings`} 
+        imgSrc={TITLE_FILTER.FONT_WEIGHT_TITLE_FILTER.AFTER_WEIGHT_TITLE_FILTER} 
+      />
+    </WrapList> 
+  </List>
+</WrapList>
+
+### <span className="text-xl font-bold gradient-text-primary">`Text Transform`</span>
+
+Follow the steps below:
+
+<WrapList>
+  <List 
+    title={`Select the Filter element on the right, then click the Settings tab and click the icon marked with a red arrow.`} 
+    imgSrc={TITLE_FILTER.FILTER_ELEMENT_TITLE_FILTER}
+  />
+  <List 
+    title={`Then, click the Text Transform column marked with a red arrow.`} 
+    imgSrc={TITLE_FILTER.TEXT_TRANSFORM_TITLE_FILTER.REAL_TRANSFORM_TITLE_FILTER}
+  />
+  <List 
+    title={`Select the transformation type you want. The available options are None, Capitalize, Uppercase, and Lowercase. In this example, we will choose Uppercase.`} 
+    imgSrc={TITLE_FILTER.TEXT_TRANSFORM_TITLE_FILTER.SHOW_TRANSFORM_TITLE_FILTER}
+  />
+  <List 
+    title={`The text will be transformed according to your selected option.`} 
+    whosChildren="title"
+  >
+    <WrapList
+      list="list-disc"
+    >
+      <List 
+        title={`Example: Before Text Transform change settings`} 
+        imgSrc={TITLE_FILTER.TEXT_TRANSFORM_TITLE_FILTER.BEFORE_TRANSFORM_TITLE_FILTER}
+      /> 
+      <List 
+        title={`Example: After Text Transform change settings`} 
+        imgSrc={TITLE_FILTER.TEXT_TRANSFORM_TITLE_FILTER.AFTER_TRANSFORM_TITLE_FILTER}
+      /> 
+    </WrapList>   
+  </List>
+</WrapList>
+
+## Option of Filter
+
+Available settings:
+
+- [`Color Palette`](#color-palette)
+- [`Font Size`](#font-size)
+- [`Font Weight`](#font-weight)
+
+### <span className="text-xl font-bold gradient-text-primary">`Color Palette`</span>
+
+Follow the steps below:
+
+<WrapList>
+  <List 
+    title={`Select the Filter element on the right, then click the Settings tab and click the icon marked with a red arrow.`} 
+    imgSrc={OPTION_FILTER.FILTER_ELEMENT_OPTION_FILTER}
+  />
+  <List 
+    title={`Click the Color Palette on the right side, which is also marked with a red arrow.`} 
+    imgSrc={OPTION_FILTER.COLOR_OPTION_FILTER.CLICK_COLOR_PALETTE_OPTION_FILTER}
+  />
+  <List 
+    title={`The Color Palette will appear. Click the right side of the palette where the red arrow and number 1 are indicated, then click the right side again where the red arrow and number 2 are marked.`} 
+    imgSrc={OPTION_FILTER.COLOR_OPTION_FILTER.SHOW_COLOR_PALETTE_OPTION_FILTER}
+  />
+  <List 
+    title={`The Option Filter element will change to the selected color.`} 
+    whosChildren="title"
+  >
+    <WrapList
+      list="list-disc"
+    >
+      <List 
+        title={`Example: Before color change settings`} 
+        imgSrc={OPTION_FILTER.COLOR_OPTION_FILTER.BEFORE_COLOR_PALETTE_OPTION_FILTER} 
+      />
+      <List 
+        title={`Example: After color change settings`} 
+        imgSrc={OPTION_FILTER.COLOR_OPTION_FILTER.AFTER_COLOR_PALETTE_OPTION_FILTER} 
+      />
+    </WrapList>
+  </List>
+</WrapList>
+
+### <span className="text-xl font-bold gradient-text-primary">`Font Size`</span>
+
+Follow the steps below:
+
+<WrapList>
+  <List 
+    title={`Select the Filter element on the right, then click the Settings tab and click the icon marked with a red arrow.`} 
+    imgSrc={OPTION_FILTER.FILTER_ELEMENT_OPTION_FILTER}
+  />
+  <List 
+    title={`On the right side, marked with a red arrow, you can change the font size to your desired value.`}
+    whosChildren="title" 
+    imgSrc={OPTION_FILTER.FONT_SIZE_OPTION_FILTER.REAL_SIZE_OPTION_FILTER}
+  >
+    <WrapList
+      list="list-none"
+    >
+     <List 
+       title="Note: The font size format can be px, em, rem, %, or other units."
+     />
+    </WrapList>
+  </List>
+  <List 
+    title={`For example, if you set the font size to 18px.`}
+    imgSrc={OPTION_FILTER.FONT_SIZE_OPTION_FILTER.EXAMPLE_SIZE_OPTION_FILTER}
+  />
+  <List 
+    title={`The font size of the Option of filter element will adjust accordingly.`}
+  >
+    <WrapList
+      list="list-disc"
+    >
+      <List 
+        title={`Example: Before font size change settings`}
+        imgSrc={OPTION_FILTER.FONT_SIZE_OPTION_FILTER.BEFORE_SIZE_OPTION_FILTER}
+      />
+      <List 
+        title={`Example: After font size change settings`}
+        imgSrc={OPTION_FILTER.FONT_SIZE_OPTION_FILTER.AFTER_SIZE_OPTION_FILTER}
+      />
+    </WrapList>
+  </List>
+</WrapList>
+
+### <span className="text-xl font-bold gradient-text-primary">`Font Weight`</span>
+
+Follow the steps below:
+
+<WrapList>
+  <List 
+    title={`Select the Filter element on the right, then click the Settings tab and click the icon marked with a red arrow.`} 
+    imgSrc={OPTION_FILTER.FILTER_ELEMENT_OPTION_FILTER}
+  />
+  <List 
+    title={`Then, click the Font Weight column marked with a red arrow.`} 
+    imgSrc={OPTION_FILTER.FONT_WEIGHT_OPTION_FILTER.REAL_WEIGHT_OPTION_FILTER}
+  />
+  <List 
+    title={`Select the font weight type you want. The available options are Thin, Extra Light, Light, Normal, Medium, Semi Bold, Bold and Extra Bold. In this example, we will choose Extra Bold.`} 
+    imgSrc={OPTION_FILTER.FONT_WEIGHT_OPTION_FILTER.SHOW_WEIGHT_OPTION_FILTER}
+  />
+  <List 
+    title={`For example, if you set the Font Weight to Font Bold.`} 
+    imgSrc={OPTION_FILTER.FONT_WEIGHT_OPTION_FILTER.EXAMPLE_WEIGHT_OPTION_FILTER}
+  />
+  <List 
+    title={`The text will be font weight according to your selected option.`} 
+    whosChildren="title"
+  >
+    <WrapList
+      list="list-disc"
+    >
+      <List 
+        title={`Example: Before Font weight change settings`} 
+        imgSrc={OPTION_FILTER.FONT_WEIGHT_OPTION_FILTER.BEFORE_WEIGHT_OPTION_FILTER}
+      /> 
+      <List 
+        title={`Example: After Font weight change settings`} 
+        imgSrc={OPTION_FILTER.FONT_WEIGHT_OPTION_FILTER.AFTER_WEIGHT_OPTION_FILTER}
+      /> 
+    </WrapList>
+  </List>
+</WrapList>
+
+
+
+
+
+
+
+
+ 

@@ -1,0 +1,238 @@
+{
+  "getting_started_separator": {
+    "title": "Getting Started",
+    "type": "separator"
+  },
+  "index": {
+    "title": "Introduction",
+    "theme": {
+      "breadcrumb": false,
+      "toc": false
+    }
+  },
+  "installation": {
+    "title": "Installation",
+    "theme": {
+      "breadcrumb": false,
+      "toc": false
+    }
+  },
+  "apps_separator": {
+    "title": "Apps",
+    "type": "separator"
+  },
+  "wishlist": {
+    "title": "Wishlist",
+    "theme": {
+      "breadcrumb": false
+    }
+  },
+  "product-review": {
+    "title": "Product Review",
+    "theme": {
+      "breadcrumb": false
+    }
+  },
+  "instant-search": {
+    "title": "Instant Search",
+    "theme": {
+      "breadcrumb": false
+    }
+  },
+  "product-filters": {
+    "title": "Product Filters",
+    "theme": {
+      "breadcrumb": false
+    }
+  },
+  "recently-viewed": {
+    "title": "Recently Viewed",
+    "theme": {
+      "breadcrumb": false
+    }
+  },
+  "cookie-consent": {
+    "title": "Cookie Consent:Upcoming"
+  },
+  "currency-converter": {
+    "title": "Currency Converter:Upcoming"
+  },
+  "related-products": {
+    "title": "Related Products:Upcoming"
+  },
+  "announcement-bar": {
+    "title": "Announcement Bar:Upcoming"
+  },
+  "advanced_customizations_separator": {
+    "title": "Advanced Customizations",
+    "type": "separator"
+  },
+  "javascript-events": {
+    "title": "Javascript Events",
+    "theme": {
+      "breadcrumb": false
+    }
+  },
+  "javascript-methods": {
+    "title": "Javascript Methods",
+    "theme": {
+      "breadcrumb": false
+    }
+  },
+  "callback-functions": {
+    "title": "Callback Functions",
+    "theme": {
+      "breadcrumb": false
+    }
+  },
+  "custom-components": {
+    "title": "Custom Components",
+    "theme": {
+      "breadcrumb": false
+    }
+  },
+  "track-user-interactions": {
+    "title": "Track User Interactions",
+    "theme": {
+      "breadcrumb": false
+    }
+  },
+  "server-side-fetching": {
+    "title": "Server Side Fetching",
+    "theme": {
+      "breadcrumb": false
+    }
+  },
+  "custom-styles": {
+    "title": "Custom Styles",
+    "theme": {
+      "breadcrumb": false
+    }
+  },
+  "code-example": {
+    "title": "Code Example",
+    "theme": {
+      "breadcrumb": false
+    }
+  },
+  "api_references_separator": {
+    "title": "API References",
+    "type": "separator"
+  },
+  "html-data-attribute": {
+    "title": "HTML Data Attribute",
+    "theme": {
+      "breadcrumb": false
+    }
+  },
+  "sledge-app-api": {
+    "title": "@sledge-app/api",
+    "theme": {
+      "breadcrumb": false
+    }
+  },
+  "sledge-app-core": {
+    "title": "@sledge-app/core",
+    "theme": {
+      "breadcrumb": false
+    }
+  },
+  "sledge-app-react-wishlist": {
+    "title": "@sledge-app/react-wishlist",
+    "theme": {
+      "breadcrumb": false
+    }
+  },
+  "sledge-app-react-product-review": {
+    "title": "@sledge-app/react-product-review",
+    "theme": {
+      "breadcrumb": false
+    }
+  },
+  "sledge-app-react-instant-search": {
+    "title": "@sledge-app/react-instant-search",
+    "theme": {
+      "breadcrumb": false
+    }
+  },
+  "sledge-app-react-product-recommendation": {
+    "title": "@sledge-app/react-product-recommendation",
+    "theme": {
+      "breadcrumb": false
+    }
+  },
+  "backend_separator": {
+    "title": "Using Backend",
+    "type": "separator"
+  },
+  "backend-general": "General",
+  "backend-advanced": "Advanced",
+  "backend-wishlist": "Wishlist",
+  "backend-product-review": "Product Review",
+  "backend-instant-search-and-product-filters": "Instant Search & Product Filters",
+  "backend-product-recommendation": "Product Recommendation",
+  "product-filter-widget": {
+    "title": "Product filter widget"
+  },
+  "more_separator": {
+    "title": "More",
+    "type": "separator"
+  },
+  "changelog": {
+    "title": "Changelog",
+    "theme": {
+      "breadcrumb": false,
+      "pagination": false,
+      "toc": false
+    }
+  },
+  "changelog-backend": {
+    "display": "hidden",
+    "title": "Backend",
+    "theme": {
+      "breadcrumb": false
+    }
+  },
+  "changelog-js": {
+    "display": "hidden",
+    "title": "JavaScript",
+    "theme": {
+      "breadcrumb": false
+    }
+  },
+  "changelog-sledge-app-core": {
+    "display": "hidden",
+    "title": "@sledge-app/core",
+    "theme": {
+      "breadcrumb": false
+    }
+  },
+  "changelog-sledge-app-react-wishlist": {
+    "display": "hidden",
+    "title": "@sledge-app/react-wishlist",
+    "theme": {
+      "breadcrumb": false
+    }
+  },
+  "changelog-sledge-app-react-product-review": {
+    "display": "hidden",
+    "title": "@sledge-app/react-product-review",
+    "theme": {
+      "breadcrumb": false
+    }
+  },
+  "changelog-sledge-app-react-instant-search": {
+    "display": "hidden",
+    "title": "@sledge-app/react-instant-search",
+    "theme": {
+      "breadcrumb": false
+    }
+  },
+  "changelog-sledge-app-react-product-recommendation": {
+    "display": "hidden",
+    "title": "@sledge-app/react-product-recommendation",
+    "theme": {
+      "breadcrumb": false
+    }
+  }
+}

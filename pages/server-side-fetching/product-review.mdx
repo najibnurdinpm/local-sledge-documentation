@@ -1,0 +1,267 @@
+import { Tabs, Tab } from "~/components/global";
+import { Steps } from "nextra/components";
+import { NextJs, Hydrogen } from "~/components/icons";
+
+# Product Review
+
+If you prefer to fetch Sledge data on the server instead doing fetch on the client browser. You can use Sledge's API package called [@sledge-app/api](/sledge-app-api).
+
+Basically the steps as simple as fetching data on server then pass that data to Sledge components, follow steps by steps below to see how to do the server side fetching.
+
+## Rating
+
+<Tabs storageKey="selected-tech-stack" items={[
+    <div className="flex items-center gap-2">
+        <Hydrogen width={24} height={24} />
+        <span>Hydrogen</span>
+    </div>,
+    <div className="flex items-center gap-2">
+        <NextJs width={24} height={24} />
+        <span>Next.js</span>
+    </div>
+]}>
+    <Tab>
+        <Steps>
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Add fetching data</h3>
+
+            ```tsx showLineNumbers copy
+            import { getProductsReviewInfo } from '@sledge-app/api';
+
+            export async function loader({context}: LoaderArgs) {
+                ...
+                const productIds = ['8003210969391','8003210969392','8003210969393'];
+                const sledgeSession = context.session.get('sledgeSession');
+                const reviews = await getProductsReviewInfo({sledgeSession, productIds});
+
+                return defer({
+                    ...
+                    reviews
+                });
+            }
+            ```
+
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Add data to component props</h3>
+
+            ```tsx showLineNumbers copy
+            import { Rating } from '@sledge-app/react-product-review';
+
+            export default function Homepage() {
+                const data = useLoaderData();
+
+                return(
+                    ...
+                    <Rating
+                        params={{productId: parseGid(product.id).id}}
+                        data={data.reviews[parseGid(product.id).id]}
+                    />
+                    ...
+                )
+            }
+            ```
+        </Steps>
+    </Tab>
+    <Tab>
+        <Steps>
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Setup widget become component</h3>
+
+            ```tsx filename="components/sledge/review/rating.tsx" showLineNumbers copy
+            'use client';
+
+            import { Rating } from "@sledge-app/react-product-review";
+
+            type iRatingComponent = {
+                data?: any;
+            }
+
+            export default function RatingComponent({ data }: iRatingComponent) {
+                return (
+                    <Rating params={{ productId: parseGid(productId).id }} data={ data } />
+                )
+            }
+            ```
+
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Add fetching data to server component</h3>
+
+            ```tsx showLineNumbers copy
+            import { getProductsReviewInfo } from '@sledge-app/api';
+            import parseGid from 'lib/shopify/parse-gid';
+            import { cookies } from 'next/headers';
+            import { RatingComponent } from 'components/sledge/review';
+
+            ...
+
+            export async function ThreeItemGrid(){
+                const sledgeSession = JSON.parse( cookies().get('sledgeSession')?.value || "{}" );
+                const reviews = await getProductsReviewInfo( {sledgeSession, productIds
+                :[ product.id ]} );
+
+                ...
+
+                return (
+                    ...
+                    <RatingComponent productId={product.id} data={ reviews[ parseGid(product.id).id ] }/>
+                    ...
+                )
+            }
+            ```
+        </Steps>
+    </Tab>
+
+</Tabs>
+
+## List
+
+<Tabs storageKey="selected-tech-stack" items={[
+    <div className="flex items-center gap-2">
+        <Hydrogen width={24} height={24} />
+        <span>Hydrogen</span>
+    </div>,
+    <div className="flex items-center gap-2">
+        <NextJs width={24} height={24} />
+        <span>Next.js</span>
+    </div>
+]}>
+    <Tab>
+        <Steps>
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Add fetching data</h3>
+
+            ```tsx showLineNumbers copy
+            import { getProductsReviewInfo, getReview, getSledgeSettings } from '@sledge-app/api';
+
+            export async function loader({params, request, context}: LoaderArgs) {
+                ...
+                const sledgeSession = context.session.get('sledgeSession');
+                const sledgeSettings = await getSledgeSettings({ sledgeSession });
+                const reviews = await getProductsReviewInfo({sledgeSession, productIds
+                :[product.id]});
+                const reviewList = await getReview({sledgeSession, productId: product.id});
+                ...
+
+                return {..., ..., reviews, reviewList, getSledgeSettings};
+            }
+            ```
+
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Add data to component props</h3>
+
+            ```tsx showLineNumbers copy
+            import { Rating, Widget, WidgetHeader } from '@sledge-app/react-product-review';
+
+            export default function Product() {
+                const {product, variants, reviewList, reviews} = useLoaderData<typeof loader>();
+                const {selectedVariant} = product;
+
+                ...
+
+                return (
+                    ...
+                    <Widget.Root
+                        params={{
+                            productId: parseGid(product.id).id,
+                            productVariantId: selectedVariant?.id
+                            ? parseGid(selectedVariant.id)?.id
+                            : '',
+                        }}
+                        onAfterAddReview={(state) => {}}
+                        data={reviewList}
+                        sledgeSettings={sledgeSettings}
+                    >
+                        <WidgetHeader>
+                            <WidgetHeader.Summary summaryData={reviews[parseGid(product.id).id]} />
+                            <WidgetHeader.AddTrigger />
+                            <WidgetHeader.Sort />
+                        </WidgetHeader>
+                        <Widget.List />
+                    </Widget.Root>
+                    ...
+                )
+            }
+            ```
+        </Steps>
+    </Tab>
+    <Tab>
+        <Steps>
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Setup widget become component</h3>
+
+            ```tsx filename="components/sledge/review/widget.tsx" showLineNumbers copy
+            'use client';
+
+            import { Widget } from '@sledge-app/react-product-review';
+            import parseGid from 'lib/shopify/parse-gid';
+            import { Product } from 'lib/shopify/types';
+
+            type IReviewList = {
+                product: Product;
+                selectedVariantId?: string;
+                defaultDataList?: any;
+                defaultDataSummary?: any;
+            };
+
+            export default function ReviewWidget({
+                product,
+                selectedVariantId,
+                defaultDataList,
+                defaultDataSummary
+            }: IReviewList) {
+                const consoleStyle =
+                'color: white; background: black; border: 1px solid white; padding: 2px 5px; border-radius: 350px;';
+
+                return (
+                    <Widget.Root
+                        params={{
+                            productId: parseGid(product.id).id,
+                            productVariantId: selectedVariantId ? parseGid(selectedVariantId)?.id : ''
+                        }}
+                        onAfterAddReview={(state) => {}}
+                        data={defaultDataList}
+                        sledgeSettings={sledgeSettings}
+                    >
+                        <WidgetHeader>
+                            <WidgetHeader.Summary summaryData={dataSummary} />
+                            <WidgetHeader.AddTrigger />
+                            <WidgetHeader.Sort />
+                        </WidgetHeader>
+                        <Widget.List />
+                    </Widget.Root>
+                );
+            }
+            ```
+
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Add fetching data to server component</h3>
+
+            ```tsx filename="app/product/[handle]/page.tsx" showLineNumbers copy
+            import { getProductsReviewInfo, getReview } from '@sledge-app/api';
+            import { ReviewWidget } from 'components/sledge/review';
+            import { ReviewWidget, RatingComponent } from 'components/sledge/review';
+            import parseGid from 'lib/shopify/parse-gid';
+            import { cookies } from 'next/headers';
+            import Link from 'next/link';
+
+            export default async function ProductPage({params}: {params: {handle: string}}){
+                ...
+                const sledgeSession = JSON.parse( cookies().get( 'sledgeSession')?.value || "{}" );
+                const sledgeSettings = await getSledgeSettings( {sledgeSession} );
+                const review = await getProductsReviewInfo({sledgeSession, productIds
+                : [product.id]});
+                const reviewList = await getReview({sledgeSession, productId: product.id});
+                ...
+
+                const productID = parseGid(product?.id).id;
+
+                return (
+                    ...
+                    <RatingComponent productId={product.id} data={ review[ productID ] } />
+                    ...
+                    <ReviewWidget
+                        product={product}
+                        dataList={reviewList}
+                        dataSummary={review[ productID ]}
+                        sledgeSettings={sledgeSettings}
+                    />
+                    ...
+                )
+            }
+            ```
+        </Steps>
+    </Tab>
+
+</Tabs>

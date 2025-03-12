@@ -1,0 +1,391 @@
+import { Steps, Code, Pre, Callout } from "nextra/components";
+import Image from "next/image";
+import { Table } from "~/components/global";
+import {
+  IMAGE_CUSTOM_STYLES_ALERT,
+  IMAGE_APPS_WISHLIST_BADGE,
+  IMAGE_APPS_WISHLIST_FLOATING_BUTTON,
+  IMAGE_APPS_WISHLIST_FLOATING_ICON,
+  IMAGE_APPS_WISHLIST_TRIGGER,
+  IMAGE_APPS_WISHLIST_BUTTON_DETAIL,
+  IMAGE_APPS_WISHLIST_LIST,
+  IMAGE_CUSTOM_STYLES_WISHLIST_EMPTY,
+} from "~/lib/const";
+
+# Wishlist
+
+All of Sledge's themes use of several kinds of classes. To assist you in customizing CSS to your needs, the most frequently used element selectors and classes are listed below.
+
+- [Alert](#alert)
+- [Badge](#badge)
+- [Badge Floating Full (Left / Right)](#badge-floating-full-left--right)
+- [Badge Floating Icon (Bottom Left / Bottom Right)](#badge-floating-icon-bottom-left--bottom-right)
+- [Trigger](#trigger)
+- [Button Detail](#button-detail)
+- [List](#list)
+- [Empty List](#empty-list)
+
+## Alert
+
+<Image
+  className="mt-3 rounded-[24px] w-auto max-h-[359px] border border-[rgba(67,198,172,1)]"
+  src={IMAGE_CUSTOM_STYLES_ALERT}
+  alt="sledge-image-docs"
+/>
+
+<Table
+  data={{
+    thead: [{ title: "Class" }, { title: "Description" }],
+    tbody: [
+      ["`sledge-wishlist__widget-alert`", "Alert wrapper"],
+      ["`sledge-wishlist__widget-alert-text`", "Alert text"],
+      ["`sledge-wishlist__widget-alert-link`", "Alert link"],
+    ],
+  }}
+/>
+
+## Badge
+
+<Image
+  src={IMAGE_APPS_WISHLIST_BADGE}
+  alt="sledge-image-docs"
+  className="mt-5"
+  width="86"
+  height="116"
+/>
+
+<Table
+  data={{
+    thead: [{ title: "Class" }, { title: "Description" }],
+    tbody: [
+      ["`sledge-icon__heart`", "Wishlist heart icon"],
+      ["`sledge-wishlist__badge-counter`", "Wishlist counter"],
+    ],
+  }}
+/>
+
+<Callout type="info">
+  You can edit this component with `Using Backend` in `Button Style` section,
+  check out [here](/backend-wishlist#button-style).
+</Callout>
+
+### Using Selector
+
+<Table
+  data={{
+    thead: [{ title: "Selector" }, { title: "Description" }],
+    tbody: [
+      [
+        "`.sledge-icon__heart #sledge-icon-heart-line`",
+        <>
+          Wishlist trigger icon line,
+          <br />
+          you can use this selector to edit line color
+        </>,
+      ],
+      [
+        "`.sledge-icon__heart #sledge-icon-heart-fill`",
+        <>
+          Wishlist trigger active icon,
+          <br />
+          you can use this selector to edit fill color icon
+        </>,
+      ],
+    ],
+  }}
+/>
+
+## Badge Floating Full (Left / Right)
+
+<Image
+  src={IMAGE_APPS_WISHLIST_FLOATING_BUTTON}
+  alt="sledge-image-docs"
+  className="mt-3 rounded-[24px] w-auto max-h-[359px] border"
+  width="86"
+  height="116"
+/>
+
+<Table
+  data={{
+    thead: [{ title: "Class" }, { title: "Description" }],
+    tbody: [
+      ["`sledge-wishlist__badge-floating`", "Wishlist badge floating wrapper"],
+      [
+        "`sledge-wishlist__badge-floating-text`",
+        "Wishlist badge floating text",
+      ],
+    ],
+  }}
+/>
+
+<Callout type="info">
+  For `Heart` icon, you can check out [here](/custom-styles/wishlist#badge).
+</Callout>
+
+## Badge Floating Icon (Bottom Left / Bottom Right)
+
+<Image
+  src={IMAGE_APPS_WISHLIST_FLOATING_ICON}
+  alt="sledge-image-docs"
+  className="mt-3 rounded-[24px] w-auto max-h-[359px] border"
+  width="86"
+  height="116"
+/>
+
+<Table
+  data={{
+    thead: [{ title: "Class" }, { title: "Description" }],
+    tbody: [
+      [
+        "`sledge-wishlist__badge-floating-icon`",
+        "Wishlist badge floating icon wrapper",
+      ],
+    ],
+  }}
+/>
+
+<Callout type="info">
+  For `Heart` icon, you can check out [here](/custom-styles/wishlist#badge).
+</Callout>
+
+## Trigger
+
+<Image
+  src={IMAGE_APPS_WISHLIST_TRIGGER}
+  alt="sledge-image-docs"
+  className="mt-5"
+  width="86"
+  height="116"
+/>{" "}
+
+<Table
+  data={{
+    thead: [{ title: "Class" }, { title: "Description" }],
+    tbody: [
+      [
+        "`sledge-wishlist__trigger-block`",
+        <>
+          Wishlist trigger block wrapper,
+          <br />
+          you can use this class to edit position
+        </>,
+      ],
+      [
+        "`sledge-wishlist__trigger`",
+        <>
+          Wishlist trigger wrapper,
+          <br />
+          you can use this class to edit background color
+        </>,
+      ],
+    ],
+  }}
+/>
+
+<Callout type="info">
+  For `Heart` icon, you can check out [here](/custom-styles/wishlist#badge).
+</Callout>
+
+### Using Selector
+
+<Table
+  data={{
+    thead: [{ title: "Selector" }, { title: "Description" }],
+    tbody: [
+      [
+        "`.sledge-icon__heart #sledge-icon-heart-line`",
+        <>
+          Wishlist trigger icon line,
+          <br />
+          you can use this selector to edit line color
+        </>,
+      ],
+      [
+        "`.sledge-icon__heart #sledge-icon-heart-fill`",
+        <>
+          Wishlist trigger active icon,
+          <br />
+          you can use this selector to edit fill color icon
+        </>,
+      ],
+    ],
+  }}
+/>
+
+## Button Detail
+
+<Image
+  src={IMAGE_APPS_WISHLIST_BUTTON_DETAIL}
+  alt="sledge-image-docs"
+  className="mt-5"
+  width="323"
+  height="88"
+/>
+
+<Table
+  data={{
+    thead: [{ title: "Class" }, { title: "Description" }],
+    tbody: [
+      [
+        "`sledge-wishlist__widget-button-detail-wrapper`",
+        "Wishlist button detail wrapper",
+      ],
+      [
+        "`sledge-wishlist__widget-button-detail-icon`",
+        "Wishlist button detail icon",
+      ],
+      [
+        "`sledge-wishlist__widget-button-detail-icon`",
+        "Wishlist button detail icon",
+      ],
+    ],
+  }}
+/>
+
+### Using Selector
+
+<Table
+  overflow={true}
+  data={{
+    thead: [{ title: "Selector" }, { title: "Description" }],
+    tbody: [
+      [
+        "`.sledge-wishlist__widget-button-detail-wrapper button`",
+        <>
+          Wishlist button detail,
+          <br />
+          you can use this selector to edit button color, width & text
+        </>,
+      ],
+    ],
+  }}
+/>
+
+## List
+
+<Image
+  src={IMAGE_APPS_WISHLIST_LIST}
+  alt="sledge-image-docs"
+  className="mt-5"
+  width="1339"
+  height="749"
+/>
+
+<Table
+  data={{
+    thead: [{ title: "Class" }, { title: "Description" }],
+    tbody: [
+      ["`sledge-wishlist__widget-header-item`", "Wishlist header title"],
+      [
+        "`sledge-wishlist__widget-product-wrapper`",
+        "Wishlist product card wrapper",
+      ],
+    ],
+  }}
+/>
+
+<Callout type="info">
+  For `Heart` icon, you can check out [here](/custom-styles/wishlist#badge).
+</Callout>
+
+<Callout type="info">
+  You can edit `Header Title` with `Using Backend` in `Wishlist Page` section,
+  check out [here](/backend-wishlist#wishlist-page).
+</Callout>
+
+<Callout type="info">
+  You can edit `Clear All Button` with `Using Backend` in `Button : Clear All`
+  section, check out [here](/backend-wishlist#button--clear-all).
+</Callout>
+
+<Callout type="info">
+  You can edit `Share Button` with `Using Backend` in `Button : Share` section,
+  check out [here](/backend-wishlist#button--share).
+</Callout>
+
+<Callout type="info">
+  For `Product Card`, you can check out
+  [here](/custom-styles/global#product-card).
+</Callout>
+
+## Empty List
+
+<Image
+  src={IMAGE_CUSTOM_STYLES_WISHLIST_EMPTY}
+  alt="sledge-image-docs"
+  className="mt-3 rounded-[24px] w-auto max-h-[359px] border border-[rgba(67,198,172,1)]"
+  width="1339"
+  height="749"
+/>
+
+<Table
+  overflow={true}
+  data={{
+    thead: [{ title: "Class" }, { title: "Description" }],
+    tbody: [
+      ["`sledge-wishlist__widget-product-empty`", "Empty wishlist wrapper"],
+      [
+        "`sledge-wishlist__widget-product-empty-icon`",
+        "Empty wishlist icon wrapper",
+      ],
+      ["`sledge-wishlist__widget-product-empty-title`", "Empty wishlist title"],
+      [
+        "`sledge-wishlist__widget-product-empty-description`",
+        "Empty wishlist description",
+      ],
+      [
+        "`sledge-wishlist__widget-button-wrapper`",
+        "Empty wishlist button wrapper",
+      ],
+      [
+        "`sledge-wishlist__widget-product-empty-button-shopping`",
+        <>
+          Empty wishlist button,
+          <br />
+          you can use this selector to edit button size, color & etc
+        </>,
+      ],
+    ],
+  }}
+/>
+
+### Using Selector
+
+<Table
+  overflow={true}
+  data={{
+    thead: [{ title: "Selector" }, { title: "Description" }],
+    tbody: [
+      [
+        "`.sledge-wishlist__widget-product-empty-icon #sledge-icon-heart-line`",
+        <>
+          Empty Wishlist icon,
+          <br />
+          you can use this selector to edit
+          <br />
+          icon size & color
+        </>,
+      ],
+      [
+        "`.sledge-wishlist__widget-product-empty-button-shopping span:nth-child(1)`",
+        <>
+          Empty Wishlist button text,
+          <br />
+          you can use this selector to edit
+          <br />
+          text size & color
+        </>,
+      ],
+      [
+        "`.sledge-wishlist__widget-product-empty-button-shopping span:nth-child(2)`",
+        <>
+          Empty Wishlist button icon,
+          <br />
+          you can use this selector to edit
+          <br />
+          button icon size & color
+        </>,
+      ],
+    ],
+  }}
+/>

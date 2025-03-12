@@ -1,0 +1,597 @@
+import Image from "next/image";
+import {
+  IMAGE_APPS_IS_FIELD,
+  IMAGE_APPS_IS_ICON_POPUP,
+  IMAGE_APPS_IS_RESULT,
+  IMAGE_APPS_IS_PF_RESULT,
+} from "~/lib/const";
+
+# @sledge-app/react-instant-search
+
+You can use our React-built widget by using the `@sledge-app/react-instant-search` package.
+
+`@sledge-app/react-instant-search` provides several components you can use to integrate it with your store.
+
+Available components :
+
+- [SearchWidget](#searchwidget)
+- [SearchIconWidget](#searchiconwidget)
+- [SearchResultWidget](#searchresultwidget)
+- [ProductFilterWidget](#productfilterwidget)
+
+
+## `SearchWidget`
+
+`SearchWidget` is an Instant Search's widget you can use to search your product or other data like (collection, page, blog, article) in a text field form.<br/>
+
+[See example](/instant-search#search-field) <br/><br/>
+
+<Image
+  src={ IMAGE_APPS_IS_FIELD }
+  alt="Search Field"
+  width="412"
+  height="421"
+/> <br />
+
+
+### Anatomy
+
+```tsx showLineNumbers copy
+import { SearchWidget } from "@sledge-app/react-instant-search";
+
+export default function InstantSearchWidget() {
+  return (
+    <SearchWidget
+        width="400px"
+        onAfterAddToCart={(state) => {
+            // Your custom function
+        }}
+        onAfterAddWishlist={(state) => {
+            // Your custom function
+        }}
+        onAfterRemoveWishlist={(state) => {
+            // Your custom function
+        }}
+        onAfterRenderProduct={(state) => {
+            // Your custom function
+        }}
+    />
+  );
+}
+```
+
+### API reference
+
+<br />
+#### <span className="text-xl font-bold">`width`</span>
+
+Customize element width.
+
+<div>e.g: `'400px'`</div>
+
+- Type: `string`
+
+<br />
+#### <span className="text-xl font-bold">`onAfterAddToCart(state: boolean)`</span>
+
+Running using your own custom function
+
+> <div className="not-italic">
+>   Using [Custom Components](/custom-components/global#product-card) will deactivate this props.
+> </div>
+
+- Type: `function`
+- Required: `false`
+
+<br />
+#### <span className="text-xl font-bold">`onAfterAddWishlist(state: boolean)`</span>
+
+Running using your own custom function
+
+> <div className="not-italic">
+>   Using [Custom Components](/custom-components/global#product-card) will deactivate this props.
+> </div>
+
+- Type: `function`
+- Required: `false`
+
+<br />
+#### <span className="text-xl font-bold">`onAfterRemoveWishlist(state: boolean)`</span>
+
+Running using your own custom function
+
+> <div className="not-italic">
+>   Using [Custom Components](/custom-components/global#product-card) will deactivate this props.
+> </div>
+
+- Type: `function`
+- Required: `false`
+
+<br />
+#### <span className="text-xl font-bold">`onAfterRenderProduct(state: boolean)`</span>
+
+Running using your own custom function
+
+> <div className="not-italic">
+>   Using [Custom Components](/custom-components/global#product-card) will deactivate this props.
+> </div>
+
+- Type: `function`
+- Required: `false`
+
+## `SearchIconWidget`
+
+`SearchIconWidget` is an Instant Search's widget you can use to search your product or other data like (collection, page, blog, article) in a popup search form.<br/>
+
+[See example](/instant-search#search-icon-popup)<br/><br/>
+
+<Image
+  src={ IMAGE_APPS_IS_ICON_POPUP }
+  alt="Search Icon Popup"
+  width="960"
+  height="504"
+/> <br />
+
+
+### Anatomy
+
+```tsx showLineNumbers copy
+import { SearchIconWidget } from "@sledge-app/react-instant-search";
+
+export default function InstantSearchIconWidget() {
+  return (
+    <SearchIconWidget
+        size='sm'
+        onAfterAddToCart={(state) => {
+            // Your custom function
+        }}
+        onAfterAddWishlist={(state) => {
+            // Your custom function
+        }}
+        onAfterRemoveWishlist={(state) => {
+            // Your custom function
+        }}
+        onAfterRenderProduct={(state) => {
+            // Your custom function
+        }}
+    />
+  );
+}
+```
+
+### API reference
+
+<br />
+#### <span className="text-xl font-bold">`size`</span>
+
+Customize icon size.
+
+- Type: `'xs' | 'sm' | 'md'`
+- Default: `'sm'`
+
+<br />
+#### <span className="text-xl font-bold">`onAfterAddToCart(state: boolean)`</span>
+
+Running using your own custom function
+
+> <div className="not-italic">
+>   Using [Custom Components](/custom-components/global#product-card) will deactivate this props.
+> </div>
+
+- Type: `function`
+- Required: `false`
+
+<br />
+#### <span className="text-xl font-bold">`onAfterAddWishlist(state: boolean)`</span>
+
+Running using your own custom function
+
+> <div className="not-italic">
+>   Using [Custom Components](/custom-components/global#product-card) will deactivate this props.
+> </div>
+
+- Type: `function`
+- Required: `false`
+
+<br />
+#### <span className="text-xl font-bold">`onAfterRemoveWishlist(state: boolean)`</span>
+
+Running using your own custom function
+
+> <div className="not-italic">
+>   Using [Custom Components](/custom-components/global#product-card) will deactivate this props.
+> </div>
+
+- Type: `function`
+- Required: `false`
+
+<br />
+#### <span className="text-xl font-bold">`onAfterRenderProduct(state: boolean)`</span>
+
+Running using your own custom function
+
+- Type: `string`
+- Required: `false`
+
+## `SearchResultWidget`
+
+`SearchResultWidget` is an Instant Search's widget you can use to display product or other data search results like (collection, page, blog, article) on a single page.<br/>
+
+[See example](/instant-search#search-result)<br/><br/>
+
+<Image
+  src={ IMAGE_APPS_IS_RESULT }
+  alt="Search Result"
+  width="938"
+  height="456"
+/> <br />
+
+### Anatomy
+
+```tsx showLineNumbers copy
+import { SearchResultWidget } from "@sledge-app/react-instant-search";
+
+export default function InstantSearchResultWidget() {
+  return (
+    <SearchResultWidget
+        query={{
+            keyword: "q",
+            sortBy: "sort_by",
+            page: "page",
+            limit: 'limit',
+        }}
+        width="1180px"
+        onAfterAddToCart={(state) => {
+            // Your custom function
+        }}
+        onAfterAddWishlist={(state) => {
+            // Your custom function
+        }}
+        onAfterRemoveWishlist={(state) => {
+            // Your custom function
+        }}
+        onAfterRenderProduct={(state) => {
+            // Your custom function
+        }}
+        onAfterRenderCollection={(state) => {
+            // Your custom function
+        }}
+        onAfterRenderPage={(state) => {
+            // Your custom function
+        }}
+        onAfterRenderBlog={(state) => {
+            // Your custom function
+        }}
+        onAfterRenderArticle={(state) => {
+            // Your custom function
+        }}
+    />
+  );
+}
+```
+
+### API reference
+
+<br />
+#### <span className="text-xl font-bold">`query.keyword`</span>
+
+Fill up your unique queryParam name for keyword.
+
+e.g: `https://your-online-store.com/collection/all?{value}=`
+
+- Type: `string`
+- Default: `'q'`
+
+<br />
+#### <span className="text-xl font-bold">`query.sortBy`</span>
+
+Fill up your unique queryParam name for sort by.
+
+e.g: `https://your-online-store.com/collection/all?{value}=`
+
+- Type: `string`
+- Default: `'sort_by'`
+
+<br />
+#### <span className="text-xl font-bold">`query.page`</span>
+
+Fill up your unique queryParam name for page.
+
+e.g: `https://your-online-store.com/collection/all?{value}=`
+
+- Type: `string`
+- Default: `'page'`
+
+<br />
+#### <span className="text-xl font-bold">`query.limit`</span>
+
+Fill up your unique queryParam name for limit.
+
+e.g: `https://your-online-store.com/collection/all?{value}=`
+
+- Type: `string`
+- Default: `'limit'`
+
+<br />
+#### <span className="text-xl font-bold">`width`</span>
+
+Customize max width of element.
+
+- Type: `string`
+- Default: `'1180px'`
+
+<br />
+#### <span className="text-xl font-bold">`onAfterAddToCart(state: boolean)`</span>
+
+Running using your own custom function
+
+> <div className="not-italic">
+>   Using [Custom Components](/custom-components/global#product-card) will deactivate this props.
+> </div>
+
+- Type: `function`
+- Required: `false`
+
+<br />
+#### <span className="text-xl font-bold">`onAfterAddWishlist(state: boolean)`</span>
+
+Running using your own custom function
+
+> <div className="not-italic">
+>   Using [Custom Components](/custom-components/global#product-card) will deactivate this props.
+> </div>
+
+- Type: `function`
+- Required: `false`
+
+<br />
+#### <span className="text-xl font-bold">`onAfterRemoveWishlist(state: boolean)`</span>
+
+Running using your own custom function
+
+> <div className="not-italic">
+>   Using [Custom Components](/custom-components/global#product-card) will deactivate this props.
+> </div>
+
+- Type: `function`
+- Required: `false`
+
+<br />
+#### <span className="text-xl font-bold">`onAfterRenderProduct(state: boolean)`</span>
+
+Running using your own custom function
+
+> <div className="not-italic">
+>   Using [Custom Components](/custom-components/global#product-card) will deactivate this props.
+> </div>
+
+- Type: `function`
+- Required: `false`
+
+<br />
+#### <span className="text-xl font-bold">`onAfterRenderCollection(state: boolean)`</span>
+
+Running using your own custom function
+
+> <div className="not-italic">
+>   Using [Custom Components](/custom-components/global#product-card) will deactivate this props.
+> </div>
+
+- Type: `function`
+- Required: `false`
+
+<br />
+#### <span className="text-xl font-bold">`onAfterRenderPage(state: boolean)`</span>
+
+Running using your own custom function
+
+> <div className="not-italic">
+>   Using [Custom Components](/custom-components/global#product-card) will deactivate this props.
+> </div>
+
+- Type: `function`
+- Required: `false`
+
+<br />
+#### <span className="text-xl font-bold">`onAfterRenderBlog(state: boolean)`</span>
+
+Running using your own custom function
+
+> <div className="not-italic">
+>   Using [Custom Components](/custom-components/global#product-card) will deactivate this props.
+> </div>
+
+- Type: `function`
+- Required: `false`
+
+<br />
+#### <span className="text-xl font-bold">`onAfterRenderArticle(state: boolean)`</span>
+
+Running using your own custom function
+
+> <div className="not-italic">
+>   Using [Custom Components](/custom-components/global#product-card) will deactivate this props.
+> </div>
+
+- Type: `function`
+- Required: `false`
+
+## `ProductFilterWidget`
+
+`ProductFilterWidget` is an Instant Search's widget you can use to search your products on a single page. This widget is also known as a "Product Listing Page." <br/>
+
+[See example](/product-filters#product-filter-result)<br/><br/>
+
+<Image
+  src={ IMAGE_APPS_IS_PF_RESULT }
+  alt="Product Filter Result"
+  width="1391"
+  height="646"
+/> <br />
+
+### Anatomy
+
+```tsx showLineNumbers copy
+import { ProductFilterWidget } from "@sledge-app/react-instant-search";
+
+export default function InstantSearchProductFilterWidget() {
+  return (
+    <ProductFilterWidget
+        query={{
+            keyword: "q",
+            sortBy: "sort_by",
+            page: "page",
+            limit: 'limit',
+        }}
+        width="1180px"
+        params={{
+            collectionId: '',
+            collectionName: ''
+        }}
+        currentTags={[]}
+        onAfterAddToCart={(state) => {
+            // Your custom function
+        }}
+        onAfterAddWishlist={(state) => {
+            // Your custom function
+        }}
+        onAfterRemoveWishlist={(state) => {
+            // Your custom function
+        }}
+        onAfterRenderProduct={(state) => {
+            // Your custom function
+        }}
+    />
+  );
+}
+```
+
+### API reference
+
+<br />
+#### <span className="text-xl font-bold">`query.keyword`</span>
+
+Fill up your unique queryParam name for keyword.
+
+e.g: `https://your-online-store.com/collection/all?{value}=`
+
+- Type: `string`
+- Default: `'q'`
+
+<br />
+#### <span className="text-xl font-bold">`query.sortBy`</span>
+
+Fill up your unique queryParam name for sort by.
+
+e.g: `https://your-online-store.com/collection/all?{value}=`
+
+- Type: `string`
+- Default: `'sort_by'`
+
+<br />
+#### <span className="text-xl font-bold">`query.page`</span>
+
+Fill up your unique queryParam name for page.
+
+e.g: `https://your-online-store.com/collection/all?{value}=`
+
+- Type: `string`
+- Default: `'page'`
+
+<br />
+#### <span className="text-xl font-bold">`query.limit`</span>
+
+Fill up your unique queryParam name for limit.
+
+e.g: `https://your-online-store.com/collection/all?{value}=`
+
+- Type: `string`
+- Default: `'limit'`
+
+<br />
+#### <span className="text-xl font-bold">`params.collectionId`</span>
+
+Fill with your own collection id
+
+- Type: `string | number`
+
+<br />
+#### <span className="text-xl font-bold">`params.collectionName`</span>
+
+Fill with your own collection name
+
+- Type: `string`
+
+<br />
+#### <span className="text-xl font-bold">`currentTags`</span>
+
+This prop is used to filter the products based on the current tags.
+
+<div>e.g: `['men', 'women', 'accessories']`</div>
+
+- Type: `string[] | number[]`
+
+<br />
+#### <span className="text-xl font-bold">`width`</span>
+
+Customize max width of element.
+
+- Type: `string`
+- Default: `'1180px'`
+
+<br />
+#### <span className="text-xl font-bold">`onAfterAddToCart(state: boolean)`</span>
+
+Running using your own custom function
+
+> <div className="not-italic">
+>   Using [Custom Components](/custom-components/global#product-card) will deactivate this props.
+> </div>
+
+- Type: `function`
+- Required: `false`
+
+<br />
+#### <span className="text-xl font-bold">`onAfterAddWishlist(state: boolean)`</span>
+
+Running using your own custom function
+
+> <div className="not-italic">
+>   Using [Custom Components](/custom-components/global#product-card) will deactivate this props.
+> </div>
+
+- Type: `function`
+- Required: `false`
+
+<br />
+#### <span className="text-xl font-bold">`onAfterRemoveWishlist(state: boolean)`</span>
+
+Running using your own custom function
+
+> <div className="not-italic">
+>   Using [Custom Components](/custom-components/global#product-card) will deactivate this props.
+> </div>
+
+- Type: `function`
+- Required: `false`
+
+<br />
+#### <span className="text-xl font-bold">`onAfterRenderProduct(state: boolean)`</span>
+
+Running using your own custom function
+
+> <div className="not-italic">
+>   Using [Custom Components](/custom-components/global#product-card) will deactivate this props.
+> </div>
+
+- Type: `function`
+- Required: `false`
+
+## Learn more
+
+Congratulations! Now that you've learned the `@sledge-app/react-instant-search` API references, you can start integrating Sledge to your store. Useful resources about integrating Sledge : 
+
+- [How to use Instant Search app](/instant-search)
+- [How to use Product Filters app](/product-filters)
+- [How to add Callback Functions](/callback-functions)
+- [How to add Custom Components](/custom-components)

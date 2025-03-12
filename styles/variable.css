@@ -1,0 +1,17 @@
+:root {
+  --nextra-menu-height: 0rem;
+}
+
+.dark {
+  --shiki-color-text: #9c9c9c !important;
+  --shiki-color-background: transparent !important;
+  --shiki-token-constant: #439fc6 !important;
+  --shiki-token-string: #f8ffae !important;
+  --shiki-token-comment: #d9d9d9 !important;
+  --shiki-token-keyword: #43c6ac !important;
+  --shiki-token-parameter: #ff5656 !important;
+  --shiki-token-function: #9560d8 !important;
+  --shiki-token-string-expression: #f8ffae !important;
+  --shiki-token-punctuation: #212121;
+  --shiki-token-link: #f8ffae !important;
+}

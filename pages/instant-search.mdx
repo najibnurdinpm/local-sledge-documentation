@@ -1,0 +1,589 @@
+import { Tabs, Tab, Dropdown } from "~/components/global";
+import { Callout } from "nextra-theme-docs";
+import Image from "next/image";
+import {
+  Webflow,
+  Liquid,
+  NextJs,
+  Hydrogen,
+  AppBlock,
+  Code,
+} from "~/components/icons";
+import {
+  IMAGE_APPS_IS_FIELD,
+  IMAGE_APPS_IS_ICON_POPUP,
+  IMAGE_APPS_IS_RESULT,
+  IMAGE_LIQUID_SHOPIFY_APP_EMBED_GUIDE_1,
+  IMAGE_LIQUID_SHOPIFY_APP_EMBED_IS_SEARCH_FIELD_1,
+  IMAGE_LIQUID_SHOPIFY_APP_EMBED_IS_POPUP_1,
+  IMAGE_LIQUID_SHOPIFY_APP_EMBED_IS_POPUP_1_1,
+  IMAGE_LIQUID_SHOPIFY_APP_EMBED_IS_POPUP_2,
+  IMAGE_LIQUID_SHOPIFY_APP_EMBED_IS_POPUP_3,
+  IMAGE_LIQUID_SHOPIFY_APP_EMBED_WISHLIST_WIDGET_1,
+  IMAGE_LIQUID_SHOPIFY_APP_EMBED_IS_RESULT_1,
+  IMAGE_LIQUID_SHOPIFY_APP_EMBED_IS_RESULT_2,
+  IMAGE_LIQUID_SHOPIFY_APP_EMBED_WISHLIST_WIDGET_NEW_1,
+  IMAGE_LIQUID_SHOPIFY_APP_EMBED_WISHLIST_WIDGET_IS_1,
+  IMAGE_LIQUID_SHOPIFY_APP_EMBED_WISHLIST_WIDGET_NEW_3,
+  IMAGE_LIQUID_SHOPIFY_APP_EMBED_WISHLIST_WIDGET_NEW_5,
+  IMAGE_LIQUID_SHOPIFY_APP_EMBED_WISHLIST_WIDGET_IS_2,
+  IMAGE_LIQUID_SHOPIFY_APP_EMBED_WISHLIST_WIDGET_IS_3,
+  IMAGE_LIQUID_SHOPIFY_APP_EMBED_WISHLIST_WIDGET_IS_4,
+} from "~/lib/const";
+
+# Instant Search
+
+Personalized and customized instant search widgets that fit with the look and feel of your brand. Let your customer to find products in instant.
+
+Sledge provides several widgets you can use to integrate it with your store.
+
+Available widgets :
+
+- [Search Widget](#search-widget)
+- [Search Icon Popup](#search-icon-popup)
+- [Search Result](#search-result)
+
+<Callout type="info">
+  If you're using `Hydrogen` or `Next.js`, <br/> make sure to install the `@sledge-app/react-instant-search` package first.
+</Callout>
+
+```sh copy
+npm i @sledge-app/react-instant-search
+```
+
+## Search Widget
+
+Search Widget is an Instant Search's widget you can use to search your product or other data like (collection, page, blog, article) in a text field form.<br/><br/>
+
+<Image src={IMAGE_APPS_IS_FIELD} alt="Search Widget" width="412" height="421" /> <br />
+
+<Tabs
+  storageKey="selected-method"
+  items={[
+    <div className="flex items-center gap-2">
+      <AppBlock />
+      <span>Theme Customizer</span>
+    </div>,
+    <div className="flex items-center gap-2">
+      <Code />
+      <span>Code</span>
+    </div>,
+  ]}
+>
+  <Tab>
+    Here is a step-by-step guide to adding this widget with block.
+
+    - From your Shopify admin, navigate to `Online Store` > `Themes` > click the `Customize` button.
+
+    - Click `+ Add Section` > Search `search widget` > select the `Search Widget` section.
+
+    <Image
+      className="mt-5 rounded-[24px] w-auto max-h-[459px] border border-[rgba(67,198,172,1)]"
+      src={IMAGE_LIQUID_SHOPIFY_APP_EMBED_IS_SEARCH_FIELD_1}
+      alt="sledge-image-docs"
+    />
+
+    - You can rearrange Search widget by Click and drag the `⋮⋮` icon
+    - When ready, `Save` your changes.
+
+    <Dropdown text={`If the position is not suitable, you can add it manually by selecting the`}
+    trigger={`block`}>
+
+    <Image
+      className="mt-3 rounded-[24px] w-auto max-h-[540px] border border-[rgba(67,198,172,1)]"
+      src={IMAGE_LIQUID_SHOPIFY_APP_EMBED_GUIDE_1}
+      alt="sledge-image-docs"
+    />
+    - Click `+ Add Block` > Search `Sledge` > select the `Sldege's Widget` you want to apply.
+    - You can rearrange wdiget by Click and drag the ⋮⋮ icon
+    - When ready, `Save` your changes.
+    </Dropdown>
+
+  </Tab>
+  <Tab>
+    Here is a step-by-step guide to adding this widget with code.    
+    <Tabs tabVariant="gradient" storageKey="selected-tech-stack" uniqueClass="tech-stack-tabs"  items={[
+        <div className="flex items-center gap-2">
+            <Hydrogen color="#677487" width={24} height={24} />
+            <span>Hydrogen</span>
+        </div>,
+        <div className="flex items-center gap-2">
+            <NextJs color="#677487" width={24} height={24} />
+            <span>Next.js</span>
+        </div>,
+        <div className="flex items-center gap-2">
+            <Liquid color="#677487" width={24} height={24} />
+            <span>Liquid</span>
+        </div>,
+        <div className="flex bg-re items-center gap-2">
+            <Webflow color="#677487" width={24} height={24} />
+            <span>Webflow</span>
+        </div>
+    ]}>
+    <Tab>
+        See the [API reference](/sledge-app-react-instant-search#api-reference) for code below.
+
+        ```tsx filename="app/SledgeInstantSearchWidget.tsx" showLineNumbers copy
+        import { SearchWidget } from "@sledge-app/react-instant-search";
+
+        export default function InstantSearchWidget() {
+            return (
+                <SearchWidget width="400px" />
+            );
+        }
+        ```
+
+    </Tab>
+    <Tab>
+        See the [API reference](/sledge-app-react-instant-search#api-reference) for code below.
+
+        ```tsx filename="app/SledgeInstantSearchWidget.tsx" showLineNumbers copy
+        'use client';
+
+        import { SearchWidget } from "@sledge-app/react-instant-search";
+
+        export default function InstantSearchWidget() {
+            return (
+                <SearchWidget width="400px" />
+            );
+        }
+        ```
+
+    </Tab>
+    <Tab>
+        See the [API reference](/html-data-attribute#api-reference-1) for code below.
+
+        ```html showLineNumbers copy
+        <div
+            data-component="instant-search-widget"
+            data-width-element="400px"
+            data-on-after-add-wishlist=""
+            data-on-after-remove-wishlist=""
+            data-on-after-render-product=""
+        ></div>
+        ```
+
+    </Tab>
+    <Tab>
+        You can place these code in custom code webflow, see the <a href="https://university.webflow.com/lesson/custom-code-embed" target="_blank" className="nx-text-primary-600 nx-underline nx-decoration-from-font [text-underline-position:from-font]">documentation</a> about custom code embed at webflow
+
+        See the [API reference](/html-data-attribute#api-reference-1) for code below.
+
+        ```html showLineNumbers copy
+        <div
+            data-component="instant-search-widget"
+            data-width-element="400px"
+            data-on-after-add-wishlist=""
+            data-on-after-remove-wishlist=""
+            data-on-after-render-product=""
+        ></div>
+        ```
+
+    </Tab>
+    </Tabs>
+
+  </Tab>
+</Tabs>
+
+## Search Icon Popup
+
+Search Icon Popup is an Instant Search's widget you can use to search your product or other data like (collection, page, blog, article) in a popup search form.<br/><br/>
+
+<Image
+  src={IMAGE_APPS_IS_ICON_POPUP}
+  alt="Search Icon Popup"
+  width="960"
+  height="504"
+/> <br />
+
+<Tabs
+  storageKey="selected-method"
+  items={[
+    <div className="flex items-center gap-2">
+      <AppBlock />
+      <span>Theme Customizer</span>
+    </div>,
+    <div className="flex items-center gap-2">
+      <Code />
+      <span>Code</span>
+    </div>,
+  ]}
+>
+  <Tab>
+    Here is a step-by-step guide to adding this widget with block.
+    
+    - In the Theme Installation, click `Integrate to my theme` on `Instant Search` option.
+
+    <Image
+      className="mt-3 rounded-[24px] w-auto border border-[rgba(67,198,172,1)]"
+      src={IMAGE_LIQUID_SHOPIFY_APP_EMBED_IS_POPUP_1}
+      alt="sledge-image-docs"
+    />
+
+    - Then click `Add widget to my theme` on `Add Search Icon Popup` option.
+
+    <Image
+      className="mt-3 rounded-[24px] w-auto border border-[rgba(67,198,172,1)]"
+      src={IMAGE_LIQUID_SHOPIFY_APP_EMBED_IS_POPUP_1_1}
+      alt="sledge-image-docs"
+    />
+
+    - You will be directed to the Editor, and the Search Icon Popup will have been added automatically.
+
+    <Image
+      className="mt-3 rounded-[24px] w-auto border border-[rgba(67,198,172,1)]"
+      src={IMAGE_LIQUID_SHOPIFY_APP_EMBED_IS_POPUP_2}
+      alt="sledge-image-docs"
+    />
+
+    - You can rearrange Search Icon Popup by Click and drag the `⋮⋮` icon
+    - You can customize the Search Icon Popup by click the `Search Icon Popup` Block.
+
+    <Image
+      className="mt-5 rounded-[24px] w-auto max-h-[459px] border border-[rgba(67,198,172,1)]"
+      src={IMAGE_LIQUID_SHOPIFY_APP_EMBED_IS_POPUP_3}
+      alt="sledge-image-docs"
+    />
+
+    - When ready, `Save` your changes.
+
+    <Dropdown text={`If the position is not suitable, you can add it manually by selecting the`}
+    trigger={`block`}>
+
+    <Image
+      className="mt-3 rounded-[24px] w-auto max-h-[540px] border border-[rgba(67,198,172,1)]"
+      src={IMAGE_LIQUID_SHOPIFY_APP_EMBED_GUIDE_1}
+      alt="sledge-image-docs"
+    />
+    - Click `+ Add Block` > Search `Sledge` > select the `Sldege's Widget` you want to apply.
+    - You can rearrange widget by Click and drag the ⋮⋮ icon
+    - When ready, `Save` your changes.
+    </Dropdown>
+
+  </Tab>
+  <Tab>
+    Here is a step-by-step guide to adding this widget with code.
+    <Tabs tabVariant="gradient" storageKey="selected-tech-stack" uniqueClass="tech-stack-tabs"  items={[
+        <div className="flex items-center gap-2">
+            <Hydrogen color="#677487" width={24} height={24} />
+            <span>Hydrogen</span>
+        </div>,
+        <div className="flex items-center gap-2">
+            <NextJs color="#677487" width={24} height={24} />
+            <span>Next.js</span>
+        </div>,
+        <div className="flex items-center gap-2">
+            <Liquid color="#677487" width={24} height={24} />
+            <span>Liquid</span>
+        </div>,
+        <div className="flex bg-re items-center gap-2">
+            <Webflow color="#677487" width={24} height={24} />
+            <span>Webflow</span>
+        </div>
+    ]}>
+    <Tab>
+        See the [API reference](/sledge-app-react-instant-search#api-reference-1) for code below.
+
+        ```tsx filename="app/SledgeInstantSearchIconWidget.tsx" showLineNumbers copy
+        import { SearchIconWidget } from "@sledge-app/react-instant-search";
+
+        export default function InstantSearchIconWidget() {
+            return (
+                <SearchIconWidget size="sm" />
+            );
+        }
+        ```
+
+    </Tab>
+    <Tab>
+        See the [API reference](/sledge-app-react-instant-search#api-reference-1) for code below.
+
+        ```tsx filename="app/SledgeInstantSearchIconWidget.tsx" showLineNumbers copy
+        'use client';
+
+        import { SearchIconWidget } from "@sledge-app/react-instant-search";
+
+        export default function InstantSearchIconWidget() {
+            return (
+                <SearchIconWidget size="sm" />
+            );
+        }
+        ```
+
+    </Tab>
+    <Tab>
+        See the [API reference](/html-data-attribute#api-reference-1) for code below.
+
+        ```html showLineNumbers copy
+        <div
+            class="header__icon"
+            data-component="instant-search-icon-widget"
+            data-icon-size="sm"
+            data-on-after-add-wishlist=""
+            data-on-after-remove-wishlist=""
+            data-on-after-render-product=""
+        ></div>
+        ```
+
+    </Tab>
+    <Tab>
+        You can place these code in custom code webflow, see the <a href="https://university.webflow.com/lesson/custom-code-embed" target="_blank" className="nx-text-primary-600 nx-underline nx-decoration-from-font [text-underline-position:from-font]">documentation</a> about custom code embed at webflow
+
+        See the [API reference](/html-data-attribute#api-reference-1) for code below.
+
+        ```html showLineNumbers copy
+        <div
+            data-component="instant-search-icon-widget"
+            data-icon-size="sm"
+            data-on-after-add-wishlist=""
+            data-on-after-remove-wishlist=""
+            data-on-after-render-product=""
+        ></div>
+        ```
+
+    </Tab>
+    </Tabs>
+
+  </Tab>
+</Tabs>
+
+## Search Result
+
+Search Result is an Instant Search's widget you can use to display product or other data search results like (collection, page, blog, article) on a single page.<br/><br/>
+
+<Image
+  src={IMAGE_APPS_IS_RESULT}
+  alt="Search Result"
+  width="938"
+  height="456"
+/> <br />
+
+<Tabs
+  storageKey="selected-method"
+  items={[
+    <div className="flex items-center gap-2">
+      <AppBlock />
+      <span>Theme Customizer</span>
+    </div>,
+    <div className="flex items-center gap-2">
+      <Code />
+      <span>Code</span>
+    </div>,
+  ]}
+>
+  <Tab>
+    <Callout type="info">
+     <div className="not-italic"> 
+      By default, Sledge provides you a proxy page that links to <br/> 
+      <span className=""> `https://YOUR-SHOPIFY-STORE.myshopify.com/apps/sledge/search` </span>
+     </div>
+    </Callout>
+
+    If you want to create a custom URL for the Search result as you desire, <br/>
+    you can put a Search result on the new page. <br/> <br/>
+    Here is a step-by-step guide to adding this widget to new page.
+
+    - From your Shopify admin, navigate to `Online Store` > `Themes` > click the `Customize` button.
+
+    - Navigate to the drop-down menu at the top, select `Pages` > `+ Create template`.
+
+    <Image
+      className="mt-5 rounded-[24px] w-auto max-h-[459px] border border-[rgba(67,198,172,1)]"
+      src={IMAGE_LIQUID_SHOPIFY_APP_EMBED_WISHLIST_WIDGET_1}
+      alt="sledge-image-docs"
+    />
+
+    <Image
+      className="mt-5 rounded-[24px] w-auto h-full max-h-[459px] border border-[rgba(67,198,172,1)]"
+      src={IMAGE_LIQUID_SHOPIFY_APP_EMBED_WISHLIST_WIDGET_NEW_1}
+      alt="sledge-image-docs"
+    />
+
+    - For example, you can create a template named `search result` and select Based on `Default page`.
+    When ready, you can save the template by click `Create template` button.
+
+    <Image
+      className="mt-5 rounded-[24px] w-auto max-h-[459px] border border-[rgba(67,198,172,1)]"
+      src={IMAGE_LIQUID_SHOPIFY_APP_EMBED_WISHLIST_WIDGET_IS_1}
+      alt="sledge-image-docs"
+    />
+
+    - Once you've `Created search result` template, You will be directed to the Search result page editor.
+
+    - Click `+ Add Section` > Search `Search Result` > Slides to `Apps` > select the `Search Result`.
+
+    <Image
+      className="mt-5 rounded-[24px] w-auto max-h-[459px] border border-[rgba(67,198,172,1)]"
+      src={IMAGE_LIQUID_SHOPIFY_APP_EMBED_IS_RESULT_1}
+      alt="sledge-image-docs"
+    />
+
+    - You can customize the Search Result by click the `Search Result` Block.
+
+    <Image
+      className="mt-5 rounded-[24px] w-auto max-h-[459px] border border-[rgba(67,198,172,1)]"
+      src={IMAGE_LIQUID_SHOPIFY_APP_EMBED_IS_RESULT_2}
+      alt="sledge-image-docs"
+    />
+
+    - Click `Save` located in the upper-right corner.
+
+    - Once you've adding Search Result, now it's time to `Create a Page`.
+    - From your Shopify admin, navigate to `Online Store` > `Pages` > click the `Add page` button.
+
+    <Image
+      className="mt-5 rounded-[24px] w-auto h-full max-h-[459px] border border-[rgba(67,198,172,1)]"
+      src={IMAGE_LIQUID_SHOPIFY_APP_EMBED_WISHLIST_WIDGET_NEW_3}
+      alt="sledge-image-docs"
+    />
+
+    - Add a `title`, and select Theme template you created earlier, for example: `Search Result`,<br/>
+    When ready, click `Save`.
+
+    <Image
+      className="mt-5 rounded-[24px] w-auto h-full max-h-[459px] border border-[rgba(67,198,172,1)]"
+      src={IMAGE_LIQUID_SHOPIFY_APP_EMBED_WISHLIST_WIDGET_IS_4}
+      alt="sledge-image-docs"
+    />
+
+    - Once you've creating a Search Result Page, Let's change URL on `Search Icon Popup`.
+
+    > <span className="not-italic">
+    > If you haven't added a `Search Icon Popup` yet, look [here](/instant-search#search-icon-popup) to see how to add the widget.
+    > </span>
+
+    - From your Shopify admin, navigate to `Online Store` > `Themes` > click the `Customize` button.
+    - Click on your `Search Icon Popup` > Click `URL Search Result` > Select `Pages` > Select `Search Result`
+
+    <div className="flex gap-2">
+      <Image
+        className="mt-5 rounded-[24px] w-[70%] h-full max-h-[459px] border border-[rgba(67,198,172,1)]"
+        src={IMAGE_LIQUID_SHOPIFY_APP_EMBED_WISHLIST_WIDGET_IS_3}
+        alt="sledge-image-docs"
+      />
+
+      <Image
+        className="mt-5 rounded-[24px] w-[30%] h-full max-h-[459px] border border-[rgba(67,198,172,1)]"
+        src={IMAGE_LIQUID_SHOPIFY_APP_EMBED_WISHLIST_WIDGET_IS_2}
+        alt="sledge-image-docs"
+      />
+    </div>
+
+    - After you've ready, you can simply click `Save` located in the upper-right corner.
+    - You can see the Search Result page at `https://YOUR-SHOPIFY-STORE.myshopify.com/pages/search-result`
+
+  </Tab>
+  <Tab>    
+    Here is a step-by-step guide to adding this widget with code.
+    <Tabs tabVariant="gradient" storageKey="selected-tech-stack" uniqueClass="tech-stack-tabs"  items={[
+        <div className="flex items-center gap-2">
+            <Hydrogen color="#677487" width={24} height={24} />
+            <span>Hydrogen</span>
+        </div>,
+        <div className="flex items-center gap-2">
+            <NextJs color="#677487" width={24} height={24} />
+            <span>Next.js</span>
+        </div>,
+        <div className="flex items-center gap-2">
+            <Liquid color="#677487" width={24} height={24} />
+            <span>Liquid</span>
+        </div>,
+        <div className="flex bg-re items-center gap-2">
+            <Webflow color="#677487" width={24} height={24} />
+            <span>Webflow</span>
+        </div>
+    ]}>
+    <Tab>
+        See the [API reference](/sledge-app-react-instant-search#api-reference-2) for code below.
+
+        ```tsx filename="app/SledgeInstantSearchResultWidget.tsx" showLineNumbers copy
+        import { SearchResultWidget } from "@sledge-app/react-instant-search";
+
+        export default function InstantSearchResultWidget() {
+            return (
+                <SearchResultWidget
+                    query={{
+                        keyword: 'q',
+                        sortBy: 'sort_by',
+                        page: 'page',
+                        limit: 'limit',
+                    }}
+                />
+            );
+        }
+        ```
+
+    </Tab>
+    <Tab>
+        See the [API reference](/sledge-app-react-instant-search#api-reference-2) for code below.
+
+        ```tsx filename="app/SledgeInstantSearchResultWidget.tsx" showLineNumbers copy
+        'use client';
+
+        import { SearchResultWidget } from "@sledge-app/react-instant-search";
+
+        export default function InstantSearchResultWidget() {
+            return (
+                <SearchResultWidget
+                    query={{
+                        keyword: 'q',
+                        sortBy: 'sort_by',
+                        page: 'page',
+                        limit: 'limit',
+                    }}
+                />
+            );
+        }
+        ```
+
+    </Tab>
+    <Tab>
+        See the [API reference](/html-data-attribute#api-reference-1) for code below.
+
+        ```html showLineNumbers copy
+        <div
+            data-component="instant-search-result-widget"
+            data-query-keyword="q"
+            data-query-sort-by="sort_by"
+            data-query-page="page"
+            data-query-limit="limit"
+            data-on-after-add-wishlist=""
+            data-on-after-remove-wishlist=""
+            data-on-after-render-product=""
+        ></div>
+        ```
+
+    </Tab>
+    <Tab>
+        You can place these code in custom code webflow, see the <a href="https://university.webflow.com/lesson/custom-code-embed" target="_blank" className="nx-text-primary-600 nx-underline nx-decoration-from-font [text-underline-position:from-font]">documentation</a> about custom code embed at webflow
+
+        See the [API reference](/html-data-attribute#api-reference-1) for code below.
+
+        ```html showLineNumbers copy
+        <div
+            data-component="instant-search-result-widget"
+            data-query-keyword="q"
+            data-query-sort-by="sort_by"
+            data-query-page="page"
+            data-query-limit="limit"
+            data-on-after-add-wishlist=""
+            data-on-after-remove-wishlist=""
+            data-on-after-render-product=""
+        ></div>
+        ```
+
+    </Tab>
+    </Tabs>
+
+  </Tab>
+</Tabs>
+
+## Learn more
+
+Congratulations! Now that you've learned usage of Instant Search widgets, you can start implementing Instant Search into your store.
+
+If your store requires custom layout and custom callback for the widget, you can learn more on how to modify them based on your needs :
+
+- [How to add Callback Functions](/callback-functions)
+- [How to add Custom Components](/custom-components)
+- [How to add Custom Style](/custom-styles)

@@ -1,0 +1,2271 @@
+import { Tabs, Tab } from "~/components/global";
+import { Steps } from "nextra/components";
+import { Webflow, Liquid, NextJs, Hydrogen } from "~/components/icons";
+import Image from "next/image";
+import { IMAGE_CC_PRODUCT_CARD, IMAGE_CC_VARIANT_PICKER } from "~/lib/const";
+
+# Global
+
+Global custom component is component you can use for multiple sledge features. Available custom components you can use :
+
+- [Product Card](#product-card)
+
+## Product Card
+
+Product cards are a very important component for wishlist and instant search applications and you can use your product cards to keep them displayed on sledge apps.<br/><br/>
+
+<Image
+  src={IMAGE_CC_PRODUCT_CARD}
+  alt="Custom Component - Product Card"
+  width="1391"
+  height="646"
+/> <br />
+
+<Tabs storageKey="selected-tech-stack"  items={[
+    <div className="flex items-center gap-2">
+        <Hydrogen width={24} height={24} />
+        <span>Hydrogen</span>
+    </div>,
+    <div className="flex items-center gap-2">
+        <NextJs width={24} height={24} />
+        <span>Next.js</span>
+    </div>,
+    <div className="flex items-center gap-2">
+        <Liquid width={24} height={24} />
+        <span>Liquid</span>
+    </div>,
+    <div className="flex items-center gap-2">
+        <Webflow width={24} height={24} />
+        <span>Webflow</span>
+    </div>
+]}>
+    <Tab>
+        This custom components works in these packages:
+        <ul className="mt-2 mb-8">
+            <li className="list-disc list-inside my-2">
+                <span>`@sledge-app/react-wishlist`</span>
+            </li>
+            <li className="list-disc list-inside my-2">
+                <span>`@sledge-app/react-instant-search`</span>
+            </li>
+            <li className="list-disc list-inside my-2">
+                <span>`@sledge-app/react-product-recommendation`</span>
+            </li>
+        </ul>
+
+        <Steps>
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Build a custom component, e.g:</h3>
+
+            ```tsx filename="app/SledgeProductCard.tsx" showLineNumbers copy
+            import { Trigger } from '@sledge-app/react-wishlist';
+            import { Rating } from '@sledge-app/react-product-review';
+
+            export default function SledgeProductCard({ product }: any) {
+                const {
+                    id,
+                    admin_graphql_api_id,
+                    title,
+                    image,
+                    handle,
+                    url,
+                    vendor,
+                    currency,
+                    variants,
+                } = product || {};
+                const {
+                    id: variant_id = '',
+                    admin_graphql_api_id: variant_admin_graphql_api_id = '',
+                    title: variant_title = '',
+                    price = '',
+                    sku = '',
+                    is_out_of_stock = false,
+                } = variants?.length ? variants[0] : {};
+
+                return (
+                    <div className="sledge__product-grid-card">
+                        <div className="sledge__product-grid-content">
+                            <div className="sledge__product-grid-card-image">
+                            <Link to={'/products/' + handle}>
+                                <Trigger
+                                    params={{
+                                        productId: id,
+                                        productVariantId: variant_id,
+                                        productName: title,
+                                        productVendor: vendor,
+                                        productSku: sku,
+                                        productVariantName: variant_title,
+                                        productLink: url,
+                                        productImage: image?.src || '',
+                                        productCurrency: currency,
+                                        productPrice: price,
+                                    }}
+                                    onAfterAddWishlist={(state) => {
+                                        if (state === 'success') {
+                                            // if condition is state === true, run your custom code
+                                        } else {
+                                            // if condition is state === true, run your custom code
+                                        }
+                                    }}
+                                    onAfterRemoveWishlist={(state) => {
+                                        if (state === 'success') {
+                                            // if condition is state === true, run your custom code
+                                        } else {
+                                            // if condition is state === true, run your custom code
+                                        }
+                                    }}
+                                />
+                                <img
+                                    src={image?.src || ''}
+                                    alt="sledge-product-card-image"
+                                    loading="lazy"
+                                />
+                            </Link>
+                            {is_out_of_stock ? (
+                                <div className="sledge__product-grid-card-out-of-stock">
+                                    Sold out
+                                </div>
+                            ) : null}
+                            </div>
+                            <div className="sledge__product-grid-card-desc">
+                                <div className="sledge__product-grid-card-title">
+                                    {title ? (
+                                    <Link to={'/products/' + handle}>
+                                        <h3>{title}</h3>
+                                    </Link>
+                                    ) : null}
+                                    <div className="sledge__product-grid-card-price">
+                                    <p>
+                                        {currency}
+                                        {price}
+                                    </p>
+                                    </div>
+                                </div>
+                                <div className="sledge__product-grid-card-text">
+                                    <div>{variant_title}</div>
+                                    <div>
+                                    <>Vendor: {vendor}</>
+                                    <> | </>
+                                    <>SKU: {sku}</>
+                                    </div>
+                                </div>
+                                <div className="sledge__product-grid-card-rating">
+                                    <Rating
+                                    params={{
+                                        productId: id,
+                                    }}
+                                    size="xs"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                        {is_out_of_stock ? (
+                            <button
+                                className="sledge__button"
+                                data-button-color-type="light"
+                                data-button-full-width="false"
+                                type="button"
+                                disabled=""
+                            >
+                                Sold out
+                            </button>
+                        ) : (
+                            <button
+                                className="sledge__button"
+                                data-button-color-type="light"
+                                data-button-full-width="false"
+                                type="button"
+                                onClick={() => {
+                                    // Put your add to cart functionality
+                                }}
+                            >
+                                <svg
+                                    width="{18}"
+                                    height="{18}"
+                                    viewBox="0 0 18 18"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                    fillRule="evenodd"
+                                    clipRule="evenodd"
+                                    d="M8.83562 1.50023C10.796 1.50023 12.4155 2.99397 12.6152 4.90442L12.6709 4.90507C13.7584 4.90507 15.0806 5.62732 15.5269 7.65307L16.1186 12.2333C16.3309 13.7116 16.0654 14.8973 15.3281 15.7478C14.5946 16.5938 13.4336 17.0416 11.9704 17.0416H5.7094C4.10215 17.0416 2.9824 16.6478 2.28565 15.8386C1.5859 15.0271 1.3519 13.8098 1.5904 12.2213L2.1724 7.70182C2.5549 5.62957 3.95365 4.90507 5.03665 4.90507C5.13014 4.04293 5.51889 3.22275 6.13562 2.60797C6.84437 1.90372 7.82162 1.50023 8.81987 1.50023H8.83562ZM12.6709 6.03007H5.03665C4.7059 6.03007 3.6004 6.16357 3.28315 7.87657L2.70415 12.3766C2.5159 13.6388 2.6614 14.5523 3.13765 15.1051C3.6079 15.6511 4.4494 15.9166 5.7094 15.9166H11.9704C12.7564 15.9166 13.8296 15.7598 14.4776 15.0113C14.9921 14.4181 15.1691 13.5346 15.0041 12.3848L14.4199 7.84582C14.1709 6.72757 13.5139 6.03007 12.6709 6.03007ZM11.023 8.11815C11.3335 8.11815 11.6027 8.37015 11.6027 8.68065C11.6027 8.99115 11.368 9.24315 11.0575 9.24315H11.023C10.7125 9.24315 10.4605 8.99115 10.4605 8.68065C10.4605 8.37015 10.7125 8.11815 11.023 8.11815ZM6.65042 8.11815C6.96092 8.11815 7.23017 8.37015 7.23017 8.68065C7.23017 8.99115 6.99467 9.24315 6.68417 9.24315H6.65042C6.33992 9.24315 6.08792 8.99115 6.08792 8.68065C6.08792 8.37015 6.33992 8.11815 6.65042 8.11815ZM8.83337 2.62522H8.82212C8.11637 2.62522 7.42862 2.90947 6.92987 3.40522C6.5236 3.80967 6.25789 4.34137 6.17193 4.90472L11.4814 4.90493C11.2887 3.61626 10.1743 2.62522 8.83337 2.62522Z"
+                                    fill="#393D4E"
+                                    />
+                                </svg>
+                                <span>Add To Cart</span>
+                            </button>
+                        )}
+                    </div>
+                );
+            };
+            ```
+
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Call custom component to prop</h3>
+
+            Only provide the function name (without `()`), see the [API reference](/sledge-app-core#productcard-product-showpopupcomponent-setshowpopupcomponent-)
+
+            > <div className="not-italic">`<CustomComponent>` must be added as a child of another sledge's widget.</div>
+
+            ```tsx {31} showLineNumbers copy
+            import { CustomComponents } from "@sledge-app/core";
+            import { SearchIconWidget } from "@sledge-app/react-instant-search";
+            import SledgeProductCard from "~/components/SledgeProductCard";
+
+            export default function InstantSearchIconWidget() {
+                return (
+                    <SearchIconWidget
+                        size='sm'
+                        onAfterAddWishlist={(state) => {
+                            if (state) {
+                                // if condition is state === true, run your custom code
+                            } else {
+                                // if condition is state === true, run your custom code
+                            }
+                        }}
+                        onAfterRemoveWishlist={(state) => {
+                            if (state) {
+                                // if condition is state === true, run your custom code
+                            } else {
+                                // if condition is state === true, run your custom code
+                            }
+                        }}
+                        onAfterRenderProduct={(state) => {
+                            if (state) {
+                                // if condition is state === true, run your custom code
+                            } else {
+                                // if condition is state === true, run your custom code
+                            }
+                        }}
+                    >
+                        <CustomComponents productCard={SledgeProductCard} />
+                    </SearchIconWidget>
+                );
+            }
+            ```
+        </Steps>
+    </Tab>
+    <Tab>
+        This custom components works in these packages:
+        <ul className="mt-2 mb-8">
+            <li className="list-disc list-inside my-2">
+                <span>`@sledge-app/react-wishlist`</span>
+            </li>
+            <li className="list-disc list-inside my-2">
+                <span>`@sledge-app/react-instant-search`</span>
+            </li>
+            <li className="list-disc list-inside my-2">
+                <span>`@sledge-app/react-product-recommendation`</span>
+            </li>
+        </ul>
+
+        <Steps>
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Build a custom component, e.g:</h3>
+
+            ```tsx filename="app/SledgeProductCard.tsx" showLineNumbers copy
+            'use client';
+
+            import { Trigger } from '@sledge-app/react-wishlist';
+            import { Rating } from '@sledge-app/react-product-review';
+
+            export default function SledgeProductCard({ product }: any) {
+                const {
+                    id,
+                    admin_graphql_api_id,
+                    title,
+                    image,
+                    handle,
+                    url,
+                    vendor,
+                    currency,
+                    variants,
+                } = product || {};
+                const {
+                    id: variant_id = '',
+                    admin_graphql_api_id: variant_admin_graphql_api_id = '',
+                    title: variant_title = '',
+                    price = '',
+                    sku = '',
+                    is_out_of_stock = false,
+                } = variants?.length ? variants[0] : {};
+
+                return (
+                    <div className="sledge__product-grid-card">
+                        <div className="sledge__product-grid-content">
+                            <div className="sledge__product-grid-card-image">
+                            <Link to={'/products/' + handle}>
+                                <Trigger
+                                    params={{
+                                        productId: id,
+                                        productVariantId: variant_id,
+                                        productName: title,
+                                        productVendor: vendor,
+                                        productSku: sku,
+                                        productVariantName: variant_title,
+                                        productLink: url,
+                                        productImage: image?.src || '',
+                                        productCurrency: currency,
+                                        productPrice: price,
+                                    }}
+                                    onAfterAddWishlist={(state) => {
+                                        if (state === 'success') {
+                                            // if condition is state === true, run your custom code
+                                        } else {
+                                            // if condition is state === true, run your custom code
+                                        }
+                                    }}
+                                    onAfterRemoveWishlist={(state) => {
+                                        if (state === 'success') {
+                                            // if condition is state === true, run your custom code
+                                        } else {
+                                            // if condition is state === true, run your custom code
+                                        }
+                                    }}
+                                />
+                                <img
+                                    src={image?.src || ''}
+                                    alt="sledge-product-card-image"
+                                    loading="lazy"
+                                />
+                            </Link>
+                            {is_out_of_stock ? (
+                                <div className="sledge__product-grid-card-out-of-stock">
+                                    Sold out
+                                </div>
+                            ) : null}
+                            </div>
+                            <div className="sledge__product-grid-card-desc">
+                                <div className="sledge__product-grid-card-title">
+                                    {title ? (
+                                    <Link to={'/products/' + handle}>
+                                        <h3>{title}</h3>
+                                    </Link>
+                                    ) : null}
+                                    <div className="sledge__product-grid-card-price">
+                                    <p>
+                                        {currency}
+                                        {price}
+                                    </p>
+                                    </div>
+                                </div>
+                                <div className="sledge__product-grid-card-text">
+                                    <div>{variant_title}</div>
+                                    <div>
+                                    <>Vendor: {vendor}</>
+                                    <> | </>
+                                    <>SKU: {sku}</>
+                                    </div>
+                                </div>
+                                <div className="sledge__product-grid-card-rating">
+                                    <Rating
+                                    params={{
+                                        productId: id,
+                                    }}
+                                    size="xs"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                        {is_out_of_stock ? (
+                            <button
+                                className="sledge__button"
+                                data-button-color-type="light"
+                                data-button-full-width="false"
+                                type="button"
+                                disabled=""
+                            >
+                                Sold out
+                            </button>
+                        ) : (
+                            <button
+                                className="sledge__button"
+                                data-button-color-type="light"
+                                data-button-full-width="false"
+                                type="button"
+                                onClick={() => {
+                                    // Put your add to cart functionality
+                                }}
+                            >
+                                <svg
+                                    width="{18}"
+                                    height="{18}"
+                                    viewBox="0 0 18 18"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                    fillRule="evenodd"
+                                    clipRule="evenodd"
+                                    d="M8.83562 1.50023C10.796 1.50023 12.4155 2.99397 12.6152 4.90442L12.6709 4.90507C13.7584 4.90507 15.0806 5.62732 15.5269 7.65307L16.1186 12.2333C16.3309 13.7116 16.0654 14.8973 15.3281 15.7478C14.5946 16.5938 13.4336 17.0416 11.9704 17.0416H5.7094C4.10215 17.0416 2.9824 16.6478 2.28565 15.8386C1.5859 15.0271 1.3519 13.8098 1.5904 12.2213L2.1724 7.70182C2.5549 5.62957 3.95365 4.90507 5.03665 4.90507C5.13014 4.04293 5.51889 3.22275 6.13562 2.60797C6.84437 1.90372 7.82162 1.50023 8.81987 1.50023H8.83562ZM12.6709 6.03007H5.03665C4.7059 6.03007 3.6004 6.16357 3.28315 7.87657L2.70415 12.3766C2.5159 13.6388 2.6614 14.5523 3.13765 15.1051C3.6079 15.6511 4.4494 15.9166 5.7094 15.9166H11.9704C12.7564 15.9166 13.8296 15.7598 14.4776 15.0113C14.9921 14.4181 15.1691 13.5346 15.0041 12.3848L14.4199 7.84582C14.1709 6.72757 13.5139 6.03007 12.6709 6.03007ZM11.023 8.11815C11.3335 8.11815 11.6027 8.37015 11.6027 8.68065C11.6027 8.99115 11.368 9.24315 11.0575 9.24315H11.023C10.7125 9.24315 10.4605 8.99115 10.4605 8.68065C10.4605 8.37015 10.7125 8.11815 11.023 8.11815ZM6.65042 8.11815C6.96092 8.11815 7.23017 8.37015 7.23017 8.68065C7.23017 8.99115 6.99467 9.24315 6.68417 9.24315H6.65042C6.33992 9.24315 6.08792 8.99115 6.08792 8.68065C6.08792 8.37015 6.33992 8.11815 6.65042 8.11815ZM8.83337 2.62522H8.82212C8.11637 2.62522 7.42862 2.90947 6.92987 3.40522C6.5236 3.80967 6.25789 4.34137 6.17193 4.90472L11.4814 4.90493C11.2887 3.61626 10.1743 2.62522 8.83337 2.62522Z"
+                                    fill="#393D4E"
+                                    />
+                                </svg>
+                                <span>Add To Cart</span>
+                            </button>
+                        )}
+                    </div>
+                );
+            };
+            ```
+
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Call custom component to prop</h3>
+
+            Only provide the function name (without `()`), see the [API reference](/sledge-app-core#productcard-product-showpopupcomponent-setshowpopupcomponent-)
+
+            > <div className="not-italic">`<CustomComponent>` must be added as a child of another sledge's widget.</div>
+
+            ```tsx {33} showLineNumbers copy
+            'use client';
+
+            import { CustomComponents } from "@sledge-app/core";
+            import { SearchIconWidget } from "@sledge-app/react-instant-search";
+            import SledgeProductCard from "~/components/SledgeProductCard";
+
+            export default function InstantSearchIconWidget() {
+                return (
+                    <SearchIconWidget
+                        size='sm'
+                        onAfterAddWishlist={(state) => {
+                            if (state) {
+                                // if condition is state === true, run your custom code
+                            } else {
+                                // if condition is state === true, run your custom code
+                            }
+                        }}
+                        onAfterRemoveWishlist={(state) => {
+                            if (state) {
+                                // if condition is state === true, run your custom code
+                            } else {
+                                // if condition is state === true, run your custom code
+                            }
+                        }}
+                        onAfterRenderProduct={(state) => {
+                            if (state) {
+                                // if condition is state === true, run your custom code
+                            } else {
+                                // if condition is state === true, run your custom code
+                            }
+                        }}
+                    >
+                        <CustomComponents productCard={SledgeProductCard} />
+                    </SearchIconWidget>
+                );
+            }
+            ```
+        </Steps>
+    </Tab>
+    <Tab>
+        This custom components works on these widgets for attributes `[data-component]`:
+        <ul className="mt-2 mb-8">
+            <li className="list-disc list-inside my-2">
+                <span>`wishlist-widget`</span>
+            </li>
+            <li className="list-disc list-inside my-2">
+                <span>`instant-search-widget`</span>
+            </li>
+            <li className="list-disc list-inside my-2">
+                <span>`instant-search-icon-widget`</span>
+            </li>
+            <li className="list-disc list-inside my-2">
+                <span>`instant-search-result-widget`</span>
+            </li>
+            <li className="list-disc list-inside my-2">
+                <span>`instant-search-product-filter-widget`</span>
+            </li>
+            <li className="list-disc list-inside my-2">
+                <span>`product-recommendation-recently-viewed`</span>
+            </li>
+        </ul>
+
+        <Steps>
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Build a custom component, e.g:</h3>
+
+            ```html showLineNumbers copy
+            <script>
+            const shopifyAddToCart = async (data) => {
+                var myHeaders = new Headers();
+                myHeaders.append('Content-Type', 'application/json');
+
+                let items = [];
+                data.map((item) => {
+                    const { id, quantity } = item;
+
+                    items.push({
+                        id: id,
+                        quantity: quantity
+                    });
+                });
+
+                var raw = JSON.stringify({
+                    items: items
+                });
+
+                var requestOptions = {
+                    method: 'POST',
+                    headers: myHeaders,
+                    body: raw,
+                    redirect: 'follow'
+                };
+
+                if (!window?.Shopify?.routes) return;
+
+                return await fetch(`${window.Shopify.routes.root}cart/add.js`, requestOptions)
+                    .then((response) => response.json())
+                    .then((result) => {
+                        return result;
+                    })
+                    .catch(() => {
+                        return;
+                    });
+            };
+
+            const handleAddToCart = async (data) => {
+                const { id, quantity } = data;
+
+                let resShopifyAddToCart = await shopifyAddToCart([
+                    {
+                        id: id,
+                        quantity: quantity
+                    }
+                ]);
+
+                if (resShopifyAddToCart?.items?.length) {
+                    window.location.href = '/cart';
+                } else {
+                    alert(resShopifyAddToCart?.description?.length ? resShopifyAddToCart.description : 'failed add to cart, please try again');
+                }
+            };
+
+            function renderProductCard({ product }) {
+                const { id, admin_graphql_api_id, title, image, handle, url, vendor, currency, variants } = product || {};
+                const {
+                    id: variant_id = '',
+                    admin_graphql_api_id: variant_admin_graphql_api_id = '',
+                    title: variant_title = '',
+                    price = '',
+                    sku = '',
+                    is_out_of_stock = false
+                } = variants?.length ? variants[0] : {};
+
+                return `<div class="sledge__product-grid-card">
+                    <div class="sledge__product-grid-content">
+                      <div class="sledge__product-grid-card-image">
+                        <a href="/products/${handle}">
+                          <div
+                              data-component="wishlist-trigger"
+                              data-product-id="${id}"
+                              data-product-variant-id="${variant_id}"
+                              data-product-name="${title}"
+                              data-product-vendor="${vendor}"
+                              data-product-sku="${sku}"
+                              data-product-variant-name="${variant_title}"
+                              data-product-link="${url}"
+                              data-product-image="${image?.src || ''}"
+                              data-product-currency="${currency}"
+                              data-product-price="${price}"
+                              data-on-after-add-wishlist="onAfterAddWishlist"
+                              data-on-after-remove-wishlist="onAfterRemoveWishlist"
+                          ></div>
+                          <img
+                            src="${image?.src || ''}"
+                            alt="sledge-product-card-image"
+                            loading="lazy"
+                          />
+                        </a>
+                        ${
+                            is_out_of_stock
+                                ? `
+                          <div class="sledge__product-grid-card-out-of-stock">
+                            Sold out
+                          </div>
+                        `
+                                : ''
+                        }
+                      </div>
+                      <div class="sledge__product-grid-card-desc">
+                        <div class="sledge__product-grid-card-title">
+                          ${
+                              title
+                                  ? `
+                            <a href="/products/${handle}">
+                              <h3>${title}</h3>
+                            </a>
+                          `
+                                  : ''
+                          }
+                          <div class="sledge__product-grid-card-price">
+                            <p>
+                              ${currency}
+                              ${price}
+                            </p>
+                          </div>
+                        </div>
+                        <div class="sledge__product-grid-card-text">
+                          <div>${variant_title}</div>
+                          <div>
+                            Vendor: ${vendor} | SKU: ${sku}
+                          </div>
+                        </div>
+                        <div class="sledge__product-grid-card-rating">
+                          <div data-component="product-review-rating" data-product-id="${id}" data-rating-size="xs"></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="sledge__product-grid-button-wrapper">
+                    ${
+                        is_out_of_stock
+                            ? `<button class="sledge__button " data-button-color-type="light" data-button-full-width="false" type="button" disabled="">Sold out</button>`
+                            : `
+                            <button class="sledge__button " data-button-color-type="light" data-button-full-width="false" type="button" onclick="handleAddToCart({ id: '${variant_id}', quantity: 1 })">
+                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M8.83562 1.50023C10.796 1.50023 12.4155 2.99397 12.6152 4.90442L12.6709 4.90507C13.7584 4.90507 15.0806 5.62732 15.5269 7.65307L16.1186 12.2333C16.3309 13.7116 16.0654 14.8973 15.3281 15.7478C14.5946 16.5938 13.4336 17.0416 11.9704 17.0416H5.7094C4.10215 17.0416 2.9824 16.6478 2.28565 15.8386C1.5859 15.0271 1.3519 13.8098 1.5904 12.2213L2.1724 7.70182C2.5549 5.62957 3.95365 4.90507 5.03665 4.90507C5.13014 4.04293 5.51889 3.22275 6.13562 2.60797C6.84437 1.90372 7.82162 1.50023 8.81987 1.50023H8.83562ZM12.6709 6.03007H5.03665C4.7059 6.03007 3.6004 6.16357 3.28315 7.87657L2.70415 12.3766C2.5159 13.6388 2.6614 14.5523 3.13765 15.1051C3.6079 15.6511 4.4494 15.9166 5.7094 15.9166H11.9704C12.7564 15.9166 13.8296 15.7598 14.4776 15.0113C14.9921 14.4181 15.1691 13.5346 15.0041 12.3848L14.4199 7.84582C14.1709 6.72757 13.5139 6.03007 12.6709 6.03007ZM11.023 8.11815C11.3335 8.11815 11.6027 8.37015 11.6027 8.68065C11.6027 8.99115 11.368 9.24315 11.0575 9.24315H11.023C10.7125 9.24315 10.4605 8.99115 10.4605 8.68065C10.4605 8.37015 10.7125 8.11815 11.023 8.11815ZM6.65042 8.11815C6.96092 8.11815 7.23017 8.37015 7.23017 8.68065C7.23017 8.99115 6.99467 9.24315 6.68417 9.24315H6.65042C6.33992 9.24315 6.08792 8.99115 6.08792 8.68065C6.08792 8.37015 6.33992 8.11815 6.65042 8.11815ZM8.83337 2.62522H8.82212C8.11637 2.62522 7.42862 2.90947 6.92987 3.40522C6.5236 3.80967 6.25789 4.34137 6.17193 4.90472L11.4814 4.90493C11.2887 3.61626 10.1743 2.62522 8.83337 2.62522Z" fill="#393D4E"></path>
+                            </svg>
+                            <span>Add To Cart</span>
+                        </button>
+                    `
+                    }
+                  </div>`;
+            }
+            </script>
+            ```
+
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Call custom component to attribute</h3>
+
+            Only provide the function name (without `()`), see the [API reference](/html-data-attribute#data-render-product-card)
+
+            > <div className="not-italic">`<div data-component="custom-components">` must be added as a child of another sledge's widget.</div>
+
+            ```html {7} showLineNumbers copy
+            <div
+                data-component="instant-search-icon-widget"
+                data-icon-size="sm"
+            >
+                <div
+                    data-component="custom-components"
+                    data-render-product-card="renderProductCard"
+                ></div>
+            </div>
+            ```
+        </Steps>
+    </Tab>
+    <Tab>
+        You can place these code in custom code webflow, see the <a href="https://university.webflow.com/lesson/custom-code-embed" target="_blank" className="nx-text-primary-600 nx-underline nx-decoration-from-font [text-underline-position:from-font]">documentation</a> about custom code embed at webflow.
+
+        This custom components works on these widgets for attributes `[data-component]`:
+        <ul className="mt-2 mb-8">
+            <li className="list-disc list-inside my-2">
+                <span>`wishlist-widget`</span>
+            </li>
+            <li className="list-disc list-inside my-2">
+                <span>`instant-search-widget`</span>
+            </li>
+            <li className="list-disc list-inside my-2">
+                <span>`instant-search-icon-widget`</span>
+            </li>
+            <li className="list-disc list-inside my-2">
+                <span>`instant-search-result-widget`</span>
+            </li>
+            <li className="list-disc list-inside my-2">
+                <span>`instant-search-product-filter-widget`</span>
+            </li>
+            <li className="list-disc list-inside my-2">
+                <span>`product-recommendation-recently-viewed`</span>
+            </li>
+        </ul>
+
+        <Steps className="mt-3">
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Build a custom component, e.g:</h3>
+
+            ```html showLineNumbers copy
+            <script>
+            function renderProductCard({ product }) {
+                const { id, admin_graphql_api_id, title, image, handle, url, vendor, currency, variants } = product || {};
+                const {
+                    id: variant_id = '',
+                    admin_graphql_api_id: variant_admin_graphql_api_id = '',
+                    title: variant_title = '',
+                    price = '',
+                    sku = '',
+                    is_out_of_stock = false
+                } = variants?.length ? variants[0] : {};
+
+                return `<div class="sledge__product-grid-card">
+                    <div class="sledge__product-grid-content">
+                      <div class="sledge__product-grid-card-image">
+                        <a href="/products/${handle}">
+                          <div
+                              data-component="wishlist-trigger"
+                              data-product-id="${id}"
+                              data-product-variant-id="${variant_id}"
+                              data-product-name="${title}"
+                              data-product-vendor="${vendor}"
+                              data-product-sku="${sku}"
+                              data-product-variant-name="${variant_title}"
+                              data-product-link="${url}"
+                              data-product-image="${image?.src || ''}"
+                              data-product-currency="${currency}"
+                              data-product-price="${price}"
+                              data-on-after-add-wishlist="onAfterAddWishlist"
+                              data-on-after-remove-wishlist="onAfterRemoveWishlist"
+                          ></div>
+                          <img
+                            src="${image?.src || ''}"
+                            alt="sledge-product-card-image"
+                            loading="lazy"
+                          />
+                        </a>
+                        ${
+                            is_out_of_stock
+                                ? `
+                          <div class="sledge__product-grid-card-out-of-stock">
+                            Sold out
+                          </div>
+                        `
+                                : ''
+                        }
+                      </div>
+                      <div class="sledge__product-grid-card-desc">
+                        <div class="sledge__product-grid-card-title">
+                          ${
+                              title
+                                  ? `
+                            <a href="/products/${handle}">
+                              <h3>${title}</h3>
+                            </a>
+                          `
+                                  : ''
+                          }
+                          <div class="sledge__product-grid-card-price">
+                            <p>
+                              ${currency}
+                              ${price}
+                            </p>
+                          </div>
+                        </div>
+                        <div class="sledge__product-grid-card-text">
+                          <div>${variant_title}</div>
+                          <div>
+                            Vendor: ${vendor} | SKU: ${sku}
+                          </div>
+                        </div>
+                        <div class="sledge__product-grid-card-rating">
+                          <div data-component="product-review-rating" data-product-id="${id}" data-rating-size="xs"></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="sledge__product-grid-button-wrapper">
+                    ${
+                        is_out_of_stock
+                            ? `<button class="sledge__button " data-button-color-type="light" data-button-full-width="false" type="button" disabled="">Sold out</button>`
+                            : `
+                            <button class="sledge__button " data-button-color-type="light" data-button-full-width="false" type="button" onclick="putYourAddToCartFunctionality()">
+                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M8.83562 1.50023C10.796 1.50023 12.4155 2.99397 12.6152 4.90442L12.6709 4.90507C13.7584 4.90507 15.0806 5.62732 15.5269 7.65307L16.1186 12.2333C16.3309 13.7116 16.0654 14.8973 15.3281 15.7478C14.5946 16.5938 13.4336 17.0416 11.9704 17.0416H5.7094C4.10215 17.0416 2.9824 16.6478 2.28565 15.8386C1.5859 15.0271 1.3519 13.8098 1.5904 12.2213L2.1724 7.70182C2.5549 5.62957 3.95365 4.90507 5.03665 4.90507C5.13014 4.04293 5.51889 3.22275 6.13562 2.60797C6.84437 1.90372 7.82162 1.50023 8.81987 1.50023H8.83562ZM12.6709 6.03007H5.03665C4.7059 6.03007 3.6004 6.16357 3.28315 7.87657L2.70415 12.3766C2.5159 13.6388 2.6614 14.5523 3.13765 15.1051C3.6079 15.6511 4.4494 15.9166 5.7094 15.9166H11.9704C12.7564 15.9166 13.8296 15.7598 14.4776 15.0113C14.9921 14.4181 15.1691 13.5346 15.0041 12.3848L14.4199 7.84582C14.1709 6.72757 13.5139 6.03007 12.6709 6.03007ZM11.023 8.11815C11.3335 8.11815 11.6027 8.37015 11.6027 8.68065C11.6027 8.99115 11.368 9.24315 11.0575 9.24315H11.023C10.7125 9.24315 10.4605 8.99115 10.4605 8.68065C10.4605 8.37015 10.7125 8.11815 11.023 8.11815ZM6.65042 8.11815C6.96092 8.11815 7.23017 8.37015 7.23017 8.68065C7.23017 8.99115 6.99467 9.24315 6.68417 9.24315H6.65042C6.33992 9.24315 6.08792 8.99115 6.08792 8.68065C6.08792 8.37015 6.33992 8.11815 6.65042 8.11815ZM8.83337 2.62522H8.82212C8.11637 2.62522 7.42862 2.90947 6.92987 3.40522C6.5236 3.80967 6.25789 4.34137 6.17193 4.90472L11.4814 4.90493C11.2887 3.61626 10.1743 2.62522 8.83337 2.62522Z" fill="#393D4E"></path>
+                            </svg>
+                            <span>Add To Cart</span>
+                        </button>
+                    `
+                    }
+                  </div>`;
+            }
+            </script>
+            ```
+
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Call custom component to attribute</h3>
+
+            Only provide the function name (without `()`), see the [API reference](/html-data-attribute#data-render-product-card)
+
+            > <div className="not-italic">`<div data-component="custom-components">` must be added as a child of another sledge's widget.</div>
+
+            ```html {7} showLineNumbers copy
+            <div
+                data-component="instant-search-icon-widget"
+                data-icon-size="sm"
+            >
+                <div
+                    data-component="custom-components"
+                    data-render-product-card="renderProductCard"
+                ></div>
+            </div>
+            ```
+        </Steps>
+    </Tab>
+
+</Tabs>
+
+### Variant Picker
+
+Sometimes you need to show color swatch on your product card and show available variant options of your product, Sledge support that functionality. Follow step by step below to implement variant picker on your product card.<br/><br/>
+
+<Image
+  src={IMAGE_CC_VARIANT_PICKER}
+  alt="Custom Component - Variant Picker"
+  width="1391"
+  height="646"
+/> <br />
+
+<Tabs storageKey="selected-tech-stack"  items={[
+    <div className="flex items-center gap-2">
+        <Hydrogen width={24} height={24} />
+        <span>Hydrogen</span>
+    </div>,
+    <div className="flex items-center gap-2">
+        <NextJs width={24} height={24} />
+        <span>Next.js</span>
+    </div>,
+    <div className="flex items-center gap-2">
+        <Liquid width={24} height={24} />
+        <span>Liquid</span>
+    </div>,
+    <div className="flex items-center gap-2">
+        <Webflow width={24} height={24} />
+        <span>Webflow</span>
+    </div>
+]}>
+    <Tab>
+        <Steps>
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Build a variant picker function, e.g:</h3>
+
+            ```tsx filename="app/SledgeProductCard.tsx" showLineNumbers copy
+            import { Trigger } from "@sledge-app/react-wishlist";
+            import { Rating } from "@sledge-app/react-product-review";
+            import { useState } from "react";
+
+            export default function SledgeProductCard({ product }: any) {
+                const {
+                    id,
+                    admin_graphql_api_id,
+                    title,
+                    image,
+                    handle,
+                    url,
+                    vendor,
+                    currency,
+                    variants,
+                } = product || {};
+
+                const {
+                    id: variant_id = "",
+                    admin_graphql_api_id: variant_admin_graphql_api_id = "",
+                    title: variant_title = "",
+                    price = "",
+                    sku = "",
+                    is_out_of_stock = false,
+                } = variants?.length ? variants[0] : {};
+
+                const [selectedVariantId, setSelectedVariantId] = useState(
+                    variants[0].admin_graphql_api_id
+                );
+
+                const options = product.options ? Object.entries(product?.options) : [];
+                const images = product?.images ?? [];
+
+                const defaultSelected: any = {};
+
+                defaultSelected['data-product-id'] = id;
+                defaultSelected["data-variant-id"] = variants[0].admin_graphql_api_id;
+                defaultSelected["data-product-handle"] = handle;
+                defaultSelected["data-selected-option1"] = variants[0].option1;
+                if (variants[0].option2)
+                    defaultSelected["data-selected-option2"] = variants[0].option2;
+
+                function setSelectedOption(element: any, optionName: any) {
+                    const optionsButton = element.target.offsetParent.querySelector(`.options-button-${optionName}`).querySelectorAll(`button`);
+
+                    const defaultSelectedClassChanger = () => {
+                        optionsButton.forEach((button: any, index: any) => {
+                            button.classList.remove('sledge__product-variant-size-swatch-active');
+                            element.target.className += ' sledge__product-variant-size-swatch-active';
+                        });
+                    };
+
+                    const colorSelectedClassChanger = () => {
+                        optionsButton.forEach((button: any, index: any) => {
+                            button.classList.remove('sledge__product-variant-color-swatch-active');
+                            element.target.className += ' sledge__product-variant-color-swatch-active';
+                        });
+                    };
+
+                    switch (optionName) {
+                        case 'Color':
+                            colorSelectedClassChanger();
+                            break;
+                        case 'Size':
+                            defaultSelectedClassChanger();
+                            break;
+                        default:
+                            defaultSelectedClassChanger();
+                    }
+                }
+
+                function setSelectedVariant(element: any, value: any, optionIndex: number) {
+                    const selectedInput = element.target.parentNode.parentNode.firstChild;
+                    const parentCard = element.target.offsetParent;
+
+                    const setOptionAttribute = () => {
+                    //set option attribute
+                    selectedInput.attributes[`data-selected-option${optionIndex}`].value =
+                        value;
+                    };
+                    setOptionAttribute();
+
+                    // define option1 and option 2
+                    const option1 = `[data-option-1="${selectedInput.attributes["data-selected-option1"].value}"]`;
+                    const option2 = `${
+                    selectedInput.attributes["data-selected-option2"]
+                        ? `[data-option-2="${selectedInput.attributes["data-selected-option2"].value}"]`
+                        : ""
+                    }`;
+
+                    // define selected option
+                    const selectOption = parentCard.querySelector(`select option${option1}${option2}`);
+                    const variantId = selectOption.attributes["data-graphql-id"].value;
+                    const imageId = selectOption.attributes["data-image-id"]?.value;
+
+                    const setOther = () => {
+                    //set data-variant-id attribute
+                    selectedInput.attributes[`data-variant-id`].value = selectOption.attributes["data-graphql-id"].value;
+
+                    //change product image by variant
+                    if (variantId) setSelectedVariantId(variantId);
+                    if (imageId)
+                        parentCard.querySelector(`img.featured-image`).src =
+                        parentCard.querySelector(`div.variant-images img[id="${imageId}"]`).src;
+                    };
+
+                    setOther();
+
+                    const result = { variantId, imageId };
+
+                    return result;
+                }
+
+                return (
+                    <div className="sledge__product-grid-card">
+                        <div className="sledge__product-grid-content">
+                            <div className="sledge__product-grid-card-desc">
+                                <div className="sledge__product-grid-card-variant-swatch">
+                                    ...
+                                    Variant Picker Code
+                                    ...
+                                </div>
+                            </div>
+                        </div>
+                        <div className="sledge__product-grid-button-wrapper"></div>
+                    </div>
+                )
+            }
+            ```
+
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Build a component with a variant picker function, e.g: </h3>
+
+            ```tsx showLineNumbers copy
+            import { CustomComponents } from "@sledge-app/core";
+            import { SearchIconWidget } from "@sledge-app/react-instant-search";
+            import SledgeProductCard from "~/components/SledgeProductCard";
+
+            export default function SledgeProductCard() {
+                ...
+                variant picker functions (Step 1)
+                ...
+                return (
+                    <div className="sledge__product-grid-card">
+                        <div className="sledge__product-grid-content">
+                            <div className="sledge__product-grid-card-image">
+                            <Link to={"/products/" + handle}>
+                                <Trigger
+                                    params={{
+                                        productId: id,
+                                        productVariantId: variant_id,
+                                        productName: title,
+                                        productVendor: vendor,
+                                        productSku: sku,
+                                        productVariantName: variant_title,
+                                        productLink: url,
+                                        productImage: image?.src || "",
+                                        productCurrency: currency,
+                                        productPrice: price,
+                                    }}
+                                    onAfterAddWishlist={(state) => {
+                                        if (state === "success") {
+                                        // if condition is state === true, run your custom code
+                                        } else {
+                                        // if condition is state === true, run your custom code
+                                        }
+                                    }}
+                                    onAfterRemoveWishlist={(state) => {
+                                        if (state === "success") {
+                                        // if condition is state === true, run your custom code
+                                        } else {
+                                        // if condition is state === true, run your custom code
+                                        }
+                                    }}
+                                />
+                                <img
+                                    src={image?.src || ""}
+                                    alt="sledge-product-card-image"
+                                    loading="lazy"
+                                    className="featured-image"
+                                />
+                            </Link>
+                            {is_out_of_stock ? (
+                                <div className="sledge__product-grid-card-out-of-stock">Sold out</div>
+                            ) : null}
+                            </div>
+                            <div className="sledge__product-grid-card-desc">
+                                <div className="sledge__product-grid-card-title">
+                                    {title ? (
+                                    <Link to={"/products/" + handle}>
+                                        <h3>{title}</h3>
+                                    </Link>
+                                    ) : null}
+                                    <div className="sledge__product-grid-card-price">
+                                    <p>
+                                        {currency}
+                                        {price}
+                                    </p>
+                                    </div>
+                                </div>
+                                <div className="sledge__product-grid-card-text">
+                                    <div>{variant_title}</div>
+                                    <div>
+                                    <>Vendor: {vendor}</>
+                                    <> | </>
+                                    <>SKU: {sku}</>
+                                    </div>
+                                </div>
+                                <div className="sledge__product-grid-card-rating">
+                                    <Rating params={{ productId: id }} size="xs" />
+                                </div>
+                            </div>
+                        </div>
+                        <div className="sledge__product-grid-card-variant-swatch">
+                            {/* variant trigger */}
+                            <input type="hidden" {...defaultSelected} className="selected-option" />
+                            <select
+                                className="variant-picker"
+                                style={{
+                                    display: "none",
+                                }}
+                            >
+                            {variants.map((variant: any) => {
+                                const {
+                                    title,
+                                    option1,
+                                    option2,
+                                    position,
+                                    id,
+                                    admin_graphql_api_id,
+                                    image_id,
+                                }: any = variant;
+
+                                const optionAttributes = {
+                                    "data-option-1": option1,
+                                    "data-option-2": option2,
+                                    "data-position": position,
+                                    "data-id": id,
+                                    "data-graphql-id": admin_graphql_api_id,
+                                    "data-image-id": image_id,
+                                };
+
+                                return <option {...optionAttributes}>{title}</option>;
+                            })}
+                            </select>
+                            {/* end variant trigger */}
+                            {/* variant images trigger */}
+                            <div
+                                className="variant-images"
+                                style={{
+                                    display: "none",
+                                }}
+                            >
+                            {images.map((image: any) => (
+                                <img
+                                    decoding="async"
+                                    id={image?.id}
+                                    height="270"
+                                    loading="lazy"
+                                    src={image?.src}
+                                    alt={product?.title}
+                                    width={269.92}
+                                    style={{ aspectRatio: 269.92 / 270 }}
+                                    className="w-[269.92px] h-full max-h-[270px]"
+                                />
+                            ))}
+                            </div>
+                            {/* end variant images trigger */}
+
+                            {/* variant picker */}
+                            {options.map((option: any, optionParentIndex: number) => {
+                            const optionName = option[0];
+                            const optionValues = option[1];
+
+                            const selectedOption = optionValues[0];
+
+                            return (
+                                <>
+                                {optionValues[0] !== "Default Title" && (
+                                    <div className={`sledge__product-variant-size-swatch-flex options-button-${optionName}`}>
+                                    {optionValues.map((item: any) => {
+                                        const defaultOptionClass = `${selectedOption === item && "sledge__product-variant-size-swatch-active"} sledge__product-variant-size-swatch`;
+
+                                        const colorOptionClass = `${selectedOption === item && "sledge__product-variant-color-swatch-active"} sledge__product-variant-color-swatch`;
+
+                                        return (
+                                        <button
+                                            type="button"
+                                            className={
+                                            optionName === "Color"
+                                                ? colorOptionClass
+                                                : defaultOptionClass
+                                            }
+                                            style={{
+                                                backgroundColor: optionName === "Color" && item,
+                                            }}
+                                            onClick={(el) => {
+                                                setSelectedVariant(el, item, optionParentIndex + 1);
+                                                setSelectedOption(el, optionName);
+                                            }}
+                                        >
+                                            {optionName !== "Color" && item.substring(0, 11)}
+                                        </button>
+                                        );
+                                    })}
+                                    </div>
+                                )}
+                                </>
+                            );
+                            })}
+                            {/* end variant picker */}
+                        </div>
+                        <div className="sledge__product-grid-button-wrapper">
+                            {is_out_of_stock ? (
+                            <button
+                                className="sledge__button"
+                                data-button-color-type="light"
+                                data-button-full-width="false"
+                                type="button"
+                                disabled
+                            >
+                                Sold out
+                            </button>
+                            ) : (
+                            <button
+                                className="sledge__button "
+                                data-button-color-type="light"
+                                data-button-full-width="false"
+                                type="button"
+                                onClick={() => {
+                                    console.log(selectedVariantId);
+                                    // This selectedVariantId can be used as a reference on the add to cart button
+                                    // Put your add to cart functionality
+                                }}
+                            >
+                                <span className="sledge-icon__bag">
+                                <svg
+                                    width={15}
+                                    height={15}
+                                    viewBox="0 0 18 17"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <g id="vuesax/bold/bag-2">
+                                    <g id="bag-2">
+                                        <path
+                                        id="Vector"
+                                        d="M14.3711 6.04627C13.919 5.54693 13.2374 5.25677 12.2927 5.15555V4.64271C12.2927 3.71824 11.9013 2.82752 11.2131 2.20671C10.518 1.57241 9.6138 1.2755 8.67584 1.36322C7.06309 1.51842 5.70676 3.07719 5.70676 4.76417V5.15555C4.76205 5.25677 4.08051 5.54693 3.6284 6.04627C2.97385 6.77505 2.9941 7.74674 3.06833 8.42154L3.54068 12.1801C3.68238 13.496 4.21547 14.8455 7.11707 14.8455H10.8824C13.784 14.8455 14.3171 13.496 14.4588 12.1869L14.9312 8.41479C15.0054 7.74674 15.0189 6.77505 14.3711 6.04627ZM8.77031 2.30118C9.4451 2.24045 10.0862 2.44963 10.5855 2.90174C11.0781 3.34711 11.3548 3.98141 11.3548 4.64271V5.11506H6.64472V4.76417C6.64472 3.56304 7.63666 2.40915 8.77031 2.30118ZM6.58399 8.87365H6.57724C6.2061 8.87365 5.90245 8.56999 5.90245 8.19885C5.90245 7.82772 6.2061 7.52406 6.57724 7.52406C6.95512 7.52406 7.25878 7.82772 7.25878 8.19885C7.25878 8.56999 6.95512 8.87365 6.58399 8.87365ZM11.3075 8.87365H11.3008C10.9296 8.87365 10.626 8.56999 10.626 8.19885C10.626 7.82772 10.9296 7.52406 11.3008 7.52406C11.6787 7.52406 11.9823 7.82772 11.9823 8.19885C11.9823 8.56999 11.6787 8.87365 11.3075 8.87365Z"
+                                        fill="#393D4E"
+                                        />
+                                    </g>
+                                    </g>
+                                </svg>
+                                </span>
+                                <span>Add To Cart</span>
+                            </button>
+                            )}
+                        </div>
+                    </div>
+                );
+            }
+            ```
+
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Call custom component to prop</h3>
+
+            Only provide the function name (without `()`), see the [API reference](/sledge-app-core#productcard-product-showpopupcomponent-setshowpopupcomponent-)
+
+            > <div className="not-italic">`<CustomComponent>` must be added as a child of another sledge's widget.</div>
+
+            ```tsx {31} showLineNumbers copy
+            import { CustomComponents } from "@sledge-app/core";
+            import { SearchIconWidget } from "@sledge-app/react-instant-search";
+            import SledgeProductCard from "~/components/SledgeProductCard";
+
+            export default function InstantSearchIconWidget() {
+                return (
+                    <SearchIconWidget
+                        size='sm'
+                        onAfterAddWishlist={(state) => {
+                            if (state) {
+                                // if condition is state === true, run your custom code
+                            } else {
+                                // if condition is state === true, run your custom code
+                            }
+                        }}
+                        onAfterRemoveWishlist={(state) => {
+                            if (state) {
+                                // if condition is state === true, run your custom code
+                            } else {
+                                // if condition is state === true, run your custom code
+                            }
+                        }}
+                        onAfterRenderProduct={(state) => {
+                            if (state) {
+                                // if condition is state === true, run your custom code
+                            } else {
+                                // if condition is state === true, run your custom code
+                            }
+                        }}
+                    >
+                        <CustomComponents productCard={SledgeProductCard} />
+                    </SearchIconWidget>
+                );
+            }
+            ```
+        </Steps>
+    </Tab>
+    <Tab>
+
+        <Steps>
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Build a variant picker function, e.g:</h3>
+
+            ```tsx filename="app/SledgeProductCard.tsx" showLineNumbers copy
+            'use client';
+
+            import { Trigger } from "@sledge-app/react-wishlist";
+            import { Rating } from "@sledge-app/react-product-review";
+            import { useState } from "react";
+
+            export default function SledgeProductCard({ product }: any) {
+                const {
+                    id,
+                    admin_graphql_api_id,
+                    title,
+                    image,
+                    handle,
+                    url,
+                    vendor,
+                    currency,
+                    variants,
+                } = product || {};
+
+                const {
+                    id: variant_id = "",
+                    admin_graphql_api_id: variant_admin_graphql_api_id = "",
+                    title: variant_title = "",
+                    price = "",
+                    sku = "",
+                    is_out_of_stock = false,
+                } = variants?.length ? variants[0] : {};
+
+                const [selectedVariantId, setSelectedVariantId] = useState(
+                    variants[0].admin_graphql_api_id
+                );
+
+                const options = product.options ? Object.entries(product?.options) : [];
+                const images = product?.images ?? [];
+
+                const defaultSelected: any = {};
+
+                defaultSelected['data-product-id'] = id;
+                defaultSelected["data-variant-id"] = variants[0].admin_graphql_api_id;
+                defaultSelected["data-product-handle"] = handle;
+                defaultSelected["data-selected-option1"] = variants[0].option1;
+                if (variants[0].option2)
+                    defaultSelected["data-selected-option2"] = variants[0].option2;
+
+                function setSelectedOption(element: any, optionName: any) {
+                    const optionsButton = element.target.offsetParent.querySelector(`.options-button-${optionName}`).querySelectorAll(`button`);
+
+                    const defaultSelectedClassChanger = () => {
+                        optionsButton.forEach((button: any, index: any) => {
+                            button.classList.remove('sledge__product-variant-size-swatch-active');
+                            element.target.className += ' sledge__product-variant-size-swatch-active';
+                        });
+                    };
+
+                    const colorSelectedClassChanger = () => {
+                        optionsButton.forEach((button: any, index: any) => {
+                            button.classList.remove('sledge__product-variant-color-swatch-active');
+                            element.target.className += ' sledge__product-variant-color-swatch-active';
+                        });
+                    };
+
+                    switch (optionName) {
+                        case 'Color':
+                            colorSelectedClassChanger();
+                            break;
+                        case 'Size':
+                            defaultSelectedClassChanger();
+                            break;
+                        default:
+                            defaultSelectedClassChanger();
+                    }
+                }
+
+                function setSelectedVariant(element: any, value: any, optionIndex: number) {
+                    const selectedInput = element.target.parentNode.parentNode.firstChild;
+                    const parentCard = element.target.offsetParent;
+
+                    const setOptionAttribute = () => {
+                    //set option attribute
+                    selectedInput.attributes[`data-selected-option${optionIndex}`].value =
+                        value;
+                    };
+                    setOptionAttribute();
+
+                    // define option1 and option 2
+                    const option1 = `[data-option-1="${selectedInput.attributes["data-selected-option1"].value}"]`;
+                    const option2 = `${
+                    selectedInput.attributes["data-selected-option2"]
+                        ? `[data-option-2="${selectedInput.attributes["data-selected-option2"].value}"]`
+                        : ""
+                    }`;
+
+                    // define selected option
+                    const selectOption = parentCard.querySelector(`select option${option1}${option2}`);
+                    const variantId = selectOption.attributes["data-graphql-id"].value;
+                    const imageId = selectOption.attributes["data-image-id"]?.value;
+
+                    const setOther = () => {
+                    //set data-variant-id attribute
+                    selectedInput.attributes[`data-variant-id`].value = selectOption.attributes["data-graphql-id"].value;
+
+                    //change product image by variant
+                    if (variantId) setSelectedVariantId(variantId);
+                    if (imageId)
+                        parentCard.querySelector(`img.featured-image`).src =
+                        parentCard.querySelector(`div.variant-images img[id="${imageId}"]`).src;
+                    };
+
+                    setOther();
+
+                    const result = { variantId, imageId };
+
+                    return result;
+                }
+
+                return (
+                    <div className="sledge__product-grid-card">
+                        <div className="sledge__product-grid-content">
+                            <div className="sledge__product-grid-card-desc">
+                                <div className="sledge__product-grid-card-variant-swatch">
+                                    ...
+                                    Variant Picker Code
+                                    ...
+                                </div>
+                            </div>
+                        </div>
+                        <div className="sledge__product-grid-button-wrapper"></div>
+                    </div>
+                )
+            }
+            ```
+
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Build a component with a variant picker function, e.g: </h3>
+
+            ```tsx showLineNumbers copy
+            'use client';
+
+            import { CustomComponents } from "@sledge-app/core";
+            import { SearchIconWidget } from "@sledge-app/react-instant-search";
+            import SledgeProductCard from "~/components/SledgeProductCard";
+
+            export default function SledgeProductCard() {
+                ...
+                variant picker functions (Step 1)
+                ...
+                return (
+                    <div className="sledge__product-grid-card">
+                        <div className="sledge__product-grid-content">
+                            <div className="sledge__product-grid-card-image">
+                            <Link to={"/products/" + handle}>
+                                <Trigger
+                                    params={{
+                                        productId: id,
+                                        productVariantId: variant_id,
+                                        productName: title,
+                                        productVendor: vendor,
+                                        productSku: sku,
+                                        productVariantName: variant_title,
+                                        productLink: url,
+                                        productImage: image?.src || "",
+                                        productCurrency: currency,
+                                        productPrice: price,
+                                    }}
+                                    onAfterAddWishlist={(state) => {
+                                        if (state === "success") {
+                                        // if condition is state === true, run your custom code
+                                        } else {
+                                        // if condition is state === true, run your custom code
+                                        }
+                                    }}
+                                    onAfterRemoveWishlist={(state) => {
+                                        if (state === "success") {
+                                        // if condition is state === true, run your custom code
+                                        } else {
+                                        // if condition is state === true, run your custom code
+                                        }
+                                    }}
+                                />
+                                <img
+                                    src={image?.src || ""}
+                                    alt="sledge-product-card-image"
+                                    loading="lazy"
+                                    className="featured-image"
+                                />
+                            </Link>
+                            {is_out_of_stock ? (
+                                <div className="sledge__product-grid-card-out-of-stock">Sold out</div>
+                            ) : null}
+                            </div>
+                            <div className="sledge__product-grid-card-desc">
+                                <div className="sledge__product-grid-card-title">
+                                    {title ? (
+                                    <Link to={"/products/" + handle}>
+                                        <h3>{title}</h3>
+                                    </Link>
+                                    ) : null}
+                                    <div className="sledge__product-grid-card-price">
+                                    <p>
+                                        {currency}
+                                        {price}
+                                    </p>
+                                    </div>
+                                </div>
+                                <div className="sledge__product-grid-card-text">
+                                    <div>{variant_title}</div>
+                                    <div>
+                                    <>Vendor: {vendor}</>
+                                    <> | </>
+                                    <>SKU: {sku}</>
+                                    </div>
+                                </div>
+                                <div className="sledge__product-grid-card-rating">
+                                    <Rating params={{ productId: id }} size="xs" />
+                                </div>
+                            </div>
+                        </div>
+                        <div className="sledge__product-grid-card-variant-swatch">
+                            {/* variant trigger */}
+                            <input type="hidden" {...defaultSelected} className="selected-option" />
+                            <select
+                                className="variant-picker"
+                                style={{
+                                    display: "none",
+                                }}
+                            >
+                            {variants.map((variant: any) => {
+                                const {
+                                    title,
+                                    option1,
+                                    option2,
+                                    position,
+                                    id,
+                                    admin_graphql_api_id,
+                                    image_id,
+                                }: any = variant;
+
+                                const optionAttributes = {
+                                    "data-option-1": option1,
+                                    "data-option-2": option2,
+                                    "data-position": position,
+                                    "data-id": id,
+                                    "data-graphql-id": admin_graphql_api_id,
+                                    "data-image-id": image_id,
+                                };
+
+                                return <option {...optionAttributes}>{title}</option>;
+                            })}
+                            </select>
+                            {/* end variant trigger */}
+                            {/* variant images trigger */}
+                            <div
+                                className="variant-images"
+                                style={{
+                                    display: "none",
+                                }}
+                            >
+                            {images.map((image: any) => (
+                                <img
+                                    decoding="async"
+                                    id={image?.id}
+                                    height="270"
+                                    loading="lazy"
+                                    src={image?.src}
+                                    alt={product?.title}
+                                    width={269.92}
+                                    style={{ aspectRatio: 269.92 / 270 }}
+                                    className="w-[269.92px] h-full max-h-[270px]"
+                                />
+                            ))}
+                            </div>
+                            {/* end variant images trigger */}
+
+                            {/* variant picker */}
+                            {options.map((option: any, optionParentIndex: number) => {
+                            const optionName = option[0];
+                            const optionValues = option[1];
+
+                            const selectedOption = optionValues[0];
+
+                            return (
+                                <>
+                                {optionValues[0] !== "Default Title" && (
+                                    <div className={`sledge__product-variant-size-swatch-flex options-button-${optionName}`}>
+                                    {optionValues.map((item: any) => {
+                                        const defaultOptionClass = `${selectedOption === item && "sledge__product-variant-size-swatch-active"} sledge__product-variant-size-swatch`;
+
+                                        const colorOptionClass = `${selectedOption === item && "sledge__product-variant-color-swatch-active"} sledge__product-variant-color-swatch`;
+
+                                        return (
+                                        <button
+                                            type="button"
+                                            className={
+                                            optionName === "Color"
+                                                ? colorOptionClass
+                                                : defaultOptionClass
+                                            }
+                                            style={{
+                                                backgroundColor: optionName === "Color" && item,
+                                            }}
+                                            onClick={(el) => {
+                                                setSelectedVariant(el, item, optionParentIndex + 1);
+                                                setSelectedOption(el, optionName);
+                                            }}
+                                        >
+                                            {optionName !== "Color" && item.substring(0, 11)}
+                                        </button>
+                                        );
+                                    })}
+                                    </div>
+                                )}
+                                </>
+                            );
+                            })}
+                            {/* end variant picker */}
+                        </div>
+                        <div className="sledge__product-grid-button-wrapper">
+                            {is_out_of_stock ? (
+                            <button
+                                className="sledge__button"
+                                data-button-color-type="light"
+                                data-button-full-width="false"
+                                type="button"
+                                disabled
+                            >
+                                Sold out
+                            </button>
+                            ) : (
+                            <button
+                                className="sledge__button "
+                                data-button-color-type="light"
+                                data-button-full-width="false"
+                                type="button"
+                                onClick={() => {
+                                    console.log(selectedVariantId);
+                                    // This selectedVariantId can be used as a reference on the add to cart button
+                                    // Put your add to cart functionality
+                                }}
+                            >
+                                <span className="sledge-icon__bag">
+                                <svg
+                                    width={15}
+                                    height={15}
+                                    viewBox="0 0 18 17"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <g id="vuesax/bold/bag-2">
+                                    <g id="bag-2">
+                                        <path
+                                        id="Vector"
+                                        d="M14.3711 6.04627C13.919 5.54693 13.2374 5.25677 12.2927 5.15555V4.64271C12.2927 3.71824 11.9013 2.82752 11.2131 2.20671C10.518 1.57241 9.6138 1.2755 8.67584 1.36322C7.06309 1.51842 5.70676 3.07719 5.70676 4.76417V5.15555C4.76205 5.25677 4.08051 5.54693 3.6284 6.04627C2.97385 6.77505 2.9941 7.74674 3.06833 8.42154L3.54068 12.1801C3.68238 13.496 4.21547 14.8455 7.11707 14.8455H10.8824C13.784 14.8455 14.3171 13.496 14.4588 12.1869L14.9312 8.41479C15.0054 7.74674 15.0189 6.77505 14.3711 6.04627ZM8.77031 2.30118C9.4451 2.24045 10.0862 2.44963 10.5855 2.90174C11.0781 3.34711 11.3548 3.98141 11.3548 4.64271V5.11506H6.64472V4.76417C6.64472 3.56304 7.63666 2.40915 8.77031 2.30118ZM6.58399 8.87365H6.57724C6.2061 8.87365 5.90245 8.56999 5.90245 8.19885C5.90245 7.82772 6.2061 7.52406 6.57724 7.52406C6.95512 7.52406 7.25878 7.82772 7.25878 8.19885C7.25878 8.56999 6.95512 8.87365 6.58399 8.87365ZM11.3075 8.87365H11.3008C10.9296 8.87365 10.626 8.56999 10.626 8.19885C10.626 7.82772 10.9296 7.52406 11.3008 7.52406C11.6787 7.52406 11.9823 7.82772 11.9823 8.19885C11.9823 8.56999 11.6787 8.87365 11.3075 8.87365Z"
+                                        fill="#393D4E"
+                                        />
+                                    </g>
+                                    </g>
+                                </svg>
+                                </span>
+                                <span>Add To Cart</span>
+                            </button>
+                            )}
+                        </div>
+                    </div>
+                );
+            }
+            ```
+
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Call custom component to prop</h3>
+
+            Only provide the function name (without `()`), see the [API reference](/sledge-app-core#productcard-product-showpopupcomponent-setshowpopupcomponent-)
+
+            > <div className="not-italic">`<CustomComponent>` must be added as a child of another sledge's widget.</div>
+
+            ```tsx {33} showLineNumbers copy
+            'use client';
+
+            import { CustomComponents } from "@sledge-app/core";
+            import { SearchIconWidget } from "@sledge-app/react-instant-search";
+            import SledgeProductCard from "~/components/SledgeProductCard";
+
+            export default function InstantSearchIconWidget() {
+                return (
+                    <SearchIconWidget
+                        size='sm'
+                        onAfterAddWishlist={(state) => {
+                            if (state) {
+                                // if condition is state === true, run your custom code
+                            } else {
+                                // if condition is state === true, run your custom code
+                            }
+                        }}
+                        onAfterRemoveWishlist={(state) => {
+                            if (state) {
+                                // if condition is state === true, run your custom code
+                            } else {
+                                // if condition is state === true, run your custom code
+                            }
+                        }}
+                        onAfterRenderProduct={(state) => {
+                            if (state) {
+                                // if condition is state === true, run your custom code
+                            } else {
+                                // if condition is state === true, run your custom code
+                            }
+                        }}
+                    >
+                        <CustomComponents productCard={SledgeProductCard} />
+                    </SearchIconWidget>
+                );
+            }
+            ```
+        </Steps>
+    </Tab>
+    <Tab>
+
+        <Steps>
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Build a component with a variant picker function, e.g:</h3>
+
+            ```html showLineNumbers copy
+            <script>
+            const shopifyAddToCart = async (data) => {
+                var myHeaders = new Headers();
+                myHeaders.append('Content-Type', 'application/json');
+
+                let items = [];
+                data.map((item) => {
+                    const { id, quantity } = item;
+
+                    items.push({
+                        id: id,
+                        quantity: quantity
+                    });
+                });
+
+                var raw = JSON.stringify({
+                    items: items
+                });
+
+                var requestOptions = {
+                    method: 'POST',
+                    headers: myHeaders,
+                    body: raw,
+                    redirect: 'follow'
+                };
+
+                if (!window?.Shopify?.routes) return;
+
+                return await fetch(`${window.Shopify.routes.root}cart/add.js`, requestOptions)
+                    .then((response) => response.json())
+                    .then((result) => {
+                        return result;
+                    })
+                    .catch(() => {
+                        return;
+                    });
+            };
+
+            const handleAddToCart = async (button) => {
+                let resShopifyAddToCart = await shopifyAddToCart([
+                    {
+                        id: button.target.dataset.selectedVariantId,
+                        quantity: button.target.dataset.quantity,
+                    },
+                ]);
+
+                if (resShopifyAddToCart?.items?.length) {
+                    window.location.href = "/cart";
+                } else {
+                    alert(
+                        resShopifyAddToCart?.description?.length
+                        ? resShopifyAddToCart.description
+                        : "failed add to cart, please try again"
+                    );
+                }
+            };
+
+            //start variant picker code
+            function setSelectedOption(element,optionName) {
+                const optionsButton = element.target.offsetParent.querySelector(`.options-button-${optionName}`).querySelectorAll(`button`)
+
+                const defaultSelectedClassChanger = () => {
+                    optionsButton.forEach((button, index) => {
+                        button.classList.remove('sledge__product-variant-size-swatch-active')
+                        element.target.className += " sledge__product-variant-size-swatch-active"
+                    })
+                }
+
+                const colorSelectedClassChanger = () => {
+                    optionsButton.forEach((button, index) => {
+                        button.classList.remove('sledge__product-variant-color-swatch-active')
+                        element.target.className += " sledge__product-variant-color-swatch-active"
+                    })
+                }
+
+                switch (optionName) {
+                    case 'Color':
+                        colorSelectedClassChanger()
+                        break;
+                    case 'Size':
+                        defaultSelectedClassChanger()
+                        break;
+                    default:
+                        defaultSelectedClassChanger()
+                }
+            }
+
+            function setSelectedVariant(element, value, optionIndex) {
+                const selectedInput = element.target.offsetParent.querySelector('.selected-option');
+                const parentCard = element.target.offsetParent;
+
+                const setOptionAttribute = () => {
+                //set option attribute
+                selectedInput.attributes[`data-selected-option${optionIndex}`].value =
+                    value;
+                };
+                setOptionAttribute();
+
+                // define option1 and option 2
+                const option1 = `[data-option-1="${selectedInput.attributes['data-selected-option1'].value}"]`;
+                const option2 = `${
+                selectedInput.attributes['data-selected-option2']
+                    ? `[data-option-2="${selectedInput.attributes['data-selected-option2'].value}"]`
+                    : ''
+                }`;
+
+                // define selected option
+                const selectOption = parentCard.querySelector(
+                `select option${option1}${option2}`,
+                );
+                const variantIdLiquid = selectOption.attributes['data-id'].value;
+                const variantId = selectOption.attributes['data-graphql-id'].value;
+                const imageId = selectOption.attributes['data-image-id']?.value;
+
+                const setOther = () => {
+                //set data-variant-id attribute
+                selectedInput.attributes[`data-variant-id`].value =
+                    selectOption.attributes['data-graphql-id'].value;
+
+                selectedInput.attributes[`data-id`].value =
+                    selectOption.attributes['data-id'].value;
+
+                //change product image by variant
+                if (variantIdLiquid) parentCard.querySelector('.add-to-cart-input').dataset.selectedVariantId = variantIdLiquid;
+
+                if (imageId && imageId !== 'null')
+                    parentCard.querySelector(`img.featured-image`).src =
+                    parentCard.querySelector(
+                        `div.variant-images img[id="${imageId}"]`,
+                    ).src;
+                };
+
+                setOther();
+
+                const result = { variantIdLiquid, imageId };
+
+                return result;
+            }
+
+            function renderSelectOptions(variants) {
+                return `
+                ${variants.map((variant) => {
+                    const { title, option1, option2, position, id, admin_graphql_api_id, image_id } = variant;
+
+                    let optionAttributes = {
+                        'data-option-1': option1,
+                        'data-option-2': option2,
+                        'data-position': position,
+                        'data-id': id,
+                        'data-graphql-id': admin_graphql_api_id,
+                        'data-image-id': image_id,
+                    };
+
+                    return `<option ${Object.keys(optionAttributes).reduce((acc, item) => acc + `${item}="${optionAttributes[item]}"`, '')}>${title}</option>`;
+                    }).join('')
+                }
+                `
+            }
+
+            function renderOptionsButton(options,handle) {
+                return options.map((option,optionParentIndex) => {
+                    const optionName = option[0];
+                    const optionValues = option[1];
+
+                    selectedOption = optionValues[0]
+
+                    if(optionValues[0] !== 'Default Title')
+                    return `
+                        <div class="sledge__product-variant-size-swatch-flex options-button-${optionName}">
+                        ${optionValues.map((item) => {
+                            const defaultOptionClass = ` ${ selectedOption === item ? 'sledge__product-variant-size-swatch-active'
+                                : '' } sledge__product-variant-size-swatch`;
+
+                            const colorOptionClass = `${
+                                selectedOption === item ? 'sledge__product-variant-color-swatch-active' : ''
+                            } sledge__product-variant-color-swatch`
+
+                            return `
+                            <button
+                                id="variant-button-${handle}"
+                                type="button"
+                                class="${optionName === 'Color'
+                                ? colorOptionClass
+                                : defaultOptionClass} variant-picker-button"
+                                style="background-color:${optionName === 'Color' ? item : ''}"
+                                onclick="setSelectedVariant(event, '${item}', ${optionParentIndex + 1}); setSelectedOption(event, '${optionName}')"
+                            >
+                                ${optionName === 'Color' ? '' : item.substring(0, 11)}
+                            </button>`
+                        }).join('')}
+                        </div>
+                    `
+                }).join('')
+            }
+
+            function renderProductCard({ product }) {
+                const { id, admin_graphql_api_id, title, image, handle, url, vendor, currency, variants, review } = product || {};
+                const {
+                    admin_graphql_api_id: variant_admin_graphql_api_id = '',
+                    title: variant_title = '',
+                    price = '',
+                    sku = '',
+                    is_out_of_stock = false
+                } = variants?.length ? variants[0] : {};
+
+                let variant_id = variants[0].id
+
+                const { total: totalReview, average: averageReview } = review || {};
+
+                const ratingTotalAttribute = typeof totalReview !== 'undefined' ? `data-rating-total="${totalReview}"` : '';
+                const ratingAverageAttribute = typeof averageReview !== 'undefined' ? `data-rating-average="${averageReview}"` : '';
+
+                const options = product.options ? Object.entries(product?.options) : [];
+                const images = product?.images ?? [];
+
+                const defaultSelected = {};
+
+                defaultSelected['data-product-handle'] = product.handle;
+                defaultSelected['data-selected-option1'] = variants[0].option1;
+                if (variants[0].option2) {
+                defaultSelected['data-selected-option2'] = variants[0].option2;
+                }
+                defaultSelected['data-id'] = variants[0].id;
+                defaultSelected['data-variant-id'] = variants[0].admin_graphql_api_id;
+
+                return `<div class="sledge__product-grid-card">
+                            <div class="sledge__product-grid-content">
+                                <div class="sledge__product-grid-card-image">
+                                    <a href="/products/${handle}">
+                                        <div data-component="wishlist-trigger" data-product-id="${id}" data-product-variant-id="${variant_id}"
+                                            data-product-name="${title}" data-product-vendor="${vendor}" data-product-sku="${sku}"
+                                            data-product-variant-name="${variant_title}" data-product-link="${url}"
+                                            data-product-image="${image?.src || ''}" data-product-currency="${currency}"
+                                            data-product-price="${price}" data-on-after-add-wishlist="onAfterAddWishlist"
+                                            data-on-after-remove-wishlist="onAfterRemoveWishlist"></div>
+                                        <img src="${image?.src || ''}" alt="sledge-product-card-image" loading="lazy" class="featured-image" />
+                                    </a>
+                                    ${ is_out_of_stock ? `
+                                    <div class="sledge__product-grid-card-out-of-stock">
+                                        Sold out
+                                    </div>
+                                    ` : ''
+                                    }
+                                </div>
+                                <div class="sledge__product-grid-card-desc">
+                                    <div class="sledge__product-grid-card-title">
+                                        ${ title ? `
+                                            <a href="/products/${handle}">
+                                                <h3>${title}</h3>
+                                            </a>`
+                                            : ''
+                                        }
+                                        <div class="sledge__product-grid-card-price">
+                                            <p>
+                                                ${currency}
+                                                ${price}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="sledge__product-grid-card-text">
+                                        <div>${variant_title}</div>
+                                        <div>
+                                            Vendor: ${vendor} | SKU: ${sku}
+                                        </div>
+                                    </div>
+                                    <div class="sledge__product-grid-card-rating">
+                                        <div data-component="product-review-rating" data-product-id="${id}" data-rating-size="xs"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="sledge__product-grid-card-variant-swatch">
+                                <input type="hidden" ${Object.keys(defaultSelected).reduce((acc, item)=> acc + `${item}="${defaultSelected[item]}"`, '')} class="selected-option" />
+                                <select class="variant-picker" style="display:none">
+                                    ${renderSelectOptions(variants)}
+                                </select>
+                                <div class="variant-images" style="display:none">
+                                    ${
+                                    images.reduce((acc, image) => acc + `<img id=${image?.id} src=${image?.src}>`, '')
+                                    }
+                                </div>
+                                ${renderOptionsButton(options,handle)}
+                            </div>
+                            <div class="sledge__product-grid-button-wrapper">
+                                ${
+                                is_out_of_stock
+                                ? `<button class="sledge__button " data-button-color-type="light" data-button-full-width="false" type="button"
+                                    disabled="">Sold out</button>`
+                                : `
+                                <button class="sledge__button add-to-cart-input" data-selected-variant-id="${variant_id}" data-quantity="1"
+                                    data-button-color-type="light" data-button-full-width="false" type="button"
+                                    onclick="handleAddToCart(event)">
+                                    <svg style="pointer-events: none;" width="18" height="18" viewBox="0 0 18 18" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" clip-rule="evenodd"
+                                            d="M8.83562 1.50023C10.796 1.50023 12.4155 2.99397 12.6152 4.90442L12.6709 4.90507C13.7584 4.90507 15.0806 5.62732 15.5269 7.65307L16.1186 12.2333C16.3309 13.7116 16.0654 14.8973 15.3281 15.7478C14.5946 16.5938 13.4336 17.0416 11.9704 17.0416H5.7094C4.10215 17.0416 2.9824 16.6478 2.28565 15.8386C1.5859 15.0271 1.3519 13.8098 1.5904 12.2213L2.1724 7.70182C2.5549 5.62957 3.95365 4.90507 5.03665 4.90507C5.13014 4.04293 5.51889 3.22275 6.13562 2.60797C6.84437 1.90372 7.82162 1.50023 8.81987 1.50023H8.83562ZM12.6709 6.03007H5.03665C4.7059 6.03007 3.6004 6.16357 3.28315 7.87657L2.70415 12.3766C2.5159 13.6388 2.6614 14.5523 3.13765 15.1051C3.6079 15.6511 4.4494 15.9166 5.7094 15.9166H11.9704C12.7564 15.9166 13.8296 15.7598 14.4776 15.0113C14.9921 14.4181 15.1691 13.5346 15.0041 12.3848L14.4199 7.84582C14.1709 6.72757 13.5139 6.03007 12.6709 6.03007ZM11.023 8.11815C11.3335 8.11815 11.6027 8.37015 11.6027 8.68065C11.6027 8.99115 11.368 9.24315 11.0575 9.24315H11.023C10.7125 9.24315 10.4605 8.99115 10.4605 8.68065C10.4605 8.37015 10.7125 8.11815 11.023 8.11815ZM6.65042 8.11815C6.96092 8.11815 7.23017 8.37015 7.23017 8.68065C7.23017 8.99115 6.99467 9.24315 6.68417 9.24315H6.65042C6.33992 9.24315 6.08792 8.99115 6.08792 8.68065C6.08792 8.37015 6.33992 8.11815 6.65042 8.11815ZM8.83337 2.62522H8.82212C8.11637 2.62522 7.42862 2.90947 6.92987 3.40522C6.5236 3.80967 6.25789 4.34137 6.17193 4.90472L11.4814 4.90493C11.2887 3.61626 10.1743 2.62522 8.83337 2.62522Z"
+                                            fill="#393D4E"></path>
+                                    </svg>
+                                    <span style="pointer-events: none;">Add To Cart</span>
+                                </button>
+                                `
+                                }
+                            </div>
+                        </div>`;
+            }
+            </script>
+            ```
+
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Call custom component to attribute</h3>
+
+            Only provide the function name (without `()`), see the [API reference](/html-data-attribute#data-render-product-card)
+
+            > <div className="not-italic">`<div data-component="custom-components">` must be added as a child of another sledge's widget.</div>
+
+            ```html {7} showLineNumbers copy
+            <div
+                data-component="instant-search-icon-widget"
+                data-icon-size="sm"
+            >
+                <div
+                    data-component="custom-components"
+                    data-render-product-card="renderProductCard"
+                ></div>
+            </div>
+            ```
+        </Steps>
+    </Tab>
+    <Tab>
+
+        <Steps className="mt-3">
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Build a component with a variant picker function, e.g</h3>
+
+            ```html showLineNumbers copy
+            <script>
+            const handleAddToCart = (button) => {
+                const selectedVariantid = button.target.dataset.selectedVariantId;
+                const quantity = button.target.dataset.quantity;
+
+                console.log(selectedVariantId);
+                // This selectedVariantId can be used as a reference on the add to cart button
+                // Put your add to cart functionality
+            };
+
+            //start variant picker code
+            function setSelectedOption(element,optionName) {
+                const optionsButton = element.target.offsetParent.querySelector(`.options-button-${optionName}`).querySelectorAll(`button`)
+
+                const defaultSelectedClassChanger = () => {
+                    optionsButton.forEach((button, index) => {
+                        button.classList.remove('sledge__product-variant-size-swatch-active')
+                        element.target.className += " sledge__product-variant-size-swatch-active"
+                    })
+                }
+
+                const colorSelectedClassChanger = () => {
+                    optionsButton.forEach((button, index) => {
+                        button.classList.remove('sledge__product-variant-color-swatch-active')
+                        element.target.className += " sledge__product-variant-color-swatch-active"
+                    })
+                }
+
+                switch (optionName) {
+                    case 'Color':
+                        colorSelectedClassChanger()
+                        break;
+                    case 'Size':
+                        defaultSelectedClassChanger()
+                        break;
+                    default:
+                        defaultSelectedClassChanger()
+                }
+            }
+
+            function setSelectedVariant(element, value, optionIndex) {
+                const selectedInput = element.target.offsetParent.querySelector('.selected-option');
+                const parentCard = element.target.offsetParent;
+
+                const setOptionAttribute = () => {
+                //set option attribute
+                selectedInput.attributes[`data-selected-option${optionIndex}`].value =
+                    value;
+                };
+                setOptionAttribute();
+
+                // define option1 and option 2
+                const option1 = `[data-option-1="${selectedInput.attributes['data-selected-option1'].value}"]`;
+                const option2 = `${
+                selectedInput.attributes['data-selected-option2']
+                    ? `[data-option-2="${selectedInput.attributes['data-selected-option2'].value}"]`
+                    : ''
+                }`;
+
+                // define selected option
+                const selectOption = parentCard.querySelector(
+                `select option${option1}${option2}`,
+                );
+                const variantIdLiquid = selectOption.attributes['data-id'].value;
+                const variantId = selectOption.attributes['data-graphql-id'].value;
+                const imageId = selectOption.attributes['data-image-id']?.value;
+
+                const setOther = () => {
+                //set data-variant-id attribute
+                selectedInput.attributes[`data-variant-id`].value =
+                    selectOption.attributes['data-graphql-id'].value;
+
+                selectedInput.attributes[`data-id`].value =
+                    selectOption.attributes['data-id'].value;
+
+                //change product image by variant
+                if (variantIdLiquid) parentCard.querySelector('.add-to-cart-input').dataset.selectedVariantId = variantIdLiquid;
+
+                if (imageId && imageId !== 'null')
+                    parentCard.querySelector(`img.featured-image`).src =
+                    parentCard.querySelector(
+                        `div.variant-images img[id="${imageId}"]`,
+                    ).src;
+                };
+
+                setOther();
+
+                const result = { variantIdLiquid, imageId };
+
+                return result;
+            }
+
+            function renderSelectOptions(variants) {
+                return `
+                ${variants.map((variant) => {
+                    const { title, option1, option2, position, id, admin_graphql_api_id, image_id } = variant;
+
+                    let optionAttributes = {
+                        'data-option-1': option1,
+                        'data-option-2': option2,
+                        'data-position': position,
+                        'data-id': id,
+                        'data-graphql-id': admin_graphql_api_id,
+                        'data-image-id': image_id,
+                    };
+
+                    return `<option ${Object.keys(optionAttributes).reduce((acc, item) => acc + `${item}="${optionAttributes[item]}"`, '')}>${title}</option>`;
+                    }).join('')
+                }
+                `
+            }
+
+            function renderOptionsButton(options,handle) {
+                return options.map((option,optionParentIndex) => {
+                    const optionName = option[0];
+                    const optionValues = option[1];
+
+                    selectedOption = optionValues[0]
+
+                    if(optionValues[0] !== 'Default Title')
+                    return `
+                        <div class="sledge__product-variant-size-swatch-flex options-button-${optionName}">
+                        ${optionValues.map((item) => {
+                            const defaultOptionClass = ` ${ selectedOption === item ? 'sledge__product-variant-size-swatch-active'
+                                : '' } sledge__product-variant-size-swatch`;
+
+                            const colorOptionClass = `${
+                                selectedOption === item ? 'sledge__product-variant-color-swatch-active' : ''
+                            } sledge__product-variant-color-swatch`
+
+                            return `
+                            <button
+                                id="variant-button-${handle}"
+                                type="button"
+                                class="${optionName === 'Color'
+                                ? colorOptionClass
+                                : defaultOptionClass} variant-picker-button"
+                                style="background-color:${optionName === 'Color' ? item : ''}"
+                                onclick="setSelectedVariant(event, '${item}', ${optionParentIndex + 1}); setSelectedOption(event, '${optionName}')"
+                            >
+                                ${optionName === 'Color' ? '' : item.substring(0, 11)}
+                            </button>`
+                        }).join('')}
+                        </div>
+                    `
+                }).join('')
+            }
+
+            function renderProductCard({ product }) {
+                const { id, admin_graphql_api_id, title, image, handle, url, vendor, currency, variants, review } = product || {};
+                const {
+                    admin_graphql_api_id: variant_admin_graphql_api_id = '',
+                    title: variant_title = '',
+                    price = '',
+                    sku = '',
+                    is_out_of_stock = false
+                } = variants?.length ? variants[0] : {};
+
+                let variant_id = variants[0].id
+
+                const { total: totalReview, average: averageReview } = review || {};
+
+                const ratingTotalAttribute = typeof totalReview !== 'undefined' ? `data-rating-total="${totalReview}"` : '';
+                const ratingAverageAttribute = typeof averageReview !== 'undefined' ? `data-rating-average="${averageReview}"` : '';
+
+                const options = product.options ? Object.entries(product?.options) : [];
+                const images = product?.images ?? [];
+
+                const defaultSelected = {};
+
+                defaultSelected['data-product-handle'] = product.handle;
+                defaultSelected['data-selected-option1'] = variants[0].option1;
+                if (variants[0].option2) {
+                defaultSelected['data-selected-option2'] = variants[0].option2;
+                }
+                defaultSelected['data-id'] = variants[0].id;
+                defaultSelected['data-variant-id'] = variants[0].admin_graphql_api_id;
+
+                return `<div class="sledge__product-grid-card">
+                            <div class="sledge__product-grid-content">
+                                <div class="sledge__product-grid-card-image">
+                                    <a href="/products/${handle}">
+                                        <div data-component="wishlist-trigger" data-product-id="${id}" data-product-variant-id="${variant_id}"
+                                            data-product-name="${title}" data-product-vendor="${vendor}" data-product-sku="${sku}"
+                                            data-product-variant-name="${variant_title}" data-product-link="${url}"
+                                            data-product-image="${image?.src || ''}" data-product-currency="${currency}"
+                                            data-product-price="${price}" data-on-after-add-wishlist="onAfterAddWishlist"
+                                            data-on-after-remove-wishlist="onAfterRemoveWishlist"></div>
+                                        <img src="${image?.src || ''}" alt="sledge-product-card-image" loading="lazy" class="featured-image" />
+                                    </a>
+                                    ${ is_out_of_stock ? `
+                                    <div class="sledge__product-grid-card-out-of-stock">
+                                        Sold out
+                                    </div>
+                                    ` : ''
+                                    }
+                                </div>
+                                <div class="sledge__product-grid-card-desc">
+                                    <div class="sledge__product-grid-card-title">
+                                        ${ title ? `
+                                            <a href="/products/${handle}">
+                                                <h3>${title}</h3>
+                                            </a>`
+                                            : ''
+                                        }
+                                        <div class="sledge__product-grid-card-price">
+                                            <p>
+                                                ${currency}
+                                                ${price}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="sledge__product-grid-card-text">
+                                        <div>${variant_title}</div>
+                                        <div>
+                                            Vendor: ${vendor} | SKU: ${sku}
+                                        </div>
+                                    </div>
+                                    <div class="sledge__product-grid-card-rating">
+                                        <div data-component="product-review-rating" data-product-id="${id}" data-rating-size="xs"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="sledge__product-grid-card-variant-swatch">
+                                <input type="hidden" ${Object.keys(defaultSelected).reduce((acc, item)=> acc + `${item}="${defaultSelected[item]}"`, '')} class="selected-option" />
+                                <select class="variant-picker" style="display:none">
+                                    ${renderSelectOptions(variants)}
+                                </select>
+                                <div class="variant-images" style="display:none">
+                                    ${
+                                    images.reduce((acc, image) => acc + `<img id=${image?.id} src=${image?.src}>`, '')
+                                    }
+                                </div>
+                                ${renderOptionsButton(options,handle)}
+                            </div>
+                            <div class="sledge__product-grid-button-wrapper">
+                                ${
+                                is_out_of_stock
+                                ? `<button class="sledge__button " data-button-color-type="light" data-button-full-width="false" type="button"
+                                    disabled="">Sold out</button>`
+                                : `
+                                <button class="sledge__button add-to-cart-input" data-selected-variant-id="${variant_id}" data-quantity="1"
+                                    data-button-color-type="light" data-button-full-width="false" type="button"
+                                    onclick="handleAddToCart(event)">
+                                    <svg style="pointer-events: none;" width="18" height="18" viewBox="0 0 18 18" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" clip-rule="evenodd"
+                                            d="M8.83562 1.50023C10.796 1.50023 12.4155 2.99397 12.6152 4.90442L12.6709 4.90507C13.7584 4.90507 15.0806 5.62732 15.5269 7.65307L16.1186 12.2333C16.3309 13.7116 16.0654 14.8973 15.3281 15.7478C14.5946 16.5938 13.4336 17.0416 11.9704 17.0416H5.7094C4.10215 17.0416 2.9824 16.6478 2.28565 15.8386C1.5859 15.0271 1.3519 13.8098 1.5904 12.2213L2.1724 7.70182C2.5549 5.62957 3.95365 4.90507 5.03665 4.90507C5.13014 4.04293 5.51889 3.22275 6.13562 2.60797C6.84437 1.90372 7.82162 1.50023 8.81987 1.50023H8.83562ZM12.6709 6.03007H5.03665C4.7059 6.03007 3.6004 6.16357 3.28315 7.87657L2.70415 12.3766C2.5159 13.6388 2.6614 14.5523 3.13765 15.1051C3.6079 15.6511 4.4494 15.9166 5.7094 15.9166H11.9704C12.7564 15.9166 13.8296 15.7598 14.4776 15.0113C14.9921 14.4181 15.1691 13.5346 15.0041 12.3848L14.4199 7.84582C14.1709 6.72757 13.5139 6.03007 12.6709 6.03007ZM11.023 8.11815C11.3335 8.11815 11.6027 8.37015 11.6027 8.68065C11.6027 8.99115 11.368 9.24315 11.0575 9.24315H11.023C10.7125 9.24315 10.4605 8.99115 10.4605 8.68065C10.4605 8.37015 10.7125 8.11815 11.023 8.11815ZM6.65042 8.11815C6.96092 8.11815 7.23017 8.37015 7.23017 8.68065C7.23017 8.99115 6.99467 9.24315 6.68417 9.24315H6.65042C6.33992 9.24315 6.08792 8.99115 6.08792 8.68065C6.08792 8.37015 6.33992 8.11815 6.65042 8.11815ZM8.83337 2.62522H8.82212C8.11637 2.62522 7.42862 2.90947 6.92987 3.40522C6.5236 3.80967 6.25789 4.34137 6.17193 4.90472L11.4814 4.90493C11.2887 3.61626 10.1743 2.62522 8.83337 2.62522Z"
+                                            fill="#393D4E"></path>
+                                    </svg>
+                                    <span style="pointer-events: none;">Add To Cart</span>
+                                </button>
+                                `
+                                }
+                            </div>
+                        </div>`;
+            }
+            </script>
+            ```
+
+            <h3 className="nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100 nx-text-2xl">Call custom component to attribute</h3>
+
+            Only provide the function name (without `()`), see the [API reference](/html-data-attribute#data-render-product-card)
+
+            > <div className="not-italic">`<div data-component="custom-components">` must be added as a child of another sledge's widget.</div>
+
+            ```html {7} showLineNumbers copy
+            <div
+                data-component="instant-search-icon-widget"
+                data-icon-size="sm"
+            >
+                <div
+                    data-component="custom-components"
+                    data-render-product-card="renderProductCard"
+                ></div>
+            </div>
+            ```
+        </Steps>
+    </Tab>
+
+</Tabs>

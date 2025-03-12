@@ -1,0 +1,331 @@
+import { Steps, Code, Pre, FileTree } from "nextra/components";
+import Image from "next/image";
+import { IMAGE_APPS_IS_PF_RESULT } from "~/lib/const";
+import Link from "next/link";
+import { Table } from "~/components/global";
+
+# Start using Sledge and Next.js
+
+Prior using all Sledge's widgets, follow the steps below to start integrating Sledge into your Next.js storefront.
+
+## Quickstart
+
+<Steps>
+### Install Sledge Core
+
+First, you need to install the core of sledge package, run the following command:
+
+```bash copy
+pnpm i @sledge-app/core
+```
+
+### Setup the `SledgeProvider`
+
+Once you've installed the core, create a new directory for your components (if it doesn't already exist).
+
+For example, you can create a directory named `components` and create a new directory in the component folder named `sledge` and finally create a file named `sledge-provider-component.tsx`.
+
+<FileTree>
+  <FileTree.Folder name="components" defaultOpen>
+    <FileTree.Folder name="sledge" defaultOpen>
+      <FileTree.File name="sledge-provider-component.tsx" />
+    </FileTree.Folder>
+  </FileTree.Folder>
+</FileTree>
+
+```tsx filename="components/sledge/sledge-provider-component.tsx" showLineNumbers copy
+"use client";
+
+import { SledgeProvider } from "@sledge-app/core";
+import "@sledge-app/core/style.css";
+import { ReactNode } from "react";
+
+interface ISledgeProvider {
+  children: React.ReactNode;
+  userId: string;
+  userEmail: string;
+  userFullname: string;
+  domain: string;
+}
+
+export default function SledgeProviderComponent({
+  children,
+  userId,
+  userEmail,
+  userFullname,
+  domain,
+}: ISledgeProvider) {
+  return (
+    <SledgeProvider
+      config={{
+        userId: userId,
+        userEmail: userEmail,
+        userFullname: userFullname,
+        domain: domain
+      }}
+    >
+      {children}
+    </SledgeProvider>
+  );
+}
+```
+
+In `app/layout.tsx`, import your `sledge-provider-component.tsx` component and use it to render `SledgeProviderComponent`
+
+```tsx filename="app/layout.tsx" showLineNumbers copy
+"use client";
+
+import SledgeProviderComponent from "components/sledge/sledge-provider-component";
+
+export default async function RootLayout() {
+  return (
+    <html>
+      <body>
+        <SledgeProviderComponent
+          userId=""
+          userEmail=""
+          userFullname=""
+          domain=""
+        >
+          {/* Main content */}
+        </SledgeProviderComponent>
+      </body>
+    </html>
+  );
+}
+```
+
+Let's look on list of all available parameters:
+
+<br />
+
+<Table
+  data={{
+    thead: [
+      { title: "Parameter" },
+      { title: "Type" },
+      { title: "Description" },
+    ],
+    tbody: [
+      [
+        "`userId`",
+        "string",
+        <>
+          <p>
+            Fill with your own user logined data,
+            <br />
+            You can check out the example{" "}
+            <Link
+              target="_blank"
+              href="https://github.com/offstack/sledge-demo-store/blob/main/nextjs/app/layout.tsx#L91"
+            >
+              code
+            </Link>
+          </p>
+        </>,
+      ],
+      [
+        "`userEmail`",
+        "string",
+        <>
+          <p>
+            Fill with your own user logined data,
+            <br />
+            You can check out the example{" "}
+            <Link
+              target="_blank"
+              href="https://github.com/offstack/sledge-demo-store/blob/main/nextjs/app/layout.tsx#L92"
+            >
+              code
+            </Link>
+          </p>
+        </>,
+      ],
+      [
+        "`userFullname`",
+        "string",
+        <>
+          <p>
+            Fill with your own user logined data,
+            <br />
+            You can check out the example{" "}
+            <Link
+              target="_blank"
+              href="https://github.com/offstack/sledge-demo-store/blob/main/nextjs/app/layout.tsx#L93"
+            >
+              code
+            </Link>
+          </p>
+        </>,
+      ],
+      [
+        "`domain`",
+        "string (required)",
+        <>
+          <p>
+            Fill with your shop's <code>.myshopify.com</code> domain name
+          </p>
+        </>,
+      ],
+    ],
+  }}
+/>
+
+### Install one of the Sledge's widget
+
+We're going to try implement product filters widget so install `@sledge-app/react-instant-search` package first :
+
+```bash copy
+pnpm i @sledge-app/react-instant-search
+```
+
+### Implement Widget
+
+Create a file named `sledge-product-filter-widget.tsx` in the `components/sledge` folder.
+
+<FileTree>
+  <FileTree.Folder name="components" defaultOpen>
+    <FileTree.Folder name="sledge" defaultOpen>
+      <FileTree.File name="sledge-product-filter-widget.tsx" />
+    </FileTree.Folder>
+  </FileTree.Folder>
+</FileTree>
+
+```tsx filename="components/sledge/sledge-product-filter-widget.tsx" showLineNumbers copy
+"use client";
+
+import { ProductFilterWidget } from "@sledge-app/react-instant-search";
+
+const SledgeProductFilterWidget = (product) => (
+  <ProductFilterWidget
+    query={{
+      keyword: "q",
+    }}
+    params={{
+      collectionId: "",
+      collectionName: "",
+    }}
+  />
+);
+```
+
+#### `ProductFilterWidget` Parameters
+
+Let's look on list of all available parameters:
+
+<br />
+
+<Table
+  data={{
+    thead: [
+      { title: "Parameter" },
+      { title: "Type" },
+      { title: "Description" },
+    ],
+    tbody: [
+      [
+        "`keyword`",
+        "string",
+        <>
+          <p>
+            Fill up your unique <Code>queryParam</Code> name for keyword.
+            <br />
+            e.g:{" "}
+            <Code>https://your-online-store.com/collection/all?q=hoodie</Code>
+            <br />
+            <br />
+            Default: <Code>q</Code>
+          </p>
+        </>,
+      ],
+      [
+        "`collectionId`",
+        "string (required)",
+        <>
+          <p>
+            Fill with your own collection id,
+            <br />
+            You can check out the example{" "}
+            <Link
+              target="_blank"
+              href="https://github.com/offstack/sledge-demo-store/blob/main/nextjs/components/sledge/instantsearch/product-filter-page.tsx#L18"
+            >
+              code
+            </Link>
+          </p>
+        </>,
+      ],
+      [
+        "`collectionName`",
+        "string (required)",
+        <>
+          <p>
+            Fill with your own collection name,
+            <br />
+            You can check out the example{" "}
+            <Link
+              target="_blank"
+              href="https://github.com/offstack/sledge-demo-store/blob/main/nextjs/components/sledge/instantsearch/product-filter-page.tsx#L18"
+            >
+              code
+            </Link>
+          </p>
+        </>,
+      ],
+    ],
+  }}
+/>
+
+#### Create collections route
+
+Create a new route for your collections page.
+
+<FileTree>
+  <FileTree.Folder name="app" defaultOpen>
+    <FileTree.Folder name="collections" defaultOpen>
+      <FileTree.Folder name="[handle]" defaultOpen>
+        <FileTree.File name="page.tsx" />
+      </FileTree.Folder>
+    </FileTree.Folder>
+  </FileTree.Folder>
+</FileTree>
+
+In `collections/[handle]/page.tsx`, import your `sledge-product-filter-widget.tsx` component and use it to render `ProductFilterWidget`
+
+```tsx filename="collections/[handle]/page.tsx" showLineNumbers copy
+import SledgeProductFilterWidget from "components/sledge/sledge-product-filter-widget.tsx";
+import { getCollection } from "lib/shopify";
+
+export default async function Page({ params }: any) {
+  const collection: any = await getCollection(params.handle);
+
+  return (
+    <>
+      <SledgeProductFilterWidget collection={collection} />
+    </>
+  );
+}
+```
+
+### Widget completely running
+
+Sledge's product filters widget is now ready to be used.
+
+<Image
+  className="mt-3 w-auto max-h-[359px]"
+  src={IMAGE_APPS_IS_PF_RESULT}
+  alt="sledge-image-docs"
+/>
+</Steps>
+
+## Learn more
+
+Congratulations! Now that the installation is complete, you can use all Sledge's widgets and start integrating to your Next.js storefront.
+
+- [Integrate Wishlist](/wishlist)
+- [Integrate Product Review](/product-review)
+- [Integrate Instant Search](/instant-search)
+- [Integrate Product Filters](/product-filters)
+- [API References - @sledge-app/react-instant-search](/sledge-app-react-instant-search)
+- [How to add Callback Functions](/callback-functions)
+- [How to add Custom Components](/custom-components)
